@@ -1,4 +1,5 @@
 import React from 'react';
+import { Text, View } from 'react-native';
 
 export interface StudyInfoCardProps {
   title: string; //스터디 이름
@@ -11,7 +12,9 @@ export interface StudyInfoCardProps {
 }
 
 const StudyInfoCard = (props: StudyInfoCardProps) => {
-  return <div></div>;
+  return <View>
+    <Text>hello</Text>
+  </View>;
 };
 
 export default StudyInfoCard;
