@@ -7,10 +7,12 @@
 
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { Button, Text, View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StackNavigationProp } from '@react-navigation/stack';
-import StudyInfoCard from "../SUITE/src/components/presents/studyInfoCard.present"
+import StudyInfoCard from "../SUITE/src/components/containers/studyInfoCard.container"
+import mainPageStyleSheet from "../SUITE/src/style/style"
+
 
 type RootStackParamList = {
   Home: undefined;
@@ -22,12 +24,8 @@ type HomeScreenProps = {
 
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
-      />
+    <View style = {mainPageStyleSheet.container}>
+        <StudyInfoCard />
     </View>
   );
 };
@@ -40,10 +38,9 @@ function App(): JSX.Element {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Details" component={StudyInfoCard} />
+        {/* <Stack.Screen name="Details" component={StudyInfoCard} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
-
 export default App;
