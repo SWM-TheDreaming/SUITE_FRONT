@@ -19,6 +19,9 @@ const StudyInfoCardUI = (props: StudyInfoCardProps) => {
     <View style = {mainPageStyleSheet.categorybox}>
       <Text style = {mainPageStyleSheet.mainPageSmallBoxtext}>공무원</Text>
     </View>
+    <View style = {mainPageStyleSheet.depositamountbox}>
+      <Text style = {mainPageStyleSheet.depositamounttext}>15,000원</Text>
+    </View>
   </View>;
 };
 
