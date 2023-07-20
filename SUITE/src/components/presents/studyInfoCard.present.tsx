@@ -14,7 +14,10 @@ export interface StudyInfoCardProps {
 const StudyInfoCardUI = (props: StudyInfoCardProps) => {
   return <View style = {mainPageStyleSheet.box}>
     <View style = {mainPageStyleSheet.ddaybox}>
-      <Text style = {mainPageStyleSheet.ddaytext}>D-12</Text>
+      <Text style = {mainPageStyleSheet.mainPageSmallBoxtext}>D-12</Text>
+    </View>
+    <View style = {mainPageStyleSheet.categorybox}>
+      <Text style = {mainPageStyleSheet.mainPageSmallBoxtext}>공무원</Text>
     </View>
   </View>;
 };

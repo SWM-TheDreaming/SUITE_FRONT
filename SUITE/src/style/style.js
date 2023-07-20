@@ -22,12 +22,18 @@ const mainPageStyleSheet = StyleSheet.create({
         justifyContent : 'center',
         marginRight: 4 //옆 컴포넌트와의 거리 조절
     },
-    ddaytext:{
+    mainPageSmallBoxtext:{
         fontSize : 12,
         color : "white",
     },
     categorybox:{
-
+        width : widthPercentage(37),
+        height : heightPercentage(20),
+        backgroundColor : "#042A8A",
+        borderRadius :4,
+        alignItems : 'center',
+        justifyContent : 'center',
+        marginRight: 4 //옆 컴포넌트와의 거리 조절
     },
     depositamountbox:{
 
