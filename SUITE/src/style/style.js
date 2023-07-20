@@ -40,7 +40,7 @@ const mainPageStyleSheet = StyleSheet.create({
         height : heightPercentage(20),
         backgroundColor : "#FFFFFF",
         borderRadius :4,
-        borderWidth : 2,
+        borderWidth : 1,
         borderColor : "#042A8A",
         alignItems : 'center',
         justifyContent : 'center',

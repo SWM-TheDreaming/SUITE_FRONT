@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import mainPageStyleSheet from '../../style/style';
 export interface StudyInfoCardProps {
   title: string; //스터디 이름
@@ -12,7 +12,7 @@ export interface StudyInfoCardProps {
 }
 
 const StudyInfoCardUI = (props: StudyInfoCardProps) => {
-  return <View style = {mainPageStyleSheet.box}>
+  return <TouchableOpacity style = {mainPageStyleSheet.box}>
     <View style = {mainPageStyleSheet.ddaybox}>
       <Text style = {mainPageStyleSheet.mainPageSmallBoxtext}>D-12</Text>
     </View>
@@ -22,7 +22,7 @@ const StudyInfoCardUI = (props: StudyInfoCardProps) => {
     <View style = {mainPageStyleSheet.depositamountbox}>
       <Text style = {mainPageStyleSheet.depositamounttext}>15,000원</Text>
     </View>
-  </View>;
+  </TouchableOpacity>;
 };
 
 export default StudyInfoCardUI;
