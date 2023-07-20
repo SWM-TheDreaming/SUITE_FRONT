@@ -12,17 +12,26 @@ export interface StudyInfoCardProps {
 }
 
 const StudyInfoCardUI = (props: StudyInfoCardProps) => {
-  return <TouchableOpacity style = {mainPageStyleSheet.box}>
-    <View style = {mainPageStyleSheet.ddaybox}>
-      <Text style = {mainPageStyleSheet.mainPageSmallBoxtext}>D-12</Text>
+  return (
+  <TouchableOpacity style = {mainPageStyleSheet.box}>
+    <View style = {mainPageStyleSheet.innerbox}>
+      <View style = {mainPageStyleSheet.tag}>
+        <View style = {mainPageStyleSheet.ddaybox}>
+          <Text style = {mainPageStyleSheet.mainPageSmallBoxtext}>D-12</Text>
+        </View>
+        <View style = {mainPageStyleSheet.categorybox}>
+          <Text style = {mainPageStyleSheet.mainPageSmallBoxtext}>공무원</Text>
+        </View>
+        <View style = {mainPageStyleSheet.depositamountbox}>
+          <Text style = {mainPageStyleSheet.depositamounttext}>15,000원</Text>
+        </View>
+      </View>
+      <Text style = {mainPageStyleSheet.titletext}>임용 시험 합격 준비반 스터디 모집</Text>
+      <Text style = {mainPageStyleSheet.detailtext}>방장:adm3howw | 참여인원:5/6</Text>
+      <Text style = {mainPageStyleSheet.detailtext}>모집기간:2023-07-15 | 시작기간:2023-07-18</Text>
     </View>
-    <View style = {mainPageStyleSheet.categorybox}>
-      <Text style = {mainPageStyleSheet.mainPageSmallBoxtext}>공무원</Text>
-    </View>
-    <View style = {mainPageStyleSheet.depositamountbox}>
-      <Text style = {mainPageStyleSheet.depositamounttext}>15,000원</Text>
-    </View>
-  </TouchableOpacity>;
+  </TouchableOpacity>
+  );
 };
 
 export default StudyInfoCardUI;
