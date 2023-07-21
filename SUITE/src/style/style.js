@@ -48,7 +48,7 @@ const mainPageStyleSheet = StyleSheet.create({
         color : "white",
     },
     categorybox:{   //categorybox
-        width : widthPercentage(37),
+        width : widthPercentage(44),
         height : heightPercentage(20),
         backgroundColor : "#042A8A",
         borderRadius :4,
@@ -57,19 +57,19 @@ const mainPageStyleSheet = StyleSheet.create({
         marginRight: 4 //옆 컴포넌트와의 거리 조절
     },
     depositamountbox:{  //depositamountbox
-        width : widthPercentage(59),
+        width : widthPercentage(32),
         height : heightPercentage(20),
         backgroundColor : "#FFFFFF",
         borderRadius :4,
         borderWidth : 1,
-        borderColor : "#042A8A",
+        borderColor : "#050953",
         alignItems : 'center',
         justifyContent : 'center',
         marginRight: 4 //옆 컴포넌트와의 거리 조절
     },
     depositamounttext:{
         fontSize : 12,
-        color : "#042A8A"
+        color : "#050953"
     },
     titletext:{
         fontSize : 18,
