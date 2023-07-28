@@ -12,7 +12,15 @@ export interface StudyInfoCardProps {
   writeDate: Date;
   scrab: number;
 }
-
+// title:'코테 스터디 모집',
+// studyDeadLine : new Date('2023-08-13'),
+// recruitmentDeadLine : new Date('2023-08-13'),
+// category : '컴퓨터',
+// depositAmount : 12000,
+// recruitmentLimit : 7,
+// presentRecruitment : 4,
+// writeDate : new Date('2023-06-13'),
+// scrab : 6
 const StudyInfoCardUI = (props: StudyInfoCardProps) => {
   return (
     <TouchableOpacity style={mainPageStyleSheet.box}>
@@ -22,17 +30,19 @@ const StudyInfoCardUI = (props: StudyInfoCardProps) => {
             <Text style={mainPageStyleSheet.mainPageSmallBoxtext}>D-12</Text>
           </View>
           <View style={mainPageStyleSheet.categorybox}>
-            <Text style={mainPageStyleSheet.mainPageSmallBoxtext}>공무원</Text>
+            <Text style={mainPageStyleSheet.mainPageSmallBoxtext}>{props.category}</Text>
           </View>
           <View style={mainPageStyleSheet.depositamountbox}>
-            <Text style={mainPageStyleSheet.depositamounttext}>15K</Text>
+            <Text style={mainPageStyleSheet.depositamounttext}>{props.depositAmount.toString().slice(0, 2)}K</Text>
           </View>
         </View>
-        <Text style={mainPageStyleSheet.titletext}>임용 시험 합격 준비반 스터디 모집</Text>
+        <Text style={mainPageStyleSheet.titletext}>{props.title}</Text>
         <Text style={mainPageStyleSheet.detailtext}>
           방장: mimo | 참여인원:{props.presentRecruitment}/{props.recruitmentLimit}
         </Text>
-        <Text style={mainPageStyleSheet.detailtext}>작성일:2023-07-21 | 스크랩:{props.scrab}</Text>
+        <Text style={mainPageStyleSheet.detailtext}>
+          작성일:{props.studyDeadLine.toString().slice(0, 15)} | 스크랩:{props.scrab}
+        </Text>
       </View>
     </TouchableOpacity>
   );

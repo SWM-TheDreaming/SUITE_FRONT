@@ -42,7 +42,7 @@ const mainPageStyleSheet = StyleSheet.create({
     //ddaybox
     width: widthPercentage(37),
     height: heightPercentage(20),
-    backgroundColor: '#36E5B1',
+    backgroundColor: '#4CADA8',
     borderRadius: 4,
     alignItems: 'center',
     justifyContent: 'center',
@@ -57,7 +57,7 @@ const mainPageStyleSheet = StyleSheet.create({
     //categorybox
     width: widthPercentage(44),
     height: heightPercentage(20),
-    backgroundColor: '#042A8A',
+    backgroundColor: '#3380F9',
     borderRadius: 4,
     alignItems: 'center',
     justifyContent: 'center',
@@ -90,6 +90,14 @@ const mainPageStyleSheet = StyleSheet.create({
     fontSize: 12,
     color: '#686868',
     marginTop: 8,
+  },
+  searchAndalarmbox: {
+    backgroundColor : "white",
+    height : heightPercentage(60)
+  },
+  statuscontainer: {
+    flex: 1,
+    paddingTop: 60,  // statusBar만큼 높이 설정
   },
 });
 
