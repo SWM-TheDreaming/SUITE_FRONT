@@ -1,7 +1,9 @@
-import React from 'react';
-import { Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { Button, Text, TouchableOpacity, View } from 'react-native';
 import mainPageStyleSheet from '../../style/style';
 import StudyInfoCardUI from '../presents/studyInfoCard.present';
+import { TextInput } from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/Entypo';
 
 const mockdata = [
   {
@@ -43,10 +45,28 @@ const mockdata = [
 ];
 
 const StudyInfoCard = () => {
+  const [search, setSearch] = useState('');
+  const handleInputChange = (event: { nativeEvent: { text: string } }) => {
+    const text = event.nativeEvent.text;
+    setSearch(text);
+  };
   return (
     <>
-      <View  style={mainPageStyleSheet.searchAndalarmbox}>
-        <Text>search</Text>
+      <View style={mainPageStyleSheet.searchAndalarmbox}>
+        <View style={mainPageStyleSheet.searchBorder}>
+          <TextInput
+            placeholder="스터디를 검색하세요"
+            onChange={handleInputChange}
+            onEndEditing={() => console.log('onEndEditing')}
+            onSubmitEditing={() => console.log('onSubmitEditing')}
+          />
+          <Icon name="magnifying-glass" size={15} />
+        </View>
+      </View>
+      <View style={mainPageStyleSheet.selectCategoryContainer}>
+        <TouchableOpacity style={mainPageStyleSheet.selectCategoryBox}>
+          <Text style={mainPageStyleSheet.selectCategoryText}>인원 전체</Text>
+        </TouchableOpacity>
       </View>
       {mockdata.map((item) => (
         <StudyInfoCardUI

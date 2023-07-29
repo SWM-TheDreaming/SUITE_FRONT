@@ -1,6 +1,8 @@
 import { StyleSheet, Platform } from 'react-native';
 import { heightPercentage, widthPercentage } from '../responsive/ResponsiveSize';
-
+import { Dimensions } from 'react-native';
+const Width = Dimensions.get('window').width; //스크린 너비 초기화
+const Height = Dimensions.get('window').height; //스크린 높이 초기화
 const mainPageStyleSheet = StyleSheet.create({
   container: {
     //전체 컨테이너
@@ -11,7 +13,7 @@ const mainPageStyleSheet = StyleSheet.create({
     //컴포넌트 박스 설정
     marginTop: 16,
     backgroundColor: '#FFFFFF',
-    width: 328,
+    width: widthPercentage(328),
     height: 140,
     borderRadius: 10,
     ...Platform.select({
@@ -31,8 +33,8 @@ const mainPageStyleSheet = StyleSheet.create({
   },
   innerbox: {
     // 내부 컴포넌트들 정렬
-    paddingLeft: 20,
-    paddingTop: 18,
+    paddingLeft: widthPercentage(20),
+    paddingTop: heightPercentage(18),
   },
   tag: {
     //ddaybox, categorybox, depositamountbox 정렬
@@ -92,12 +94,49 @@ const mainPageStyleSheet = StyleSheet.create({
     marginTop: 8,
   },
   searchAndalarmbox: {
-    backgroundColor : "white",
-    height : heightPercentage(60)
+    backgroundColor: 'white',
+    height: heightPercentage(70),
+    width: Width,
   },
   statuscontainer: {
     flex: 1,
-    paddingTop: 60,  // statusBar만큼 높이 설정
+    paddingTop: 60, // statusBar만큼 높이 설정
+  },
+  searchBorder: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    fontSize: 13,
+    justifyContent: 'space-between',
+    marginLeft: widthPercentage(20),
+    marginTop: heightPercentage(12),
+    marginBottom: heightPercentage(12),
+    width: widthPercentage(280),
+    height: heightPercentage(40),
+    borderRadius: 60,
+    borderWidth: 1,
+    borderColor: '#D8D8D8',
+    paddingLeft: widthPercentage(10),
+    paddingRight: widthPercentage(10),
+  },
+  selectCategoryContainer: {
+    flexDirection: 'row',
+    marginTop: heightPercentage(16),
+  },
+  selectCategoryBox: {
+    width: widthPercentage(65),
+    height: heightPercentage(28),
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: '#D8D8D8',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  selectCategoryText: {
+    fontSize: 12,
+    color: '#686868',
   },
 });
 
