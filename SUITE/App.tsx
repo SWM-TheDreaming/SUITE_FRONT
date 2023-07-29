@@ -10,8 +10,7 @@ function App(): JSX.Element {
         <RootNavigator />
       </SafeAreaView>
     </SafeAreaProvider>
-  )
-  ;
+  );
 }
 const styles = StyleSheet.create({
   container: {

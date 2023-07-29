@@ -12,15 +12,6 @@ export interface StudyInfoCardProps {
   writeDate: Date;
   scrab: number;
 }
-// title:'코테 스터디 모집',
-// studyDeadLine : new Date('2023-08-13'),
-// recruitmentDeadLine : new Date('2023-08-13'),
-// category : '컴퓨터',
-// depositAmount : 12000,
-// recruitmentLimit : 7,
-// presentRecruitment : 4,
-// writeDate : new Date('2023-06-13'),
-// scrab : 6
 const StudyInfoCardUI = (props: StudyInfoCardProps) => {
   return (
     <TouchableOpacity style={mainPageStyleSheet.box}>
