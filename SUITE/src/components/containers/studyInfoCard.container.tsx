@@ -4,7 +4,11 @@ import mainPageStyleSheet from '../../style/style';
 import StudyInfoCardUI from '../presents/studyInfoCard.present';
 import { TextInput } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Entypo';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../types';
+import { useNavigation } from '@react-navigation/native';
 
+export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 const mockdata = [
   {
     id: 1,
@@ -45,6 +49,7 @@ const mockdata = [
 ];
 
 const StudyInfoCard = () => {
+  const navigation = useNavigation<RootStackNavigationProp>();
   const [search, setSearch] = useState('');
   const handleInputChange = (event: { nativeEvent: { text: string } }) => {
     const text = event.nativeEvent.text;
@@ -64,7 +69,12 @@ const StudyInfoCard = () => {
         </View>
       </View>
       <View style={mainPageStyleSheet.selectCategoryContainer}>
-        <TouchableOpacity style={mainPageStyleSheet.selectCategoryBox}>
+        <TouchableOpacity
+          style={mainPageStyleSheet.selectCategoryBox}
+          onPress={() => {
+            navigation.navigate('CategoryFilter');
+          }}
+        >
           <Text style={mainPageStyleSheet.selectCategoryText}>인원 전체</Text>
         </TouchableOpacity>
       </View>
