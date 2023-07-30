@@ -4,6 +4,7 @@ import { TransitionPresets } from '@react-navigation/stack';
 import RootClientTabs from './ClientTabs';
 import CategoryFilter from '../screens/CategoryFilter';
 import { RootStackParamList } from '../types';
+import Studylist from '../screens/Studylist';
 const App = createStackNavigator<RootStackParamList>();
 
 export function AppStack() {

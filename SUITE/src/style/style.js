@@ -120,6 +120,11 @@ const mainPageStyleSheet = StyleSheet.create({
     paddingLeft: widthPercentage(10),
     paddingRight: widthPercentage(10),
   },
+  categoryPageContainer: {
+    backgroundColor : 'white',
+    width : Width,
+    height : Height
+  },
   selectCategoryContainer: {
     flexDirection: 'row',
     marginTop: heightPercentage(16),
@@ -157,6 +162,44 @@ const mainPageStyleSheet = StyleSheet.create({
     top: '70%', // 수직 방향 가운데 정렬
     transform: [{ translateY: -12 }], // 세로 중앙 위치 조정
   },
+  filterInfoBox: {
+    flexDirection: 'row',
+    height: heightPercentage(48),
+    marginTop : heightPercentage(20),
+    justifyContent : 'space-between',
+    alignItems : 'flex-end',
+    paddingRight : widthPercentage(20),
+    paddingLeft : widthPercentage(20)
+  },
+  categoryChoiceText: {
+    fontSize : 16,
+    color : "#686868",
+    fontWeight : 'bold'
+  },
+  choiceInfoText:{
+    fontSize : 12,
+    color : "#005BA5",
+    fontWeight : 'bold'
+  },
+  categoryButtonContainner : {
+    marginTop : heightPercentage(24),
+    paddingRight : widthPercentage(20),
+    paddingLeft : widthPercentage(20)
+  },
+  categoryButtonBox: {
+    width : widthPercentage(102),
+    height : heightPercentage(40),
+    borderWidth : 1,
+    borderRadius : 5,
+    borderColor : "#E8E8E8",
+    justifyContent : 'center',
+    alignItems : 'center',
+    marginRight : widthPercentage(7),
+    marginTop : heightPercentage(7)
+  },
+  categoryButtonText: {
+   fontSize : 12,
+  }
 });
 
 export default mainPageStyleSheet;
