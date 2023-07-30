@@ -138,6 +138,25 @@ const mainPageStyleSheet = StyleSheet.create({
     fontSize: 12,
     color: '#686868',
   },
+  filterBox: {
+    flexDirection: 'row',
+    height: heightPercentage(48),
+    justifyContent: 'center',
+    alignItems: 'center', // 수직 방향 가운데 정렬
+    position: 'relative', // position을 설정해야 하위 컴포넌트의 position 속성이 적용됨
+  },
+  filterText: {
+    flex: 1, // Text 컴포넌트가 남은 공간을 모두 차지하도록 설정
+    fontSize: 16,
+    textAlign: 'center', // 수평 방향 가운데 정렬
+    paddingTop: heightPercentage(15),
+  },
+  filterOutIcon: {
+    position: 'absolute',
+    right: widthPercentage(25), // 우측 끝과 아이콘 사이 간격
+    top: '70%', // 수직 방향 가운데 정렬
+    transform: [{ translateY: -12 }], // 세로 중앙 위치 조정
+  },
 });
 
 export default mainPageStyleSheet;
