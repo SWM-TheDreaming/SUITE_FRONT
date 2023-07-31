@@ -2,6 +2,10 @@
   "migIndex": 1,
   "data": [
     {
+      "path": "assets/fonts/Oswald-Bold.ttf",
+      "sha1": "a6d0bf488eefe0dea9d0e433f0bc706514a7f8f6"
+    },
+    {
       "path": "assets/fonts/PretendardVariable.ttf",
       "sha1": "8b677cf7aa4a6e20b771d2e7832abfc9263ffc61"
     }
