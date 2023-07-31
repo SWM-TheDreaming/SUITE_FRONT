@@ -2,6 +2,10 @@
   "compilerOptions": {
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
+    "compilerOptions" : {
+      "typeRoots" : ["./@types","./node_modules/@types"]
+    },
+    "strictNullChecks": false,
     "esModuleInterop": true,
     "isolatedModules": true,
     "jsx": "react",

@@ -1,12 +1,23 @@
-import React from 'react';
+import { useFocusEffect, useRoute } from '@react-navigation/native';
+import React, { useCallback, useState } from 'react';
 import { View, Text } from 'react-native';
 import StudyInfoCard from '../components/containers/studyInfoCard.container';
 import mainPageStyleSheet from '../style/style';
+import { Category } from '../types';
 
-const Studylist = () => {
+const Studylist:React.FC  = () => {
+  const [selectCategories, setSelectCategories] = useState<Category[]>()
+  const route = useRoute()
+  useFocusEffect(
+    useCallback(() => {
+      if (route.params) {
+        setSelectCategories(route.params as Category[]);
+      }
+    },[route.params])
+  );
   return (
     <View style={mainPageStyleSheet.container}>
-      <StudyInfoCard />
+      <StudyInfoCard filterCategory={selectCategories}/>
     </View>
   );
 };

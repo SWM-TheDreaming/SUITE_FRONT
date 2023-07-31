@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Button, Text, TouchableOpacity, View } from 'react-native';
 import mainPageStyleSheet from '../../style/style';
 import StudyInfoCardUI from '../presents/studyInfoCard.present';
@@ -6,9 +6,11 @@ import { TextInput } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Entypo';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../types';
-import { useNavigation } from '@react-navigation/native';
-
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { RouteProp, useFocusEffect } from '@react-navigation/core';
+import { Category } from '../../types';
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
+
 const mockdata = [
   {
     id: 1,
@@ -47,14 +49,24 @@ const mockdata = [
     scrab: 6,
   },
 ];
-
-const StudyInfoCard = () => {
+const StudyInfoCard: React.FunctionComponent<Category> = ({filterCategory}) => {
   const navigation = useNavigation<RootStackNavigationProp>();
+  const [filter, setFilter] = useState<string[]>()
   const [search, setSearch] = useState('');
   const handleInputChange = (event: { nativeEvent: { text: string } }) => {
     const text = event.nativeEvent.text;
     setSearch(text);
   };
+  useFocusEffect(
+    useCallback(() => {
+      if (filterCategory) {
+        setFilter(filterCategory.selectedCategories);
+      }    
+    }, [filterCategory])
+  );
+  useEffect(() => {
+    console.log(filter) //API 호출 자리
+  },[filter]);
   return (
     <>
       <View style={mainPageStyleSheet.searchAndalarmbox}>
