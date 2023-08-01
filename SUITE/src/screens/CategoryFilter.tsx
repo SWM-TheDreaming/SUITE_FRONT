@@ -26,10 +26,10 @@ const CategoryFilter = () => {
       </TouchableOpacity>
     );
   };
-  
+
   const renderItem: React.FC<{ item: { id: string; title: string } }> = ({ item }) => {
     const isSelected = selectedButtons.includes(item.title);
-    return <TableButton title={item.title} onPress={() => handleButtonPress(item.title)} isSelected={isSelected}/>;
+    return <TableButton title={item.title} onPress={() => handleButtonPress(item.title)} isSelected={isSelected} />;
   };
   const handleButtonPress = (id: string) => {
     const isSelected = selectedButtons.includes(id);
@@ -56,7 +56,7 @@ const CategoryFilter = () => {
   ];
   useEffect(() => {
     console.log(selectedButtons);
-  },[selectedButtons]);
+  }, [selectedButtons]);
 
   return (
     <View style={mainPageStyleSheet.categoryPageContainer}>
@@ -65,24 +65,19 @@ const CategoryFilter = () => {
         <TouchableOpacity
           style={mainPageStyleSheet.filterOutIcon}
           onPress={() => {
-            navigation.navigate('Studylist', { selectedCategories: selectedButtons});
+            navigation.navigate('Studylist', { selectedCategories: selectedButtons });
           }}
         >
           <Icon name="x" size={24} />
         </TouchableOpacity>
       </View>
       <View style={mainPageStyleSheet.filterInfoBox}>
-          <Text style={mainPageStyleSheet.categoryChoiceText}>카테고리 선택</Text>
-          <Text style={mainPageStyleSheet.choiceInfoText}>복수 선택 가능</Text>
+        <Text style={mainPageStyleSheet.categoryChoiceText}>카테고리 선택</Text>
+        <Text style={mainPageStyleSheet.choiceInfoText}>복수 선택 가능</Text>
       </View>
       <View style={mainPageStyleSheet.categoryButtonContainner}>
-        <FlatList
-            data={data}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.id}
-            numColumns= {3}
-        />
-    </View>
+        <FlatList data={data} renderItem={renderItem} keyExtractor={(item) => item.id} numColumns={3} />
+      </View>
     </View>
   );
 };

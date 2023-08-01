@@ -49,9 +49,9 @@ const mockdata = [
     scrab: 6,
   },
 ];
-const StudyInfoCard: React.FunctionComponent<Category> = ({filterCategory}) => {
+const StudyInfoCard: React.FunctionComponent<Category> = ({ filterCategory }) => {
   const navigation = useNavigation<RootStackNavigationProp>();
-  const [filter, setFilter] = useState<string[]>()
+  const [filter, setFilter] = useState<string[]>();
   const [search, setSearch] = useState('');
   const handleInputChange = (event: { nativeEvent: { text: string } }) => {
     const text = event.nativeEvent.text;
@@ -61,12 +61,12 @@ const StudyInfoCard: React.FunctionComponent<Category> = ({filterCategory}) => {
     useCallback(() => {
       if (filterCategory) {
         setFilter(filterCategory.selectedCategories);
-      }    
-    }, [filterCategory])
+      }
+    }, [filterCategory]),
   );
   useEffect(() => {
-    console.log(filter) //API 호출 자리
-  },[filter]);
+    console.log(filter); //API 호출 자리
+  }, [filter]);
   return (
     <>
       <View style={mainPageStyleSheet.searchAndalarmbox}>
