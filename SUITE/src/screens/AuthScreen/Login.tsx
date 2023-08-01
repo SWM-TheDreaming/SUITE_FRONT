@@ -70,7 +70,7 @@ const Login = () => {
           <Text
             style={mainPageStyleSheet.authInfoText}
             onPress={() => {
-              navigation.navigate('SignUp');
+              navigation.navigate('TermOfUse');
             }}
           >
             회원가입

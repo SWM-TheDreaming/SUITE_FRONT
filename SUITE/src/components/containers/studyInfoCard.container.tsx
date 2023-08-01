@@ -77,7 +77,7 @@ const StudyInfoCard: React.FunctionComponent<Category> = ({ filterCategory }) =>
             onEndEditing={() => console.log('onEndEditing')}
             onSubmitEditing={() => console.log('onSubmitEditing')}
           />
-          <Icon name="magnifying-glass" size={15} />
+          <Icon name="chevron-back-outline" size={15} color={'black'} />
         </View>
       </View>
       <View style={mainPageStyleSheet.selectCategoryContainer}>
