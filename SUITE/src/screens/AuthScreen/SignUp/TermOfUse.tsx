@@ -81,7 +81,7 @@ const TermOfUse = () => {
     if (!ageChecked || !termsChecked || !privacyChecked) {
       setCheckedBtn(false);
     } else {
-      navigation.navigate('UserInformation');
+      navigation.navigate('EmailAuthentication');
     }
   };
   return (
@@ -153,9 +153,9 @@ const TermOfUse = () => {
           />
         </View>
       </View>
-      <View style={mainPageStyleSheet.endTermOfUseContainer}>
-        <TouchableOpacity style={mainPageStyleSheet.endTermOfUseBtn} onPress={handleNextPage}>
-          <Text style={mainPageStyleSheet.endTermOfUseBtnText}>SUITE 시작하기</Text>
+      <View style={mainPageStyleSheet.SignUpNextBtnContainer}>
+        <TouchableOpacity style={mainPageStyleSheet.SignUpNextBtnBtn} onPress={handleNextPage}>
+          <Text style={mainPageStyleSheet.SignUpNextBtnText}>SUITE 시작하기</Text>
         </TouchableOpacity>
       </View>
     </View>

@@ -21,6 +21,12 @@ const Login = () => {
     }
     if (login.errors.password) {
       setValidatePW(false);
+    }
+    if (login.getTextInputProps('password').value == '') {
+      setValidatePW(false);
+    }
+    if (login.getTextInputProps('username').value == '') {
+      setValidateEmail(false);
     } else {
       console.log('로그인 성공'); //로그인 API 연동
       setValidateEmail(true);

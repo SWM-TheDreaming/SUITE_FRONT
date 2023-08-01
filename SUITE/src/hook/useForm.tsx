@@ -18,10 +18,9 @@ const useForm = () => {
       ...values,
       [name]: text,
     });
-
     // 유효성 검사 수행
     if (name === 'username') {
-      if (!text) {
+      if (!text || text == '') {
         setErrors({
           ...errors,
           [name]: '이메일을 입력해주세요.',
@@ -34,7 +33,7 @@ const useForm = () => {
       } else {
         setErrors({
           ...errors,
-          [name]: undefined,
+          [name]: '',
         });
       }
     } else if (name === 'password') {
@@ -51,7 +50,7 @@ const useForm = () => {
       } else {
         setErrors({
           ...errors,
-          [name]: undefined,
+          [name]: '',
         });
       }
     }

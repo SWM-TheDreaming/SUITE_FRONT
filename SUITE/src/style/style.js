@@ -320,6 +320,8 @@ const mainPageStyleSheet = StyleSheet.create({
   underStatusBar: {
     width: Width,
     height: heightPercentage(48),
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   pageBackIcon: {
     marginTop: 12,
@@ -379,7 +381,7 @@ const mainPageStyleSheet = StyleSheet.create({
     justifyContent: 'center',
     paddingRight: 15,
   },
-  endTermOfUseContainer: {
+  SignUpNextBtnContainer: {
     position: 'absolute',
     bottom: 0,
     left: 0,
@@ -390,7 +392,7 @@ const mainPageStyleSheet = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  endTermOfUseBtn: {
+  SignUpNextBtnBtn: {
     width: widthPercentage(320),
     height: heightPercentage(50),
     backgroundColor: '#050953',
@@ -398,11 +400,33 @@ const mainPageStyleSheet = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 24,
   },
-  endTermOfUseBtnText: {
+  disabledSignUpNextBtnBtn: {
+    width: widthPercentage(320),
+    height: heightPercentage(50),
+    backgroundColor: '#E8E8E8',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 24,
+  },
+  SignUpNextBtnText: {
     fontSize: 16,
     color: '#FFFFFF',
     fontWeight: 'bold',
     fontFamily: 'PretendardVariable',
+  },
+  SignUpText: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    textAlign: 'center',
+    fontSize: 16,
+    color: '#000000',
+    fontFamily: 'PretendardVariable',
+  },
+  emailAuthenticationContainer: {
+    marginTop: heightPercentage(40),
+    marginLeft: widthPercentage(24),
+    marginRight: widthPercentage(24),
   },
 });
 
