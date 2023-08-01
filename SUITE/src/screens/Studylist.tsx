@@ -5,19 +5,19 @@ import StudyInfoCard from '../components/containers/studyInfoCard.container';
 import mainPageStyleSheet from '../style/style';
 import { Category } from '../types';
 
-const Studylist:React.FC  = () => {
-  const [selectCategories, setSelectCategories] = useState<Category[]>()
-  const route = useRoute()
+const Studylist: React.FC = () => {
+  const [selectCategories, setSelectCategories] = useState<Category[]>();
+  const route = useRoute();
   useFocusEffect(
     useCallback(() => {
       if (route.params) {
         setSelectCategories(route.params as Category[]);
       }
-    },[route.params])
+    }, [route.params]),
   );
   return (
     <View style={mainPageStyleSheet.container}>
-      <StudyInfoCard filterCategory={selectCategories}/>
+      <StudyInfoCard filterCategory={selectCategories} />
     </View>
   );
 };

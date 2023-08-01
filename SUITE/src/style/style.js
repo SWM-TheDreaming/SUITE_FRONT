@@ -80,7 +80,7 @@ const mainPageStyleSheet = StyleSheet.create({
   depositamounttext: {
     fontSize: 12,
     color: '#050953',
-    fontFamily : 'PretendardVariable'
+    fontFamily: 'PretendardVariable',
   },
   titletext: {
     fontSize: 18,
@@ -88,13 +88,13 @@ const mainPageStyleSheet = StyleSheet.create({
     color: '#000000',
     marginTop: 12,
     marginBottom: 8,
-    fontFamily : 'PretendardVariable'
+    fontFamily: 'PretendardVariable',
   },
   detailtext: {
     fontSize: 12,
     color: '#686868',
     marginTop: 8,
-    fontFamily : 'PretendardVariable'
+    fontFamily: 'PretendardVariable',
   },
   searchAndalarmbox: {
     backgroundColor: 'white',
@@ -124,9 +124,9 @@ const mainPageStyleSheet = StyleSheet.create({
     paddingRight: widthPercentage(10),
   },
   categoryPageContainer: {
-    backgroundColor : 'white',
-    width : Width,
-    height : Height
+    backgroundColor: 'white',
+    width: Width,
+    height: Height,
   },
   selectCategoryContainer: {
     flexDirection: 'row',
@@ -145,7 +145,7 @@ const mainPageStyleSheet = StyleSheet.create({
   selectCategoryText: {
     fontSize: 12,
     color: '#686868',
-    fontFamily : 'PretendardVariable'
+    fontFamily: 'PretendardVariable',
   },
   filterBox: {
     flexDirection: 'row',
@@ -159,7 +159,7 @@ const mainPageStyleSheet = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center', // 수평 방향 가운데 정렬
     paddingTop: heightPercentage(15),
-    fontFamily : 'PretendardVariable'
+    fontFamily: 'PretendardVariable',
   },
   filterOutIcon: {
     position: 'absolute',
@@ -170,148 +170,148 @@ const mainPageStyleSheet = StyleSheet.create({
   filterInfoBox: {
     flexDirection: 'row',
     height: heightPercentage(48),
-    marginTop : heightPercentage(20),
-    justifyContent : 'space-between',
-    alignItems : 'flex-end',
-    paddingRight : widthPercentage(20),
-    paddingLeft : widthPercentage(20)
+    marginTop: heightPercentage(20),
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+    paddingRight: widthPercentage(20),
+    paddingLeft: widthPercentage(20),
   },
   categoryChoiceText: {
-    fontSize : 16,
-    color : "#686868",
-    fontWeight : 'bold',
-    fontFamily : 'PretendardVariable'
+    fontSize: 16,
+    color: '#686868',
+    fontWeight: 'bold',
+    fontFamily: 'PretendardVariable',
   },
-  choiceInfoText:{
-    fontSize : 12,
-    color : "#005BA5",
-    fontWeight : 'bold',
-    fontFamily : 'PretendardVariable'
+  choiceInfoText: {
+    fontSize: 12,
+    color: '#005BA5',
+    fontWeight: 'bold',
+    fontFamily: 'PretendardVariable',
   },
-  categoryButtonContainner : {
-    marginTop : heightPercentage(24),
-    paddingRight : widthPercentage(20),
-    paddingLeft : widthPercentage(20)
+  categoryButtonContainner: {
+    marginTop: heightPercentage(24),
+    paddingRight: widthPercentage(20),
+    paddingLeft: widthPercentage(20),
   },
   categoryButtonBox: {
-    width : widthPercentage(102),
-    height : heightPercentage(40),
-    borderWidth : 1,
-    borderRadius : 5,
-    borderColor : "#E8E8E8",
-    justifyContent : 'center',
-    alignItems : 'center',
-    marginRight : widthPercentage(7),
-    marginTop : heightPercentage(7)
+    width: widthPercentage(102),
+    height: heightPercentage(40),
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: '#E8E8E8',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: widthPercentage(7),
+    marginTop: heightPercentage(7),
   },
   categoryButtonText: {
-   fontSize : 12,
-   fontFamily : 'PretendardVariable'
+    fontSize: 12,
+    fontFamily: 'PretendardVariable',
   },
-  loginContainer :{
-    width : Width,
-    height : Height,
-    backgroundColor : 'white'
+  loginContainer: {
+    width: Width,
+    height: Height,
+    backgroundColor: 'white',
   },
-  logoContainer : {
-    height : heightPercentage(200),
-    justifyContent : 'center',
-    alignItems : 'center',
+  logoContainer: {
+    height: heightPercentage(200),
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  idpwInputContainer : {
-    marginLeft : widthPercentage(24),
-    marginRight : widthPercentage(24),
-    marginTop : heightPercentage(24),
+  idpwInputContainer: {
+    marginLeft: widthPercentage(24),
+    marginRight: widthPercentage(24),
+    marginTop: heightPercentage(24),
   },
-  idpwtext : {
-    fontSize : 14,
-    color : '#888888',
-    marginTop : heightPercentage(10),
-    fontFamily : 'PretendardVariable'
+  idpwtext: {
+    fontSize: 14,
+    color: '#888888',
+    marginTop: heightPercentage(10),
+    fontFamily: 'PretendardVariable',
   },
-  idpwInputBox : {
-    width : widthPercentage(310),
-    height : heightPercentage(50),
-    marginTop : heightPercentage(10),
-    borderColor : "#E8E8E8",
-    borderWidth : 1,
-    borderRadius : 3
+  idpwInputBox: {
+    width: widthPercentage(310),
+    height: heightPercentage(50),
+    marginTop: heightPercentage(10),
+    borderColor: '#E8E8E8',
+    borderWidth: 1,
+    borderRadius: 3,
   },
   loginButtonContainer: {
-    justifyContent : 'center',
-    alignItems : 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  loginButton :{
-    height : heightPercentage(50),
-    width : widthPercentage(310),
-    marginTop : heightPercentage(20),
-    backgroundColor : '#050953',
-    justifyContent : 'center',
-    alignItems : 'center',
-    borderRadius :20
+  loginButton: {
+    height: heightPercentage(50),
+    width: widthPercentage(310),
+    marginTop: heightPercentage(20),
+    backgroundColor: '#050953',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 20,
   },
-  loginButtonText : {
-    color : 'white',
-    fontSize : 16,
-    fontWeight : 'bold',
-    fontFamily : 'PretendardVariable'
+  loginButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+    fontFamily: 'PretendardVariable',
   },
-  idPwInputErrorText : {
-    color : 'red',
-    fontSize : 10,
-    marginTop : 4,
-    fontFamily : 'PretendardVariable'
+  idPwInputErrorText: {
+    color: 'red',
+    fontSize: 10,
+    marginTop: 4,
+    fontFamily: 'PretendardVariable',
   },
-  authInfoContainer : {
-    marginTop : heightPercentage(20),
-    justifyContent : 'center',
-    alignItems : 'center',
-    flexDirection : 'row'
+  authInfoContainer: {
+    marginTop: heightPercentage(20),
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
   },
-  authInfoText : {
-    color : '#686868',
-    fontSize : 11,
-    fontFamily : 'PretendardVariable'
+  authInfoText: {
+    color: '#686868',
+    fontSize: 11,
+    fontFamily: 'PretendardVariable',
   },
-  authInfobar : {
-    color : '#686868',
-    fontSize : 11,
-    marginRight : widthPercentage(25),
-    marginLeft : widthPercentage(25)
+  authInfobar: {
+    color: '#686868',
+    fontSize: 11,
+    marginRight: widthPercentage(25),
+    marginLeft: widthPercentage(25),
   },
-  snsLoginButtonContainer : {
-    marginTop : heightPercentage(48),
-    justifyContent : 'center',
-    alignItems : 'center',
+  snsLoginButtonContainer: {
+    marginTop: heightPercentage(48),
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  kakaoLoginButton : {
-    backgroundColor : '#FEE500',
-    borderRadius : 5,
-    width : widthPercentage(312),
-    height : heightPercentage(48),
-    justifyContent : 'center',
-    alignItems : 'center',
-    marginTop : heightPercentage(10),
-    flexDirection : 'row'
+  kakaoLoginButton: {
+    backgroundColor: '#FEE500',
+    borderRadius: 5,
+    width: widthPercentage(312),
+    height: heightPercentage(48),
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: heightPercentage(10),
+    flexDirection: 'row',
   },
-  googleLoginButton : {
-    backgroundColor : 'white',
-    borderColor : '#D8D8D8',
-    borderRadius : 5,
-    borderWidth : 1,
-    width : widthPercentage(312),
-    height : heightPercentage(48),
-    justifyContent : 'center',
-    alignItems : 'center',
-    marginTop : heightPercentage(10),
-    flexDirection : 'row'
+  googleLoginButton: {
+    backgroundColor: 'white',
+    borderColor: '#D8D8D8',
+    borderRadius: 5,
+    borderWidth: 1,
+    width: widthPercentage(312),
+    height: heightPercentage(48),
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: heightPercentage(10),
+    flexDirection: 'row',
   },
-  snsLoginButtonText : {
-    fontSize : 14,
-    color : 'black',
-    paddingLeft : 5,
-    fontFamily : 'PretendardVariable'
-  }
+  snsLoginButtonText: {
+    fontSize: 14,
+    color: 'black',
+    paddingLeft: 5,
+    fontFamily: 'PretendardVariable',
+  },
 });
 
 export default mainPageStyleSheet;
