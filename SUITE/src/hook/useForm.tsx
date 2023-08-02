@@ -3,12 +3,28 @@ import { useState } from 'react';
 export interface FormValues {
   username: string;
   password: string;
+  code: string;
+  name: string;
+  phone: string;
+  securityNum: string;
+  birthday: string;
+  sex: string;
+  preferStudy: string;
+  studyMethod: string;
 }
 
 const useForm = () => {
   const [values, setValues] = useState<FormValues>({
     username: '',
     password: '',
+    code: '',
+    name: '',
+    phone: '',
+    securityNum: '',
+    birthday: '',
+    sex: '',
+    preferStudy: '',
+    studyMethod: '',
   });
   const [touched, setTouched] = useState<{ [key: string]: boolean }>({});
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -46,6 +62,57 @@ const useForm = () => {
         setErrors({
           ...errors,
           [name]: '비밀번호는 영문, 숫자, 특수문자를 혼합하여 10자 이상이어야 합니다.',
+        });
+      } else {
+        setErrors({
+          ...errors,
+          [name]: '',
+        });
+      }
+    } else if (name === 'name') {
+      if (!text) {
+        setErrors({
+          ...errors,
+          [name]: '이름을 입력해주세요.',
+        });
+      } else if (!/^[ㄱ-ㅎㅏ-ㅣ가-힣]{1,4}$/.test(text)) {
+        setErrors({
+          ...errors,
+          [name]: '이름 형식에 맞지 않습니다.',
+        });
+      } else {
+        setErrors({
+          ...errors,
+          [name]: '',
+        });
+      }
+    } else if (name === 'phone') {
+      if (!text) {
+        setErrors({
+          ...errors,
+          [name]: '전화번호를 입력해주세요.',
+        });
+      } else if (!/^01[0-9]{1}-[0-9]{4}-[0-9]{4}$/.test(text)) {
+        setErrors({
+          ...errors,
+          [name]: '전화번호 형식에 맞지 않습니다.',
+        });
+      } else {
+        setErrors({
+          ...errors,
+          [name]: '',
+        });
+      }
+    } else if (name === 'securityNum') {
+      if (!text) {
+        setErrors({
+          ...errors,
+          [name]: '생년월일을 입력해주세요.',
+        });
+      } else if (!/^\d{6}$/.test(text)) {
+        setErrors({
+          ...errors,
+          [name]: '형식에 맞지 않습니다.',
         });
       } else {
         setErrors({

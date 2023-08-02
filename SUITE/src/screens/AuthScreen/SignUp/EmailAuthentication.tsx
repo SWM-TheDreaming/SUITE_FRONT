@@ -6,22 +6,25 @@ import mainPageStyleSheet from '../../../style/style';
 import { RootStackNavigationProp } from '../Login';
 import Icon from 'react-native-vector-icons/Ionicons';
 import InputField from '../../../components/presents/InputField';
+import { useRecoilState } from 'recoil';
+import { emailState } from '../../../../recoil/atoms'; // Recoil 상태를 정의한 파일 임포트
 
 const EmailAuthentication = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
   const emailAuthentication = useForm();
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-
+  const [email, setEmail] = useRecoilState(emailState);
   const handlePasswordConfirmationChange = (text: string) => {
     setPasswordConfirmation(text);
   };
   const validatePassword = () => {
     return emailAuthentication.getTextInputProps('password').value === passwordConfirmation;
   };
-
   const handleButtonPress = () => {
-    navigation.navigate('UserInformation'); //로그인 API 연동
+    const emailValue = emailAuthentication.getTextInputProps('username').value;
+    setEmail(emailValue);
+    navigation.navigate('AuthenticateCode'); //로그인 API 연동
   };
 
   useEffect(() => {
