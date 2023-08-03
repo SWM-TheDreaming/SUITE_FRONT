@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import { RootStackParamList } from '../types';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
-
+import { Category } from '../data/Categoty';
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 const CategoryFilter = () => {
@@ -39,21 +39,7 @@ const CategoryFilter = () => {
       setSelectedButtons([...selectedButtons, id]);
     }
   };
-  const data = [
-    { id: '1', title: '토익' },
-    { id: '2', title: '토스' },
-    { id: '3', title: '오픽' },
-    { id: '4', title: '공무원' },
-    { id: '5', title: '법학' },
-    { id: '6', title: '경찰고시' },
-    { id: '7', title: '임용시험' },
-    { id: '8', title: '소방고시' },
-    { id: '9', title: '회계/세무' },
-    { id: '10', title: '공인중개사' },
-    { id: '11', title: '대학' },
-    { id: '12', title: '자격증' },
-    { id: '13', title: 'IT' },
-  ];
+
   useEffect(() => {
     console.log(selectedButtons);
   }, [selectedButtons]);
@@ -76,7 +62,7 @@ const CategoryFilter = () => {
         <Text style={mainPageStyleSheet.choiceInfoText}>복수 선택 가능</Text>
       </View>
       <View style={mainPageStyleSheet.categoryButtonContainner}>
-        <FlatList data={data} renderItem={renderItem} keyExtractor={(item) => item.id} numColumns={3} />
+        <FlatList data={Category} renderItem={renderItem} keyExtractor={(item) => item.id} numColumns={3} />
       </View>
     </View>
   );

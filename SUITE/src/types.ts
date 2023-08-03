@@ -9,6 +9,7 @@ export type RootStackParamList = {
   SignupComplete: undefined;
   TermOfUse: undefined;
   UserInformation: undefined;
+  AuthenticateCode: undefined;
 };
 
 export interface Category {
