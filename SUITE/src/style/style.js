@@ -479,6 +479,32 @@ const mainPageStyleSheet = StyleSheet.create({
     marginTop: heightPercentage(20),
     fontFamily: 'PretendardVariable',
   },
+  choiceProfileContainer: {
+    flex : 1,
+    alignItems:'center',
+    marginTop : heightPercentage(75)
+  },
+  choiceProfile : {
+    width : 188,
+    height : 188,
+    borderRadius:100,
+    alignItems:'center',
+    justifyContent:'center',
+  },
+  choiceProfileImage : {
+    width:188,
+    height:188,
+    borderRadius:100,
+  },
+  profileInputBox: {
+    width: widthPercentage(310),
+    height: heightPercentage(50),
+    marginTop: heightPercentage(50),
+    borderColor: '#E8E8E8',
+    borderWidth: 1,
+    borderRadius: 3,
+    paddingLeft: 13,
+  },
 });
 
 export default mainPageStyleSheet;

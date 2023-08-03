@@ -69,7 +69,7 @@ const UserInformation = () => {
         <TouchableOpacity
           style={mainPageStyleSheet.pageBackIcon}
           onPress={() => {
-            navigation.navigate('Profile');
+            navigation.navigate('TermOfUse');
           }}
         >
           <Icon name="chevron-back" size={24} color={'#000000'} />

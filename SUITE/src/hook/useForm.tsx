@@ -11,6 +11,7 @@ export interface FormValues {
   sex: string;
   preferStudy: string;
   studyMethod: string;
+  nickname : string;
 }
 
 const useForm = () => {
@@ -25,6 +26,7 @@ const useForm = () => {
     sex: '',
     preferStudy: '',
     studyMethod: '',
+    nickname: '',
   });
   const [touched, setTouched] = useState<{ [key: string]: boolean }>({});
   const [errors, setErrors] = useState<{ [key: string]: string }>({});

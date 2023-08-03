@@ -1,8 +1,16 @@
-import React, { useEffect } from 'react';
-import { View, Text } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Image, Text } from 'react-native';
 import mainPageStyleSheet from '../../../style/style';
 import { useRecoilState } from 'recoil';
 import { emailState, nameState, passwordState, phoneState, preferStudyState, securityNumState, studyMethodState } from '../../../../recoil/atoms';
+import {launchImageLibrary} from 'react-native-image-picker'
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/core';
+import { RootStackNavigationProp } from '../Login';
+import InputField from '../../../components/presents/InputField';
+import useForm from '../../../hook/useForm';
+import defaultImage from '../../../Icons/profile.png'
 
 const Profile = () => {
   const [email, setEmail] = useRecoilState(emailState)
@@ -12,15 +20,80 @@ const Profile = () => {
   const [securityNum, setsecurityNum] = useRecoilState(securityNumState);
   const [preferStudy, setpreferStudy] = useRecoilState(preferStudyState);
   const [studyMethod, setstudyMethod] = useRecoilState(studyMethodState);
-
-  useEffect(()=> {
+  const [img, setImageSource ] = useState(""); 
+  const navigation = useNavigation<RootStackNavigationProp>();
+  const profile = useForm();
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const handleButtonPress = () => {
+    
+  };
+  function pickImg() { 
+    launchImageLibrary(
+      {
+        mediaType: 'photo',
+        maxWidth: 188,
+        maxHeight: 188,
+      }, 
+      (response) => {
+        if(response.didCancel){
+          return;
+        }else if(response.errorCode){
+          console.log("Image Error : " + response.errorCode);
+        }
+        setImageSource(response.assets[0].uri);
+     })
   }
-  ,[])
-
+  useEffect(() => {
+    if (profile.getTextInputProps('nickname').value != '') {
+      setIsButtonDisabled(false);
+    } else {
+      setIsButtonDisabled(true);
+    }
+  }, [profile.getTextInputProps('nickname').value]);
   return (
     <View style={mainPageStyleSheet.categoryPageContainer}>
-      <Text>Profile page</Text>
+      <View style={mainPageStyleSheet.underStatusBar}>
+        <TouchableOpacity
+          style={mainPageStyleSheet.pageBackIcon}
+          onPress={() => {
+            navigation.navigate('UserInformation');
+          }}
+        >
+          <Icon name="chevron-back" size={24} color={'#000000'} />
+        </TouchableOpacity>
+        <Text style={mainPageStyleSheet.SignUpText}>프로필 설정</Text>
+      </View>
+
+        <View style={mainPageStyleSheet.choiceProfileContainer}>
+        {img ?   
+        <TouchableOpacity style={mainPageStyleSheet.choiceProfile} onPress={()=>pickImg()}>
+          <Image source={{uri: img}} style={mainPageStyleSheet.choiceProfileImage}/>
+        </TouchableOpacity>  
+        :
+        <TouchableOpacity style={mainPageStyleSheet.choiceProfile} onPress={()=>pickImg()}>
+          <Image source={defaultImage} style={mainPageStyleSheet.choiceProfileImage}/>
+        </TouchableOpacity>
+      }
+          <InputField
+            style={mainPageStyleSheet.profileInputBox}
+            placeholder=" 닉네임을 입력해주세요"
+            {...profile.getTextInputProps('nickname')}
+            touched={profile.touched.nickname}
+          />
     </View>
+    <View style={mainPageStyleSheet.SignUpNextBtnContainer}>
+        <TouchableOpacity
+          style={[mainPageStyleSheet.SignUpNextBtnBtn, isButtonDisabled && mainPageStyleSheet.disabledSignUpNextBtnBtn]}
+          disabled={isButtonDisabled}
+          onPress={() => {
+            handleButtonPress();
+          }}
+        >
+          <Text style={mainPageStyleSheet.SignUpNextBtnText}>회원가입 완료하기</Text>
+        </TouchableOpacity>
+      </View>
+      </View>
+      
   );
 };
 
