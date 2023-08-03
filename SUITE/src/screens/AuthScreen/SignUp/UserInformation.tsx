@@ -7,6 +7,9 @@ import { RootStackNavigationProp } from '../Login';
 import useForm from '../../../hook/useForm';
 import InputField from '../../../components/presents/InputField';
 import { SelectList } from 'react-native-dropdown-select-list';
+import { Category } from '../../../data/Categoty';
+import { useRecoilState } from 'recoil';
+import { nameState, phoneState, preferStudyState, securityNumState, studyMethodState } from '../../../../recoil/atoms';
 
 const UserInformation = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
@@ -14,12 +17,27 @@ const UserInformation = () => {
   const [selectedCategory, setselectedCategory] = useState('');
   const [selectedItem, setSelectedItem] = useState(''); // State to keep track of the selected item
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [name, setName] = useRecoilState(nameState);
+  const [phone, setPhone] = useRecoilState(phoneState);
+  const [securityNum, setsecurityNum] = useRecoilState(securityNumState);
+  const [preferStudy, setpreferStudy] = useRecoilState(preferStudyState);
+  const [studyMethod, setstudyMethod] = useRecoilState(studyMethodState);
 
   const handleSelectItem = (item: React.SetStateAction<string>) => {
     setSelectedItem(item);
   };
   const handleButtonPress = () => {
-    navigation.navigate('AuthenticateCode'); //로그인 API 연동
+    const nameValue = signUp.getTextInputProps('name').value;
+    const phoneValue = signUp.getTextInputProps('phone').value;
+    const securityNumValue = signUp.getTextInputProps('birthday').value + '-' + signUp.getTextInputProps('sex').value;
+    const preferStudyValue = selectedCategory
+    const studyMethodValue = selectedItem
+    setName(nameValue)
+    setPhone(phoneValue)
+    setsecurityNum(securityNumValue)
+    setpreferStudy(preferStudyValue)
+    setstudyMethod(studyMethodValue)
+    navigation.navigate('Profile'); 
   };
   useEffect(() => {
     if (
@@ -44,20 +62,7 @@ const UserInformation = () => {
     selectedItem,
   ]);
 
-  const Category = [
-    { key: '1', value: '토스' },
-    { key: '2', value: '오픽' },
-    { key: '3', value: '공무원' },
-    { key: '4', value: '법학' },
-    { key: '5', value: '경찰고시' },
-    { key: '6', value: '임용시험' },
-    { key: '7', value: '소방고시' },
-    { key: '8', value: '회계/세무' },
-    { key: '9', value: '자격증' },
-    { key: '10', value: '공인중개사' },
-    { key: '11', value: '대학' },
-    { key: '12', value: 'IT' },
-  ];
+
   return (
     <View style={mainPageStyleSheet.categoryPageContainer}>
       <View style={mainPageStyleSheet.underStatusBar}>
