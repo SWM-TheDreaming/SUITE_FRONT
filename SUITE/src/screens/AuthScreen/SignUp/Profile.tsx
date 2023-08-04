@@ -57,17 +57,8 @@ const Profile = () => {
       };
 
   const handleButtonPress = () => {
-    console.log(email)
-    console.log(password)
-    console.log(name)
-    console.log(profile.getTextInputProps('nickname').value)
-    console.log(phone)
-    console.log(securityNum)
-    console.log(preferStudy)
-    console.log(studyMethod)
-
     SignUp()
-    // navigation.navigate('SignUp');
+    navigation.navigate('SignUp');
   };
   function pickImg() { 
     launchImageLibrary(

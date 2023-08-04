@@ -32,33 +32,32 @@ const AuthenticateCode = () => {
     }
   }, [validateCode]);
   useEffect(() => {
-    console.log(email)
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://semtle.catholic.ac.kr:8085/member/auth/mail', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email: email,
-          }),
-        });
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch('http://semtle.catholic.ac.kr:8085/member/auth/mail', {
+  //         method: 'POST',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //         body: JSON.stringify({
+  //           email: email,
+  //         }),
+  //       });
 
-        if (response.ok) {
-          const data = await response.json();
-          console.log(data)
-          setverifyCode(data.data.code);
-        } else {
-          const data = await response.json();
-          console.log('Error occurred:', data);
-        }
-      } catch (error) {
-        console.log('Error occurred:', error);
-      }
-    };
+  //       if (response.ok) {
+  //         const data = await response.json();
+  //         console.log(data)
+  //         setverifyCode(data.data.code);
+  //       } else {
+  //         const data = await response.json();
+  //         console.log('Error occurred:', data);
+  //       }
+  //     } catch (error) {
+  //       console.log('Error occurred:', error);
+  //     }
+  //   };
 
-    fetchData();
+  //   fetchData();
   }, []);
 
   return (

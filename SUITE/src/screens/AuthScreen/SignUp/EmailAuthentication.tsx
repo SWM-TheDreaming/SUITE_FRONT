@@ -8,8 +8,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import InputField from '../../../components/presents/InputField';
 import { useRecoilState } from 'recoil';
 import { emailState, passwordState } from '../../../../recoil/atoms'; // Recoil 상태를 정의한 파일 임포트
-import { Modal } from '../../../hook/modal';
-
+import ModalPopup from '../../../hook/modal';
+import SignModalPopup from '../../../components/presents/SignmodalPopup';
 const EmailAuthentication = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
   const emailAuthentication = useForm();
@@ -18,7 +18,7 @@ const EmailAuthentication = () => {
   const [email, setEmail] = useRecoilState(emailState);
   const [statusCode, setStatusCode] = useState(0)
   const [password, setpPassword] = useRecoilState(passwordState)
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [visible, setVisible] = React.useState(false);
 
   const handlePasswordConfirmationChange = (text: string) => {
     setPasswordConfirmation(text);
@@ -32,7 +32,7 @@ const EmailAuthentication = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: email, 
+          email: emailAuthentication.getTextInputProps('username').value, 
         }),
       });
       if (response.ok) {
@@ -41,7 +41,7 @@ const EmailAuthentication = () => {
         
       } else {
         const data = await response.json();
-        //모달코드작성
+        setVisible(true)
         setStatusCode(data.code)
       }
     } catch (error) {
@@ -112,7 +112,11 @@ const EmailAuthentication = () => {
           <Text style={mainPageStyleSheet.idPwInputErrorText}>비밀번호가 일치하지 않습니다.</Text>
         )}
       </View>
-      
+
+      <ModalPopup visible={visible}>  
+          <SignModalPopup visible={visible} onClose={() => setVisible(false)}/>
+      </ModalPopup>
+
       <View style={mainPageStyleSheet.SignUpNextBtnContainer}> 
         <TouchableOpacity
           style={[mainPageStyleSheet.SignUpNextBtnBtn, isButtonDisabled && mainPageStyleSheet.disabledSignUpNextBtnBtn]}

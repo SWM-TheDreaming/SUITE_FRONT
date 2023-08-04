@@ -1,41 +1,57 @@
-import React from "react";
-import { FunctionComponent, useState } from "react";
-import { StyleSheet, View, Modal as DefaultModal, Button } from "react-native";
-import mainPageStyleSheet from "../style/style";
+import React, { useState, useEffect, useRef } from 'react';
+import { Modal, View, Animated, StyleSheet } from 'react-native';
+import { heightPercentage, widthPercentage } from '../responsive/ResponsiveSize';
+import mainPageStyleSheet from '../style/style';
 
-type ModalProps = {
-  activator?: FunctionComponent<{ handleOpen: () => void }>;
+interface ModalPopupProps {
+  visible: boolean;
   children: React.ReactNode;
-};
-
-export function Modal({ activator: Activator, children }: ModalProps) {
-  const [isVisible, setVisible] = useState(false);
-
-  return (
-    <View>
-      <DefaultModal
-        visible={isVisible}
-        transparent={false}
-        animationType={"slide"}
-      >
-        <View style={mainPageStyleSheet.modalContainer}>
-          {children}
-          <Button onPress={() => setVisible(false)} title="Close"></Button>
-        </View>
-      </DefaultModal>
-      {Activator ? (
-        <Activator handleOpen={() => setVisible(true)} />
-      ) : (
-        <Button onPress={() => setVisible(true)} title="Open"></Button>
-      )}
-    </View>
-  );
 }
 
+const ModalPopup: React.FC<ModalPopupProps> = ({ visible, children }) => {
+  const [showModal, setShowModal] = useState(visible);
+  const scaleValue = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    toggleModal();
+  }, [visible]);
+
+  const toggleModal = () => {
+    if (visible) {
+      setShowModal(true);
+      Animated.spring(scaleValue, {
+        toValue: 1,
+        useNativeDriver: true,
+      }).start();
+    } else {
+      setTimeout(() => setShowModal(false), 200);
+      Animated.timing(scaleValue, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: true,
+      }).start();
+    }
+  };
+
+  return (
+    <Modal transparent visible={showModal}>
+      <View style={styles.modalBackGround}>
+        <Animated.View
+          style={[mainPageStyleSheet.SignModalContainer, { transform: [{ scale: scaleValue }] }]}>
+          {children}
+        </Animated.View>
+      </View>
+    </Modal>
+  );
+};
+
 const styles = StyleSheet.create({
-  contentView: {
+  modalBackGround: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
 });
+
+export default ModalPopup; 
