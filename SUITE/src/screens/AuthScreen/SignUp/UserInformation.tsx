@@ -10,7 +10,8 @@ import { SelectList } from 'react-native-dropdown-select-list';
 import { Category } from '../../../data/Categoty';
 import { useRecoilState } from 'recoil';
 import { nameState, phoneState, preferStudyState, securityNumState, studyMethodState } from '../../../../recoil/atoms';
-
+import convertStudyValue from '../../../data/ChangeCategory';
+import convertStudyMethod from '../../../data/ChangeStudyMethod';
 const UserInformation = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
   const signUp = useForm();
@@ -30,8 +31,8 @@ const UserInformation = () => {
     const nameValue = signUp.getTextInputProps('name').value;
     const phoneValue = signUp.getTextInputProps('phone').value;
     const securityNumValue = signUp.getTextInputProps('birthday').value + '-' + signUp.getTextInputProps('sex').value;
-    const preferStudyValue = selectedCategory
-    const studyMethodValue = selectedItem
+    const preferStudyValue = convertStudyValue(selectedCategory)
+    const studyMethodValue = convertStudyMethod(selectedItem)
     setName(nameValue)
     setPhone(phoneValue)
     setsecurityNum(securityNumValue)

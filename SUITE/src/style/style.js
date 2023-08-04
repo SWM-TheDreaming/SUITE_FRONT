@@ -214,9 +214,14 @@ const mainPageStyleSheet = StyleSheet.create({
     backgroundColor: 'white',
   },
   logoContainer: {
-    height: heightPercentage(200),
+    marginTop:heightPercentage(50),
+    height: heightPercentage(140),
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  logoStyle : {
+    width : 120,
+    height : 120
   },
   idpwInputContainer: {
     marginLeft: widthPercentage(24),
@@ -281,12 +286,8 @@ const mainPageStyleSheet = StyleSheet.create({
     marginLeft: widthPercentage(25),
   },
   snsLoginButtonContainer: {
-    // marginTop: heightPercentage(48),
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    height: Height * 0.3,
+    marginTop: heightPercentage(30),
+    marginBottom: heightPercentage(30),
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -387,7 +388,7 @@ const mainPageStyleSheet = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    height: Height * 0.2,
+    height: Height * 0.25,
     justifyContent: 'center',
     alignItems: 'center',
     justifyContent: 'center',
@@ -505,6 +506,29 @@ const mainPageStyleSheet = StyleSheet.create({
     borderRadius: 3,
     paddingLeft: 13,
   },
+  signUpCompleteText : {
+    fontsize : 10,
+    color : "#B3ADAD",
+    fontFamily: 'PretendardVariable',
+  },
+  modalContainer : {
+    zIndex:3,
+    position:'absolute',
+    justifyContent:"center",
+    alignContent:"center",
+    alignItems:"center",
+    paddingTop: 50,
+    width : widthPercentage(280),
+    height : heightPercentage(352),
+    backgroundColor : '#050953',
+
+  },
+  modalButton : {
+    width : widthPercentage(240),
+    height : heightPercentage(50),
+    backgroundColor : '#050953',
+    borderRadius : 25
+  }
 });
 
 export default mainPageStyleSheet;

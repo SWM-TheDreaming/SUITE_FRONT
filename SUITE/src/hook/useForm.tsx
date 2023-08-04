@@ -122,6 +122,23 @@ const useForm = () => {
           [name]: '',
         });
       }
+    }else if (name === 'nickname') {
+      if (!text) {
+        setErrors({
+          ...errors,
+          [name]: '닉네임을 입력해주세요.',
+        });
+      } else if (!/^.{1,8}$/.test(text)) {
+        setErrors({
+          ...errors,
+          [name]: '닉네임은 8글자 이하로 입력해주세요',
+        });
+      } else {
+        setErrors({
+          ...errors,
+          [name]: '',
+        });
+      }
     }
   };
 

@@ -6,14 +6,14 @@ import Halloffame from '../screens/Halloffame';
 import Mystudy from '../screens/Mystudy';
 import Mypage from '../screens/Mypage';
 import { WithLocalSvg } from 'react-native-svg';
-import studylistsvg from '../Icons/studylist.svg';
-import studylistchoice from '../Icons/studylistchoice.svg';
-import halloffamesvg from '../Icons/halloffame.svg';
-import halloffamechoice from '../Icons/halloffamechoice.svg';
-import mystudysvg from '../Icons/mystudy.svg';
-import mystudychoice from '../Icons/mystudychoice.svg';
-import mypagesvg from '../Icons/mypage.svg';
-import mypagechoice from '../Icons/mypagechoice.svg';
+import Studylistsvg from '../Icons/studylist.svg';
+import Studylistchoice from '../Icons/studylistchoice.svg';
+import Halloffamesvg from '../Icons/halloffame.svg';
+import Halloffamechoice from '../Icons/halloffamechoice.svg';
+import Mystudysvg from '../Icons/mystudy.svg';
+import Mystudychoice from '../Icons/mystudychoice.svg';
+import Mypagesvg from '../Icons/mypage.svg';
+import Mypagechoice from '../Icons/mypagechoice.svg';
 import { heightPercentage } from '../responsive/ResponsiveSize';
 
 const ClientTabs = createBottomTabNavigator();
@@ -38,7 +38,7 @@ export default function RootClientTabs() {
         options={{
           tabBarLabel: '스터디목록',
           tabBarIcon: ({ focused }) =>
-            focused ? <WithLocalSvg asset={studylistchoice} /> : <WithLocalSvg asset={studylistsvg} />,
+            focused ? <Studylistchoice/> : <Studylistsvg />,
         }}
       />
       <ClientTabs.Screen
@@ -47,7 +47,7 @@ export default function RootClientTabs() {
         options={{
           tabBarLabel: '명예의전당',
           tabBarIcon: ({ focused }) =>
-            focused ? <WithLocalSvg asset={halloffamechoice} /> : <WithLocalSvg asset={halloffamesvg} />,
+            focused ? <Halloffamechoice /> : <Halloffamesvg />,
         }}
       />
       <ClientTabs.Screen
@@ -56,7 +56,7 @@ export default function RootClientTabs() {
         options={{
           tabBarLabel: '나의스터디',
           tabBarIcon: ({ focused }) =>
-            focused ? <WithLocalSvg asset={mystudychoice} /> : <WithLocalSvg asset={mystudysvg} />,
+            focused ? <Mystudychoice /> : <Mystudysvg/>,
         }}
       />
 
@@ -66,7 +66,7 @@ export default function RootClientTabs() {
         options={{
           tabBarLabel: '마이페이지',
           tabBarIcon: ({ focused }) =>
-            focused ? <WithLocalSvg asset={mypagechoice} /> : <WithLocalSvg asset={mypagesvg} />,
+            focused ? <Mypagechoice /> : <Mypagesvg />,
         }}
       />
     </ClientTabs.Navigator>

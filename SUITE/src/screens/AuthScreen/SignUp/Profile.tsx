@@ -24,8 +24,50 @@ const Profile = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
   const profile = useForm();
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+
+  const SignUp = async () => {
+        try {
+          const response = await fetch('http://semtle.catholic.ac.kr:8085/member/signup', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              email: email,
+              password : password,
+              role : "USER",
+              name : name,
+              nickName : profile.getTextInputProps('nickname').value,
+              phone : phone,
+              securityNum : securityNum,
+              preferStudy : preferStudy,
+              studyMethod : studyMethod,
+            }),
+          });
+  
+          if (response.ok) {
+            const data = await response.json();
+            console.log(data)
+          } else {
+            console.log('Error occurred:', response);
+          }
+        } catch (error) {
+          console.log('Error occurred:', error);
+        }
+      };
+
   const handleButtonPress = () => {
-    
+    console.log(email)
+    console.log(password)
+    console.log(name)
+    console.log(profile.getTextInputProps('nickname').value)
+    console.log(phone)
+    console.log(securityNum)
+    console.log(preferStudy)
+    console.log(studyMethod)
+
+    SignUp()
+    // navigation.navigate('SignUp');
   };
   function pickImg() { 
     launchImageLibrary(
@@ -80,6 +122,8 @@ const Profile = () => {
             {...profile.getTextInputProps('nickname')}
             touched={profile.touched.nickname}
           />
+    <Text>{<Text style={mainPageStyleSheet.idPwInputErrorText}>{profile.errors.nickname}</Text>}</Text>
+
     </View>
     <View style={mainPageStyleSheet.SignUpNextBtnContainer}>
         <TouchableOpacity
