@@ -214,9 +214,14 @@ const mainPageStyleSheet = StyleSheet.create({
     backgroundColor: 'white',
   },
   logoContainer: {
-    height: heightPercentage(200),
+    marginTop:heightPercentage(50),
+    height: heightPercentage(140),
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  logoStyle : {
+    width : 120,
+    height : 120
   },
   idpwInputContainer: {
     marginLeft: widthPercentage(24),
@@ -281,12 +286,8 @@ const mainPageStyleSheet = StyleSheet.create({
     marginLeft: widthPercentage(25),
   },
   snsLoginButtonContainer: {
-    // marginTop: heightPercentage(48),
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    height: Height * 0.3,
+    marginTop: heightPercentage(30),
+    marginBottom: heightPercentage(30),
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -387,7 +388,7 @@ const mainPageStyleSheet = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    height: Height * 0.2,
+    height: Height * 0.25,
     justifyContent: 'center',
     alignItems: 'center',
     justifyContent: 'center',
@@ -505,6 +506,52 @@ const mainPageStyleSheet = StyleSheet.create({
     borderRadius: 3,
     paddingLeft: 13,
   },
+  signUpCompleteText : {
+    fontsize : 10,
+    color : "#B3ADAD",
+    fontFamily: 'PretendardVariable',
+  },
+  emailChecktext : {
+    fontSize : 17,
+    fontWeight : 'bold',
+    marginTop : heightPercentage(30)
+  },
+  SignModalContainer : {
+    width: widthPercentage(280),
+    height : heightPercentage(170),
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 20,
+    justifyContent : 'center',
+    alignItems : 'center'   
+  },
+  SignmodalButton : {
+    width : widthPercentage(240),
+    height : heightPercentage(50),
+    backgroundColor : '#050953',
+    borderRadius : 25,
+    justifyContent : 'center',
+    alignItems : 'center',
+    marginVertical: 20,   
+  },
+  SignmodalButtonText : {
+    color : 'white',
+    fontSize : 16,
+    fontWeight : "bold"
+  },
+  brandingTextContainer : {
+    justifyContent : 'center',
+    alignItems : 'center',
+    marginTop : heightPercentage(50)
+  },
+  signUpcompleteContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: Height * 0.75,
+    alignItems : 'center',
+  }
 });
 
 export default mainPageStyleSheet;

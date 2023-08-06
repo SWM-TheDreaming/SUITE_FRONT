@@ -6,14 +6,15 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/core';
 import InputField from '../../../components/presents/InputField';
 import useForm from '../../../hook/useForm';
-
+import { useRecoilValue } from 'recoil';
+import { emailState } from '../../../../recoil/atoms';
 const AuthenticateCode = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
   const [verifyCode, setverifyCode] = useState('aa');
   const [authenticationCode, setauthenticationCode] = useState('');
   const emailAuthenticationCode = useForm();
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-
+  const email = useRecoilValue(emailState);
   const handleAuthencticationCodeChange = (text: string) => {
     setauthenticationCode(text);
   };
@@ -30,7 +31,7 @@ const AuthenticateCode = () => {
       setIsButtonDisabled(false);
     }
   }, [validateCode]);
-  // useEffect(() => {
+  useEffect(() => {
   //   const fetchData = async () => {
   //     try {
   //       const response = await fetch('http://semtle.catholic.ac.kr:8085/member/auth/mail', {
@@ -39,7 +40,7 @@ const AuthenticateCode = () => {
   //           'Content-Type': 'application/json',
   //         },
   //         body: JSON.stringify({
-  //           email: email, // 여기에 이메일 값을 넣어줍니다.
+  //           email: email,
   //         }),
   //       });
 
@@ -48,7 +49,8 @@ const AuthenticateCode = () => {
   //         console.log(data)
   //         setverifyCode(data.data.code);
   //       } else {
-  //         console.log('Error occurred:', response.status);
+  //         const data = await response.json();
+  //         console.log('Error occurred:', data);
   //       }
   //     } catch (error) {
   //       console.log('Error occurred:', error);
@@ -56,7 +58,7 @@ const AuthenticateCode = () => {
   //   };
 
   //   fetchData();
-  // }, []);
+  }, []);
 
   return (
     <View style={mainPageStyleSheet.categoryPageContainer}>

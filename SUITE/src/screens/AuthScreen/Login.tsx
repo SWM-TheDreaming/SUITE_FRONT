@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, TextInputProps } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, TextInputProps, Image } from 'react-native';
 import useForm from '../../hook/useForm';
 import mainPageStyleSheet from '../../style/style';
 import InputField from '../../components/presents/InputField';
 import Kakaosvg from '../../Icons/kakao.svg';
 import Googlesvg from '../../Icons/google.svg';
+import Logo from '../../Icons/Logo.png'
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../types';
+import { ScrollView } from 'react-native-gesture-handler';
+import { useRecoilState } from 'recoil';
+import { tokenState } from '../../../recoil/atoms';
+import { setStorage } from '../../hook/asyncStorage';
+
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 const Login = () => {
@@ -15,8 +21,35 @@ const Login = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
   const [validateEmail, setValidateEmail] = useState(true);
   const [validatePw, setValidatePW] = useState(true);
+  const [token, setToken] = useRecoilState(tokenState);
+  const SingIn = async () => {
+    try {
+      const response = await fetch('http://semtle.catholic.ac.kr:8085/member/signin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: login.getTextInputProps('username').value,
+          password : login.getTextInputProps('password').value,
+        }),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        setStorage("token", JSON.stringify(data.data.accessToken));
+        setToken(data.data.accessToken)
+      } else {
+        const data = await response.json();
+        console.log('Error occurred:', data.data);
+      }
+    } catch (error) {
+      console.log('Error occurred:', error);
+    }
+  }
   const handleButtonPress = () => {
     if (login.errors.username) {
+      console.log(login.errors.username)
       setValidateEmail(false);
     }
     if (login.errors.password) {
@@ -27,16 +60,21 @@ const Login = () => {
     }
     if (login.getTextInputProps('username').value == '') {
       setValidateEmail(false);
-    } else {
-      console.log('로그인 성공'); //로그인 API 연동
+    } else if(!login.errors.username && !login.errors.password) {
+      SingIn()
       setValidateEmail(true);
       setValidatePW(true);
     }
   };
+  
   return (
+    <ScrollView>
     <View style={mainPageStyleSheet.loginContainer}>
       <View style={mainPageStyleSheet.logoContainer}>
-        <Text>Logo</Text>
+        <Image 
+          source={Logo}
+          style = {mainPageStyleSheet.logoStyle}
+          />
       </View>
       <View style={mainPageStyleSheet.idpwInputContainer}>
         <Text style={mainPageStyleSheet.idpwtext}>아이디</Text>
@@ -102,6 +140,7 @@ const Login = () => {
         </TouchableOpacity>
       </View>
     </View>
+    </ScrollView>
   );
 };
 

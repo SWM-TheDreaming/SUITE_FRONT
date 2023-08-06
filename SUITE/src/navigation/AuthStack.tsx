@@ -8,6 +8,7 @@ import SignupComplete from '../screens/AuthScreen/SignUp/SignupComplete';
 import TermOfUse from '../screens/AuthScreen/SignUp/TermOfUse';
 import UserInformation from '../screens/AuthScreen/SignUp/UserInformation';
 import AuthenticateCode from '../screens/AuthScreen/SignUp/AuthenticateCode';
+import SignUp from '../screens/AuthScreen/SignUp/SignUp'
 const Auth = createStackNavigator();
 
 export function AuthStack() {
@@ -64,6 +65,14 @@ export function AuthStack() {
       <Auth.Screen
         name="AuthenticateCode"
         component={AuthenticateCode}
+        options={{
+          headerShown: false,
+          ...TransitionPresets.RevealFromBottomAndroid,
+        }}
+      />
+      <Auth.Screen
+        name="SignUp"
+        component={SignUp}
         options={{
           headerShown: false,
           ...TransitionPresets.RevealFromBottomAndroid,
