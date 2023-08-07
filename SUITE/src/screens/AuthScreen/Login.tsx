@@ -13,6 +13,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { useRecoilState } from 'recoil';
 import { tokenState } from '../../../recoil/atoms';
 import { setStorage } from '../../hook/asyncStorage';
+import { SignInApi } from '../../api/Sign/signin';
 
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
@@ -24,24 +25,15 @@ const Login = () => {
   const [token, setToken] = useRecoilState(tokenState);
   const SingIn = async () => {
     try {
-      const response = await fetch('http://semtle.catholic.ac.kr:8085/member/signin', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: login.getTextInputProps('username').value,
-          password : login.getTextInputProps('password').value,
-        }),
-      });
+      const email = login.getTextInputProps('username').value;
+      const password = login.getTextInputProps('password').value;
   
-      if (response.ok) {
-        const data = await response.json();
-        setStorage("token", JSON.stringify(data.data.accessToken));
-        setToken(data.data.accessToken)
-      } else {
-        const data = await response.json();
-        console.log('Error occurred:', data.data);
+      try {
+        const accessToken = await SignInApi(email, password);
+        setStorage("token", JSON.stringify(accessToken));
+        setToken(accessToken);
+      } catch (error) {
+        console.log('Error occurred:', error);
       }
     } catch (error) {
       console.log('Error occurred:', error);

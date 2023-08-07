@@ -25,7 +25,7 @@ export default function RootNavigator() {
   return (
     <NavigationContainer>
        {
-                token.length < 10?(
+                !token || token.length < 10 ?(
                     <AuthStack />
                 ):(
                     <AppStack />

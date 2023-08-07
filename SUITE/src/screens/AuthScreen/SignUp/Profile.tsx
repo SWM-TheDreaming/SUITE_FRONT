@@ -11,6 +11,7 @@ import { RootStackNavigationProp } from '../Login';
 import InputField from '../../../components/presents/InputField';
 import useForm from '../../../hook/useForm';
 import defaultImage from '../../../Icons/profile.png'
+import { signUpAPI } from '../../../api/Sign/signup';
 
 const Profile = () => {
   const [email, setEmail] = useRecoilState(emailState)
@@ -25,40 +26,18 @@ const Profile = () => {
   const profile = useForm();
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
-  const SignUp = async () => {
-        try {
-          const response = await fetch('http://semtle.catholic.ac.kr:8085/member/signup', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              email: email,
-              password : password,
-              role : "USER",
-              name : name,
-              nickName : profile.getTextInputProps('nickname').value,
-              phone : phone,
-              securityNum : securityNum,
-              preferStudy : preferStudy,
-              studyMethod : studyMethod,
-            }),
-          });
-  
-          if (response.ok) {
-            const data = await response.json();
-            console.log(data)
-          } else {
-            console.log('Error occurred:', response);
-          }
-        } catch (error) {
-          console.log('Error occurred:', error);
-        }
-      };
-
   const handleButtonPress = () => {
-    SignUp()
-    navigation.navigate('SignUp');
+    signUpAPI({
+      email: email,
+      password: password,
+      name: name,
+      nickname: profile.getTextInputProps('nickname').value,
+      phone: phone,
+      securityNum: securityNum,
+      preferStudy: preferStudy,
+      studyMethod: studyMethod,
+    });
+      navigation.navigate('SignUp');
   };
   function pickImg() { 
     launchImageLibrary(
