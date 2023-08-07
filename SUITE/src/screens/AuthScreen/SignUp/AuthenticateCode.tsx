@@ -8,6 +8,8 @@ import InputField from '../../../components/presents/InputField';
 import useForm from '../../../hook/useForm';
 import { useRecoilValue } from 'recoil';
 import { emailState } from '../../../../recoil/atoms';
+import { emailAuthenticationCodeApi } from '../../../api/Sign/emailAutheticationCode';
+
 const AuthenticateCode = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
   const [verifyCode, setverifyCode] = useState('aa');
@@ -32,32 +34,15 @@ const AuthenticateCode = () => {
     }
   }, [validateCode]);
   useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch('http://semtle.catholic.ac.kr:8085/member/auth/mail', {
-  //         method: 'POST',
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //         },
-  //         body: JSON.stringify({
-  //           email: email,
-  //         }),
-  //       });
-
-  //       if (response.ok) {
-  //         const data = await response.json();
-  //         console.log(data)
-  //         setverifyCode(data.data.code);
-  //       } else {
-  //         const data = await response.json();
-  //         console.log('Error occurred:', data);
-  //       }
-  //     } catch (error) {
-  //       console.log('Error occurred:', error);
-  //     }
-  //   };
-
-  //   fetchData();
+    const getEmailCode = async () => {
+      try {
+        const code = await emailAuthenticationCodeApi(email);
+        setverifyCode(code);
+      } catch (error) {
+        console.log('Error occurred:', error);
+      }
+    };
+    getEmailCode();
   }, []);
 
   return (
