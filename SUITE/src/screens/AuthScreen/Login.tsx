@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, TextInputProps, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import useForm from '../../hook/useForm';
 import mainPageStyleSheet from '../../style/style';
 import InputField from '../../components/presents/InputField';
@@ -14,8 +14,23 @@ import { useRecoilState } from 'recoil';
 import { tokenState } from '../../../recoil/atoms';
 import { setStorage } from '../../hook/asyncStorage';
 import { SignInApi } from '../../api/Sign/signin';
+import ModalPopup from '../../hook/modal';
+import SignModalPopup from '../../components/presents/SignmodalPopup';
+import { externalkakaologin } from '../../api/Sign/kakaoLogin';
 
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
+
+const kakaoLoginHandle = async () => {
+  try {
+    const kakaoResult = await externalkakaologin();
+    if (kakaoResult.status == 500){
+      //다음 실행 코드(navigation)
+    }
+    console.log("result =", kakaoResult.status);
+  } catch (error) {
+    console.log("Error occurred:", error);
+  }
+};
 
 const Login = () => {
   const login = useForm();
@@ -23,6 +38,9 @@ const Login = () => {
   const [validateEmail, setValidateEmail] = useState(true);
   const [validatePw, setValidatePW] = useState(true);
   const [token, setToken] = useRecoilState(tokenState);
+  const [visible, setVisible] = useState(false);
+  const [loginFailText, setLoginFailText] = useState('')
+
   const SingIn = async () => {
     try {
       const email = login.getTextInputProps('username').value;
@@ -30,8 +48,19 @@ const Login = () => {
   
       try {
         const accessToken = await SignInApi(email, password);
-        setStorage("token", JSON.stringify(accessToken));
-        setToken(accessToken);
+        if (accessToken == "가입된 이메일이 없습니다."){
+          setLoginFailText("가입된 이메일이 없습니다.")
+          setVisible(true)
+        }
+        else if (accessToken == "비밀번호가 일치하지 않습니다."){
+          setLoginFailText("비밀번호가 일치하지 않습니다.")
+          setVisible(true)
+        }
+        else{
+            setStorage("token", JSON.stringify(accessToken));
+            setToken(accessToken);
+        }
+        
       } catch (error) {
         console.log('Error occurred:', error);
       }
@@ -41,7 +70,6 @@ const Login = () => {
   }
   const handleButtonPress = () => {
     if (login.errors.username) {
-      console.log(login.errors.username)
       setValidateEmail(false);
     }
     if (login.errors.password) {
@@ -101,6 +129,10 @@ const Login = () => {
           <Text style={mainPageStyleSheet.loginButtonText}>SUITE 시작하기</Text>
         </TouchableOpacity>
       </View>
+      <ModalPopup visible={visible}>  
+          <SignModalPopup visible={visible} onClose={() => setVisible(false)} text = {loginFailText}/>
+      </ModalPopup>
+
       <View style={mainPageStyleSheet.authInfoContainer}>
         <TouchableOpacity>
           <Text
@@ -122,7 +154,7 @@ const Login = () => {
         </TouchableOpacity>
       </View>
       <View style={mainPageStyleSheet.snsLoginButtonContainer}>
-        <TouchableOpacity style={mainPageStyleSheet.kakaoLoginButton}>
+        <TouchableOpacity style={mainPageStyleSheet.kakaoLoginButton} onPress={() => kakaoLoginHandle()}>
           <Kakaosvg />
           <Text style={mainPageStyleSheet.snsLoginButtonText}>카카오 아이디로 로그인하기</Text>
         </TouchableOpacity>

@@ -18,7 +18,7 @@ const EmailAuthentication = () => {
   const [email, setEmail] = useRecoilState(emailState);
   const [statusCode, setStatusCode] = useState(0)
   const [password, setpPassword] = useRecoilState(passwordState)
-  const [visible, setVisible] = React.useState(false);
+  const [visible, setVisible] = useState(false);
 
   const handlePasswordConfirmationChange = (text: string) => {
     setPasswordConfirmation(text);
@@ -114,7 +114,7 @@ const EmailAuthentication = () => {
       </View>
 
       <ModalPopup visible={visible}>  
-          <SignModalPopup visible={visible} onClose={() => setVisible(false)}/>
+          <SignModalPopup visible={visible} onClose={() => setVisible(false)} text = {'이미 등록된 이메일이 있습니다!'}/>
       </ModalPopup>
 
       <View style={mainPageStyleSheet.SignUpNextBtnContainer}> 
