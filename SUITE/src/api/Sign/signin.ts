@@ -10,12 +10,16 @@ export const SignInApi = async (email: string, password: string): Promise<string
           password: password,
         }),
       });
-  
-      if (response.ok) {
+      if (response) {
         const data = await response.json();
-        return data.data.accessToken;
+        if (data.statusCode == 200){
+            return data.data.accessToken
+        }
+        else if(data.statusCode == 400 || data.statusCode == 404) {
+            return data.message
+        }
       } else {
-        const data = await response.json();
+        const data = await response.json()
         throw new Error(data.data);
       }
     } catch (error) {
