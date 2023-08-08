@@ -37,8 +37,7 @@ export default function RootClientTabs() {
         component={Studylist}
         options={{
           tabBarLabel: '스터디목록',
-          tabBarIcon: ({ focused }) =>
-            focused ? <Studylistchoice/> : <Studylistsvg />,
+          tabBarIcon: ({ focused }) => (focused ? <Studylistchoice /> : <Studylistsvg />),
         }}
       />
       <ClientTabs.Screen
@@ -46,8 +45,7 @@ export default function RootClientTabs() {
         component={Halloffame}
         options={{
           tabBarLabel: '명예의전당',
-          tabBarIcon: ({ focused }) =>
-            focused ? <Halloffamechoice /> : <Halloffamesvg />,
+          tabBarIcon: ({ focused }) => (focused ? <Halloffamechoice /> : <Halloffamesvg />),
         }}
       />
       <ClientTabs.Screen
@@ -55,8 +53,7 @@ export default function RootClientTabs() {
         component={Mystudy}
         options={{
           tabBarLabel: '나의스터디',
-          tabBarIcon: ({ focused }) =>
-            focused ? <Mystudychoice /> : <Mystudysvg/>,
+          tabBarIcon: ({ focused }) => (focused ? <Mystudychoice /> : <Mystudysvg />),
         }}
       />
 
@@ -65,8 +62,7 @@ export default function RootClientTabs() {
         component={Mypage}
         options={{
           tabBarLabel: '마이페이지',
-          tabBarIcon: ({ focused }) =>
-            focused ? <Mypagechoice /> : <Mypagesvg />,
+          tabBarIcon: ({ focused }) => (focused ? <Mypagechoice /> : <Mypagesvg />),
         }}
       />
     </ClientTabs.Navigator>

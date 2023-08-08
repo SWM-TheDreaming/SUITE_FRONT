@@ -6,18 +6,16 @@ import { tokenState } from '../../recoil/atoms';
 import { setStorage } from '../hook/asyncStorage';
 
 const Mypage = () => {
-  const [token, setToken] = useRecoilState(tokenState)
+  const [token, setToken] = useRecoilState(tokenState);
 
   const SignOut = async () => {
-    setStorage("token", JSON.stringify(null));
-    setToken('')
-  } 
+    setStorage('token', JSON.stringify(null));
+    setToken('');
+  };
   return (
     <View>
       <Text>mypage page</Text>
-      <TouchableOpacity
-        onPress = {SignOut}
-      >
+      <TouchableOpacity onPress={SignOut}>
         <Text>로그아웃</Text>
       </TouchableOpacity>
     </View>

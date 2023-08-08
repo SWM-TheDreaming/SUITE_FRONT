@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Button, Text, TouchableOpacity, View } from 'react-native';
+import { Button, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import mainPageStyleSheet from '../../style/style';
 import StudyInfoCardUI from '../presents/studyInfoCard.present';
 import { TextInput } from 'react-native-gesture-handler';
@@ -51,7 +51,7 @@ const mockdata = [
 ];
 const StudyInfoCard: React.FunctionComponent<Category> = ({ filterCategory }) => {
   const navigation = useNavigation<RootStackNavigationProp>();
-  const [filter, setFilter] = useState<string[]>();
+  const [filter, setFilter] = useState<string[]>([]);
   const [search, setSearch] = useState('');
   const handleInputChange = (event: { nativeEvent: { text: string } }) => {
     const text = event.nativeEvent.text;
@@ -80,15 +80,22 @@ const StudyInfoCard: React.FunctionComponent<Category> = ({ filterCategory }) =>
           <Icon name="chevron-back-outline" size={15} color={'black'} />
         </View>
       </View>
-      <View style={mainPageStyleSheet.selectCategoryContainer}>
-        <TouchableOpacity
-          style={mainPageStyleSheet.selectCategoryBox}
-          onPress={() => {
-            navigation.navigate('CategoryFilter');
-          }}
-        >
-          <Text style={mainPageStyleSheet.selectCategoryText}>인원 전체</Text>
-        </TouchableOpacity>
+      <View style={mainPageStyleSheet.selectedCategoryScrollViewContainer}>
+        <ScrollView horizontal={true} style={mainPageStyleSheet.selectCategoryContainer}>
+          {filter.map((categoryItem, index) => (
+            <View key={index} style={mainPageStyleSheet.selectedFilterCategory}>
+              <Text style={mainPageStyleSheet.selectedCategoryText}>{categoryItem}</Text>
+            </View>
+          ))}
+          <TouchableOpacity
+            style={mainPageStyleSheet.selectCategoryBox}
+            onPress={() => {
+              navigation.navigate('CategoryFilter');
+            }}
+          >
+            <Text style={mainPageStyleSheet.selectCategoryText}>필터 선택</Text>
+          </TouchableOpacity>
+        </ScrollView>
       </View>
       {mockdata.map((item) => (
         <StudyInfoCardUI

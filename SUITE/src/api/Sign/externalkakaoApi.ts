@@ -4,7 +4,7 @@
 // export const externalkakaologin = () => {
 //     KakaoLogin.login().then((result) => {
 //         const data = JSON.stringify(result)
-//         const parsedData = JSON.parse(data); 
+//         const parsedData = JSON.parse(data);
 //         const accessToken = parsedData.accessToken;
 //         kakaoLoginApi(accessToken)
 //     }).catch((error) => {

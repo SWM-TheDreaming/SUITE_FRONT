@@ -11,6 +11,7 @@ export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 const CategoryFilter = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
   const [selectedButtons, setSelectedButtons] = useState<string[]>([]);
+  const categoryData = Category.map((item) => ({ id: item.key, title: item.value }));
 
   const TableButton: React.FC<{ title: string; onPress: () => void; isSelected: boolean }> = ({
     title,
@@ -39,21 +40,18 @@ const CategoryFilter = () => {
       setSelectedButtons([...selectedButtons, id]);
     }
   };
-
-  useEffect(() => {
-    console.log(selectedButtons);
-  }, [selectedButtons]);
+  const applyButton = () => {
+    navigation.navigate('Studylist', { selectedCategories: selectedButtons });
+  };
+  const resetSelection = () => {
+    setSelectedButtons([]); // selectedButtons 배열 초기화
+  };
 
   return (
     <View style={mainPageStyleSheet.categoryPageContainer}>
       <View style={mainPageStyleSheet.filterBox}>
         <Text style={mainPageStyleSheet.filterText}>필터</Text>
-        <TouchableOpacity
-          style={mainPageStyleSheet.filterOutIcon}
-          onPress={() => {
-            navigation.navigate('Studylist', { selectedCategories: selectedButtons });
-          }}
-        >
+        <TouchableOpacity style={mainPageStyleSheet.filterOutIcon} onPress={applyButton}>
           <Icon name="x" size={24} />
         </TouchableOpacity>
       </View>
@@ -62,7 +60,15 @@ const CategoryFilter = () => {
         <Text style={mainPageStyleSheet.choiceInfoText}>복수 선택 가능</Text>
       </View>
       <View style={mainPageStyleSheet.categoryButtonContainner}>
-        <FlatList data={Category} renderItem={renderItem} keyExtractor={(item) => item.id} numColumns={3} />
+        <FlatList data={categoryData} renderItem={renderItem} numColumns={3} />
+      </View>
+      <View style={mainPageStyleSheet.categoryFilterButtonContainer}>
+        <TouchableOpacity style={mainPageStyleSheet.categoryFilterResetButton} onPress={resetSelection}>
+          <Text style={mainPageStyleSheet.categortFilterResetText}>선택 초기화</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={mainPageStyleSheet.categoryFilterApplyButton} onPress={applyButton}>
+          <Text style={mainPageStyleSheet.categortFilterApplyText}>적용하기</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

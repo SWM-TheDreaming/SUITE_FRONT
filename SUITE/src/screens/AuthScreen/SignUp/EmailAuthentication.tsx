@@ -7,17 +7,19 @@ import { RootStackNavigationProp } from '../Login';
 import Icon from 'react-native-vector-icons/Ionicons';
 import InputField from '../../../components/presents/InputField';
 import { useRecoilState } from 'recoil';
-import { emailState, passwordState } from '../../../../recoil/atoms'; // Recoil 상태를 정의한 파일 임포트
+import { emailState, isAuthState, passwordState } from '../../../../recoil/atoms'; // Recoil 상태를 정의한 파일 임포트
 import ModalPopup from '../../../hook/modal';
 import SignModalPopup from '../../../components/presents/SignmodalPopup';
+
 const EmailAuthentication = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
   const emailAuthentication = useForm();
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [email, setEmail] = useRecoilState(emailState);
-  const [statusCode, setStatusCode] = useState(0)
-  const [password, setpPassword] = useRecoilState(passwordState)
+  const [statusCode, setStatusCode] = useState(0);
+  const [password, setpPassword] = useRecoilState(passwordState);
+  const [isAuth, setIsAuth] = useRecoilState(isAuthState);
   const [visible, setVisible] = useState(false);
 
   const handlePasswordConfirmationChange = (text: string) => {
@@ -32,17 +34,16 @@ const EmailAuthentication = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: emailAuthentication.getTextInputProps('username').value, 
+          email: emailAuthentication.getTextInputProps('username').value,
         }),
       });
       if (response.ok) {
         const data = await response.json();
-        navigation.navigate('AuthenticateCode')
-        
+        navigation.navigate('AuthenticateCode');
       } else {
         const data = await response.json();
-        setVisible(true)
-        setStatusCode(data.code)
+        setVisible(true);
+        setStatusCode(data.code);
       }
     } catch (error) {
       console.log('Error occurred:', error);
@@ -56,8 +57,9 @@ const EmailAuthentication = () => {
     const emailValue = emailAuthentication.getTextInputProps('username').value;
     const passWordValue = emailAuthentication.getTextInputProps('password').value;
     setEmail(emailValue);
-    setpPassword(passWordValue)
-    fetchData()
+    setpPassword(passWordValue);
+    setIsAuth(false);
+    fetchData();
   };
 
   useEffect(() => {
@@ -69,9 +71,7 @@ const EmailAuthentication = () => {
   }, [emailAuthentication.errors.username, emailAuthentication.errors.password, validatePassword]);
 
   return (
-    
     <View style={mainPageStyleSheet.categoryPageContainer}>
-      
       <View style={mainPageStyleSheet.underStatusBar}>
         <TouchableOpacity
           style={mainPageStyleSheet.pageBackIcon}
@@ -113,11 +113,11 @@ const EmailAuthentication = () => {
         )}
       </View>
 
-      <ModalPopup visible={visible}>  
-          <SignModalPopup visible={visible} onClose={() => setVisible(false)} text = {'이미 등록된 이메일이 있습니다!'}/>
+      <ModalPopup visible={visible}>
+        <SignModalPopup visible={visible} onClose={() => setVisible(false)} text={'이미 등록된 이메일이 있습니다!'} />
       </ModalPopup>
 
-      <View style={mainPageStyleSheet.SignUpNextBtnContainer}> 
+      <View style={mainPageStyleSheet.SignUpNextBtnContainer}>
         <TouchableOpacity
           style={[mainPageStyleSheet.SignUpNextBtnBtn, isButtonDisabled && mainPageStyleSheet.disabledSignUpNextBtnBtn]}
           disabled={isButtonDisabled}
@@ -129,8 +129,6 @@ const EmailAuthentication = () => {
         </TouchableOpacity>
       </View>
     </View>
-
-
   );
 };
 

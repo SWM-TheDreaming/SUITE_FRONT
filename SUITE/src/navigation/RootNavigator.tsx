@@ -13,7 +13,7 @@ export default function RootNavigator() {
     const getTokenFromAsyncStorage = async () => {
       try {
         const storedToken = await AsyncStorage.getItem('token'); // 'token'은 AsyncStorage에 저장된 토큰의 키입니다.
-        if (storedToken !== "null") {
+        if (storedToken !== 'null') {
           setToken(storedToken);
         }
       } catch (error) {
@@ -22,15 +22,5 @@ export default function RootNavigator() {
     };
     getTokenFromAsyncStorage();
   }, []);
-  return (
-    <NavigationContainer>
-       {
-                !token || token.length < 10 ?(
-                    <AuthStack />
-                ):(
-                    <AppStack />
-                )
-            }
-    </NavigationContainer>
-  );
+  return <NavigationContainer>{!token || token.length < 10 ? <AuthStack /> : <AppStack />}</NavigationContainer>;
 }

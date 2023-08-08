@@ -10,6 +10,7 @@ export type RootStackParamList = {
   TermOfUse: undefined;
   UserInformation: undefined;
   AuthenticateCode: undefined;
+  OauthTermOfUse: undefined;
 };
 
 export interface Category {

@@ -8,7 +8,8 @@ import SignupComplete from '../screens/AuthScreen/SignUp/SignupComplete';
 import TermOfUse from '../screens/AuthScreen/SignUp/TermOfUse';
 import UserInformation from '../screens/AuthScreen/SignUp/UserInformation';
 import AuthenticateCode from '../screens/AuthScreen/SignUp/AuthenticateCode';
-import SignUp from '../screens/AuthScreen/SignUp/SignUp'
+import SignUp from '../screens/AuthScreen/SignUp/SignUp';
+import OauthTermOfUse from '../screens/AuthScreen/SignUp/OauthTermOfUse';
 const Auth = createStackNavigator();
 
 export function AuthStack() {
@@ -25,6 +26,14 @@ export function AuthStack() {
       <Auth.Screen
         name="TermOfUse"
         component={TermOfUse}
+        options={{
+          headerShown: false,
+          ...TransitionPresets.RevealFromBottomAndroid,
+        }}
+      />
+      <Auth.Screen
+        name="OauthTermOfUse"
+        component={OauthTermOfUse}
         options={{
           headerShown: false,
           ...TransitionPresets.RevealFromBottomAndroid,
