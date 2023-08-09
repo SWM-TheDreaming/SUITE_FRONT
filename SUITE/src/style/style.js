@@ -128,6 +128,9 @@ const mainPageStyleSheet = StyleSheet.create({
     width: Width,
     height: Height,
   },
+  selectedCategoryScrollViewContainer: {
+    height: heightPercentage(50),
+  },
   selectCategoryContainer: {
     flexDirection: 'row',
     marginTop: heightPercentage(16),
@@ -135,6 +138,8 @@ const mainPageStyleSheet = StyleSheet.create({
   selectCategoryBox: {
     width: widthPercentage(65),
     height: heightPercentage(28),
+    marginRight: widthPercentage(5),
+    marginLeft: widthPercentage(5),
     backgroundColor: 'white',
     borderWidth: 1,
     borderRadius: 5,
@@ -142,10 +147,27 @@ const mainPageStyleSheet = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  selectedFilterCategory: {
+    width: widthPercentage(65),
+    height: heightPercentage(28),
+    marginLeft: widthPercentage(5),
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: '#005BA5',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   selectCategoryText: {
     fontSize: 12,
     color: '#686868',
     fontFamily: 'PretendardVariable',
+  },
+  selectedCategoryText: {
+    fontSize: 12,
+    color: '#005BA5',
+    fontFamily: 'PretendardVariable',
+    fontWeight: 'bold',
   },
   filterBox: {
     flexDirection: 'row',
@@ -208,20 +230,62 @@ const mainPageStyleSheet = StyleSheet.create({
     fontSize: 12,
     fontFamily: 'PretendardVariable',
   },
+  categoryFilterButtonContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: Height * 0.25,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  categoryFilterResetButton: {
+    width: widthPercentage(150),
+    height: heightPercentage(60),
+    borderColor: 'black',
+    borderWidth: 1,
+    borderRadius: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 10,
+  },
+  categortFilterResetText: {
+    color: '#050953',
+    fontSize: 16,
+    fontFamily: 'PretendardVariable',
+    fontWeight: 'bold',
+  },
+  categoryFilterApplyButton: {
+    width: widthPercentage(150),
+    height: heightPercentage(60),
+    backgroundColor: '#050953',
+    borderColor: 'black',
+    borderWidth: 1,
+    borderRadius: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  categortFilterApplyText: {
+    color: 'white',
+    fontSize: 16,
+    fontFamily: 'PretendardVariable',
+    fontWeight: 'bold',
+  },
   loginContainer: {
     width: Width,
     height: Height,
     backgroundColor: 'white',
   },
   logoContainer: {
-    marginTop:heightPercentage(50),
+    marginTop: heightPercentage(50),
     height: heightPercentage(140),
     justifyContent: 'center',
     alignItems: 'center',
   },
-  logoStyle : {
-    width : 120,
-    height : 120
+  logoStyle: {
+    width: 120,
+    height: 120,
   },
   idpwInputContainer: {
     marginLeft: widthPercentage(24),
@@ -481,21 +545,21 @@ const mainPageStyleSheet = StyleSheet.create({
     fontFamily: 'PretendardVariable',
   },
   choiceProfileContainer: {
-    flex : 1,
-    alignItems:'center',
-    marginTop : heightPercentage(75)
+    flex: 1,
+    alignItems: 'center',
+    marginTop: heightPercentage(75),
   },
-  choiceProfile : {
-    width : 188,
-    height : 188,
-    borderRadius:100,
-    alignItems:'center',
-    justifyContent:'center',
+  choiceProfile: {
+    width: 188,
+    height: 188,
+    borderRadius: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  choiceProfileImage : {
-    width:188,
-    height:188,
-    borderRadius:100,
+  choiceProfileImage: {
+    width: 188,
+    height: 188,
+    borderRadius: 100,
   },
   profileInputBox: {
     width: widthPercentage(310),
@@ -506,43 +570,43 @@ const mainPageStyleSheet = StyleSheet.create({
     borderRadius: 3,
     paddingLeft: 13,
   },
-  signUpCompleteText : {
-    fontsize : 10,
-    color : "#B3ADAD",
+  signUpCompleteText: {
+    fontsize: 10,
+    color: '#B3ADAD',
     fontFamily: 'PretendardVariable',
   },
-  emailChecktext : {
-    fontSize : 17,
-    fontWeight : 'bold',
-    marginTop : heightPercentage(30)
+  emailChecktext: {
+    fontSize: 17,
+    fontWeight: 'bold',
+    marginTop: heightPercentage(30),
   },
-  SignModalContainer : {
+  SignModalContainer: {
     width: widthPercentage(280),
-    height : heightPercentage(170),
+    height: heightPercentage(170),
     backgroundColor: 'white',
     borderRadius: 10,
     padding: 20,
-    justifyContent : 'center',
-    alignItems : 'center'   
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  SignmodalButton : {
-    width : widthPercentage(240),
-    height : heightPercentage(50),
-    backgroundColor : '#050953',
-    borderRadius : 25,
-    justifyContent : 'center',
-    alignItems : 'center',
-    marginVertical: 20,   
+  SignmodalButton: {
+    width: widthPercentage(240),
+    height: heightPercentage(50),
+    backgroundColor: '#050953',
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 20,
   },
-  SignmodalButtonText : {
-    color : 'white',
-    fontSize : 16,
-    fontWeight : "bold"
+  SignmodalButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
-  brandingTextContainer : {
-    justifyContent : 'center',
-    alignItems : 'center',
-    marginTop : heightPercentage(50)
+  brandingTextContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: heightPercentage(50),
   },
   signUpcompleteContainer: {
     position: 'absolute',
@@ -550,8 +614,8 @@ const mainPageStyleSheet = StyleSheet.create({
     left: 0,
     right: 0,
     height: Height * 0.75,
-    alignItems : 'center',
-  }
+    alignItems: 'center',
+  },
 });
 
 export default mainPageStyleSheet;

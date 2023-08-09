@@ -36,8 +36,7 @@ const ModalPopup: React.FC<ModalPopupProps> = ({ visible, children }) => {
   return (
     <Modal transparent visible={showModal}>
       <View style={styles.modalBackGround}>
-        <Animated.View
-          style={[mainPageStyleSheet.SignModalContainer, { transform: [{ scale: scaleValue }] }]}>
+        <Animated.View style={[mainPageStyleSheet.SignModalContainer, { transform: [{ scale: scaleValue }] }]}>
           {children}
         </Animated.View>
       </View>
@@ -54,4 +53,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ModalPopup; 
+export default ModalPopup;

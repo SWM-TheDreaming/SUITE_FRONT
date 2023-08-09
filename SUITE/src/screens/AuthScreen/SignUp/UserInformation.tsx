@@ -31,14 +31,14 @@ const UserInformation = () => {
     const nameValue = signUp.getTextInputProps('name').value;
     const phoneValue = signUp.getTextInputProps('phone').value;
     const securityNumValue = signUp.getTextInputProps('birthday').value + '-' + signUp.getTextInputProps('sex').value;
-    const preferStudyValue = convertStudyValue(selectedCategory)
-    const studyMethodValue = convertStudyMethod(selectedItem)
-    setName(nameValue)
-    setPhone(phoneValue)
-    setsecurityNum(securityNumValue)
-    setpreferStudy(preferStudyValue)
-    setstudyMethod(studyMethodValue)
-    navigation.navigate('Profile'); 
+    const preferStudyValue = convertStudyValue(selectedCategory);
+    const studyMethodValue = convertStudyMethod(selectedItem);
+    setName(nameValue);
+    setPhone(phoneValue);
+    setsecurityNum(securityNumValue);
+    setpreferStudy(preferStudyValue);
+    setstudyMethod(studyMethodValue);
+    navigation.navigate('Profile');
   };
   useEffect(() => {
     if (
@@ -62,7 +62,6 @@ const UserInformation = () => {
     selectedCategory,
     selectedItem,
   ]);
-
 
   return (
     <View style={mainPageStyleSheet.categoryPageContainer}>
@@ -124,7 +123,7 @@ const UserInformation = () => {
           setSelected={(val: React.SetStateAction<string>) => setselectedCategory(val)}
           data={Category}
           save="value"
-          maxHeight = {120}
+          maxHeight={120}
         />
         <Text style={mainPageStyleSheet.noValidateCheckText}>선호 스터디 방식</Text>
         <View style={{ flexDirection: 'row' }}>

@@ -11,7 +11,7 @@ export interface FormValues {
   sex: string;
   preferStudy: string;
   studyMethod: string;
-  nickname : string;
+  nickname: string;
 }
 
 const useForm = () => {
@@ -122,7 +122,7 @@ const useForm = () => {
           [name]: '',
         });
       }
-    }else if (name === 'nickname') {
+    } else if (name === 'nickname') {
       if (!text) {
         setErrors({
           ...errors,
