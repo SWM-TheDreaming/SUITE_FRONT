@@ -111,6 +111,16 @@ const StudyInfoCard: React.FunctionComponent<Category> = ({ filterCategory }) =>
           scrab={item.scrab}
         />
       ))}
+      <View style={mainPageStyleSheet.studyCreateButtonContainer}>
+        <TouchableOpacity
+          style={mainPageStyleSheet.studyCreateButton}
+          onPress={() => {
+            navigation.navigate('SuiteRoomInfo');
+          }}
+        >
+          <Icon name="plus" size={24} color={'white'} />
+        </TouchableOpacity>
+      </View>
     </>
   );
 };
