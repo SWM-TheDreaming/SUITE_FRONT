@@ -659,6 +659,104 @@ const mainPageStyleSheet = StyleSheet.create({
     fontSize: 20,
     marginRight: 15,
   },
+  depositRuleBox: {
+    width: widthPercentage(150),
+    height: heightPercentage(50),
+    marginTop: heightPercentage(10),
+    marginLeft: widthPercentage(20),
+    borderColor: '#E8E8E8',
+    borderWidth: 1,
+    borderRadius: 3,
+    paddingLeft: 13,
+  },
+  depositRuleInputContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  depositRuleErrorText: {
+    color: 'red',
+    fontSize: 10,
+    marginTop: 4,
+    paddingLeft: widthPercentage(20),
+    fontFamily: 'PretendardVariable',
+  },
+  depositRuleIcon: {
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    marginLeft: 5,
+  },
+  roomInformationContainer: {
+    width: widthPercentage(310),
+    height: heightPercentage(310),
+    marginTop: heightPercentage(10),
+    borderColor: '#E8E8E8',
+    borderWidth: 1,
+    borderRadius: 3,
+    paddingLeft: 13,
+  },
+  imageModalContainer: {
+    width: widthPercentage(280),
+    height: heightPercentage(400),
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  imageModalText: {
+    fontSize: 17,
+    fontWeight: 'bold',
+    marginTop: heightPercentage(40),
+    textAlign: 'center',
+    color: 'black',
+  },
+  imagemodalButton: {
+    width: widthPercentage(240),
+    height: heightPercentage(50),
+    marginTop: heightPercentage(30),
+    backgroundColor: '#050953',
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  depositCheckBox: {
+    width: widthPercentage(310),
+    height: heightPercentage(50),
+    marginTop: heightPercentage(10),
+    borderColor: '#E8E8E8',
+    borderWidth: 1,
+    borderRadius: 3,
+    paddingLeft: 13,
+    justifyContent : 'center'
+  },
+  depositInformationContainer:{
+    marginTop: heightPercentage(40),
+    width: widthPercentage(310),
+    height: heightPercentage(130),
+    backgroundColor : '#FFF4F4'
+  },
+  depositInformationTextContainer:{
+    flexDirection :'row',
+    marginBottom : heightPercentage(5)
+  },
+  depositInformationText:{
+    paddingTop:20,
+    color : '#F14A4A',
+    fontFamily: 'PretendardVariable',
+  },
+  depositInformationIcon:{
+    paddingLeft: 20,
+    paddingTop:20,
+    marginRight: 3
+  },
+  depositDetailInformationText:{
+    marginTop : heightPercentage(5),
+    paddingLeft : 25,
+    fontFamily: 'PretendardVariable',
+    fontSize : 13,
+    color : '#484848'
+  }
 });
 
 export default mainPageStyleSheet;

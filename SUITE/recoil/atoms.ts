@@ -56,3 +56,31 @@ export const recruitmentLimitState = atom({
   key: 'recruitmentLimitState',
   default: 0,
 });
+export const depositAmountState = atom({
+  key: 'depositAmountState',
+  default: 0,
+});
+export const minAttendanceRateState = atom({
+  key: 'minAttendanceRateState',
+  default: 0,
+});
+export const minMissionCompleteRateState = atom({
+  key: 'minMissionCompleteRateState',
+  default: 0,
+});
+export const studyPasswordState = atom({
+  key: 'studyPasswordState',
+  default: '',
+});
+export const isOnlineState = atom({
+  key: 'isOnlineState',
+  default: true,
+});
+export const contentState = atom({
+  key: 'contentState',
+  default: '',
+});
+export const channelLinkState = atom({
+  key: 'channelLinkState',
+  default: '',
+});
