@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import mainPageStyleSheet from '../../style/style';
-import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../types';
@@ -14,6 +13,7 @@ import { SelectList } from 'react-native-dropdown-select-list';
 import { Category } from '../../data/Categoty';
 import DatePickerModal from '../../components/presents/DatePickermodal';
 import NumberInputField from '../../components/presents/NumberInputField';
+import { Header } from '../../hook/header';
 import {
   recruitmentDeadLineState,
   recruitmentLimitState,
@@ -66,17 +66,7 @@ const SuiteRoomInfo = () => {
   ]);
   return (
     <View style={mainPageStyleSheet.categoryPageContainer}>
-      <View style={mainPageStyleSheet.underStatusBar}>
-        <TouchableOpacity
-          style={mainPageStyleSheet.pageBackIcon}
-          onPress={() => {
-            navigation.navigate('Studylist');
-          }}
-        >
-          <Icon name="chevron-back" size={24} color={'#000000'} />
-        </TouchableOpacity>
-        <Text style={mainPageStyleSheet.SignUpText}>Suite Room 개설</Text>
-      </View>
+      <Header title="Suite Room 개설" backScreen="Studylist" />
       <Progress.Bar
         progress={0.3}
         height={2}

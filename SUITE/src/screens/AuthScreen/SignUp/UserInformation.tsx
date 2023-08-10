@@ -16,7 +16,7 @@ const UserInformation = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
   const signUp = useForm();
   const [selectedCategory, setselectedCategory] = useState('');
-  const [selectedItem, setSelectedItem] = useState(''); // State to keep track of the selected item
+  const [selectedItem, setSelectedItem] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [name, setName] = useRecoilState(nameState);
   const [phone, setPhone] = useRecoilState(phoneState);
