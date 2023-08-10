@@ -11,6 +11,10 @@ export type RootStackParamList = {
   UserInformation: undefined;
   AuthenticateCode: undefined;
   OauthTermOfUse: undefined;
+  SuiteRoomurl: undefined;
+  SuiteRoomInfo: undefined;
+  SuiteRoompay: undefined;
+  SuiteRoomRule: undefined;
 };
 
 export interface Category {

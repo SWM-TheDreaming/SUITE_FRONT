@@ -35,3 +35,24 @@ export const isAuthState = atom({
   key: 'isAuthState',
   default: true,
 });
+
+export const suiteRoomState = atom({
+  key: 'suiteRoomState',
+  default: '',
+});
+export const subjectState = atom({
+  key: 'subjectState',
+  default: '',
+});
+export const recruitmentDeadLineState = atom({
+  key: 'recruitmentDeadLineState',
+  default: null,
+});
+export const studyDeadLineState = atom({
+  key: 'studyDeadLineState',
+  default: null,
+});
+export const recruitmentLimitState = atom({
+  key: 'recruitmentLimitState',
+  default: 0,
+});

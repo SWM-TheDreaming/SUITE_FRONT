@@ -616,6 +616,49 @@ const mainPageStyleSheet = StyleSheet.create({
     height: Height * 0.75,
     alignItems: 'center',
   },
+  studyCreateButtonContainer: {
+    alignSelf: 'flex-end',
+  },
+  studyCreateButton: {
+    height: 40,
+    width: 40,
+    backgroundColor: '#005BA5',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 25,
+    right: 16,
+    bottom: 20,
+  },
+  studyInfoDateText: {
+    fontSize: 14,
+    color: 'black',
+    marginTop: heightPercentage(10),
+    fontFamily: 'PretendardVariable',
+  },
+  studyNumberInputField: {
+    flexDirection: 'row',
+    justifyContent: 'center', // 가로 중앙 정렬
+    alignItems: 'center', // 세로 중앙 정렬
+    width: widthPercentage(310),
+    height: heightPercentage(50),
+    marginTop: heightPercentage(10),
+    borderColor: '#E8E8E8',
+    borderWidth: 1,
+    borderRadius: 3,
+  },
+  studyNumberInputFieldValue: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  studyNumberMinus: {
+    fontSize: 20,
+    marginLeft: 15,
+  },
+  studyNumberPlus: {
+    fontSize: 20,
+    marginRight: 15,
+  },
 });
 
 export default mainPageStyleSheet;

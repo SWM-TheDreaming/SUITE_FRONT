@@ -6,6 +6,10 @@ import CategoryFilter from '../screens/CategoryFilter';
 import { RootStackParamList } from '../types';
 import { AuthStack } from './AuthStack';
 import Studylist from '../screens/Studylist';
+import SuiteRoomInfo from '../screens/SutieRoomCreate/SuiteRoomInfo';
+import SuiteRoompay from '../screens/SutieRoomCreate/SuiteRoompay';
+import SuiteRoomurl from '../screens/SutieRoomCreate/SuiteRoomurl';
+import SuiteRoomRule from '../screens/SutieRoomCreate/SuiteRoomRule';
 const App = createStackNavigator<RootStackParamList>();
 
 export function AppStack() {
@@ -21,6 +25,38 @@ export function AppStack() {
       <App.Screen
         name="CategoryFilter"
         component={CategoryFilter}
+        options={{
+          headerShown: false,
+          ...TransitionPresets.RevealFromBottomAndroid,
+        }}
+      />
+      <App.Screen
+        name="SuiteRoomInfo"
+        component={SuiteRoomInfo}
+        options={{
+          headerShown: false,
+          ...TransitionPresets.RevealFromBottomAndroid,
+        }}
+      />
+      <App.Screen
+        name="SuiteRoompay"
+        component={SuiteRoompay}
+        options={{
+          headerShown: false,
+          ...TransitionPresets.RevealFromBottomAndroid,
+        }}
+      />
+      <App.Screen
+        name="SuiteRoomurl"
+        component={SuiteRoomurl}
+        options={{
+          headerShown: false,
+          ...TransitionPresets.RevealFromBottomAndroid,
+        }}
+      />
+      <App.Screen
+        name="SuiteRoomRule"
+        component={SuiteRoomRule}
         options={{
           headerShown: false,
           ...TransitionPresets.RevealFromBottomAndroid,
