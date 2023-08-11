@@ -4,6 +4,7 @@ import mainPageStyleSheet from '../../style/style';
 import { RootStackParamList } from '../../types';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
+import TagComponent from './TagComponent';
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 export interface StudyInfoCardProps {
@@ -27,17 +28,11 @@ const StudyInfoCardUI = (props: StudyInfoCardProps) => {
       navigation.navigate('SuiteRoomDetail',{SuiteRoomid : props.id});
     }}>
       <View style={mainPageStyleSheet.innerbox}>
-        <View style={mainPageStyleSheet.tag}>
-          <View style={mainPageStyleSheet.ddaybox}>
-            <Text style={mainPageStyleSheet.mainPageSmallBoxtext}>D-12</Text>
-          </View>
-          <View style={mainPageStyleSheet.categorybox}>
-            <Text style={mainPageStyleSheet.mainPageSmallBoxtext}>{props.category}</Text>
-          </View>
-          <View style={mainPageStyleSheet.depositamountbox}>
-            <Text style={mainPageStyleSheet.depositamounttext}>{props.depositAmount.toString().slice(0, 2)}K</Text>
-          </View>
-        </View>
+        <TagComponent
+          dDay="D-12"
+          category={props.category}
+          depositAmount={`${props.depositAmount.toString().slice(0, 2)}K`}
+        />
         <Text style={mainPageStyleSheet.titletext}>{props.title}</Text>
         <Text style={mainPageStyleSheet.detailtext}>
           방장: mimo | 참여인원:{props.presentRecruitment}/{props.recruitmentLimit}
