@@ -86,7 +86,7 @@ const SuiteRoomRule = () => {
   ]);
   return (
     <View style={mainPageStyleSheet.categoryPageContainer}>
-      <Header title="Suite Room 개설" backScreen="Studylist" />
+      <Header title="Suite Room 개설" backScreen="SuiteRoomInfo" />
       <Progress.Bar
         progress={0.6}
         height={2}

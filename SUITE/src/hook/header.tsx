@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import mainPageStyleSheet from '../style/style';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../types';
-
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 interface HeaderProps {
@@ -15,8 +14,10 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ title, backScreen }) => {
   const navigation = useNavigation<RootStackNavigationProp>();
+  const [visible, setVisible] = useState(false);
 
   const handleBackPress = () => {
+    // setVisible(true)
     if (backScreen) {
       navigation.navigate(backScreen);
     } else {

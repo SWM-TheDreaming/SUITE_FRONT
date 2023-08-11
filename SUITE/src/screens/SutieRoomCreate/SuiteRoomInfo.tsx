@@ -7,7 +7,7 @@ import { RootStackParamList } from '../../types';
 import suiteRoomForm from '../../hook/suiteRoomForm';
 import InputField from '../../components/presents/InputField';
 import * as Progress from 'react-native-progress';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { Dimensions } from 'react-native';
 import { SelectList } from 'react-native-dropdown-select-list';
 import { Category } from '../../data/Categoty';
@@ -31,11 +31,11 @@ const SuiteRoomInfo = () => {
   const [studyDeadLine, setstudyDeadLine] = useState(new Date());
   const [participantCount, setParticipantCount] = useState(1);
   const navigation = useNavigation<RootStackNavigationProp>();
-  const setSuiteRoomState = useSetRecoilState(suiteRoomState);
-  const setSubjectState = useSetRecoilState(subjectState);
-  const setRecruitmentDeadLineState = useSetRecoilState(recruitmentDeadLineState);
-  const setStudyDeadLineState = useSetRecoilState(studyDeadLineState);
-  const setRecruitmentLimitState = useSetRecoilState(recruitmentLimitState);
+  const [recoilSuiteRoomTitle, setSuiteRoomState] = useRecoilState(suiteRoomState);
+  const [recoilSubject, setSubjectState] = useRecoilState(subjectState);
+  const [recoilRecruitmentDeadLine, setRecruitmentDeadLineState] = useRecoilState(recruitmentDeadLineState);
+  const [recoilStudyDeadLine, setStudyDeadLineState] = useRecoilState(studyDeadLineState);
+  const [recoilRecruitmentLimit, setRecruitmentLimitState] = useRecoilState(recruitmentLimitState);
 
   const handleButtonPress = () => {
     setSuiteRoomState(suiteRoomInfo.getTextInputProps('title').value);
@@ -82,7 +82,7 @@ const SuiteRoomInfo = () => {
         <InputField
           style={mainPageStyleSheet.idpwInputBox}
           autoFocus
-          placeholder=" 제목을 입력해주세요"
+          placeholder= " 제목을 입력해주세요"
           maxLength={50}
           {...suiteRoomInfo.getTextInputProps('title')}
           touched={suiteRoomInfo.touched.title}

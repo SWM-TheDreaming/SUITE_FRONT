@@ -756,6 +756,56 @@ const mainPageStyleSheet = StyleSheet.create({
     fontFamily: 'PretendardVariable',
     fontSize : 13,
     color : '#484848'
+  },
+  payCheckBox: {
+    backgroundColor: '#050953',
+    width: widthPercentage(312),
+    height: heightPercentage(266),
+    marginTop : heightPercentage(30),
+    borderRadius: 10,
+    paddingLeft: 15,
+    paddingTop: 12,
+  },
+  payInfoText :{
+    color : 'black',
+    fontSize : 20,
+    fontWeight:'bold',
+    fontFamily: 'PretendardVariable',
+    paddingLeft: 5
+  },
+  payInfosubText :{
+    color : '#888888',
+    fontSize : 13,
+    fontFamily: 'PretendardVariable',
+    paddingLeft: 5,
+    paddingTop : 5
+  },
+  payCheckText : {
+    paddingLeft : 20,
+    paddingTop : 25,
+    color : 'white',
+    fontSize: 13,
+    fontWeight : 'bold',
+    fontFamily: 'PretendardVariable',
+  },
+  accountNumberCopyBox:{
+    justifyContent : 'flex-end',
+    marginLeft : 7
+  },
+  accountNumberCopyContainer:{
+    backgroundColor : '#FFC763',
+    borderRadius : 7,
+    height : 15,
+    width: 20,
+    justifyContent : 'center',
+    alignItems : 'center'
+  },
+  accountNumberCopyText :{
+    color : '#050953',
+    fontSize : 9,
+    fontFamily: 'PretendardVariable',
+    textAlign : 'center',
+    fontWeight : 'bold'
   }
 });
 
