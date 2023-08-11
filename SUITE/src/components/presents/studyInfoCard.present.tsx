@@ -1,7 +1,13 @@
 import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import mainPageStyleSheet from '../../style/style';
+import { RootStackParamList } from '../../types';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
+export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
+
 export interface StudyInfoCardProps {
+  id : string;
   title: string; //스터디 이름
   studyDeadLine: Date; //스터디 종료날짜
   recruitmentDeadLine: Date; //스터디 신청 마감 기한
@@ -13,8 +19,13 @@ export interface StudyInfoCardProps {
   scrab: number;
 }
 const StudyInfoCardUI = (props: StudyInfoCardProps) => {
+  const navigation = useNavigation<RootStackNavigationProp>();
   return (
-    <TouchableOpacity style={mainPageStyleSheet.box}>
+    <TouchableOpacity style={mainPageStyleSheet.box}
+    onPress={() => {
+      console.log(props.id)
+      navigation.navigate('SuiteRoomDetail',{SuiteRoomid : props.id});
+    }}>
       <View style={mainPageStyleSheet.innerbox}>
         <View style={mainPageStyleSheet.tag}>
           <View style={mainPageStyleSheet.ddaybox}>

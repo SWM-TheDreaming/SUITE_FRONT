@@ -6,14 +6,14 @@ import { TextInput } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Entypo';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../types';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { RouteProp, useFocusEffect } from '@react-navigation/core';
+import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/core';
 import { Category } from '../../types';
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 const mockdata = [
   {
-    id: 1,
+    id: '123',
     title: '임용 시험 합격 준비반 스터디 모집',
     studyDeadLine: new Date('2023-06-13'),
     recruitmentDeadLine: new Date('2023-06-13'),
@@ -25,7 +25,7 @@ const mockdata = [
     scrab: 5,
   },
   {
-    id: 2,
+    id: '234',
     title: 'TOEIC 스터디 모집',
     studyDeadLine: new Date('2023-07-13'),
     recruitmentDeadLine: new Date('2023-07-13'),
@@ -37,7 +37,7 @@ const mockdata = [
     scrab: 2,
   },
   {
-    id: 3,
+    id: '345',
     title: '코테 스터디 모집',
     studyDeadLine: new Date('2023-08-13'),
     recruitmentDeadLine: new Date('2023-08-13'),
@@ -100,6 +100,7 @@ const StudyInfoCard: React.FunctionComponent<Category> = ({ filterCategory }) =>
       {mockdata.map((item) => (
         <StudyInfoCardUI
           key={item.id}
+          id={item.id}
           title={item.title}
           studyDeadLine={item.studyDeadLine}
           recruitmentDeadLine={item.recruitmentDeadLine}

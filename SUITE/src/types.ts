@@ -15,7 +15,8 @@ export type RootStackParamList = {
   SuiteRoomInfo: undefined;
   SuiteRoompay: undefined;
   SuiteRoomRule: undefined;
-  SuiteRoompayCheck: undefined
+  SuiteRoompayCheck: undefined;
+  SuiteRoomDetail : {SuiteRoomid : string};
 };
 
 export interface Category {
@@ -24,4 +25,7 @@ export interface Category {
         selectedCategories: string[] | undefined;
       }
     | undefined;
+}
+export interface SuiteRoomId {
+      SuiteRoomid: string;
 }

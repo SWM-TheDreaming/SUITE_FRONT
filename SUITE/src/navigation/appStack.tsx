@@ -11,6 +11,7 @@ import SuiteRoompay from '../screens/SutieRoomCreate/SuiteRoompay';
 import SuiteRoomurl from '../screens/SutieRoomCreate/SuiteRoomurl';
 import SuiteRoomRule from '../screens/SutieRoomCreate/SuiteRoomRule';
 import SuiteRoompayCheck from '../screens/SutieRoomCreate/SuiteRoompayCheck';
+import SuiteRoomDetail from '../screens/SuiteRoom/SuiteRoomDetail';
 const App = createStackNavigator<RootStackParamList>();
 
 export function AppStack() {
@@ -66,6 +67,14 @@ export function AppStack() {
        <App.Screen
         name="SuiteRoompayCheck"
         component={SuiteRoompayCheck}
+        options={{
+          headerShown: false,
+          ...TransitionPresets.RevealFromBottomAndroid,
+        }}
+      />
+      <App.Screen
+        name="SuiteRoomDetail"
+        component={SuiteRoomDetail}
         options={{
           headerShown: false,
           ...TransitionPresets.RevealFromBottomAndroid,
