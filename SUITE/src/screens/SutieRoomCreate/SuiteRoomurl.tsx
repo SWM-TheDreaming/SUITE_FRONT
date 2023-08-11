@@ -39,7 +39,7 @@ const SuiteRoomurl = () => {
   }, [suiteRoomUrl.getTextInputProps('content').value, suiteRoomUrl.getTextInputProps('channelLink').value]);
   return (
     <View style={mainPageStyleSheet.categoryPageContainer}>
-      <Header title="Suite Room 개설" backScreen="Studylist" />
+      <Header title="Suite Room 개설" backScreen="SuiteRoomRule" />
       <Progress.Bar
         progress={1.0}
         height={2}

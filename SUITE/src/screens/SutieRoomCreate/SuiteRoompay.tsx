@@ -9,16 +9,20 @@ import { Header } from '../../hook/header';
 import InputField from '../../components/presents/InputField';
 import suiteRoomForm from '../../hook/suiteRoomForm';
 import { useRecoilValue } from 'recoil';
-import { depositAmountState } from '../../../recoil/atoms';
+import { useSetRecoilState } from 'recoil';
+import { depositAmountState, payNameState } from '../../../recoil/atoms';
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 const SuiteRoompay = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
   const suiteRoomPay = suiteRoomForm();
   const depositAmount = useRecoilValue(depositAmountState)
+  const setPayNameState = useSetRecoilState(payNameState)
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const handleButtonPress = () => {
-  
+    setPayNameState(suiteRoomPay.getTextInputProps('name').value)
+    //스터디룸 생성 API 코드 연동 예정
+    navigation.navigate('SuiteRoompayCheck')
   };
   useEffect(() => {
     if (suiteRoomPay.getTextInputProps('name').value != ''){
@@ -29,7 +33,7 @@ const SuiteRoompay = () => {
   }, [suiteRoomPay.getTextInputProps('name').value]);
   return (
     <View style={mainPageStyleSheet.categoryPageContainer}>
-      <Header title="Suite Room 체크인" backScreen="Studylist" />
+      <Header title="Suite Room 체크인" backScreen="SuiteRoomurl" />
       <View style={mainPageStyleSheet.emailAuthenticationContainer}>
         <Text style={mainPageStyleSheet.idpwtext}>보증 금액</Text>
         <View style = {mainPageStyleSheet.depositCheckBox}>

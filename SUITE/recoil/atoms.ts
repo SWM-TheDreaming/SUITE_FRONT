@@ -84,3 +84,7 @@ export const channelLinkState = atom({
   key: 'channelLinkState',
   default: '',
 });
+export const payNameState = atom({
+  key: 'payNameState',
+  default: '',
+});
