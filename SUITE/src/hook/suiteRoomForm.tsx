@@ -30,7 +30,7 @@ const suiteRoomForm = () => {
     password: '',
     channelLink: '',
     studyMethod: '',
-    name: ''
+    name: '',
   });
   const [touched, setTouched] = useState<{ [key: string]: boolean }>({});
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -175,7 +175,7 @@ const suiteRoomForm = () => {
           [name]: '',
         });
       }
-    }else if (name === 'name') {
+    } else if (name === 'name') {
       if (!text) {
         setErrors({
           ...errors,

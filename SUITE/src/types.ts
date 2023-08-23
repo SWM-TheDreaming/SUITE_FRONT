@@ -1,7 +1,9 @@
 export type RootStackParamList = {
   Mainpage: { selectedCategories: string[] };
+  TabBarNavigation: undefined;
   CategoryFilter: undefined;
   Studylist: { selectedCategories: string[] };
+  Mystudy: undefined;
   Login: undefined;
   SignUp: undefined;
   EmailAuthentication: undefined;
@@ -16,7 +18,11 @@ export type RootStackParamList = {
   SuiteRoompay: undefined;
   SuiteRoomRule: undefined;
   SuiteRoompayCheck: undefined;
-  SuiteRoomDetail : {SuiteRoomid : string};
+  SuiteRoomDetail: { SuiteRoomid: string };
+  SuiteRoomCanbanBoard: undefined;
+  SuiteRoomDashboard: undefined;
+  SuiteRoomMyAttendance: undefined;
+  SuiteRoomDetailStart: undefined;
 };
 
 export interface Category {
@@ -27,5 +33,5 @@ export interface Category {
     | undefined;
 }
 export interface SuiteRoomId {
-      SuiteRoomid: string;
+  SuiteRoomid: string;
 }

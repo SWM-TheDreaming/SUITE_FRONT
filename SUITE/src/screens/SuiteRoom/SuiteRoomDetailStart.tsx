@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
-import { RouteProp } from '@react-navigation/native';
-import { RootStackParamList } from '../../types';
 import { Header } from '../../hook/header';
 import SuiteRoomStyleSheet from '../../style/SuiteRoom';
 import TagComponent from '../../components/presents/TagComponent';
@@ -14,13 +12,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import Clipboard from '@react-native-clipboard/clipboard';
-import ModalPopup from '../../hook/modal';
-import SignModalPopup from '../../components/presents/SignmodalPopup';
-type SuiteRoomDetailRouteProp = RouteProp<RootStackParamList, 'SuiteRoomDetail'>;
 
-interface SuiteRoomDetailProps {
-  route: SuiteRoomDetailRouteProp;
-}
 const mockdata = {
   id: '123',
   title: '임용 시험 합격 준비반 스터디 모집',
@@ -37,17 +29,13 @@ const mockdata = {
   minAttendanceRate: 80,
   minMissionCompleteRate: 90,
 };
-const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route }) => {
-  const { SuiteRoomid } = route.params;
-  const [visible, setVisible] = useState(false);
-
+const SuiteRoomDetailStart = () => {
   const handleCopyToClipboard = () => {
     Clipboard.setString(mockdata.link);
   };
   return (
     <ScrollView>
       <View style={SuiteRoomStyleSheet.SuiteRoomDetailContainer}>
-        <Header title={''} backScreen="Studylist" />
         <View style={SuiteRoomStyleSheet.SuiteRoomDetailupperBox}>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
             <TagComponent
@@ -163,28 +151,9 @@ const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route 
             </Text>
           </View>
         </View>
-        <View style={SuiteRoomStyleSheet.SuiteRoomDetailReaderButtonContainer}>
-          {/* <TouchableOpacity style={SuiteRoomStyleSheet.SuiteRoomDetailScrabButton}  onPress={() => {
-              setVisible(true);
-            }}>
-            <Text style={mainPageStyleSheet.categortFilterResetText}>취소</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={SuiteRoomStyleSheet.SutieRoomDetailCheckinButton}>
-            <Text style={mainPageStyleSheet.categortFilterApplyText}>스터디 시작</Text>
-          </TouchableOpacity> */}
-          <TouchableOpacity style={SuiteRoomStyleSheet.SuiteRoomDetailScrabButton}>
-            <FontAwesome name="star-o" size={20} color={'#888888'} />
-          </TouchableOpacity>
-          <TouchableOpacity style={SuiteRoomStyleSheet.SutieRoomDetailCheckinButton}>
-            <Text style={mainPageStyleSheet.categortFilterApplyText}>체크인하기</Text>
-          </TouchableOpacity>
-        </View>
-        <ModalPopup visible={visible}>
-          <SignModalPopup visible={visible} onClose={() => setVisible(false)} text={'스터디를 취소하시겠습니까?'} />
-        </ModalPopup>
       </View>
     </ScrollView>
   );
 };
 
-export default SuiteRoomDetail;
+export default SuiteRoomDetailStart;
