@@ -388,6 +388,7 @@ const mainPageStyleSheet = StyleSheet.create({
     height: heightPercentage(48),
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: 'white',
   },
   pageBackIcon: {
     marginTop: 12,
@@ -728,85 +729,85 @@ const mainPageStyleSheet = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 3,
     paddingLeft: 13,
-    justifyContent : 'center'
+    justifyContent: 'center',
   },
-  depositInformationContainer:{
+  depositInformationContainer: {
     marginTop: heightPercentage(40),
     width: widthPercentage(310),
     height: heightPercentage(130),
-    backgroundColor : '#FFF4F4'
+    backgroundColor: '#FFF4F4',
   },
-  depositInformationTextContainer:{
-    flexDirection :'row',
-    marginBottom : heightPercentage(5)
+  depositInformationTextContainer: {
+    flexDirection: 'row',
+    marginBottom: heightPercentage(5),
   },
-  depositInformationText:{
-    paddingTop:20,
-    color : '#F14A4A',
+  depositInformationText: {
+    paddingTop: 20,
+    color: '#F14A4A',
     fontFamily: 'PretendardVariable',
   },
-  depositInformationIcon:{
+  depositInformationIcon: {
     paddingLeft: 20,
-    paddingTop:20,
-    marginRight: 3
+    paddingTop: 20,
+    marginRight: 3,
   },
-  depositDetailInformationText:{
-    marginTop : heightPercentage(5),
-    paddingLeft : 25,
+  depositDetailInformationText: {
+    marginTop: heightPercentage(5),
+    paddingLeft: 25,
     fontFamily: 'PretendardVariable',
-    fontSize : 13,
-    color : '#484848'
+    fontSize: 13,
+    color: '#484848',
   },
   payCheckBox: {
     backgroundColor: '#050953',
     width: widthPercentage(312),
     height: heightPercentage(266),
-    marginTop : heightPercentage(30),
+    marginTop: heightPercentage(30),
     borderRadius: 10,
     paddingLeft: 15,
     paddingTop: 12,
   },
-  payInfoText :{
-    color : 'black',
-    fontSize : 20,
-    fontWeight:'bold',
-    fontFamily: 'PretendardVariable',
-    paddingLeft: 5
-  },
-  payInfosubText :{
-    color : '#888888',
-    fontSize : 13,
+  payInfoText: {
+    color: 'black',
+    fontSize: 20,
+    fontWeight: 'bold',
     fontFamily: 'PretendardVariable',
     paddingLeft: 5,
-    paddingTop : 5
   },
-  payCheckText : {
-    paddingLeft : 20,
-    paddingTop : 25,
-    color : 'white',
+  payInfosubText: {
+    color: '#888888',
     fontSize: 13,
-    fontWeight : 'bold',
+    fontFamily: 'PretendardVariable',
+    paddingLeft: 5,
+    paddingTop: 5,
+  },
+  payCheckText: {
+    paddingLeft: 20,
+    paddingTop: 25,
+    color: 'white',
+    fontSize: 13,
+    fontWeight: 'bold',
     fontFamily: 'PretendardVariable',
   },
-  accountNumberCopyBox:{
-    justifyContent : 'flex-end',
-    marginLeft : 7
+  accountNumberCopyBox: {
+    justifyContent: 'flex-end',
+    marginLeft: 7,
   },
-  accountNumberCopyContainer:{
-    backgroundColor : '#FFC763',
-    borderRadius : 7,
-    height : 15,
+  accountNumberCopyContainer: {
+    backgroundColor: '#FFC763',
+    borderRadius: 7,
+    height: 15,
     width: 20,
-    justifyContent : 'center',
-    alignItems : 'center'
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  accountNumberCopyText :{
-    color : '#050953',
-    fontSize : 9,
+  accountNumberCopyText: {
+    color: '#050953',
+    fontSize: 9,
     fontFamily: 'PretendardVariable',
-    textAlign : 'center',
-    fontWeight : 'bold'
-  }
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
 });
 
 export default mainPageStyleSheet;

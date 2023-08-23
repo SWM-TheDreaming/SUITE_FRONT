@@ -88,3 +88,8 @@ export const payNameState = atom({
   key: 'payNameState',
   default: '',
 });
+
+export const suiteRoomIdState = atom({
+  key: 'suiteRoomIdState',
+  default: '',
+});

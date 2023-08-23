@@ -12,6 +12,7 @@ import SuiteRoomurl from '../screens/SutieRoomCreate/SuiteRoomurl';
 import SuiteRoomRule from '../screens/SutieRoomCreate/SuiteRoomRule';
 import SuiteRoompayCheck from '../screens/SutieRoomCreate/SuiteRoompayCheck';
 import SuiteRoomDetail from '../screens/SuiteRoom/SuiteRoomDetail';
+import TabBarNavigation from './TopBarNavigation';
 const App = createStackNavigator<RootStackParamList>();
 
 export function AppStack() {
@@ -20,6 +21,13 @@ export function AppStack() {
       <App.Screen
         name="Mainpage"
         component={RootClientTabs} //로그인 인증이 되었을 때 HomeScreen 대신에 ClientTab을 띄우게 한다.
+        options={{
+          headerShown: false,
+        }}
+      />
+      <App.Screen
+        name="TabBarNavigation"
+        component={TabBarNavigation}
         options={{
           headerShown: false,
         }}
@@ -64,7 +72,7 @@ export function AppStack() {
           ...TransitionPresets.RevealFromBottomAndroid,
         }}
       />
-       <App.Screen
+      <App.Screen
         name="SuiteRoompayCheck"
         component={SuiteRoompayCheck}
         options={{

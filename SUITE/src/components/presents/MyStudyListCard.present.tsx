@@ -5,6 +5,8 @@ import { RootStackParamList } from '../../types';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import TagComponent from './TagComponent';
+import { useSetRecoilState } from 'recoil';
+import { suiteRoomIdState } from '../../../recoil/atoms';
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 export interface StudyInfoCardProps {
@@ -19,14 +21,16 @@ export interface StudyInfoCardProps {
   writeDate: Date;
   scrab: number;
 }
-const StudyInfoCardUI = (props: StudyInfoCardProps) => {
+const MyStudyInfoCardUI = (props: StudyInfoCardProps) => {
   const navigation = useNavigation<RootStackNavigationProp>();
+  const suiteRoomId = useSetRecoilState(suiteRoomIdState);
+
   return (
     <TouchableOpacity
       style={mainPageStyleSheet.box}
       onPress={() => {
-        console.log(props.id);
-        navigation.navigate('SuiteRoomDetail', { SuiteRoomid: props.id });
+        suiteRoomId(props.id);
+        navigation.navigate('TabBarNavigation');
       }}
     >
       <View style={mainPageStyleSheet.innerbox}>
@@ -47,4 +51,4 @@ const StudyInfoCardUI = (props: StudyInfoCardProps) => {
   );
 };
 
-export default StudyInfoCardUI;
+export default MyStudyInfoCardUI;

@@ -82,7 +82,7 @@ const SuiteRoomInfo = () => {
         <InputField
           style={mainPageStyleSheet.idpwInputBox}
           autoFocus
-          placeholder= " 제목을 입력해주세요"
+          placeholder=" 제목을 입력해주세요"
           maxLength={50}
           {...suiteRoomInfo.getTextInputProps('title')}
           touched={suiteRoomInfo.touched.title}
