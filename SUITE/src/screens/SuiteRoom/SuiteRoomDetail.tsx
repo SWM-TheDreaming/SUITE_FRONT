@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, ScrollView, Image, Dimensions, TouchableOpacity } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
 import { RootStackParamList } from '../../types';
@@ -11,8 +11,11 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import ProgressCircle from 'react-native-progress-circle'
 import mainPageStyleSheet from '../../style/style';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Clipboard from '@react-native-clipboard/clipboard';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
+import Clipboard from '@react-native-clipboard/clipboard';
+import ModalPopup from '../../hook/modal';
+import SignModalPopup from '../../components/presents/SignmodalPopup';
 type SuiteRoomDetailRouteProp = RouteProp<RootStackParamList, 'SuiteRoomDetail'>;
 
 interface SuiteRoomDetailProps {
@@ -38,6 +41,8 @@ const mockdata =
   ;
 const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route }) => {
   const { SuiteRoomid } = route.params;
+  const [visible, setVisible] = useState(false);
+
   const handleCopyToClipboard = () => {
     Clipboard.setString(mockdata.link);
   };
@@ -46,11 +51,16 @@ const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route 
       <View style={SuiteRoomStyleSheet.SuiteRoomDetailContainer}>
           <Header title={''} backScreen= 'Studylist'/>
           <View style={SuiteRoomStyleSheet.SuiteRoomDetailupperBox}>
+          <View style={{flexDirection : 'row', justifyContent : 'space-between'}}>
           <TagComponent
               dDay="D-12"
               category={mockdata.category}
               depositAmount={`${mockdata.depositAmount.toString().slice(0, 2)}K`}
           />
+          <TouchableOpacity >
+            <FontAwesome5 name="edit" size={15} color={'#686868'}></FontAwesome5>
+          </TouchableOpacity>
+          </View>
           <Text style={SuiteRoomStyleSheet.SuiteRoomDetailTitle}>{mockdata.title}</Text>
           <View style={SuiteRoomStyleSheet.SuiteRoomDetailUpperBox}>
               <View style={SuiteRoomStyleSheet.SuiteRoomBoxIconContainer}>
@@ -96,7 +106,7 @@ const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route 
               shadowColor="#E2FFFE"
               bgColor="white"
           >
-            <Text style={SuiteRoomStyleSheet.SuiteRoomDetailCircularBarText}>{mockdata.minAttendanceRate}</Text>
+            <Text style={SuiteRoomStyleSheet.SuiteRoomDetailCircularBarText}>{mockdata.minAttendanceRate}%</Text>
           </ProgressCircle>
           <View style={SuiteRoomStyleSheet.SuiteRoomCirculaBarInfoContainer}>
             <Text style={SuiteRoomStyleSheet.SuiteRoomCircularBarInfoText}>최소 출석률</Text>
@@ -115,7 +125,7 @@ const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route 
             <Text style={SuiteRoomStyleSheet.SuiteRoomDetailCircularBarText}>{mockdata.minMissionCompleteRate}%</Text>
            </ProgressCircle>
            <View style={SuiteRoomStyleSheet.SuiteRoomCirculaBarInfoContainer}>
-              <Text style={SuiteRoomStyleSheet.SuiteRoomCircularBarInfoText}>최소 출석률</Text>
+              <Text style={SuiteRoomStyleSheet.SuiteRoomCircularBarInfoText}>미션 달성률</Text>
               <Text style={SuiteRoomStyleSheet.SuiteRoomDetailInfoText}><Text style={SuiteRoomStyleSheet.SuiteRoomDetailminMissionCompleteRate}>{mockdata.minMissionCompleteRate}%</Text> 이상 달성</Text>
             </View>
           </View>
@@ -132,11 +142,13 @@ const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route 
           </View>
           </View>
           <View style={SuiteRoomStyleSheet.SuiteRoomDetailReaderButtonContainer}>
-          {/* <TouchableOpacity style={SuiteRoomStyleSheet.SuiteRoomDetailCancelButton}>
-            <Text style={mainPageStyleSheet.categortFilterResetText}>스터디 취소</Text>
+          {/* <TouchableOpacity style={SuiteRoomStyleSheet.SuiteRoomDetailScrabButton}  onPress={() => {
+              setVisible(true);
+            }}>
+            <Text style={mainPageStyleSheet.categortFilterResetText}>취소</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={SuiteRoomStyleSheet.SuiteRoomDetailUpdateyButton}>
-            <Text style={mainPageStyleSheet.categortFilterApplyText}>스터디 수정</Text>
+          <TouchableOpacity style={SuiteRoomStyleSheet.SutieRoomDetailCheckinButton}>
+            <Text style={mainPageStyleSheet.categortFilterApplyText}>스터디 시작</Text>
           </TouchableOpacity> */}
           <TouchableOpacity style={SuiteRoomStyleSheet.SuiteRoomDetailScrabButton}>
           <FontAwesome name="star-o" size={20} color={'#888888'}/>
@@ -145,6 +157,9 @@ const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route 
             <Text style={mainPageStyleSheet.categortFilterApplyText}>체크인하기</Text>
           </TouchableOpacity>
       </View>
+      <ModalPopup visible={visible}>
+          <SignModalPopup visible={visible} onClose={() => setVisible(false)} text={'스터디를 취소하시겠습니까?'} />
+        </ModalPopup>
       </View>
     </ScrollView>
   );
