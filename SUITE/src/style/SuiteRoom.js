@@ -180,7 +180,7 @@ const SuiteRoomStyleSheet = StyleSheet.create({
         borderRadius: 24,
         justifyContent: 'center',
         alignItems: 'center',
-      }
+      },
 });
 
 export default SuiteRoomStyleSheet;
