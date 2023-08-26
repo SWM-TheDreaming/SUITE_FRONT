@@ -22,5 +22,5 @@ export default function RootNavigator() {
     };
     getTokenFromAsyncStorage();
   }, []);
-  return <NavigationContainer>{!token || token.length < 10 ? <AuthStack /> : <AppStack />}</NavigationContainer>;
+  return <NavigationContainer>{!token || token.length < 10 ? <AppStack /> : <AppStack />}</NavigationContainer>;
 }

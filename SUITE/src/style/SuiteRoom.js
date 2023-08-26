@@ -9,7 +9,6 @@ const SuiteRoomStyleSheet = StyleSheet.create({
   },
   MyStudyRoomContainer: {
     backgroundColor: 'white',
-    height: Height,
   },
   SuiteRoomDetailupperBox: {
     marginLeft: widthPercentage(20),
@@ -192,6 +191,118 @@ const SuiteRoomStyleSheet = StyleSheet.create({
   MySuiteRoomStatusText: {
     width: Dimensions.get('window').width / 4,
     textAlign: 'center',
+  },
+  dashBoardContainer: {
+    flexDirection: 'column',
+    marginTop: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  DepositDayContainer: {
+    flexDirection: 'row',
+  },
+  DepositBox: {
+    width: widthPercentage(160),
+    height: heightPercentage(80),
+    backgroundColor: '#F8F8F8',
+    borderRadius: 5,
+    marginRight: 7,
+  },
+  DepositDayInfoText: {
+    fontSize: 14,
+    fontFamily: 'PretendardVariable',
+    color: 'black',
+    paddingLeft: 20,
+    paddingTop: 10,
+  },
+  DepositDayText: {
+    fontSize: 18,
+    fontFamily: 'PretendardVariable',
+    fontWeight: 'bold',
+    color: 'black',
+    paddingLeft: 20,
+    marginTop: 7,
+  },
+  DayBox: {
+    width: widthPercentage(160),
+    height: heightPercentage(80),
+    backgroundColor: '#F8F8F8',
+    borderRadius: 5,
+  },
+  CircleProgressContainer: {
+    flexDirection: 'row',
+    marginTop: 10,
+  },
+  AttendanceCircleBox: {
+    width: widthPercentage(160),
+    height: heightPercentage(230),
+    backgroundColor: '#F8F8F8',
+    borderRadius: 5,
+    marginRight: 7,
+  },
+  MissionCircleBox: {
+    width: widthPercentage(160),
+    height: heightPercentage(230),
+    backgroundColor: '#F8F8F8',
+    borderRadius: 10,
+  },
+  AttendanceMissionBox: {
+    marginTop: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  StudyDashboardContainer: {
+    marginTop: 32,
+  },
+  StudyInfoContainer: {
+    width: widthPercentage(320),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  StudyInfoText: {
+    fontWeight: 'bold',
+    color: 'black',
+    fontSize: 16,
+    fontFamily: 'PretendardVariable',
+  },
+  DepositText: {
+    fontSize: 14,
+    color: '#005BA5',
+    fontFamily: 'PretendardVariable',
+  },
+  StudyStatusContainer: {
+    marginBottom: 30,
+  },
+  AttendanceBoxContainer: {
+    backgroundColor: '#F8F8F8',
+    width: widthPercentage(320),
+    height: heightPercentage(110),
+  },
+  MyattendaceTextContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  MyattendanceText: {
+    color: 'black',
+    fontFamily: 'PretendardVariable',
+    fontSize: 14,
+    paddingLeft: 24,
+    paddingTop: 10,
+    fontWeight: 'bold',
+  },
+  MyAttendanceRate: {
+    color: '#050953',
+    fontFamily: 'PretendardVariable',
+    fontSize: 20,
+    paddingRight: 24,
+    paddingTop: 10,
+    fontWeight: 'bold',
+  },
+  MyattendanceProgressBarContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 8,
   },
 });
 
