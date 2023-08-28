@@ -808,6 +808,26 @@ const mainPageStyleSheet = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
   },
+  CheckButton: {
+    width: widthPercentage(100),
+    height: heightPercentage(40),
+    backgroundColor: '#005BA5',
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 20,
+    marginLeft: 10,
+  },
+  CancelButton: {
+    width: widthPercentage(100),
+    height: heightPercentage(40),
+    backgroundColor: '#B8B8B8',
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 20,
+    marginRight: 10,
+  },
 });
 
 export default mainPageStyleSheet;
