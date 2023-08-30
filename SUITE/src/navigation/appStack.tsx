@@ -13,6 +13,8 @@ import SuiteRoomRule from '../screens/SutieRoomCreate/SuiteRoomRule';
 import SuiteRoompayCheck from '../screens/SutieRoomCreate/SuiteRoompayCheck';
 import SuiteRoomDetail from '../screens/SuiteRoom/SuiteRoomDetail';
 import TabBarNavigation from './TopBarNavigation';
+import LeaderTopBarNavigation from './LeaderTopBarNavigation';
+import CreateMission from '../screens/SuiteRoom/CreateMission';
 const App = createStackNavigator<RootStackParamList>();
 
 export function AppStack() {
@@ -28,6 +30,13 @@ export function AppStack() {
       <App.Screen
         name="TabBarNavigation"
         component={TabBarNavigation}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <App.Screen
+        name="LeaderTabBarNavigation"
+        component={LeaderTopBarNavigation}
         options={{
           headerShown: false,
         }}
@@ -83,6 +92,14 @@ export function AppStack() {
       <App.Screen
         name="SuiteRoomDetail"
         component={SuiteRoomDetail}
+        options={{
+          headerShown: false,
+          ...TransitionPresets.RevealFromBottomAndroid,
+        }}
+      />
+      <App.Screen
+        name="CreateMission"
+        component={CreateMission}
         options={{
           headerShown: false,
           ...TransitionPresets.RevealFromBottomAndroid,
