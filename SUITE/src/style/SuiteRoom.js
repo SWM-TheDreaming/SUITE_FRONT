@@ -304,6 +304,74 @@ const SuiteRoomStyleSheet = StyleSheet.create({
     alignItems: 'center',
     marginTop: 8,
   },
+  MissionContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  MissionStatusContainer: {
+    marginTop: 24,
+    marginLeft: 20,
+    marginBottom: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  MissionStatusText: {
+    color: 'black',
+    fontSize: 16,
+    fontWeight: 'bold',
+    fontFamily: 'PretendardVariable',
+  },
+  MissionLengthText: {
+    marginLeft: 5,
+    color: '#00ACCF',
+    fontSize: 16,
+    fontWeight: 'bold',
+    fontFamily: 'PretendardVariable',
+  },
+  ChoiceMissionContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 24,
+  },
+  ChoiceMissionBox: {
+    width: widthPercentage(320),
+    height: heightPercentage(50),
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 16,
+    backgroundColor: 'white',
+    borderRadius: 24,
+  },
+  SelectedMissionButton: {
+    width: widthPercentage(100),
+    height: heightPercentage(35),
+    borderRadius: 24,
+    backgroundColor: '#050953',
+  },
+  MissionButton: {
+    width: widthPercentage(100),
+    height: heightPercentage(35),
+    borderRadius: 24,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  SelectedMissionText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16,
+    fontFamily: 'PretendardVariable',
+  },
+  MissionText: {
+    color: '#D8D8D8',
+    fontWeight: 'bold',
+    fontSize: 16,
+    fontFamily: 'PretendardVariable',
+  },
+  MissionScrollView: {
+    height: Height,
+  },
 });
 
 export default SuiteRoomStyleSheet;
