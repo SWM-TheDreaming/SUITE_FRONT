@@ -9,15 +9,21 @@ import mainPageStyleSheet from '../../style/style';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import ImageModalPopup from '../../hook/ImageModal';
 import AttendanceCheckModal from '../../hook/AttendanceCheckModal';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../types';
+export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
+
 const SuiteRoomDashboard = () => {
   const SuiteRoomId = useRecoilValue(suiteRoomIdState);
   const [attendanceCheckVisible, setAttendanceCheckVisible] = useState(false);
   const [number, setNumber] = useState<number>(0);
+  const navigation = useNavigation<RootStackNavigationProp>();
   const attendanceStart = () => {
     //출석 API 불러오기
     setNumber(Math.floor(Math.random() * 100))  //출석 진행중이라면 number 세팅
     //출석 진행중 아니라면 출석 진행중이 아니라는 modal visible 세팅
-    
+
   }
   useEffect(()=>{
     if(number!=0){
@@ -78,7 +84,7 @@ const SuiteRoomDashboard = () => {
           <TouchableOpacity style={SuiteRoomStyleSheet.AttendanceCheckStart} onPress = {attendanceStart}>
             <Text style={mainPageStyleSheet.categortFilterApplyText}>출석 하기</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={SuiteRoomStyleSheet.ContractButtonConatiner}>
+          <TouchableOpacity style={SuiteRoomStyleSheet.ContractButtonConatiner} onPress = {()=>navigation.navigate('ContractTabNavigation')}>
             <FontAwesome5 name="file-contract" size={20} color={'#050953'} />
             <Text style={SuiteRoomStyleSheet.ContractButtonText}>계약서 이력</Text>
           </TouchableOpacity>

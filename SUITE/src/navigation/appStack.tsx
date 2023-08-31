@@ -15,6 +15,7 @@ import SuiteRoomDetail from '../screens/SuiteRoom/SuiteRoomDetail';
 import TabBarNavigation from './TopBarNavigation';
 import LeaderTopBarNavigation from './LeaderTopBarNavigation';
 import CreateMission from '../screens/SuiteRoom/CreateMission';
+import ContractTabNavigation from "./ContractTabNavigation"
 const App = createStackNavigator<RootStackParamList>();
 
 export function AppStack() {
@@ -37,6 +38,13 @@ export function AppStack() {
       <App.Screen
         name="LeaderTabBarNavigation"
         component={LeaderTopBarNavigation}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <App.Screen
+        name="ContractTabNavigation"
+        component={ContractTabNavigation}
         options={{
           headerShown: false,
         }}
