@@ -397,15 +397,17 @@ const SuiteRoomStyleSheet = StyleSheet.create({
     fontFamily: 'PretendardVariable',  
   },
   AttendanceCheckStart: {
-    width: widthPercentage(260),
+    width: widthPercentage(200),
     height: heightPercentage(50),
     marginTop : 20,
     backgroundColor: '#050953',
     borderColor: 'black',
     borderWidth: 1,
-    borderRadius: 24,
+    borderRadius: 15,
     justifyContent: 'center',
     alignItems: 'center',
+    marginRight : 7,
+    flexDirection : 'row'
   },
   AttendanceModal: {
     fontSize: 17,
@@ -421,6 +423,38 @@ const SuiteRoomStyleSheet = StyleSheet.create({
     textAlign: 'center',
     color: 'black',
   },
+  ContractButtonConatiner: {
+    width: widthPercentage(120),
+    height: heightPercentage(50),
+    marginTop : 20,
+    backgroundColor: '#FEDE35',
+    borderRadius: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection : 'row'
+  },
+  ContractButtonText: {
+    color: 'black',
+    fontSize: 16,
+    fontFamily: 'PretendardVariable',
+    fontWeight: 'bold',
+    marginLeft : 5
+  },
+  AttendanceInputContainer : {
+    width : widthPercentage(240),
+    height : heightPercentage(50),
+    marginTop : heightPercentage(12),
+    borderRadius : 5,
+    borderColor : '#D8D8D8',
+    borderWidth : 1,
+    justifyContent : 'center'
+  },
+  IncorrectAttendanceText : {
+    color: 'red',
+    fontSize: 10,
+    marginTop: 4,
+    fontFamily: 'PretendardVariable',
+  }
 }
 );
 
