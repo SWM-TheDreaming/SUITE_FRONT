@@ -30,7 +30,7 @@ const CompleteData: DataRow[] = [
 const SuiteRoomCanbanBoard = () => {
   const [content, setContent] = useState('진행 중');
   const [data, setData] = useState(ProgressData);
-  const [selectedButton, setSelectedButton] = useState<string | null>(null);
+  const [selectedButton, setSelectedButton] = useState<string | null>('progress');
   const buttons: string[] = ['progress', 'request', 'complete'];
   const handlePress = (type: string) => {
     switch (type) {

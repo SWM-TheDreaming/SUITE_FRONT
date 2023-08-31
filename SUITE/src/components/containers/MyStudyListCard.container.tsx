@@ -15,6 +15,7 @@ const mockdata = [
     presentRecruitment: 2,
     writeDate: new Date('2023-06-13'),
     scrab: 5,
+    userId : 'one8775'
   },
   {
     id: '234',
@@ -27,6 +28,7 @@ const mockdata = [
     presentRecruitment: 4,
     writeDate: new Date('2023-06-13'),
     scrab: 2,
+    userId : 'you'
   },
   {
     id: '345',
@@ -39,12 +41,15 @@ const mockdata = [
     presentRecruitment: 4,
     writeDate: new Date('2023-06-13'),
     scrab: 6,
+    userId : 'hyeop'
   },
 ];
+const userId = 'one8775'
 const MyStudyListCard = () => {
   return (
     <>
       {mockdata.map((item) => (
+        userId === item.userId ?
         <MyStudyListCardUI
           key={item.id}
           id={item.id}
@@ -57,6 +62,22 @@ const MyStudyListCard = () => {
           presentRecruitment={item.presentRecruitment}
           writeDate={item.writeDate}
           scrab={item.scrab}
+          IsLeader = {true}
+        />
+        :
+        <MyStudyListCardUI
+          key={item.id}
+          id={item.id}
+          title={item.title}
+          studyDeadLine={item.studyDeadLine}
+          recruitmentDeadLine={item.recruitmentDeadLine}
+          category={item.category}
+          depositAmount={item.depositAmount}
+          recruitmentLimit={item.recruitmentLimit}
+          presentRecruitment={item.presentRecruitment}
+          writeDate={item.writeDate}
+          scrab={item.scrab}
+          IsLeader = {false}
         />
       ))}
     </>

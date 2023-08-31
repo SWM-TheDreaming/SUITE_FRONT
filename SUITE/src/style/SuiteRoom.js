@@ -128,6 +128,7 @@ const SuiteRoomStyleSheet = StyleSheet.create({
     width: widthPercentage(310),
     height: heightPercentage(170),
     backgroundColor: '#FFF4F4',
+    marginBottom : heightPercentage(40)
   },
   SuiteRoomDetailInformationText: {
     marginTop: heightPercentage(10),
@@ -138,7 +139,6 @@ const SuiteRoomStyleSheet = StyleSheet.create({
     color: '#484848',
   },
   SuiteRoomDetailReaderButtonContainer: {
-    marginTop: heightPercentage(40),
     marginBottom: heightPercentage(20),
     flexDirection: 'row',
     justifyContent: 'center',
@@ -311,9 +311,19 @@ const SuiteRoomStyleSheet = StyleSheet.create({
   MissionStatusContainer: {
     marginTop: 24,
     marginLeft: 20,
+    marginRight : 20,
     marginBottom: 8,
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  LeaderMissionStatusContainer: {
+    marginTop: 24,
+    marginLeft: 20,
+    marginRight : 20,
+    marginBottom: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent : 'space-between'
   },
   MissionStatusText: {
     color: 'black',
@@ -372,6 +382,46 @@ const SuiteRoomStyleSheet = StyleSheet.create({
   MissionScrollView: {
     height: Height,
   },
-});
+  CreateMissionButton : {
+    width : widthPercentage(100),
+    height : heightPercentage (40),
+    backgroundColor : '#050953',
+    borderRadius : 24,
+    justifyContent : 'center',
+    alignItems : 'center'
+  },
+  CreateMissionText : {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16,
+    fontFamily: 'PretendardVariable',  
+  },
+  AttendanceCheckStart: {
+    width: widthPercentage(260),
+    height: heightPercentage(50),
+    marginTop : 20,
+    backgroundColor: '#050953',
+    borderColor: 'black',
+    borderWidth: 1,
+    borderRadius: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  AttendanceModal: {
+    fontSize: 17,
+    fontWeight: 'bold',
+    marginTop: heightPercentage(20),
+    textAlign: 'center',
+    color: 'black',
+  },
+  AttendanceModalNumberText: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    marginTop: heightPercentage(10),
+    textAlign: 'center',
+    color: 'black',
+  },
+}
+);
 
 export default SuiteRoomStyleSheet;

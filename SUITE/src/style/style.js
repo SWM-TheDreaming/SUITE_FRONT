@@ -475,6 +475,14 @@ const mainPageStyleSheet = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 24,
   },
+  disabledSignUpNextBtnSmall: {
+    width: widthPercentage(150),
+    height: heightPercentage(50),
+    backgroundColor: '#E8E8E8',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 24,
+  },
   SignUpNextBtnText: {
     fontSize: 16,
     color: '#FFFFFF',

@@ -1,6 +1,7 @@
 export type RootStackParamList = {
   Mainpage: { selectedCategories: string[] };
   TabBarNavigation: undefined;
+  LeaderTabBarNavigation : undefined;
   CategoryFilter: undefined;
   Studylist: { selectedCategories: string[] };
   Mystudy: undefined;
@@ -23,6 +24,7 @@ export type RootStackParamList = {
   SuiteRoomDashboard: undefined;
   SuiteRoomMyAttendance: undefined;
   SuiteRoomDetailStart: undefined;
+  CreateMission : undefined;
 };
 
 export interface Category {

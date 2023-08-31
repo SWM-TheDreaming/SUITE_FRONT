@@ -20,6 +20,7 @@ export interface StudyInfoCardProps {
   presentRecruitment: number; //현재 인원
   writeDate: Date;
   scrab: number;
+  IsLeader : boolean;
 }
 const MyStudyInfoCardUI = (props: StudyInfoCardProps) => {
   const navigation = useNavigation<RootStackNavigationProp>();
@@ -30,7 +31,9 @@ const MyStudyInfoCardUI = (props: StudyInfoCardProps) => {
       style={mainPageStyleSheet.box}
       onPress={() => {
         suiteRoomId(props.id);
-        navigation.navigate('TabBarNavigation');
+        props.IsLeader === false ?
+        navigation.navigate('TabBarNavigation') : 
+        navigation.navigate('LeaderTabBarNavigation');
       }}
     >
       <View style={mainPageStyleSheet.innerbox}>

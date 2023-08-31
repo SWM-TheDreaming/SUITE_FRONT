@@ -43,9 +43,6 @@ const SuiteRoomDetailStart = () => {
               category={mockdata.category}
               depositAmount={`${mockdata.depositAmount.toString().slice(0, 2)}K`}
             />
-            <TouchableOpacity>
-              <FontAwesome5 name="edit" size={15} color={'#686868'}></FontAwesome5>
-            </TouchableOpacity>
           </View>
           <Text style={SuiteRoomStyleSheet.SuiteRoomDetailTitle}>{mockdata.title}</Text>
           <View style={SuiteRoomStyleSheet.SuiteRoomDetailUpperBox}>
