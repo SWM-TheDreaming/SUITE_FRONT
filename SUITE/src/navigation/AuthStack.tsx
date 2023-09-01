@@ -10,6 +10,7 @@ import UserInformation from '../screens/AuthScreen/SignUp/UserInformation';
 import AuthenticateCode from '../screens/AuthScreen/SignUp/AuthenticateCode';
 import SignUp from '../screens/AuthScreen/SignUp/SignUp';
 import OauthTermOfUse from '../screens/AuthScreen/SignUp/OauthTermOfUse';
+import PhoneAuthentication from '../screens/AuthScreen/SignUp/PhoneAuthetication';
 const Auth = createStackNavigator();
 
 export function AuthStack() {
@@ -42,6 +43,14 @@ export function AuthStack() {
       <Auth.Screen
         name="EmailAuthentication"
         component={EmailAuthentication}
+        options={{
+          headerShown: false,
+          ...TransitionPresets.RevealFromBottomAndroid,
+        }}
+      />
+      <Auth.Screen
+        name="PhoneAuthentication"
+        component={PhoneAuthentication}
         options={{
           headerShown: false,
           ...TransitionPresets.RevealFromBottomAndroid,

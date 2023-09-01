@@ -307,6 +307,47 @@ const mainPageStyleSheet = StyleSheet.create({
     borderRadius: 3,
     paddingLeft: 13,
   },
+  phoneNumInputBox: {
+    width: widthPercentage(220),
+    height: heightPercentage(50),
+    marginTop: heightPercentage(10),
+    borderColor: '#E8E8E8',
+    borderWidth: 1,
+    borderRadius: 3,
+    paddingLeft: 13,
+  },
+  phoneAuthenticateCodeContainer : {
+    alignItems : 'center',
+    justifyContent : 'center',
+    marginLeft : 10,
+    marginTop: heightPercentage(10),
+  },
+  phoneAuthenticateCodeButton : {
+    borderWidth : 1,
+    borderRadius : 20,
+    borderColor : '#E8E8E8',
+    height : heightPercentage(50), 
+    width : widthPercentage(80),
+    alignItems : 'center',
+    justifyContent : 'center',
+    backgroundColor : '#E8E8E8'
+  },
+  phoneAuthenticateCodeButtonNotDisabled : {
+    borderWidth : 1,
+    borderRadius : 20,
+    borderColor : '#E8E8E8',
+    height : heightPercentage(50), 
+    width : widthPercentage(80),
+    alignItems : 'center',
+    justifyContent : 'center',
+    backgroundColor : '#050953'
+  },
+  phonAuthenticateCodeText : {
+    fontSize : 12,
+    color : 'white',
+    fontWeight : 'bold',
+    fontFamily: 'PretendardVariable',
+  },
   loginButtonContainer: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -580,9 +621,10 @@ const mainPageStyleSheet = StyleSheet.create({
     paddingLeft: 13,
   },
   signUpCompleteText: {
-    fontsize: 10,
+    fontSize: 14,
     color: '#B3ADAD',
     fontFamily: 'PretendardVariable',
+    marginBottom : 10
   },
   emailChecktext: {
     fontSize: 17,

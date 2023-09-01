@@ -3,6 +3,7 @@ export type RootStackParamList = {
   TabBarNavigation: undefined;
   ContractTabNavigation : undefined;
   LeaderTabBarNavigation : undefined;
+  PhoneAuthentication : undefined
   CategoryFilter: undefined;
   Studylist: { selectedCategories: string[] };
   Mystudy: undefined;

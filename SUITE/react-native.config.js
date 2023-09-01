@@ -4,4 +4,5 @@ module.exports = {
     android: {},
   },
   assets: ['./assets/fonts/'],
+  API_URL : 'http://semtle.catholic.ac.kr:8085',
 };

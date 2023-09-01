@@ -10,7 +10,7 @@ import { useRecoilState } from 'recoil';
 import { emailState, isAuthState, passwordState } from '../../../../recoil/atoms'; // Recoil 상태를 정의한 파일 임포트
 import ModalPopup from '../../../hook/modal';
 import SignModalPopup from '../../../components/presents/SignmodalPopup';
-
+import { API_URL } from '../../../../react-native.config';
 const EmailAuthentication = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
   const emailAuthentication = useForm();
@@ -28,7 +28,7 @@ const EmailAuthentication = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('http://semtle.catholic.ac.kr:8085/member/verification/email', {
+      const response = await fetch(`${API_URL}/member/verification/email`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
