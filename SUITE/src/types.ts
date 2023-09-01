@@ -1,6 +1,7 @@
 export type RootStackParamList = {
   Mainpage: { selectedCategories: string[] };
   TabBarNavigation: undefined;
+  ContractTabNavigation : undefined;
   LeaderTabBarNavigation : undefined;
   CategoryFilter: undefined;
   Studylist: { selectedCategories: string[] };

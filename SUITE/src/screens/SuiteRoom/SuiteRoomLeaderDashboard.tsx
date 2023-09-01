@@ -9,10 +9,18 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import mainPageStyleSheet from '../../style/style';
 import ImageModalPopup from '../../hook/ImageModal';
 import LeaderAttendanceModal from '../../components/presents/LeaderAttendanceModal';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../types';
+export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
+
 const SuiteRoomLeaderDashboard = () => {
   const SuiteRoomId = useRecoilValue(suiteRoomIdState);
   const [visible, setVisible] = useState(false);
   const [number, setNumber] = useState<number>(0);
+    const navigation = useNavigation<RootStackNavigationProp>();
+
   const attendanceStart = () => {
     setNumber(Math.random())
   }
@@ -71,9 +79,15 @@ const SuiteRoomLeaderDashboard = () => {
               </View>
             </View>
           </View>
+          <View style={{flexDirection : 'row'}}>
           <TouchableOpacity style={SuiteRoomStyleSheet.AttendanceCheckStart} onPress = {attendanceStart}>
             <Text style={mainPageStyleSheet.categortFilterApplyText}>출석 시작</Text>
           </TouchableOpacity>
+          <TouchableOpacity style={SuiteRoomStyleSheet.ContractButtonConatiner}  onPress = {()=>navigation.navigate('ContractTabNavigation')}>
+            <FontAwesome5 name="file-contract" size={20} color={'#050953'} />
+            <Text style={SuiteRoomStyleSheet.ContractButtonText}>계약서 이력</Text>
+          </TouchableOpacity>
+          </View>
           <ImageModalPopup visible={visible}>
             <LeaderAttendanceModal
                 visible={visible}

@@ -235,19 +235,19 @@ const SuiteRoomStyleSheet = StyleSheet.create({
   },
   AttendanceCircleBox: {
     width: widthPercentage(160),
-    height: heightPercentage(230),
+    height: heightPercentage(210),
     backgroundColor: '#F8F8F8',
     borderRadius: 5,
     marginRight: 7,
   },
   MissionCircleBox: {
     width: widthPercentage(160),
-    height: heightPercentage(230),
+    height: heightPercentage(210),
     backgroundColor: '#F8F8F8',
     borderRadius: 10,
   },
   AttendanceMissionBox: {
-    marginTop: 10,
+    marginTop: heightPercentage(10),
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -397,15 +397,31 @@ const SuiteRoomStyleSheet = StyleSheet.create({
     fontFamily: 'PretendardVariable',  
   },
   AttendanceCheckStart: {
-    width: widthPercentage(260),
-    height: heightPercentage(50),
+    width: widthPercentage(160),
+    height: heightPercentage(40),
     marginTop : 20,
     backgroundColor: '#050953',
     borderColor: 'black',
     borderWidth: 1,
-    borderRadius: 24,
+    borderRadius: 15,
     justifyContent: 'center',
     alignItems: 'center',
+    marginRight : 7,
+    flexDirection : 'row',
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000000',
+        shadowOffset: {
+          width: 1,
+          height: 1,
+        },
+        shadowOpacity: 0.3,
+        shadowRadius: 1,
+      },
+      android: {
+        elevation: 4,
+      },
+    }),
   },
   AttendanceModal: {
     fontSize: 17,
@@ -421,6 +437,113 @@ const SuiteRoomStyleSheet = StyleSheet.create({
     textAlign: 'center',
     color: 'black',
   },
+  ContractButtonConatiner: {
+    width: widthPercentage(160),
+    height: heightPercentage(40),
+    marginTop : 20,
+    backgroundColor: '#FEDE35',
+    borderRadius: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection : 'row',
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000000',
+        shadowOffset: {
+          width: 1,
+          height: 1,
+        },
+        shadowOpacity: 0.3,
+        shadowRadius: 1,
+      },
+      android: {
+        elevation: 4,
+      },
+    }),
+  },
+  ContractButtonText: {
+    color: 'black',
+    fontSize: 16,
+    fontFamily: 'PretendardVariable',
+    fontWeight: 'bold',
+    marginLeft : 5
+  },
+  AttendanceInputContainer : {
+    width : widthPercentage(240),
+    height : heightPercentage(50),
+    marginTop : heightPercentage(12),
+    borderRadius : 5,
+    borderColor : '#D8D8D8',
+    borderWidth : 1,
+    justifyContent : 'center'
+  },
+  IncorrectAttendanceText : {
+    color: 'red',
+    fontSize: 10,
+    marginTop: 4,
+    fontFamily: 'PretendardVariable',
+  },
+  ContractBox: {
+    //컴포넌트 박스 설정
+    marginTop: 16,
+    marginBottom : 4,
+    backgroundColor: 'white',
+    // opacity:0.77,
+    width: widthPercentage(328),
+    height: heightPercentage(140),
+    borderRadius: 10,
+    borderColor : '#050953',
+    ...Platform.select({
+      ios: {
+        shadowColor: '#686868',
+        shadowOffset: {
+          width: 2,
+          height: 2,
+        },
+        shadowOpacity: 0.3,
+        shadowRadius: 1,
+      },
+      android: {
+        elevation: 5,
+      },
+    }),
+  },
+  ContractTxNameText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'black',
+    fontFamily: 'PretendardVariable',
+  },
+  detailtext: {
+    fontSize: 12,
+    color: '#686868',
+    marginTop: 8,
+    fontFamily: 'PretendardVariable',
+  },
+  ContractModalContainer: {
+    width: widthPercentage(280),
+    height: heightPercentage(220),
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  ContainerLogoStyle: {
+    width: 40,
+    height: 40,
+  },
+  ContractModalDetailText : {
+    fontSize : 14,
+    fontFamily: 'PretendardVariable',
+    marginTop : 5,
+    width: widthPercentage(200)
+  },
+  ContractModalCopyIcon : {
+    alignItems : 'center',
+    justifyContent : 'center',
+    marginTop : 2
+  }
 }
 );
 
