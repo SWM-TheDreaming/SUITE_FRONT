@@ -11,6 +11,7 @@ import AuthenticateCode from '../screens/AuthScreen/SignUp/AuthenticateCode';
 import SignUp from '../screens/AuthScreen/SignUp/SignUp';
 import OauthTermOfUse from '../screens/AuthScreen/SignUp/OauthTermOfUse';
 import PhoneAuthentication from '../screens/AuthScreen/SignUp/PhoneAuthetication';
+import FindId from '../screens/AuthScreen/FindId/FindId';
 const Auth = createStackNavigator();
 
 export function AuthStack() {
@@ -91,6 +92,14 @@ export function AuthStack() {
       <Auth.Screen
         name="SignUp"
         component={SignUp}
+        options={{
+          headerShown: false,
+          ...TransitionPresets.RevealFromBottomAndroid,
+        }}
+      />
+      <Auth.Screen
+        name="FindId"
+        component={FindId}
         options={{
           headerShown: false,
           ...TransitionPresets.RevealFromBottomAndroid,

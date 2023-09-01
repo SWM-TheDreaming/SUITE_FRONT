@@ -878,6 +878,22 @@ const mainPageStyleSheet = StyleSheet.create({
     marginVertical: 20,
     marginRight: 10,
   },
+  findIdContainer: {
+    width: widthPercentage(310),
+    height: heightPercentage(50),
+    marginTop: heightPercentage(10),
+    paddingLeft: 13,
+    justifyContent: 'center',
+    alignItems :'center'
+  },
+  findEmailText: {
+    fontSize: 20,
+    color: 'black',
+    fontWeight : 'bold',
+    marginTop: heightPercentage(70),
+    fontFamily: 'PretendardVariable',
+    textAlign : 'center'
+  },
 });
 
 export default mainPageStyleSheet;

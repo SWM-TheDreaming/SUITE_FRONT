@@ -16,6 +16,7 @@ export type RootStackParamList = {
   UserInformation: undefined;
   AuthenticateCode: undefined;
   OauthTermOfUse: undefined;
+  FindId : undefined;
   SuiteRoomurl: undefined;
   SuiteRoomInfo: undefined;
   SuiteRoompay: undefined;

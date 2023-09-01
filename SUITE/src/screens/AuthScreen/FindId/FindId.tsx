@@ -6,45 +6,39 @@ import { useNavigation } from '@react-navigation/core';
 import { RootStackNavigationProp } from '../Login';
 import useForm from '../../../hook/useForm';
 import InputField from '../../../components/presents/InputField';
-import { useRecoilState } from 'recoil';
-import { phoneState } from '../../../../recoil/atoms';
-import { PhoneAuthenticationCodeApi } from '../../../api/Sign/PhoneAuthenticationApi';
+import { FindIdApi } from '../../../api/Sign/FindIdApi';
 const FindId = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
   const signUp = useForm();
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [phonAuthenticationButtonDisabled, setPhonAuthenticationButtonDisabled] = useState(true)
-  const [phone, setPhone] = useRecoilState(phoneState);
-  const [authenticationCode, setauthenticationCode] = useState('aa');
-  const [verifyCode, setverifyCode] = useState('aa');
+  const [userEmail, setUserEmail] = useState('');
+  const [infoText, setInfoText] = useState('')
   const [isViewDisabled, setIsViewDisabled] = useState(true);
 
   const getPhoneAuthenticationCode = async () => {
     try {
-      const code = await PhoneAuthenticationCodeApi(signUp.getTextInputProps('phone').value);
-      console.log(code)
-      setverifyCode(code);
+      const code = await FindIdApi(signUp.getTextInputProps('phone').value);
+      if (code.statusCode == 200){
+        setInfoText('이메일 정보는 아래와 같습니다')
+        setUserEmail(code.data.email);
+      }
+      else{
+          setInfoText('가입한 이메일 내력이 존재하지 않습니다.')
+          setUserEmail('')
+      }
     } catch (error) {
       console.log('Error occurred:', error);
     }
   };
 
-  const handleAuthencticationCodeChange = (text: string) => {
-    setauthenticationCode(text);
-  };
+ 
   const handleSendButtonPress = () =>{
     getPhoneAuthenticationCode()
     setIsViewDisabled(false)
   }
 
   const handleButtonPress = () => {
-    const phoneValue = signUp.getTextInputProps('phone').value;
-    setPhone(phoneValue);
-    navigation.navigate('UserInformation');
-  };
-
-  const validateCode = () => {
-    return verifyCode === authenticationCode;
+    navigation.navigate('Login');
   };
 
   useEffect(() => {
@@ -58,14 +52,6 @@ const FindId = () => {
   }, [
     signUp.errors.phone,
   ]);
-    useEffect(()=>{
-        if (authenticationCode === verifyCode){
-            setIsButtonDisabled(false)
-        }
-        else{
-            setIsButtonDisabled(true)
-        }
-    },[authenticationCode])
 
   return (
     <View style={mainPageStyleSheet.categoryPageContainer}>
@@ -73,12 +59,12 @@ const FindId = () => {
         <TouchableOpacity
           style={mainPageStyleSheet.pageBackIcon}
           onPress={() => {
-            navigation.navigate('TermOfUse');
+            navigation.navigate('Login');
           }}
         >
           <Icon name="chevron-back" size={24} color={'#000000'} />
         </TouchableOpacity>
-        <Text style={mainPageStyleSheet.SignUpText}>전화번호 인증</Text>
+        <Text style={mainPageStyleSheet.SignUpText}>아이디 찾기</Text>
       </View>
       <View style={mainPageStyleSheet.emailAuthenticationContainer}>
         <Text style={mainPageStyleSheet.idpwtext}>전화번호</Text>
@@ -95,33 +81,29 @@ const FindId = () => {
                     disabled={phonAuthenticationButtonDisabled}
                     onPress = {() =>{handleSendButtonPress()}}
                 >
-                    <Text style={mainPageStyleSheet.phonAuthenticateCodeText}>인증번호 발송</Text>
+                    <Text style={mainPageStyleSheet.phonAuthenticateCodeText}>입력 완료</Text>
                 </TouchableOpacity>
             </View>
         </View>
         <Text>{<Text style={mainPageStyleSheet.idPwInputErrorText}>{signUp.errors.phone}</Text>}</Text>
         { isViewDisabled == false ?
-        <View>
-        <Text style={mainPageStyleSheet.idpwtext}>인증코드</Text>
-            <InputField
-            autoFocus
-            placeholder="인증코드를 입력해주세요"
-            onChangeText={handleAuthencticationCodeChange}
-            />
-            {!validateCode() && <Text style={mainPageStyleSheet.idPwInputErrorText}>코드가 일치하지 않습니다.</Text>}
+        <View >
+        <Text style={mainPageStyleSheet.findEmailText}>{infoText}</Text>
+            <View style={mainPageStyleSheet.findIdContainer}>
+                <Text>{userEmail}</Text>
+            </View>
         </View>
         :null
         }
         </View>
       <View style={mainPageStyleSheet.SignUpNextBtnContainer}>
         <TouchableOpacity
-          style={[mainPageStyleSheet.SignUpNextBtnBtn, isButtonDisabled && mainPageStyleSheet.disabledSignUpNextBtnBtn]}
-          disabled={isButtonDisabled}
+          style={mainPageStyleSheet.SignUpNextBtnBtn}
           onPress={() => {
             handleButtonPress();
           }}
         >
-          <Text style={mainPageStyleSheet.SignUpNextBtnText}>다음</Text>
+          <Text style={mainPageStyleSheet.SignUpNextBtnText}>홈 화면으로 이동</Text>
         </TouchableOpacity>
       </View>
     </View>
