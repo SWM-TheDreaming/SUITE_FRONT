@@ -49,7 +49,7 @@ const ContractContentModalPopup: React.FC<ModalPopupProps> = ({ visible, onClose
     return null;
   } else
     return (
-      <View>
+      <View style={{marginTop : 20}}>
         <View style={{flexDirection:'row'}}>
             <Text style={SuiteRoomStyleSheet.ContractModalDetailText} numberOfLines={1} >{"계약서 주소 : " + contract_address}</Text>
             <TouchableOpacity style={SuiteRoomStyleSheet.ContractModalCopyIcon} onPress={()=>handleCopyToClipboard(contract_address)}>

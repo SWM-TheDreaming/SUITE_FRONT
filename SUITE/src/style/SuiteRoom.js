@@ -522,7 +522,7 @@ const SuiteRoomStyleSheet = StyleSheet.create({
   },
   ContractModalContainer: {
     width: widthPercentage(280),
-    height: heightPercentage(250),
+    height: heightPercentage(220),
     backgroundColor: 'white',
     borderRadius: 10,
     padding: 20,
