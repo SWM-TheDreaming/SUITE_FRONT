@@ -19,7 +19,7 @@ const SuiteRoomLeaderDashboard = () => {
   const SuiteRoomId = useRecoilValue(suiteRoomIdState);
   const [visible, setVisible] = useState(false);
   const [number, setNumber] = useState<number>(0);
-  const navigation = useNavigation<RootStackNavigationProp>();
+    const navigation = useNavigation<RootStackNavigationProp>();
 
   const attendanceStart = () => {
     setNumber(Math.random())
