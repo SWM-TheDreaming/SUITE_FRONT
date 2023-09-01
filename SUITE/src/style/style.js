@@ -549,6 +549,11 @@ const mainPageStyleSheet = StyleSheet.create({
     marginLeft: widthPercentage(24),
     marginRight: widthPercentage(24),
   },
+  FindPwemailAuthenticationContainer: {
+    marginTop: heightPercentage(5),
+    marginLeft: widthPercentage(24),
+    marginRight: widthPercentage(24),
+  },
   securityNumBox: {
     width: widthPercentage(140),
     height: heightPercentage(50),
