@@ -8,18 +8,18 @@ import { Category } from '../types';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 const Studylist: React.FC = () => {
-  const [selectCategories, setSelectCategories] = useState<Category[]>();
+  const [selectedCategories, setSelectCategories] = useState<Category>();
   const route = useRoute();
   useFocusEffect(
     useCallback(() => {
       if (route.params) {
-        setSelectCategories(route.params as Category[]);
+        setSelectCategories(route.params as Category);
       }
     }, [route.params]),
   );
   return (
     <View style={mainPageStyleSheet.container}>
-      <StudyInfoCard filterCategory={selectCategories} />
+      <StudyInfoCard filterCategory={selectedCategories} />
     </View>
   );
 };

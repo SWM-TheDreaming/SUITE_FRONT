@@ -33,11 +33,7 @@ export type RootStackParamList = {
 };
 
 export interface Category {
-  filterCategory:
-    | {
         selectedCategories: string[] | undefined;
-      }
-    | undefined;
 }
 export interface SuiteRoomId {
   SuiteRoomid: string;
