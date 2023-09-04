@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { sendProfileImageApi } from '../../../api/Sign/sendProfileImageApi';
 import { View, Image, Text } from 'react-native';
 import mainPageStyleSheet from '../../../style/style';
 import {
@@ -35,20 +36,30 @@ const Profile = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
   const profile = useForm();
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [memberId, setMemberId] = useState('')
 
-  const handleButtonPress = () => {
-    signUpAPI({
-      email: email,
-      password: password,
-      name: name,
-      nickname: profile.getTextInputProps('nickname').value,
-      phone: phone,
-      securityNum: securityNum,
-      preferStudy: preferStudy,
-      studyMethod: studyMethod,
-      isOauth: isOauth,
+  const getEmailCode = async () => {
+    try {
+      const code = await signUpAPI({
+        email: email,
+        password: password,
+        name: name,
+        nickname: profile.getTextInputProps('nickname').value,
+        phone: phone,
+        securityNum: securityNum,
+        preferStudy: preferStudy,
+        studyMethod: studyMethod,
+        isOauth: isOauth
     });
+    console.log(code)
+    sendProfileImageApi(parseInt(String(code)),img)
     navigation.navigate('SignUp');
+  } catch (error) {
+      console.log('Error occurred:', error);
+    }
+  };
+  const handleButtonPress = () => {
+    getEmailCode()
   };
   function pickImg() {
     launchImageLibrary(

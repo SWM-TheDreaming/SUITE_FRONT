@@ -1,19 +1,18 @@
 import { API_URL } from "../../../react-native.config";
-export const emailAuthenticationCodeApi = async (email: string | null) => {
+export const PhoneAuthenticationCodeApi = async (phoneNumber: string | null) => {
   try {
-    const response = await fetch(`${API_URL}/member/auth/mail`, {
+    const response = await fetch(`${API_URL}/member/send-sms`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        email: email,
+        phoneNumber: phoneNumber,
       }),
     });
-
     if (response.ok) {
       const data = await response.json();
-      return data.data.code;
+      return data.data;
     } else {
       const data = await response.json();
       throw new Error(data);

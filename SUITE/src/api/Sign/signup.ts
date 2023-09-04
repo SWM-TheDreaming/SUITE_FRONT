@@ -1,3 +1,5 @@
+import { API_URL } from "../../../react-native.config";
+
 export const signUpAPI = async ({
   email,
   password,
@@ -20,7 +22,7 @@ export const signUpAPI = async ({
   isOauth: boolean;
 }): Promise<void> => {
   try {
-    const response = await fetch('http://semtle.catholic.ac.kr:8085/member/signup', {
+    const response = await fetch(`${API_URL}/member/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -41,7 +43,7 @@ export const signUpAPI = async ({
 
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
+      return data.data.memberId
     } else {
       console.log('Error occurred:', response);
     }

@@ -152,11 +152,11 @@ const Login = () => {
             </Text>
           </TouchableOpacity>
           <Text style={mainPageStyleSheet.authInfobar}> | </Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress = {() => {navigation.navigate('FindId')}}>
             <Text style={mainPageStyleSheet.authInfoText}>아이디 찾기</Text>
           </TouchableOpacity>
           <Text style={mainPageStyleSheet.authInfobar}> | </Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress = {() => {navigation.navigate('FindPW')}}>
             <Text style={mainPageStyleSheet.authInfoText}>비밀번호 찾기</Text>
           </TouchableOpacity>
         </View>

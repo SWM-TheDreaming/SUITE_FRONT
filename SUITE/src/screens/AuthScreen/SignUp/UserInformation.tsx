@@ -9,7 +9,7 @@ import InputField from '../../../components/presents/InputField';
 import { SelectList } from 'react-native-dropdown-select-list';
 import { Category } from '../../../data/Categoty';
 import { useRecoilState } from 'recoil';
-import { nameState, phoneState, preferStudyState, securityNumState, studyMethodState } from '../../../../recoil/atoms';
+import { nameState, preferStudyState, securityNumState, studyMethodState } from '../../../../recoil/atoms';
 import convertStudyValue from '../../../data/ChangeCategory';
 import convertStudyMethod from '../../../data/ChangeStudyMethod';
 const UserInformation = () => {
@@ -19,7 +19,6 @@ const UserInformation = () => {
   const [selectedItem, setSelectedItem] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [name, setName] = useRecoilState(nameState);
-  const [phone, setPhone] = useRecoilState(phoneState);
   const [securityNum, setsecurityNum] = useRecoilState(securityNumState);
   const [preferStudy, setpreferStudy] = useRecoilState(preferStudyState);
   const [studyMethod, setstudyMethod] = useRecoilState(studyMethodState);
@@ -29,12 +28,10 @@ const UserInformation = () => {
   };
   const handleButtonPress = () => {
     const nameValue = signUp.getTextInputProps('name').value;
-    const phoneValue = signUp.getTextInputProps('phone').value;
     const securityNumValue = signUp.getTextInputProps('birthday').value + '-' + signUp.getTextInputProps('sex').value;
     const preferStudyValue = convertStudyValue(selectedCategory);
     const studyMethodValue = convertStudyMethod(selectedItem);
     setName(nameValue);
-    setPhone(phoneValue);
     setsecurityNum(securityNumValue);
     setpreferStudy(preferStudyValue);
     setstudyMethod(studyMethodValue);
@@ -43,7 +40,6 @@ const UserInformation = () => {
   useEffect(() => {
     if (
       signUp.errors.name == '' &&
-      signUp.errors.phone == '' &&
       selectedItem != '' &&
       selectedCategory != '' &&
       signUp.getTextInputProps('birthday').value != '' &&
@@ -55,14 +51,11 @@ const UserInformation = () => {
     }
   }, [
     signUp.errors.name,
-    signUp.errors.phone,
-    signUp.errors.phone,
     signUp.getTextInputProps('birthday').value,
     signUp.getTextInputProps('sex').value,
     selectedCategory,
     selectedItem,
   ]);
-
   return (
     <View style={mainPageStyleSheet.categoryPageContainer}>
       <View style={mainPageStyleSheet.underStatusBar}>
@@ -86,14 +79,6 @@ const UserInformation = () => {
           touched={signUp.touched.name}
         />
         <Text>{<Text style={mainPageStyleSheet.idPwInputErrorText}>{signUp.errors.name}</Text>}</Text>
-        <Text style={mainPageStyleSheet.idpwtext}>전화번호</Text>
-        <InputField
-          style={mainPageStyleSheet.idpwInputBox}
-          placeholder=" 전화번호 입력해주세요"
-          {...signUp.getTextInputProps('phone')}
-          touched={signUp.touched.phone}
-        />
-        <Text>{<Text style={mainPageStyleSheet.idPwInputErrorText}>{signUp.errors.phone}</Text>}</Text>
         <Text style={mainPageStyleSheet.idpwtext}>주민번호</Text>
         <View style={{ flexDirection: 'row' }}>
           <View style={{ flexDirection: 'column' }}>

@@ -24,7 +24,7 @@ const AuthenticateCode = () => {
     return verifyCode === authenticationCode;
   };
   const handleButtonPress = () => {
-    navigation.navigate('UserInformation'); //로그인 API 연동
+    navigation.navigate('PhoneAuthentication'); //로그인 API 연동
   };
   useEffect(() => {
     if (!validateCode()) {
@@ -33,17 +33,17 @@ const AuthenticateCode = () => {
       setIsButtonDisabled(false);
     }
   }, [validateCode]);
-  useEffect(() => {
-    const getEmailCode = async () => {
-      try {
-        const code = await emailAuthenticationCodeApi(email);
-        setverifyCode(code);
-      } catch (error) {
-        console.log('Error occurred:', error);
-      }
-    };
-    getEmailCode();
-  }, []);
+  // useEffect(() => {
+  //   const getEmailCode = async () => {
+  //     try {
+  //       const code = await emailAuthenticationCodeApi(email);
+  //       setverifyCode(code);
+  //     } catch (error) {
+  //       console.log('Error occurred:', error);
+  //     }
+  //   };
+  //   getEmailCode();
+  // }, []);
 
   return (
     <View style={mainPageStyleSheet.categoryPageContainer}>

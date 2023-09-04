@@ -3,6 +3,7 @@ export type RootStackParamList = {
   TabBarNavigation: undefined;
   ContractTabNavigation : undefined;
   LeaderTabBarNavigation : undefined;
+  PhoneAuthentication : undefined
   CategoryFilter: undefined;
   Studylist: { selectedCategories: string[] };
   Mystudy: undefined;
@@ -15,6 +16,9 @@ export type RootStackParamList = {
   UserInformation: undefined;
   AuthenticateCode: undefined;
   OauthTermOfUse: undefined;
+  FindId : undefined;
+  FindPW : undefined;
+  NewPW : undefined;
   SuiteRoomurl: undefined;
   SuiteRoomInfo: undefined;
   SuiteRoompay: undefined;

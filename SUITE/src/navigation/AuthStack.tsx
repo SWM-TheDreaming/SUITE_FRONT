@@ -10,6 +10,10 @@ import UserInformation from '../screens/AuthScreen/SignUp/UserInformation';
 import AuthenticateCode from '../screens/AuthScreen/SignUp/AuthenticateCode';
 import SignUp from '../screens/AuthScreen/SignUp/SignUp';
 import OauthTermOfUse from '../screens/AuthScreen/SignUp/OauthTermOfUse';
+import PhoneAuthentication from '../screens/AuthScreen/SignUp/PhoneAuthetication';
+import FindId from '../screens/AuthScreen/FindId/FindId';
+import FindPW from '../screens/AuthScreen/FindId/FindPW';
+import NewPW from '../screens/AuthScreen/FindId/NewPW';
 const Auth = createStackNavigator();
 
 export function AuthStack() {
@@ -42,6 +46,14 @@ export function AuthStack() {
       <Auth.Screen
         name="EmailAuthentication"
         component={EmailAuthentication}
+        options={{
+          headerShown: false,
+          ...TransitionPresets.RevealFromBottomAndroid,
+        }}
+      />
+      <Auth.Screen
+        name="PhoneAuthentication"
+        component={PhoneAuthentication}
         options={{
           headerShown: false,
           ...TransitionPresets.RevealFromBottomAndroid,
@@ -82,6 +94,30 @@ export function AuthStack() {
       <Auth.Screen
         name="SignUp"
         component={SignUp}
+        options={{
+          headerShown: false,
+          ...TransitionPresets.RevealFromBottomAndroid,
+        }}
+      />
+      <Auth.Screen
+        name="FindId"
+        component={FindId}
+        options={{
+          headerShown: false,
+          ...TransitionPresets.RevealFromBottomAndroid,
+        }}
+      />
+      <Auth.Screen
+        name="FindPW"
+        component={FindPW}
+        options={{
+          headerShown: false,
+          ...TransitionPresets.RevealFromBottomAndroid,
+        }}
+      />
+      <Auth.Screen
+        name="NewPW"
+        component={NewPW}
         options={{
           headerShown: false,
           ...TransitionPresets.RevealFromBottomAndroid,

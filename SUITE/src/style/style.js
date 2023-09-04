@@ -307,6 +307,47 @@ const mainPageStyleSheet = StyleSheet.create({
     borderRadius: 3,
     paddingLeft: 13,
   },
+  phoneNumInputBox: {
+    width: widthPercentage(220),
+    height: heightPercentage(50),
+    marginTop: heightPercentage(10),
+    borderColor: '#E8E8E8',
+    borderWidth: 1,
+    borderRadius: 3,
+    paddingLeft: 13,
+  },
+  phoneAuthenticateCodeContainer : {
+    alignItems : 'center',
+    justifyContent : 'center',
+    marginLeft : 10,
+    marginTop: heightPercentage(10),
+  },
+  phoneAuthenticateCodeButton : {
+    borderWidth : 1,
+    borderRadius : 20,
+    borderColor : '#E8E8E8',
+    height : heightPercentage(50), 
+    width : widthPercentage(80),
+    alignItems : 'center',
+    justifyContent : 'center',
+    backgroundColor : '#E8E8E8'
+  },
+  phoneAuthenticateCodeButtonNotDisabled : {
+    borderWidth : 1,
+    borderRadius : 20,
+    borderColor : '#E8E8E8',
+    height : heightPercentage(50), 
+    width : widthPercentage(80),
+    alignItems : 'center',
+    justifyContent : 'center',
+    backgroundColor : '#050953'
+  },
+  phonAuthenticateCodeText : {
+    fontSize : 12,
+    color : 'white',
+    fontWeight : 'bold',
+    fontFamily: 'PretendardVariable',
+  },
   loginButtonContainer: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -508,6 +549,11 @@ const mainPageStyleSheet = StyleSheet.create({
     marginLeft: widthPercentage(24),
     marginRight: widthPercentage(24),
   },
+  FindPwemailAuthenticationContainer: {
+    marginTop: heightPercentage(5),
+    marginLeft: widthPercentage(24),
+    marginRight: widthPercentage(24),
+  },
   securityNumBox: {
     width: widthPercentage(140),
     height: heightPercentage(50),
@@ -580,9 +626,10 @@ const mainPageStyleSheet = StyleSheet.create({
     paddingLeft: 13,
   },
   signUpCompleteText: {
-    fontsize: 10,
+    fontSize: 14,
     color: '#B3ADAD',
     fontFamily: 'PretendardVariable',
+    marginBottom : 10
   },
   emailChecktext: {
     fontSize: 17,
@@ -835,6 +882,22 @@ const mainPageStyleSheet = StyleSheet.create({
     alignItems: 'center',
     marginVertical: 20,
     marginRight: 10,
+  },
+  findIdContainer: {
+    width: widthPercentage(310),
+    height: heightPercentage(50),
+    marginTop: heightPercentage(10),
+    paddingLeft: 13,
+    justifyContent: 'center',
+    alignItems :'center'
+  },
+  findEmailText: {
+    fontSize: 20,
+    color: 'black',
+    fontWeight : 'bold',
+    marginTop: heightPercentage(70),
+    fontFamily: 'PretendardVariable',
+    textAlign : 'center'
   },
 });
 

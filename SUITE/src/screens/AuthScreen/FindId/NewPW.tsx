@@ -1,54 +1,31 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
-import { Alert, View, Text, TouchableOpacity, Button } from 'react-native';
+import {View, Text, TouchableOpacity } from 'react-native';
 import useForm from '../../../hook/useForm';
 import mainPageStyleSheet from '../../../style/style';
 import { RootStackNavigationProp } from '../Login';
 import Icon from 'react-native-vector-icons/Ionicons';
 import InputField from '../../../components/presents/InputField';
 import { useRecoilState } from 'recoil';
-import { emailState, isAuthState, passwordState } from '../../../../recoil/atoms'; // Recoil 상태를 정의한 파일 임포트
+import { emailState } from '../../../../recoil/atoms'; // Recoil 상태를 정의한 파일 임포트
 import ModalPopup from '../../../hook/modal';
 import SignModalPopup from '../../../components/presents/SignmodalPopup';
-import { API_URL } from '../../../../react-native.config';
-const EmailAuthentication = () => {
+import { FindPWApi } from '../../../api/Sign/FindPWApi';
+const NewPW = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
   const emailAuthentication = useForm();
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [email, setEmail] = useRecoilState(emailState);
-  const [statusCode, setStatusCode] = useState(0);
-  const [password, setpPassword] = useRecoilState(passwordState);
-  const [isAuth, setIsAuth] = useRecoilState(isAuthState);
   const [visible, setVisible] = useState(false);
 
   const handlePasswordConfirmationChange = (text: string) => {
     setPasswordConfirmation(text);
   };
-
-  const fetchData = async () => {
-    try {
-      const response = await fetch(`${API_URL}/member/verification/email`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: emailAuthentication.getTextInputProps('username').value,
-        }),
-      });
-      if (response.ok) {
-        const data = await response.json();
-        navigation.navigate('AuthenticateCode');
-      } else {
-        const data = await response.json();
-        setVisible(true);
-        setStatusCode(data.code);
-      }
-    } catch (error) {
-      console.log('Error occurred:', error);
-    }
-  };
+  const closeModalAction = () =>{
+      setVisible(false)
+      navigation.navigate('Login')
+  }
 
   const validatePassword = () => {
     return emailAuthentication.getTextInputProps('password').value === passwordConfirmation;
@@ -56,19 +33,17 @@ const EmailAuthentication = () => {
   const handleButtonPress = () => {
     const emailValue = emailAuthentication.getTextInputProps('username').value;
     const passWordValue = emailAuthentication.getTextInputProps('password').value;
-    setEmail(emailValue);
-    setpPassword(passWordValue);
-    setIsAuth(false);
-    fetchData();
+    FindPWApi(emailValue,passWordValue)
+    setVisible(true)
   };
 
   useEffect(() => {
-    if (emailAuthentication.errors.username == '' && emailAuthentication.errors.password == '' && validatePassword()) {
+    if (emailAuthentication.errors.password == '' && validatePassword()) {
       setIsButtonDisabled(false);
     } else {
       setIsButtonDisabled(true);
     }
-  }, [emailAuthentication.errors.username, emailAuthentication.errors.password, validatePassword]);
+  }, [emailAuthentication.errors.password, validatePassword]);
 
   return (
     <View style={mainPageStyleSheet.categoryPageContainer}>
@@ -76,25 +51,23 @@ const EmailAuthentication = () => {
         <TouchableOpacity
           style={mainPageStyleSheet.pageBackIcon}
           onPress={() => {
-            navigation.navigate('TermOfUse');
+            navigation.navigate('Login');
           }}
         >
           <Icon name="chevron-back" size={24} color={'#000000'} />
         </TouchableOpacity>
-        <Text style={mainPageStyleSheet.SignUpText}>이메일 인증</Text>
+        <Text style={mainPageStyleSheet.SignUpText}>비밀번호 변경</Text>
       </View>
       <View style={mainPageStyleSheet.emailAuthenticationContainer}>
         <Text style={mainPageStyleSheet.idpwtext}>이메일</Text>
-        <InputField
-          placeholder=" 이메일을 입력해주세요"
-          {...emailAuthentication.getTextInputProps('username')}
-          touched={emailAuthentication.touched.username}
-        />
+            <View style={mainPageStyleSheet.depositCheckBox}>
+            <Text>{email}</Text>
+            </View>
         <Text style={mainPageStyleSheet.idPwInputErrorText}>{emailAuthentication.errors.username}</Text>
-        <Text style={mainPageStyleSheet.idpwtext}>비밀번호</Text>
+        <Text style={mainPageStyleSheet.idpwtext}>새로운 비밀번호</Text>
         <InputField
           style={mainPageStyleSheet.idpwInputBox}
-          placeholder=" 비밀번호를 입력해주세요"
+          placeholder=" 새로운 비밀번호를 입력해주세요"
           {...emailAuthentication.getTextInputProps('password')}
           touched={emailAuthentication.touched.password}
           secureTextEntry
@@ -114,7 +87,7 @@ const EmailAuthentication = () => {
       </View>
 
       <ModalPopup visible={visible}>
-        <SignModalPopup visible={visible} onClose={() => setVisible(false)} text={'이미 등록된 이메일이 있습니다!'} />
+        <SignModalPopup visible={visible} onClose={() => closeModalAction()} text={'비밀번호 변경이 완료되었습니다'} />
       </ModalPopup>
 
       <View style={mainPageStyleSheet.SignUpNextBtnContainer}>
@@ -132,4 +105,4 @@ const EmailAuthentication = () => {
   );
 };
 
-export default EmailAuthentication;
+export default NewPW;
