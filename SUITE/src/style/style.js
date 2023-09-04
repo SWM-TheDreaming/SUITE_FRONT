@@ -100,6 +100,7 @@ const mainPageStyleSheet = StyleSheet.create({
     backgroundColor: 'white',
     height: heightPercentage(70),
     width: Width,
+    flexDirection : 'row'
   },
   statuscontainer: {
     flex: 1,
@@ -115,8 +116,6 @@ const mainPageStyleSheet = StyleSheet.create({
     marginLeft: widthPercentage(20),
     marginTop: heightPercentage(12),
     marginBottom: heightPercentage(12),
-    width: widthPercentage(280),
-    height: heightPercentage(40),
     borderRadius: 60,
     borderWidth: 1,
     borderColor: '#D8D8D8',

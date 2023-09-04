@@ -30,14 +30,11 @@ export type RootStackParamList = {
   SuiteRoomMyAttendance: undefined;
   SuiteRoomDetailStart: undefined;
   CreateMission : undefined;
+  Alarm : undefined;
 };
 
 export interface Category {
-  filterCategory:
-    | {
         selectedCategories: string[] | undefined;
-      }
-    | undefined;
 }
 export interface SuiteRoomId {
   SuiteRoomid: string;
