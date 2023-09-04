@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { Header } from '../hook/header';
-import mainPageStyleSheet from '../style/style';
+import AnpServiceStyleSheet from '../style/AnPservice';
 const data = [
     {
         text : "SUITE 출시 기념 친구초대 이벤트가 진행 중입니다.",
@@ -36,10 +36,10 @@ const Alarm = () => {
         <View>
             <Header title={'알림'} />
         {data.map((item, index) => (
-            <TouchableOpacity key={index} style={mainPageStyleSheet.AlarmContainer}>
-                <Text style={mainPageStyleSheet.AlarmTopText}>공지사항</Text>
-                <Text style={mainPageStyleSheet.AlarmMiddleText}>{item.text}</Text>
-                <Text style={mainPageStyleSheet.AlarmThirdText}>{item.date}</Text>
+            <TouchableOpacity key={index} style={AnpServiceStyleSheet.AlarmContainer}>
+                <Text style={AnpServiceStyleSheet.AlarmTopText}>공지사항</Text>
+                <Text style={AnpServiceStyleSheet.AlarmMiddleText}>{item.text}</Text>
+                <Text style={AnpServiceStyleSheet.AlarmThirdText}>{item.date}</Text>
             </TouchableOpacity>
           ))}
         </View>

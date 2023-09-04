@@ -11,6 +11,7 @@ import { RootStackParamList } from '../../types';
 import { useNavigation } from '@react-navigation/native';
 import { useFocusEffect } from '@react-navigation/core';
 import { Category } from '../../types';
+import AnpServiceStyleSheet from '../../style/AnPservice';
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 const mockdata = [
@@ -86,7 +87,7 @@ const StudyInfoCard: React.FunctionComponent<{ filterCategory?: Category }> = ({
             </TouchableOpacity>
         </View>
         </View>
-        <View style={mainPageStyleSheet.AlarmContainer}>
+        <View style={AnpServiceStyleSheet.AlarmContainer}>
           <TouchableOpacity onPress={()=>navigation.navigate('Alarm')}>
             {ExistAlarm === true ?
               <MaterialCommunityIcons name="bell-badge-outline" size={24} color={'black'} />

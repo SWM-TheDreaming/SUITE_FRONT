@@ -102,11 +102,6 @@ const mainPageStyleSheet = StyleSheet.create({
     width: Width,
     flexDirection : 'row'
   },
-  AlarmContainer : {
-    justifyContent : 'center',
-    alignItems : 'center',
-    marginLeft : widthPercentage(30)
-  },
   statuscontainer: {
     flex: 1,
     paddingTop: 60, // statusBar만큼 높이 설정
@@ -903,31 +898,6 @@ const mainPageStyleSheet = StyleSheet.create({
     fontFamily: 'PretendardVariable',
     textAlign : 'center'
   },
-  AlarmContainer : {
-    height : heightPercentage(130),
-    borderTopColor : '#E8E8E8',
-    borderBottomColor : '#E8E8E8',
-    borderTopWidth : 1,
-    borderBottomWidth : 1,
-    paddingLeft : 20,
-    paddingTop : heightPercentage(20)
-  },
-  AlarmTopText : {
-    color : 'black',
-    fontSize : 14,
-    fontFamily: 'PretendardVariable',
-  },
-  AlarmMiddleText : {
-    marginTop : 7,
-    fontSize : 16,
-    fontWeight : 'bold',
-    fontFamily: 'PretendardVariable',
-  },
-  AlarmThirdText : {
-    marginTop : 7,
-    fontSize : 12,
-    color : '#B8B8B8'
-  }
 });
 
 export default mainPageStyleSheet;
