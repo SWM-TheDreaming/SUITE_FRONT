@@ -87,8 +87,8 @@ const StudyInfoCard: React.FunctionComponent<{ filterCategory?: Category }> = ({
         </View>
         </View>
         <View style={mainPageStyleSheet.AlarmContainer}>
-          <TouchableOpacity >
-            {ExistAlarm === false ?
+          <TouchableOpacity onPress={()=>navigation.navigate('Alarm')}>
+            {ExistAlarm === true ?
               <MaterialCommunityIcons name="bell-badge-outline" size={24} color={'black'} />
             : <MaterialCommunityIcons name="bell-outline" size={24} color={'black'} />
   }

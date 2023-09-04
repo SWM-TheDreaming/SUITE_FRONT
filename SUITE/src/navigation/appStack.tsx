@@ -16,6 +16,7 @@ import TabBarNavigation from './TopBarNavigation';
 import LeaderTopBarNavigation from './LeaderTopBarNavigation';
 import CreateMission from '../screens/SuiteRoom/CreateMission';
 import ContractTabNavigation from "./ContractTabNavigation"
+import Alarm from '../screens/Alarm';
 const App = createStackNavigator<RootStackParamList>();
 
 export function AppStack() {
@@ -108,6 +109,14 @@ export function AppStack() {
       <App.Screen
         name="CreateMission"
         component={CreateMission}
+        options={{
+          headerShown: false,
+          ...TransitionPresets.RevealFromBottomAndroid,
+        }}
+      />
+      <App.Screen
+        name="Alarm"
+        component={Alarm}
         options={{
           headerShown: false,
           ...TransitionPresets.RevealFromBottomAndroid,

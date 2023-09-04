@@ -30,6 +30,7 @@ export type RootStackParamList = {
   SuiteRoomMyAttendance: undefined;
   SuiteRoomDetailStart: undefined;
   CreateMission : undefined;
+  Alarm : undefined;
 };
 
 export interface Category {

@@ -903,6 +903,31 @@ const mainPageStyleSheet = StyleSheet.create({
     fontFamily: 'PretendardVariable',
     textAlign : 'center'
   },
+  AlarmContainer : {
+    height : heightPercentage(130),
+    borderTopColor : '#E8E8E8',
+    borderBottomColor : '#E8E8E8',
+    borderTopWidth : 1,
+    borderBottomWidth : 1,
+    paddingLeft : 20,
+    paddingTop : heightPercentage(20)
+  },
+  AlarmTopText : {
+    color : 'black',
+    fontSize : 14,
+    fontFamily: 'PretendardVariable',
+  },
+  AlarmMiddleText : {
+    marginTop : 7,
+    fontSize : 16,
+    fontWeight : 'bold',
+    fontFamily: 'PretendardVariable',
+  },
+  AlarmThirdText : {
+    marginTop : 7,
+    fontSize : 12,
+    color : '#B8B8B8'
+  }
 });
 
 export default mainPageStyleSheet;
