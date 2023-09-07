@@ -1,4 +1,4 @@
-package com.suite;
+package com.suite.study;
 
 import android.app.Application;
 import com.facebook.react.PackageList;
