@@ -24,7 +24,7 @@ export type RootStackParamList = {
   SuiteRoompay: undefined;
   SuiteRoomRule: undefined;
   SuiteRoompayCheck: undefined;
-  SuiteRoomDetail: { SuiteRoomid: string };
+  SuiteRoomDetail: { SuiteRoomid: number };
   SuiteRoomCanbanBoard: undefined;
   SuiteRoomDashboard: undefined;
   SuiteRoomMyAttendance: undefined;

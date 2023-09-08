@@ -113,6 +113,7 @@ const Profile = () => {
         <InputField
           style={mainPageStyleSheet.profileInputBox}
           placeholder=" 닉네임을 입력해주세요"
+          maxLength={8}
           {...profile.getTextInputProps('nickname')}
           touched={profile.touched.nickname}
         />

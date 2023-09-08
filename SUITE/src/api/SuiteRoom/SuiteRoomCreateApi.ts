@@ -1,64 +1,65 @@
+import axios from 'axios';
 import { API_URL_SUITEROOM } from '../../../react-native.config';
 
-export const SuiteRoomCreateApi = async ({
-  title,
-  content,
-  subject,
-  recruitmentDeadline,
-  studyDeadline,
-  recruitmentLimit,
-  depositAmount,
-  minAttendanceRate,
-  minMissionCompleteRate,
-  isPublic,
-  password,
-  isOpen,
-  channelLink,
-  studyMethod,
-}: {
-  title: string;
-  content: string;
-  subject: string;
-  recruitmentDeadline: Date;
-  studyDeadline: Date;
-  recruitmentLimit: number;
-  depositAmount: number;
-  minAttendanceRate: number;
-  minMissionCompleteRate: number;
-  isPublic: boolean;
-  password: number;
-  isOpen: boolean;
-  channelLink: string;
-  studyMethod: string;
-  contractAddress: string;
-}): Promise<void> => {
+export const SuiteRoomCreateApi = async (
+  accessToken: string,
+  {
+    title,
+    content,
+    subject,
+    recruitmentDeadline,
+    studyDeadline,
+    recruitmentLimit,
+    depositAmount,
+    minAttendanceRate,
+    minMissionCompleteRate,
+    isPublic,
+    password,
+    isOpen,
+    channelLink,
+    studyMethod,
+    contractAddress,
+  }: {
+    title: string;
+    content: string;
+    subject: string;
+    recruitmentDeadline: Date;
+    studyDeadline: Date;
+    recruitmentLimit: number;
+    depositAmount: number;
+    minAttendanceRate: number;
+    minMissionCompleteRate: number;
+    isPublic: boolean;
+    password: number;
+    isOpen?: boolean; // Optional field
+    channelLink?: string; // Optional field
+    studyMethod?: string; // Optional field
+    contractAddress: string;
+  },
+): Promise<void> => {
   try {
-    const response = await fetch(`${API_URL_SUITEROOM}/suite/suiteroom/registration`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        title: title,
-        content: content,
-        subject: subject,
-        recruitmentDeadline: recruitmentDeadline,
-        studyDeadline: studyDeadline,
-        recruitmentLimit: recruitmentLimit,
-        depositAmount: depositAmount,
-        minAttendanceRate: minAttendanceRate,
-        minMissionCompleteRate: minMissionCompleteRate,
-        isPublic: isPublic,
-        password: password,
-        isOpen: false,
-        channelLink: channelLink,
-        studyMethod: studyMethod,
-        contractAddress: null,
-      }),
+    axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+
+    const response = await axios.post(`${API_URL_SUITEROOM}/suite/suiteroom/registration`, {
+      title,
+      content,
+      subject,
+      recruitmentDeadline,
+      studyDeadline,
+      recruitmentLimit,
+      depositAmount,
+      minAttendanceRate,
+      minMissionCompleteRate,
+      isPublic,
+      password,
+      isOpen: false,
+      channelLink,
+      studyMethod,
+      contractAddress: null,
     });
 
-    if (response.ok) {
-      const data = await response.json();
+    if (response.status === 200) {
+      const data = response.data;
       return data;
     } else {
       console.log('Error occurred:', response);

@@ -25,6 +25,8 @@ import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../types';
 import { Header } from '../../hook/header';
+import { tokenState } from '../../../recoil/atoms';
+import { types } from '@babel/core';
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 const SuiteRoomCreateComplete = () => {
@@ -42,10 +44,11 @@ const SuiteRoomCreateComplete = () => {
   const content = useRecoilValue(contentState);
   const channelLink = useRecoilValue(channelLinkState);
   const payName = useRecoilValue(payNameState);
+  const userToken = useRecoilValue(tokenState);
 
   const SuiteRoomCreate = async () => {
     try {
-      const code = await SuiteRoomCreateApi({
+      const code = await SuiteRoomCreateApi(userToken, {
         title: suiteRoom,
         content: content,
         subject: convertStudyValue(subject),
@@ -77,7 +80,6 @@ const SuiteRoomCreateComplete = () => {
     console.log(studyPassword);
     console.log(content);
     console.log(channelLink);
-    console.log(payName);
     console.log(isPublic);
     SuiteRoomCreate();
   }, []);

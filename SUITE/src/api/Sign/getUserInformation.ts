@@ -8,13 +8,14 @@ interface UserData {
   isAuth: boolean;
   phone: string;
   preferStudy: string;
-  profileImage: string;
+  profileURL: string;
   // 다른 속성들도 정의할 수 있음
 }
 export const getUserInformation = async (accessToken: string): Promise<UserData> => {
   try {
     // token이 필요한 API 요청 시 header Authorization에 token 담아서 보내기
-    axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken.slice(3, accessToken.length - 3)}`;
+    console.log('getuser : ', accessToken);
+    axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
 
     const userResponse = await axios.get(`${API_URL}/member/m/profile`);
 

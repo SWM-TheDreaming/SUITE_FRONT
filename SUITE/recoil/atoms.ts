@@ -2,7 +2,7 @@ import { atom } from 'recoil';
 
 export const tokenState = atom({
   key: 'tokenState',
-  default: '',
+  default: null,
 });
 export const emailState = atom({
   key: 'emailState',

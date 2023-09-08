@@ -25,6 +25,8 @@ import {
   profileImageState,
 } from '../../recoil/atoms';
 import { useRecoilValue } from 'recoil';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getUserInformation } from '../api/Sign/getUserInformation';
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 const Mypage = () => {
@@ -33,18 +35,36 @@ const Mypage = () => {
   const [Authenticate, setAuthenticate] = useState(false);
   const [ExistAlarm, setExistAlarm] = useState(false);
   const [img, setImageSource] = useState('');
-  const email = useRecoilValue(emailState);
-  const memberId = useRecoilValue(memberIdState);
-  const name = useRecoilValue(nameState);
-  const nickname = useRecoilValue(nicknameState);
-  const isAuth = useRecoilValue(isAuthState);
-  const phone = useRecoilValue(phoneState);
-  const preferStudy = useRecoilValue(preferStudyState);
-  const profileImage = useRecoilValue(profileImageState);
+  const [email, setEmail] = useRecoilState(emailState);
+  const [memberId, setMemebrId] = useRecoilState(memberIdState);
+  const [name, setName] = useRecoilState(nameState);
+  const [nickname, setNickname] = useRecoilState(nicknameState);
+  const [isAuth, setIsAuth] = useRecoilState(isAuthState);
+  const [phone, setPhone] = useRecoilState(phoneState);
+  const [preferStudy, setPreferStudy] = useRecoilState(preferStudyState);
+  const [profileImage, setProfileImage] = useRecoilState(profileImageState);
   const SignOut = async () => {
-    setStorage('token', JSON.stringify(null));
-    setToken('');
+    await AsyncStorage.removeItem('token');
+    setToken(null);
   };
+  const getUserInfo = async (token: string) => {
+    try {
+      const code = await getUserInformation(token);
+      setEmail(code.email);
+      setMemebrId(code.memberId);
+      setName(code.name);
+      setNickname(code.nickName);
+      setIsAuth(code.isAuth);
+      setPhone(code.phone);
+      setPreferStudy(code.preferStudy);
+      setProfileImage(code.profileURL);
+    } catch (error) {
+      console.log('Error occurred:', error);
+    }
+  };
+  useEffect(() => {
+    getUserInfo(token);
+  }, []);
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={AnpServiceStyleSheet.MypageContainer}>
       <View style={AnpServiceStyleSheet.MyPageHeader}>
@@ -67,7 +87,7 @@ const Mypage = () => {
 
       <View>
         <View style={{ flexDirection: 'row' }}>
-          {img ? (
+          {profileImage ? (
             <Image source={{ uri: profileImage }} style={AnpServiceStyleSheet.choiceProfileImage} />
           ) : (
             <Image source={defaultImage} style={AnpServiceStyleSheet.choiceProfileImage} />
