@@ -12,6 +12,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useFocusEffect } from '@react-navigation/core';
 import { Category } from '../../types';
 import AnpServiceStyleSheet from '../../style/AnPservice';
+import { SuiteRoomReadAllApi } from '../../api/SuiteRoom/SuiteRoomReadAllApi';
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 const mockdata = [
@@ -56,7 +57,7 @@ const StudyInfoCard: React.FunctionComponent<{ filterCategory?: Category }> = ({
   const navigation = useNavigation<RootStackNavigationProp>();
   const [filter, setFilter] = useState<string[]>([]);
   const [search, setSearch] = useState('');
-  const [ExistAlarm, setExistAlarm] = useState(false)
+  const [ExistAlarm, setExistAlarm] = useState(false);
   const handleInputChange = (event: { nativeEvent: { text: string } }) => {
     const text = event.nativeEvent.text;
     setSearch(text);
@@ -71,11 +72,15 @@ const StudyInfoCard: React.FunctionComponent<{ filterCategory?: Category }> = ({
   useEffect(() => {
     console.log(filter); //API 호출 자리
   }, [filter]);
+  useEffect(() => {
+    const studyList = SuiteRoomReadAllApi();
+    console.log(studyList);
+  }, []);
   return (
     <>
       <View style={mainPageStyleSheet.searchAndalarmbox}>
-        <View style={{width:300}}>
-        <View style={mainPageStyleSheet.searchBorder}>
+        <View style={{ width: 300 }}>
+          <View style={mainPageStyleSheet.searchBorder}>
             <TextInput
               placeholder="스터디를 검색하세요"
               onChange={handleInputChange}
@@ -85,19 +90,24 @@ const StudyInfoCard: React.FunctionComponent<{ filterCategory?: Category }> = ({
             <TouchableOpacity>
               <FontAwesome name="search" size={15} color={'black'} />
             </TouchableOpacity>
-        </View>
+          </View>
         </View>
         <View style={AnpServiceStyleSheet.AlarmContainer}>
-          <TouchableOpacity onPress={()=>navigation.navigate('Alarm')}>
-            {ExistAlarm === true ?
+          <TouchableOpacity onPress={() => navigation.navigate('Alarm')}>
+            {ExistAlarm === true ? (
               <MaterialCommunityIcons name="bell-badge-outline" size={24} color={'black'} />
-            : <MaterialCommunityIcons name="bell-outline" size={24} color={'black'} />
-  }
+            ) : (
+              <MaterialCommunityIcons name="bell-outline" size={24} color={'black'} />
+            )}
           </TouchableOpacity>
         </View>
       </View>
       <View style={mainPageStyleSheet.selectedCategoryScrollViewContainer}>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={mainPageStyleSheet.selectCategoryContainer}>
+        <ScrollView
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          style={mainPageStyleSheet.selectCategoryContainer}
+        >
           {filter.map((categoryItem, index) => (
             <View key={index} style={mainPageStyleSheet.selectedFilterCategory}>
               <Text style={mainPageStyleSheet.selectedCategoryText}>{categoryItem}</Text>

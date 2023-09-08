@@ -36,6 +36,18 @@ export const isAuthState = atom({
   key: 'isAuthState',
   default: true,
 });
+export const memberIdState = atom({
+  key: 'memberIdState',
+  default: '',
+});
+export const nicknameState = atom({
+  key: 'nicknameState',
+  default: '',
+});
+export const profileImageState = atom({
+  key: 'profileImageState',
+  default: '',
+});
 
 export const suiteRoomState = atom({
   key: 'suiteRoomState',
