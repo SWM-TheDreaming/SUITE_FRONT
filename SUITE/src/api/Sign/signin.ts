@@ -13,6 +13,7 @@ export const SignInApi = async (email: string, password: string): Promise<string
     if (response) {
       const data = await response.json();
       if (data.statusCode == 200) {
+        console.log('accessToken', data.data.accessToken);
         return data.data.accessToken;
       } else if (data.statusCode == 400 || data.statusCode == 404) {
         return data.message;

@@ -1,4 +1,4 @@
-import { API_URL } from "../../../react-native.config";
+import { API_URL } from '../../../react-native.config';
 
 export const signUpAPI = async ({
   email,
@@ -10,6 +10,7 @@ export const signUpAPI = async ({
   preferStudy,
   studyMethod,
   isOauth,
+  fcmToken,
 }: {
   email: string;
   password: string;
@@ -20,6 +21,7 @@ export const signUpAPI = async ({
   preferStudy: string;
   studyMethod: string;
   isOauth: boolean;
+  fcmToken: string;
 }): Promise<void> => {
   try {
     const response = await fetch(`${API_URL}/member/signup`, {
@@ -38,12 +40,13 @@ export const signUpAPI = async ({
         preferStudy: preferStudy,
         studyMethod: studyMethod,
         isOauth: isOauth,
+        fcmToken: '123',
       }),
     });
-
+    console.log(response);
     if (response.ok) {
       const data = await response.json();
-      return data.data.memberId
+      return data.data.memberId;
     } else {
       console.log('Error occurred:', response);
     }

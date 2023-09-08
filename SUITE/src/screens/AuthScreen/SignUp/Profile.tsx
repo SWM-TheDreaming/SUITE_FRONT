@@ -36,7 +36,7 @@ const Profile = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
   const profile = useForm();
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const [memberId, setMemberId] = useState('')
+  const [memberId, setMemberId] = useState('');
 
   const getEmailCode = async () => {
     try {
@@ -49,17 +49,18 @@ const Profile = () => {
         securityNum: securityNum,
         preferStudy: preferStudy,
         studyMethod: studyMethod,
-        isOauth: isOauth
-    });
-    console.log(code)
-    sendProfileImageApi(parseInt(String(code)),img)
-    navigation.navigate('SignUp');
-  } catch (error) {
+        isOauth: isOauth,
+        fcmToken: '1234',
+      });
+      console.log(code);
+      sendProfileImageApi(parseInt(String(code)), img);
+      navigation.navigate('SignUp');
+    } catch (error) {
       console.log('Error occurred:', error);
     }
   };
   const handleButtonPress = () => {
-    getEmailCode()
+    getEmailCode();
   };
   function pickImg() {
     launchImageLibrary(
@@ -112,6 +113,7 @@ const Profile = () => {
         <InputField
           style={mainPageStyleSheet.profileInputBox}
           placeholder=" 닉네임을 입력해주세요"
+          maxLength={8}
           {...profile.getTextInputProps('nickname')}
           touched={profile.touched.nickname}
         />

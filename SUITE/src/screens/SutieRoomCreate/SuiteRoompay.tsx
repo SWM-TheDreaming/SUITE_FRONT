@@ -6,7 +6,6 @@ import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../types';
 import { Header } from '../../hook/header';
-import InputField from '../../components/presents/InputField';
 import suiteRoomForm from '../../hook/suiteRoomForm';
 import { useRecoilValue } from 'recoil';
 import { useSetRecoilState } from 'recoil';
@@ -18,49 +17,52 @@ const SuiteRoompay = () => {
   const suiteRoomPay = suiteRoomForm();
   const depositAmount = useRecoilValue(depositAmountState);
   const setPayNameState = useSetRecoilState(payNameState);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [point, setPoint] = useState(30000);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const handleButtonPress = () => {
     setPayNameState(suiteRoomPay.getTextInputProps('name').value);
     //스터디룸 생성 API 코드 연동 예정
-    navigation.navigate('SuiteRoompayCheck');
+    navigation.navigate('SuiteRoomCreateComplete');
   };
   useEffect(() => {
-    if (suiteRoomPay.getTextInputProps('name').value != '') {
-      setIsButtonDisabled(false);
-    } else {
+    if (point < depositAmount) {
       setIsButtonDisabled(true);
     }
-  }, [suiteRoomPay.getTextInputProps('name').value]);
+  }, []);
   return (
     <View style={mainPageStyleSheet.categoryPageContainer}>
       <Header title="Suite Room 체크인" backScreen="SuiteRoomurl" />
       <View style={mainPageStyleSheet.emailAuthenticationContainer}>
-        <Text style={mainPageStyleSheet.idpwtext}>보증 금액</Text>
+        <Text style={mainPageStyleSheet.idpwtext}>현재 포인트</Text>
+        <View style={mainPageStyleSheet.depositCheckBox}>
+          <Text>{point}원</Text>
+        </View>
+        <Text style={mainPageStyleSheet.noValidateCheckText}>보증 금액</Text>
         <View style={mainPageStyleSheet.depositCheckBox}>
           <Text>{depositAmount}원</Text>
         </View>
-        <Text style={mainPageStyleSheet.noValidateCheckText}>입금자명</Text>
-        <InputField
-          style={mainPageStyleSheet.idpwInputBox}
-          placeholder=" 입금자명을 입력해주세요"
-          {...suiteRoomPay.getTextInputProps('name')}
-          touched={suiteRoomPay.touched.name}
-        />
-        <Text style={mainPageStyleSheet.idPwInputErrorText}>{suiteRoomPay.errors.name}</Text>
-
-        <View style={mainPageStyleSheet.depositInformationContainer}>
-          <View style={mainPageStyleSheet.depositInformationTextContainer}>
-            <Icon
-              name="exclamation-circle"
-              size={15}
-              color={'#F14A4A'}
-              style={mainPageStyleSheet.depositInformationIcon}
-            />
-            <Text style={mainPageStyleSheet.depositInformationText}>주의사항</Text>
-          </View>
-          <Text style={mainPageStyleSheet.depositDetailInformationText}>• 입금은 즉시 해주세요!</Text>
-          <Text style={mainPageStyleSheet.depositDetailInformationText}>• 입금이 확인되면 체크인이 완료됩니다.</Text>
+        <Text style={mainPageStyleSheet.noValidateCheckText}>차감후 남은 포인트</Text>
+        <View style={mainPageStyleSheet.depositCheckBox}>
+          <Text>{point - depositAmount}원</Text>
         </View>
+        <Text style={mainPageStyleSheet.idPwInputErrorText}>{suiteRoomPay.errors.name}</Text>
+        {isButtonDisabled === true ? (
+          <View style={mainPageStyleSheet.depositInformationContainer}>
+            <View style={mainPageStyleSheet.depositInformationTextContainer}>
+              <Icon
+                name="exclamation-circle"
+                size={15}
+                color={'#F14A4A'}
+                style={mainPageStyleSheet.depositInformationIcon}
+              />
+              <Text style={mainPageStyleSheet.depositInformationText}>주의사항</Text>
+            </View>
+            <Text style={mainPageStyleSheet.depositDetailInformationText}>• 보증금을 확인해주세요!</Text>
+            <Text style={mainPageStyleSheet.depositDetailInformationText}>
+              • 포인트가 부족하여 방 생성이 불가합니다!
+            </Text>
+          </View>
+        ) : null}
       </View>
       <View style={mainPageStyleSheet.SignUpNextBtnContainer}>
         <TouchableOpacity

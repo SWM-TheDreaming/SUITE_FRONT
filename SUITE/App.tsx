@@ -3,24 +3,24 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import RootNavigator from './src/navigation/RootNavigator';
 import { StyleSheet } from 'react-native';
 import { RecoilRoot } from 'recoil';
-import messaging from '@react-native-firebase/messaging';
+// import messaging from '@react-native-firebase/messaging';
 
-messaging().setBackgroundMessageHandler(async (remoteMessage) => {
-  console.log('[Background Remote Message]', remoteMessage);
-});
+// messaging().setBackgroundMessageHandler(async (remoteMessage) => {
+//   console.log('[Background Remote Message]', remoteMessage);
+// });
 
 function App(): JSX.Element {
-  const getFcmToken = async () => {
-    const fcmToken = await messaging().getToken();
-    console.log('[FCM Token] ', fcmToken);
-  };
-  useEffect(() => {
-    getFcmToken();
-    const unsubscribe = messaging().onMessage(async (remoteMessage) => {
-      console.log('[Remote Message] ', JSON.stringify(remoteMessage));
-    });
-    return unsubscribe;
-  }, []);
+  // const getFcmToken = async () => {
+  //   const fcmToken = await messaging().getToken();
+  //   console.log('[FCM Token] ', fcmToken);
+  // };
+  // useEffect(() => {
+  //   getFcmToken();
+  //   const unsubscribe = messaging().onMessage(async (remoteMessage) => {
+  //     console.log('[Remote Message] ', JSON.stringify(remoteMessage));
+  //   });
+  //   return unsubscribe;
+  // }, []);
 
   return (
     <RecoilRoot>

@@ -6,16 +6,43 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../types';
 import suiteRoomForm from '../../hook/suiteRoomForm';
 import { useRecoilValue } from 'recoil';
-import { depositAmountState, payNameState } from '../../../recoil/atoms';
+import {
+  suiteRoomState,
+  recruitmentDeadLineState,
+  studyDeadLineState,
+  recruitmentLimitState,
+  depositAmountState,
+  minAttendanceRateState,
+  minMissionCompleteRateState,
+  studyPasswordState,
+  isOnlineState,
+  contentState,
+  channelLinkState,
+  payNameState,
+  subjectState,
+} from '../../../recoil/atoms';
 import Clipboard from '@react-native-clipboard/clipboard';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import convertStudyValue from '../../data/ChangeCategory';
+import { SuiteRoomCreateApi } from '../../api/SuiteRoom/SuiteRoomCreateApi';
 
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 const SuiteRoompayCheck = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
   const suiteRoomPay = suiteRoomForm();
+  const suiteRoom = useRecoilValue(suiteRoomState);
+  const subject = useRecoilValue(subjectState);
+  const recruitmentDeadLine = useRecoilValue(recruitmentDeadLineState);
+  const studyDeadLine = useRecoilValue(studyDeadLineState);
+  const recruitmentLimit = useRecoilValue(recruitmentLimitState);
   const depositAmount = useRecoilValue(depositAmountState);
+  const minAttendanceRate = useRecoilValue(minAttendanceRateState);
+  const minMissionCompleteRate = useRecoilValue(minMissionCompleteRateState);
+  const studyPassword = useRecoilValue(studyPasswordState);
+  const isPublic = useRecoilValue(isOnlineState);
+  const content = useRecoilValue(contentState);
+  const channelLink = useRecoilValue(channelLinkState);
   const payName = useRecoilValue(payNameState);
 
   const handleCopyToClipboard = () => {
@@ -25,6 +52,20 @@ const SuiteRoompayCheck = () => {
   const handleButtonPress = () => {
     navigation.navigate('Studylist');
   };
+  useEffect(() => {
+    console.log(suiteRoom);
+    console.log(convertStudyValue(subject));
+    console.log(recruitmentDeadLine);
+    console.log(studyDeadLine);
+    console.log(recruitmentLimit);
+    console.log(minAttendanceRate);
+    console.log(minMissionCompleteRate);
+    console.log(studyPassword);
+    console.log(content);
+    console.log(channelLink);
+    console.log(payName);
+    console.log(isPublic);
+  }, []);
   return (
     <View style={mainPageStyleSheet.categoryPageContainer}>
       <View style={mainPageStyleSheet.emailAuthenticationContainer}>

@@ -17,6 +17,7 @@ import { SignInApi } from '../../api/Sign/signin';
 import ModalPopup from '../../hook/modal';
 import SignModalPopup from '../../components/presents/SignmodalPopup';
 import { externalkakaologin } from '../../api/Sign/kakaoLogin';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
@@ -66,7 +67,7 @@ const Login = () => {
           setLoginFailText('비밀번호가 일치하지 않습니다.');
           setVisible(true);
         } else {
-          setStorage('token', JSON.stringify(accessToken));
+          _storeData(accessToken);
           setToken(accessToken);
         }
       } catch (error) {
@@ -74,6 +75,13 @@ const Login = () => {
       }
     } catch (error) {
       console.log('Error occurred:', error);
+    }
+  };
+  const _storeData = async (token: string) => {
+    try {
+      await AsyncStorage.setItem('token', token);
+    } catch (error) {
+      // Error saving data
     }
   };
   const handleButtonPress = () => {
@@ -152,11 +160,19 @@ const Login = () => {
             </Text>
           </TouchableOpacity>
           <Text style={mainPageStyleSheet.authInfobar}> | </Text>
-          <TouchableOpacity onPress = {() => {navigation.navigate('FindId')}}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('FindId');
+            }}
+          >
             <Text style={mainPageStyleSheet.authInfoText}>아이디 찾기</Text>
           </TouchableOpacity>
           <Text style={mainPageStyleSheet.authInfobar}> | </Text>
-          <TouchableOpacity onPress = {() => {navigation.navigate('FindPW')}}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('FindPW');
+            }}
+          >
             <Text style={mainPageStyleSheet.authInfoText}>비밀번호 찾기</Text>
           </TouchableOpacity>
         </View>

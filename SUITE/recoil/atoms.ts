@@ -2,7 +2,7 @@ import { atom } from 'recoil';
 
 export const tokenState = atom({
   key: 'tokenState',
-  default: '',
+  default: null,
 });
 export const emailState = atom({
   key: 'emailState',
@@ -35,6 +35,18 @@ export const studyMethodState = atom({
 export const isAuthState = atom({
   key: 'isAuthState',
   default: true,
+});
+export const memberIdState = atom({
+  key: 'memberIdState',
+  default: '',
+});
+export const nicknameState = atom({
+  key: 'nicknameState',
+  default: '',
+});
+export const profileImageState = atom({
+  key: 'profileImageState',
+  default: '',
 });
 
 export const suiteRoomState = atom({
