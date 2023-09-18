@@ -20,6 +20,7 @@ import {
   channelLinkState,
   payNameState,
   subjectState,
+  tokenState,
 } from '../../../recoil/atoms';
 import Clipboard from '@react-native-clipboard/clipboard';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -31,18 +32,13 @@ export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 const SuiteRoompayCheck = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
   const suiteRoomPay = suiteRoomForm();
+  const token = useRecoilValue(tokenState);
   const suiteRoom = useRecoilValue(suiteRoomState);
   const subject = useRecoilValue(subjectState);
   const recruitmentDeadLine = useRecoilValue(recruitmentDeadLineState);
   const studyDeadLine = useRecoilValue(studyDeadLineState);
   const recruitmentLimit = useRecoilValue(recruitmentLimitState);
   const depositAmount = useRecoilValue(depositAmountState);
-  const minAttendanceRate = useRecoilValue(minAttendanceRateState);
-  const minMissionCompleteRate = useRecoilValue(minMissionCompleteRateState);
-  const studyPassword = useRecoilValue(studyPasswordState);
-  const isPublic = useRecoilValue(isOnlineState);
-  const content = useRecoilValue(contentState);
-  const channelLink = useRecoilValue(channelLinkState);
   const payName = useRecoilValue(payNameState);
 
   const handleCopyToClipboard = () => {
@@ -52,20 +48,6 @@ const SuiteRoompayCheck = () => {
   const handleButtonPress = () => {
     navigation.navigate('Studylist');
   };
-  useEffect(() => {
-    console.log(suiteRoom);
-    console.log(convertStudyValue(subject));
-    console.log(recruitmentDeadLine);
-    console.log(studyDeadLine);
-    console.log(recruitmentLimit);
-    console.log(minAttendanceRate);
-    console.log(minMissionCompleteRate);
-    console.log(studyPassword);
-    console.log(content);
-    console.log(channelLink);
-    console.log(payName);
-    console.log(isPublic);
-  }, []);
   return (
     <View style={mainPageStyleSheet.categoryPageContainer}>
       <View style={mainPageStyleSheet.emailAuthenticationContainer}>

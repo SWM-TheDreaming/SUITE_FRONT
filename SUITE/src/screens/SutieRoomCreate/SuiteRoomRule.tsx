@@ -40,7 +40,7 @@ const SuiteRoomRule = () => {
     const minAttendanceRate = parseInt(suiteRoomRule.getTextInputProps('minAttendanceRate').value);
     const minMissionCompleteRate = parseInt(suiteRoomRule.getTextInputProps('minMissionCompleteRate').value);
     const password = suiteRoomRule.getTextInputProps('password').value;
-    const isOnline = selectedItem == '공개방' ? false : true;
+    const isOnline = selectedItem == '공개방' ? true : false;
 
     setdepositAmountState(depositAmount);
     setminAttendanceRateState(minAttendanceRate);

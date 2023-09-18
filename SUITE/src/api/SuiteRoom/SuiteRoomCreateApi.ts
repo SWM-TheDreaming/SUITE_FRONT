@@ -31,9 +31,9 @@ export const SuiteRoomCreateApi = async (
     minMissionCompleteRate: number;
     isPublic: boolean;
     password: number;
-    isOpen?: boolean; // Optional field
-    channelLink?: string; // Optional field
-    studyMethod?: string; // Optional field
+    isOpen: boolean; // Optional field
+    channelLink: string; // Optional field
+    studyMethod: string; // Optional field
     contractAddress: string;
   },
 ): Promise<void> => {
@@ -41,23 +41,22 @@ export const SuiteRoomCreateApi = async (
     axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
 
     const response = await axios.post(`${API_URL_SUITEROOM}/suite/suiteroom/registration`, {
-      title,
-      content,
-      subject,
-      recruitmentDeadline,
-      studyDeadline,
-      recruitmentLimit,
-      depositAmount,
-      minAttendanceRate,
-      minMissionCompleteRate,
-      isPublic,
-      password,
+      title: title,
+      content: content,
+      subject: subject,
+      recruitmentDeadline: recruitmentDeadline,
+      studyDeadline: studyDeadline,
+      recruitmentLimit: recruitmentLimit,
+      depositAmount: depositAmount,
+      minAttendanceRate: minAttendanceRate,
+      minMissionCompleteRate: minMissionCompleteRate,
+      isPublic: isPublic,
+      password: password,
       isOpen: false,
-      channelLink,
-      studyMethod,
+      channelLink: channelLink,
+      studyMethod: studyMethod,
       contractAddress: null,
     });
-
     if (response.status === 200) {
       const data = response.data;
       return data;

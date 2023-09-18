@@ -7,9 +7,26 @@ import suiteRoomForm from '../../hook/suiteRoomForm';
 import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../types';
-import { useSetRecoilState } from 'recoil';
-import { channelLinkState, contentState } from '../../../recoil/atoms';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import {
+  channelLinkState,
+  contentState,
+  depositAmountState,
+  isOnlineState,
+  minAttendanceRateState,
+  minMissionCompleteRateState,
+  payNameState,
+  recruitmentDeadLineState,
+  recruitmentLimitState,
+  studyDeadLineState,
+  studyPasswordState,
+  subjectState,
+  suiteRoomState,
+  tokenState,
+} from '../../../recoil/atoms';
 import { Header } from '../../hook/header';
+import { SuiteRoomCreateApi } from '../../api/SuiteRoom/SuiteRoomCreateApi';
+import convertStudyValue from '../../data/ChangeCategory';
 
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
@@ -19,12 +36,50 @@ const SuiteRoomurl = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
   const setcontentState = useSetRecoilState(contentState);
   const setchannelLinkState = useSetRecoilState(channelLinkState);
-
+  const token = useRecoilValue(tokenState);
+  const suiteRoom = useRecoilValue(suiteRoomState);
+  const subject = useRecoilValue(subjectState);
+  const recruitmentDeadLine = useRecoilValue(recruitmentDeadLineState);
+  const studyDeadLine = useRecoilValue(studyDeadLineState);
+  const recruitmentLimit = useRecoilValue(recruitmentLimitState);
+  const depositAmount = useRecoilValue(depositAmountState);
+  const minAttendanceRate = useRecoilValue(minAttendanceRateState);
+  const minMissionCompleteRate = useRecoilValue(minMissionCompleteRateState);
+  const studyPassword = useRecoilValue(studyPasswordState);
+  const isPublic = useRecoilValue(isOnlineState);
+  const payName = useRecoilValue(payNameState);
+  const suiteRoomCreate = () => {
+    console.log(suiteRoom);
+    console.log(convertStudyValue(subject));
+    console.log(recruitmentDeadLine);
+    console.log(studyDeadLine);
+    console.log(recruitmentLimit);
+    console.log(isPublic);
+    console.log(studyPassword);
+    SuiteRoomCreateApi(token, {
+      title: suiteRoom,
+      content: suiteRoomUrl.getTextInputProps('content').value,
+      subject: convertStudyValue(subject),
+      recruitmentDeadline: recruitmentDeadLine,
+      studyDeadline: studyDeadLine,
+      recruitmentLimit: recruitmentLimit,
+      depositAmount: depositAmount,
+      minAttendanceRate: minAttendanceRate,
+      minMissionCompleteRate: minMissionCompleteRate,
+      isPublic: isPublic,
+      password: studyPassword,
+      isOpen: false,
+      channelLink: suiteRoomUrl.getTextInputProps('channelLink').value,
+      studyMethod: 'ONLINE',
+      contractAddress: null,
+    });
+  };
   const handleButtonPress = () => {
     const content = suiteRoomUrl.getTextInputProps('content').value;
     const channelLink = suiteRoomUrl.getTextInputProps('channelLink').value;
     setcontentState(content);
-    setchannelLinkState(channelLink);
+    setchannelLinkState(channelLink); //할필요없음 나중에 코드 제거 필요
+    suiteRoomCreate();
     navigation.navigate('SuiteRoompay');
   };
   useEffect(() => {

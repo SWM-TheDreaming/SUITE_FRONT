@@ -83,7 +83,7 @@ export const minMissionCompleteRateState = atom({
 });
 export const studyPasswordState = atom({
   key: 'studyPasswordState',
-  default: '',
+  default: 0,
 });
 export const isOnlineState = atom({
   key: 'isOnlineState',
