@@ -4,20 +4,16 @@ import { Dimensions } from 'react-native';
 const Width = Dimensions.get('window').width; //스크린 너비 초기화
 const Height = Dimensions.get('window').height; //스크린 높이 초기화
 const AnpServiceStyleSheet = StyleSheet.create({
-  // AlarmContainer : {
-  //     justifyContent : 'center',
-  //     alignItems : 'center',
-  //     marginLeft : widthPercentage(30)
-  // },
   AlarmContainer: {
+    width: widthPercentage(60),
+    flexDirection: 'row',
     height: heightPercentage(130),
     borderTopColor: '#E8E8E8',
     borderBottomColor: '#E8E8E8',
     borderTopWidth: 1,
     borderBottomWidth: 1,
-    paddingLeft: 20,
-    paddingRight: 20,
     paddingTop: heightPercentage(20),
+    justifyContent: 'center',
   },
   AlarmTopText: {
     color: 'black',

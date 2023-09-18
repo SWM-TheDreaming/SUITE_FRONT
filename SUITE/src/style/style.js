@@ -100,7 +100,7 @@ const mainPageStyleSheet = StyleSheet.create({
     backgroundColor: 'white',
     height: heightPercentage(70),
     width: Width,
-    flexDirection : 'row'
+    flexDirection: 'row',
   },
   statuscontainer: {
     flex: 1,
@@ -315,36 +315,36 @@ const mainPageStyleSheet = StyleSheet.create({
     borderRadius: 3,
     paddingLeft: 13,
   },
-  phoneAuthenticateCodeContainer : {
-    alignItems : 'center',
-    justifyContent : 'center',
-    marginLeft : 10,
+  phoneAuthenticateCodeContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 10,
     marginTop: heightPercentage(10),
   },
-  phoneAuthenticateCodeButton : {
-    borderWidth : 1,
-    borderRadius : 20,
-    borderColor : '#E8E8E8',
-    height : heightPercentage(50), 
-    width : widthPercentage(80),
-    alignItems : 'center',
-    justifyContent : 'center',
-    backgroundColor : '#E8E8E8'
+  phoneAuthenticateCodeButton: {
+    borderWidth: 1,
+    borderRadius: 20,
+    borderColor: '#E8E8E8',
+    height: heightPercentage(50),
+    width: widthPercentage(80),
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#E8E8E8',
   },
-  phoneAuthenticateCodeButtonNotDisabled : {
-    borderWidth : 1,
-    borderRadius : 20,
-    borderColor : '#E8E8E8',
-    height : heightPercentage(50), 
-    width : widthPercentage(80),
-    alignItems : 'center',
-    justifyContent : 'center',
-    backgroundColor : '#050953'
+  phoneAuthenticateCodeButtonNotDisabled: {
+    borderWidth: 1,
+    borderRadius: 20,
+    borderColor: '#E8E8E8',
+    height: heightPercentage(50),
+    width: widthPercentage(80),
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#050953',
   },
-  phonAuthenticateCodeText : {
-    fontSize : 12,
-    color : 'white',
-    fontWeight : 'bold',
+  phonAuthenticateCodeText: {
+    fontSize: 12,
+    color: 'white',
+    fontWeight: 'bold',
     fontFamily: 'PretendardVariable',
   },
   loginButtonContainer: {
@@ -628,7 +628,7 @@ const mainPageStyleSheet = StyleSheet.create({
     fontSize: 14,
     color: '#B3ADAD',
     fontFamily: 'PretendardVariable',
-    marginBottom : 10
+    marginBottom: 10,
   },
   emailChecktext: {
     fontSize: 17,
@@ -672,7 +672,7 @@ const mainPageStyleSheet = StyleSheet.create({
     alignItems: 'center',
   },
   studyCreateButtonContainer: {
-    alignSelf: 'flex-end',
+    position: 'absolute',
   },
   studyCreateButton: {
     height: 40,
@@ -681,8 +681,8 @@ const mainPageStyleSheet = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 25,
-    right: 16,
-    bottom: 20,
+    top: Height * 0.65,
+    left: Width * 0.75,
   },
   studyInfoDateText: {
     fontSize: 14,
@@ -888,15 +888,15 @@ const mainPageStyleSheet = StyleSheet.create({
     marginTop: heightPercentage(10),
     paddingLeft: 13,
     justifyContent: 'center',
-    alignItems :'center'
+    alignItems: 'center',
   },
   findEmailText: {
     fontSize: 20,
     color: 'black',
-    fontWeight : 'bold',
+    fontWeight: 'bold',
     marginTop: heightPercentage(70),
     fontFamily: 'PretendardVariable',
-    textAlign : 'center'
+    textAlign: 'center',
   },
 });
 

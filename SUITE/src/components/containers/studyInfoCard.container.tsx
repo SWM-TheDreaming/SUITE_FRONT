@@ -5,6 +5,7 @@ import StudyInfoCardUI from '../presents/studyInfoCard.present';
 import { TextInput } from 'react-native-gesture-handler';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
+import AntDesign from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../types';
@@ -16,7 +17,6 @@ import { SuiteRoomReadAllApi } from '../../api/SuiteRoom/SuiteRoomReadAllApi';
 import { tokenState } from '../../../recoil/atoms';
 import { useRecoilValue } from 'recoil';
 import convertStudyValue from '../../data/ChangeCategory';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
