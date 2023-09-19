@@ -5,11 +5,13 @@ import { RootStackParamList } from '../../types';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import TagComponent from './TagComponent';
+import convertStudyValueFromEngish from '../../data/ChangeCategoryFromEnglish';
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 export interface StudyInfoCardProps {
   suiteRoomId: number;
   host: boolean;
+  hostNickname: string;
   title: string; //스터디 이름
   createdDate: string; //스터디 종료날짜
   recruitmentDeadline: Date; //스터디 신청 마감 기한
@@ -29,7 +31,7 @@ const StudyInfoCardUI = (props: StudyInfoCardProps) => {
     const recruitmentDeadline = new Date(props.recruitmentDeadline);
     const timeDiff = recruitmentDeadline.getTime() - today.getTime();
     const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-    return `D${daysDiff}`;
+    return `D-${daysDiff}`;
   };
 
   return (
@@ -43,15 +45,15 @@ const StudyInfoCardUI = (props: StudyInfoCardProps) => {
       <View style={mainPageStyleSheet.innerbox}>
         <TagComponent
           dDay={calculateDDay()}
-          category={props.subject}
+          category={convertStudyValueFromEngish(props.subject)}
           depositAmount={`${props.depositAmount.toString().slice(0, 2)}K`}
         />
         <Text style={mainPageStyleSheet.titletext}>{props.title}</Text>
         <Text style={mainPageStyleSheet.detailtext}>
-          방장: mimo | 참여인원:{props.participantCount}/{props.recruitmentLimit}
+          방장 : {props.hostNickname} | 참여인원 : {props.participantCount}/{props.recruitmentLimit}
         </Text>
         <Text style={mainPageStyleSheet.detailtext}>
-          작성일 : {props.createdDate.slice(0, 10)} | 스크랩:{props.markCount}
+          작성일 : {props.createdDate.slice(0, 10)} | 스크랩 : {props.markCount}
         </Text>
       </View>
     </TouchableOpacity>

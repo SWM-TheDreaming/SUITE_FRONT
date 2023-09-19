@@ -12,7 +12,7 @@ import ProgressCircle from 'react-native-progress-circle';
 import mainPageStyleSheet from '../../style/style';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-
+import convertStudyValueFromEngish from '../../data/ChangeCategoryFromEnglish';
 import Clipboard from '@react-native-clipboard/clipboard';
 import ModalPopup from '../../hook/modal';
 import SignModalPopup from '../../components/presents/SignmodalPopup';
@@ -94,8 +94,8 @@ const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route 
         <View style={SuiteRoomStyleSheet.SuiteRoomDetailupperBox}>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
             <TagComponent
-              dDay={`D${dday}`}
-              category={subject}
+              dDay={`D-${dday}`}
+              category={convertStudyValueFromEngish(subject)}
               depositAmount={`${depositAmount.toString().slice(0, 2)}K`}
             />
             {host === true ? (
