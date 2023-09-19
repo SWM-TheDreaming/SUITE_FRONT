@@ -145,6 +145,15 @@ const StudyInfoCard: React.FunctionComponent<{ filterCategory?: Category }> = ({
           </TouchableOpacity>
         </ScrollView>
       </View>
+      <TouchableOpacity
+        style={mainPageStyleSheet.studyCreateButton}
+        onPress={() => {
+          navigation.navigate('SuiteRoomInfo');
+        }}
+      >
+        <Feather name="plus" size={24} color={'white'} />
+      </TouchableOpacity>
+
       <ScrollView showsVerticalScrollIndicator={false}>
         {studyList &&
           studyList.map((item) => (
@@ -165,16 +174,6 @@ const StudyInfoCard: React.FunctionComponent<{ filterCategory?: Category }> = ({
               participantCount={item.participantCount}
             />
           ))}
-        <View style={mainPageStyleSheet.studyCreateButtonContainer}>
-          <TouchableOpacity
-            style={mainPageStyleSheet.studyCreateButton}
-            onPress={() => {
-              navigation.navigate('SuiteRoomInfo');
-            }}
-          >
-            <Feather name="plus" size={24} color={'white'} />
-          </TouchableOpacity>
-        </View>
       </ScrollView>
     </>
   );

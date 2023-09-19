@@ -682,7 +682,7 @@ const mainPageStyleSheet = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 25,
     top: Height * 0.65,
-    left: Width * 0.75,
+    left: Width * 0.35,
   },
   studyInfoDateText: {
     fontSize: 14,
