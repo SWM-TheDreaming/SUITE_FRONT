@@ -7,7 +7,7 @@ import { RootStackParamList } from '../../types';
 import suiteRoomForm from '../../hook/suiteRoomForm';
 import InputField from '../../components/presents/InputField';
 import * as Progress from 'react-native-progress';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { Dimensions } from 'react-native';
 import { SelectList } from 'react-native-dropdown-select-list';
 import { Category } from '../../data/Categoty';
@@ -20,7 +20,9 @@ import {
   studyDeadLineState,
   subjectState,
   suiteRoomState,
+  tokenState,
 } from '../../../recoil/atoms';
+import { SuiteRoomTitleCheck } from '../../api/SuiteRoom/SuiteRoomTitleCheckAPi';
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 const SuiteRoomInfo = () => {
@@ -29,6 +31,7 @@ const SuiteRoomInfo = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [recruitmentDeadLine, setrecruitmentDeadLine] = useState(new Date());
   const [studyDeadLine, setstudyDeadLine] = useState(new Date());
+  const [sameStudyName, setSameStudyName] = useState(false);
   const [participantCount, setParticipantCount] = useState(1);
   const navigation = useNavigation<RootStackNavigationProp>();
   const [recoilSuiteRoomTitle, setSuiteRoomState] = useRecoilState(suiteRoomState);
@@ -36,14 +39,27 @@ const SuiteRoomInfo = () => {
   const [recoilRecruitmentDeadLine, setRecruitmentDeadLineState] = useRecoilState(recruitmentDeadLineState);
   const [recoilStudyDeadLine, setStudyDeadLineState] = useRecoilState(studyDeadLineState);
   const [recoilRecruitmentLimit, setRecruitmentLimitState] = useRecoilState(recruitmentLimitState);
-
+  const token = useRecoilValue(tokenState);
+  const titleCheck = async () => {
+    try {
+      const code = await SuiteRoomTitleCheck(token, suiteRoomInfo.getTextInputProps('title').value);
+      if (code === 200) {
+        setSameStudyName(false);
+        setSuiteRoomState(suiteRoomInfo.getTextInputProps('title').value);
+        setSubjectState(selectedCategory);
+        setRecruitmentDeadLineState(recruitmentDeadLine);
+        setStudyDeadLineState(studyDeadLine);
+        setRecruitmentLimitState(participantCount);
+        navigation.navigate('SuiteRoomRule');
+      } else {
+        setSameStudyName(true);
+      }
+    } catch (error) {
+      console.log('Error occurred:', error);
+    }
+  };
   const handleButtonPress = () => {
-    setSuiteRoomState(suiteRoomInfo.getTextInputProps('title').value);
-    setSubjectState(selectedCategory);
-    setRecruitmentDeadLineState(recruitmentDeadLine);
-    setStudyDeadLineState(studyDeadLine);
-    setRecruitmentLimitState(participantCount);
-    navigation.navigate('SuiteRoomRule');
+    titleCheck();
   };
   useEffect(() => {
     if (
@@ -87,6 +103,10 @@ const SuiteRoomInfo = () => {
           {...suiteRoomInfo.getTextInputProps('title')}
           touched={suiteRoomInfo.touched.title}
         />
+        {sameStudyName == true && (
+          <Text style={mainPageStyleSheet.idPwInputErrorText}>스터디 제목이 이미 존재합니다!</Text>
+        )}
+
         <Text style={mainPageStyleSheet.noValidateCheckText}>스터디 주제</Text>
         <SelectList
           boxStyles={mainPageStyleSheet.categoySelectBox}
