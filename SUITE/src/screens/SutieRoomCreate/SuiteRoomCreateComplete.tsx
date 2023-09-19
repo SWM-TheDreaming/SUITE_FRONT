@@ -24,15 +24,15 @@ const SuiteRoomCreateComplete = () => {
       </View>
       <View style={mainPageStyleSheet.SignUpNextBtnContainer}>
         <Text style={mainPageStyleSheet.signUpCompleteText}>
-          스위트룸 생성이 완료되었습니다! 마이페이지에서 확인해보세요!
+          스위트룸 생성이 완료되었습니다! 보증금을 납부하러 가볼까요?!
         </Text>
         <TouchableOpacity
           style={mainPageStyleSheet.SignUpNextBtnBtn}
           onPress={() => {
-            navigation.navigate('Mystudy');
+            navigation.navigate('SuiteRoompay');
           }}
         >
-          <Text style={mainPageStyleSheet.SignUpNextBtnText}>마이페이지로 이동</Text>
+          <Text style={mainPageStyleSheet.SignUpNextBtnText}>보증금 납부하기</Text>
         </TouchableOpacity>
       </View>
     </View>

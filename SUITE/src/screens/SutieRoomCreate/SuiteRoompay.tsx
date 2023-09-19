@@ -60,23 +60,35 @@ const SuiteRoompay = () => {
               />
               <Text style={mainPageStyleSheet.depositInformationText}>주의사항</Text>
             </View>
-            <Text style={mainPageStyleSheet.depositDetailInformationText}>• 보증금을 확인해주세요!</Text>
             <Text style={mainPageStyleSheet.depositDetailInformationText}>
               • 포인트가 부족하여 방 생성이 불가합니다!
+            </Text>
+            <Text style={mainPageStyleSheet.depositDetailInformationText}>
+              • 포인트 충전 후 스위트룸 생성을 완료해주세요!
             </Text>
           </View>
         ) : null}
       </View>
       <View style={mainPageStyleSheet.SignUpNextBtnContainer}>
-        <TouchableOpacity
-          style={[mainPageStyleSheet.SignUpNextBtnBtn, isButtonDisabled && mainPageStyleSheet.disabledSignUpNextBtnBtn]}
-          disabled={isButtonDisabled}
-          onPress={() => {
-            handleButtonPress();
-          }}
-        >
-          <Text style={mainPageStyleSheet.SignUpNextBtnText}>납부하기</Text>
-        </TouchableOpacity>
+        {isButtonDisabled === false ? (
+          <TouchableOpacity
+            style={mainPageStyleSheet.SignUpNextBtnBtn}
+            onPress={() => {
+              handleButtonPress();
+            }}
+          >
+            <Text style={mainPageStyleSheet.SignUpNextBtnText}>납부하기</Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            style={mainPageStyleSheet.SignUpNextBtnBtn}
+            onPress={() => {
+              handleButtonPress();
+            }}
+          >
+            <Text style={mainPageStyleSheet.SignUpNextBtnText}>포인트 충전하기</Text>
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );

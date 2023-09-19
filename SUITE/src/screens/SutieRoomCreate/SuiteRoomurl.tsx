@@ -81,7 +81,7 @@ const SuiteRoomurl = () => {
     setcontentState(content);
     setchannelLinkState(channelLink); //할필요없음 나중에 코드 제거 필요
     suiteRoomCreate();
-    navigation.navigate('SuiteRoompay');
+    navigation.navigate('SuiteRoomCreateComplete');
   };
   useEffect(() => {
     if (
