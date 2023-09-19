@@ -36,7 +36,7 @@ export const SuiteRoomCreateApi = async (
     studyMethod: string; // Optional field
     contractAddress: string;
   },
-): Promise<void> => {
+): Promise<string> => {
   try {
     axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
 
@@ -58,7 +58,7 @@ export const SuiteRoomCreateApi = async (
       contractAddress: null,
     });
     if (response.status === 200) {
-      const data = response.data;
+      const data = response.data.data.suiteRoomId;
       return data;
     } else {
       console.log('Error occurred:', response);

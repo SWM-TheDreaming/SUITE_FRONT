@@ -8,27 +8,24 @@ import { RootStackParamList } from '../../types';
 import { Header } from '../../hook/header';
 import suiteRoomForm from '../../hook/suiteRoomForm';
 import { useRecoilValue } from 'recoil';
-import { useSetRecoilState } from 'recoil';
-import { depositAmountState, payNameState, suiteRoomState, tokenState } from '../../../recoil/atoms';
+import { depositAmountState, suiteRoomIdState, tokenState } from '../../../recoil/atoms';
 import { SuiteRoomPay } from '../../api/SuiteRoom/SuiteRoomPay';
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 const SuiteRoompay = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
-  const suiteRoomnum = useRecoilValue(suiteRoomState);
+  const suiteRoomNum = useRecoilValue(suiteRoomIdState);
   const suiteRoomPay = suiteRoomForm();
   const depositAmount = useRecoilValue(depositAmountState);
   const token = useRecoilValue(tokenState);
-  const setPayNameState = useSetRecoilState(payNameState);
   const [point, setPoint] = useState(30000);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const handleButtonPress = () => {
-    setPayNameState(suiteRoomPay.getTextInputProps('name').value);
-    //스터디룸 생성 API 코드 연동 예정
+    payCheck();
     navigation.navigate('SuiteRoomCreateComplete');
   };
   const payCheck = () => {
-    // SuiteRoomPay(token ,)
+    SuiteRoomPay(token, parseInt(suiteRoomNum));
   };
   useEffect(() => {
     if (point < depositAmount) {

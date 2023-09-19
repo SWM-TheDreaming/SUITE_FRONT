@@ -23,6 +23,7 @@ import {
   subjectState,
   suiteRoomState,
   tokenState,
+  suiteRoomIdState,
 } from '../../../recoil/atoms';
 import { Header } from '../../hook/header';
 import { SuiteRoomCreateApi } from '../../api/SuiteRoom/SuiteRoomCreateApi';
@@ -47,33 +48,33 @@ const SuiteRoomurl = () => {
   const minMissionCompleteRate = useRecoilValue(minMissionCompleteRateState);
   const studyPassword = useRecoilValue(studyPasswordState);
   const isPublic = useRecoilValue(isOnlineState);
+  const setSuiteRomId = useSetRecoilState(suiteRoomIdState);
   const payName = useRecoilValue(payNameState);
-  const suiteRoomCreate = () => {
-    console.log(suiteRoom);
-    console.log(convertStudyValue(subject));
-    console.log(recruitmentDeadLine);
-    console.log(studyDeadLine);
-    console.log(recruitmentLimit);
-    console.log(isPublic);
-    console.log(studyPassword);
-    SuiteRoomCreateApi(token, {
-      title: suiteRoom,
-      content: suiteRoomUrl.getTextInputProps('content').value,
-      subject: convertStudyValue(subject),
-      recruitmentDeadline: recruitmentDeadLine,
-      studyDeadline: studyDeadLine,
-      recruitmentLimit: recruitmentLimit,
-      depositAmount: depositAmount,
-      minAttendanceRate: minAttendanceRate,
-      minMissionCompleteRate: minMissionCompleteRate,
-      isPublic: isPublic,
-      password: studyPassword,
-      isOpen: false,
-      channelLink: suiteRoomUrl.getTextInputProps('channelLink').value,
-      studyMethod: 'ONLINE',
-      contractAddress: null,
-    });
+  const suiteRoomCreate = async () => {
+    try {
+      const code = await SuiteRoomCreateApi(token, {
+        title: suiteRoom,
+        content: suiteRoomUrl.getTextInputProps('content').value,
+        subject: convertStudyValue(subject),
+        recruitmentDeadline: recruitmentDeadLine,
+        studyDeadline: studyDeadLine,
+        recruitmentLimit: recruitmentLimit,
+        depositAmount: depositAmount,
+        minAttendanceRate: minAttendanceRate,
+        minMissionCompleteRate: minMissionCompleteRate,
+        isPublic: isPublic,
+        password: studyPassword,
+        isOpen: false,
+        channelLink: suiteRoomUrl.getTextInputProps('channelLink').value,
+        studyMethod: 'ONLINE',
+        contractAddress: null,
+      });
+      setSuiteRomId(code);
+    } catch (error) {
+      console.log('Error occurred:', error);
+    }
   };
+
   const handleButtonPress = () => {
     const content = suiteRoomUrl.getTextInputProps('content').value;
     const channelLink = suiteRoomUrl.getTextInputProps('channelLink').value;
