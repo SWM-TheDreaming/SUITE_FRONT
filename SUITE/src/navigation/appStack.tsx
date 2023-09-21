@@ -18,6 +18,7 @@ import CreateMission from '../screens/SuiteRoom/CreateMission';
 import ContractTabNavigation from './ContractTabNavigation';
 import SuiteRoomCreateComplete from '../screens/SutieRoomCreate/SuiteRoomCreateComplete';
 import Alarm from '../screens/Alarm';
+import SuiteRoomEdit from '../screens/SuiteRoom/SuiteRoomEdit';
 const App = createStackNavigator<RootStackParamList>();
 
 export function AppStack() {
@@ -102,6 +103,14 @@ export function AppStack() {
       <App.Screen
         name="SuiteRoomDetail"
         component={SuiteRoomDetail}
+        options={{
+          headerShown: false,
+          ...TransitionPresets.RevealFromBottomAndroid,
+        }}
+      />
+      <App.Screen
+        name="SuiteRoomEdit"
+        component={SuiteRoomEdit}
         options={{
           headerShown: false,
           ...TransitionPresets.RevealFromBottomAndroid,

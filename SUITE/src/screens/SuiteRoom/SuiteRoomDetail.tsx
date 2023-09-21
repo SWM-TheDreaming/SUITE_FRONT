@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
-import { RouteProp } from '@react-navigation/native';
+import { RouteProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../types';
 import { Header } from '../../hook/header';
 import SuiteRoomStyleSheet from '../../style/SuiteRoom';
@@ -19,6 +19,11 @@ import SignModalPopup from '../../components/presents/SignmodalPopup';
 import { SuiteRoomDetailView } from '../../api/SuiteRoom/SuiteroomDetail';
 import { useRecoilValue } from 'recoil';
 import { tokenState } from '../../../recoil/atoms';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { useIsFocused } from '@react-navigation/native';
+
+export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
+
 type SuiteRoomDetailRouteProp = RouteProp<RootStackParamList, 'SuiteRoomDetail'>;
 
 interface SuiteRoomDetailProps {
@@ -27,6 +32,8 @@ interface SuiteRoomDetailProps {
 const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route }) => {
   const today = new Date();
   const { SuiteRoomid } = route.params;
+  const isFocused = useIsFocused();
+  const navigation = useNavigation<RootStackNavigationProp>();
   const [visible, setVisible] = useState(false);
   const storedToken = useRecoilValue(tokenState);
   const [channelLink, setChannelLink] = useState('');
@@ -86,7 +93,10 @@ const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route 
     const oneDay = 24 * 60 * 60 * 1000;
     setDday(Math.ceil((new Date(recruitmentDeadLine).getTime() - today.getTime()) / oneDay));
   }, [recruitmentDeadLine]);
-
+  useEffect(() => {
+    //페이지 새로고침시 다시 리렌더링 가능
+    fetchData();
+  }, [isFocused]);
   return (
     <ScrollView>
       <View style={SuiteRoomStyleSheet.SuiteRoomDetailContainer}>
@@ -99,7 +109,11 @@ const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route 
               depositAmount={`${depositAmount.toString().slice(0, 2)}K`}
             />
             {host === true ? (
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('SuiteRoomEdit', { roomId: SuiteRoomid, content: content, url: channelLink });
+                }}
+              >
                 <FontAwesome5 name="edit" size={15} color={'#686868'}></FontAwesome5>
               </TouchableOpacity>
             ) : null}
