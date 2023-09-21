@@ -5,7 +5,6 @@ import StudyInfoCardUI from '../presents/studyInfoCard.present';
 import { TextInput } from 'react-native-gesture-handler';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
-import AntDesign from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../types';
@@ -17,6 +16,7 @@ import { SuiteRoomReadAllApi } from '../../api/SuiteRoom/SuiteRoomReadAllApi';
 import { tokenState } from '../../../recoil/atoms';
 import { useRecoilValue } from 'recoil';
 import convertStudyValue from '../../data/ChangeCategory';
+import { useIsFocused } from '@react-navigation/native';
 
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
@@ -27,6 +27,8 @@ const StudyInfoCard: React.FunctionComponent<{ filterCategory?: Category }> = ({
   const [ExistAlarm, setExistAlarm] = useState(false);
   const storedToken = useRecoilValue(tokenState);
   const [studyList, setStudyList] = useState([]);
+  const isFocused = useIsFocused();
+
   const handleInputChange = (event: { nativeEvent: { text: string } }) => {
     const text = event.nativeEvent.text;
     setSearch(text);
@@ -38,28 +40,25 @@ const StudyInfoCard: React.FunctionComponent<{ filterCategory?: Category }> = ({
       }
     }, [filterCategory]),
   );
-  useEffect(() => {
-    console.log(filter); //API 호출 자리
-
-    const fetchData = async () => {
-      try {
-        const convertfilter = [];
-        for (let i = 0; i < filter.length; i++) {
-          convertfilter.push(convertStudyValue(filter[i]));
-        }
-        const datalist = await SuiteRoomReadAllApi(storedToken, convertfilter);
-        setStudyList(datalist);
-        // 받은 데이터 활용하기
-      } catch (error) {
-        console.log('Error occurred:', error);
+  const fetchData = async () => {
+    try {
+      const convertfilter = [];
+      for (let i = 0; i < filter.length; i++) {
+        convertfilter.push(convertStudyValue(filter[i]));
       }
-    };
-
+      const datalist = await SuiteRoomReadAllApi(storedToken, convertfilter);
+      setStudyList(datalist);
+      // 받은 데이터 활용하기
+    } catch (error) {
+      console.log('Error occurred:', error);
+    }
+  };
+  useEffect(() => {
     fetchData();
   }, [filter]);
   useEffect(() => {
-    console.log(studyList);
-  }, [studyList]);
+    fetchData();
+  }, [isFocused]);
   return (
     <>
       <View style={mainPageStyleSheet.searchAndalarmbox}>

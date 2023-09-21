@@ -21,7 +21,8 @@ import { useRecoilValue } from 'recoil';
 import { tokenState } from '../../../recoil/atoms';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useIsFocused } from '@react-navigation/native';
-
+import { SuiteRoomDeleteApi } from '../../api/SuiteRoom/SutieRoomDeleteApi';
+import CheckCancelModal from '../../hook/checkCancelModal';
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 type SuiteRoomDetailRouteProp = RouteProp<RootStackParamList, 'SuiteRoomDetail'>;
@@ -35,6 +36,7 @@ const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route 
   const isFocused = useIsFocused();
   const navigation = useNavigation<RootStackNavigationProp>();
   const [visible, setVisible] = useState(false);
+  const [cancelVisible, setCancelVisible] = useState(false);
   const storedToken = useRecoilValue(tokenState);
   const [channelLink, setChannelLink] = useState('');
   const [content, setContent] = useState('');
@@ -85,7 +87,15 @@ const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route 
   const handleCopyToClipboard = () => {
     Clipboard.setString(channelLink);
   };
-
+  const deletebuttonHandler = () => {
+    SuiteRoomDeleteApi(storedToken, SuiteRoomid);
+    setVisible(false);
+    setCancelVisible(true);
+  };
+  const cancelCheckButtonHandler = () => {
+    setCancelVisible(false);
+    navigation.navigate('Studylist');
+  };
   useEffect(() => {
     fetchData();
   }, []);
@@ -245,7 +255,19 @@ const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route 
           )}
         </View>
         <ModalPopup visible={visible}>
-          <SignModalPopup visible={visible} onClose={() => setVisible(false)} text={'스터디를 취소하시겠습니까?'} />
+          <CheckCancelModal
+            visible={visible}
+            onClose={() => setVisible(false)}
+            onConfirm={() => deletebuttonHandler()}
+            text={'스터디를 취소하시겠습니까?'}
+          />
+        </ModalPopup>
+        <ModalPopup visible={cancelVisible}>
+          <SignModalPopup
+            visible={cancelVisible}
+            onClose={() => cancelCheckButtonHandler()}
+            text={'취소가 완료되었습니다!'}
+          />
         </ModalPopup>
       </View>
     </ScrollView>
