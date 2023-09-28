@@ -30,6 +30,7 @@ export type RootStackParamList = {
   SuiteRoomMyAttendance: undefined;
   SuiteRoomDetailStart: undefined;
   SuiteRoomEdit: { roomId: number; content: string; url: string };
+  SuiteRoomUserAttendPay: undefined;
   CreateMission: undefined;
   Alarm: undefined;
   SuiteRoomCreateComplete: undefined;

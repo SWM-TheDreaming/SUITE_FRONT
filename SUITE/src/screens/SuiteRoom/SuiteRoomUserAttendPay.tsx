@@ -9,13 +9,13 @@ import { Header } from '../../hook/header';
 import suiteRoomForm from '../../hook/suiteRoomForm';
 import { useRecoilValue } from 'recoil';
 import { depositAmountState, suiteRoomIdState, tokenState } from '../../../recoil/atoms';
-import { SuiteRoomPay } from '../../api/SuiteRoom/SuiteRoomPay';
+import { SuiteRoomAttendance } from '../../api/SuiteRoom/SuiteRoomAttendance';
 import CheckBox from '@react-native-community/checkbox';
 import ImageModalPopup from '../../hook/ImageModal';
 import PayCheckModal from '../../components/presents/PayCheckModalPresent';
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
-const SuiteRoompay = () => {
+const SuiteRoomUserAttendPay = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
   const suiteRoomNum = useRecoilValue(suiteRoomIdState);
   const suiteRoomPay = suiteRoomForm();
@@ -31,7 +31,7 @@ const SuiteRoompay = () => {
     setVisible(true);
   };
   const payCheck = () => {
-    SuiteRoomPay(token, parseInt(suiteRoomNum));
+    SuiteRoomAttendance(token, parseInt(suiteRoomNum));
   };
   const outModal = () => {
     setVisible(false);
@@ -78,16 +78,35 @@ const SuiteRoompay = () => {
             </Text>
           </View>
         ) : (
-          <View style={mainPageStyleSheet.PaycheckboxContainer}>
-            <TouchableOpacity>
-              <CheckBox
-                value={checked}
-                onValueChange={setChecked}
-                tintColors={{ true: '#005BA5', false: '#686868' }}
-                style={{ width: 25, height: 20 }}
-              />
-            </TouchableOpacity>
-            <Text style={mainPageStyleSheet.AllcheckboxText}>차감 포인트를 확인하였습니다</Text>
+          <View>
+            <View style={mainPageStyleSheet.depositOKInformationContainer}>
+              <View style={mainPageStyleSheet.depositInformationTextContainer}>
+                <Icon
+                  name="exclamation-circle"
+                  size={15}
+                  color={'#F14A4A'}
+                  style={mainPageStyleSheet.depositInformationIcon}
+                />
+                <Text style={mainPageStyleSheet.depositInformationText}>주의사항</Text>
+              </View>
+              <Text style={mainPageStyleSheet.depositDetailInformationText}>
+                • 스터디 정보를 잘 확인하고 보증금 납부를 해주세요!
+              </Text>
+              <Text style={mainPageStyleSheet.depositDetailInformationText}>
+                • 아래 확인 버튼 클릭 후 납부가 가능합니다!
+              </Text>
+            </View>
+            <View style={mainPageStyleSheet.PaycheckboxContainer}>
+              <TouchableOpacity>
+                <CheckBox
+                  value={checked}
+                  onValueChange={setChecked}
+                  tintColors={{ true: '#005BA5', false: '#686868' }}
+                  style={{ width: 25, height: 20 }}
+                />
+              </TouchableOpacity>
+              <Text style={mainPageStyleSheet.AllcheckboxText}>차감 포인트를 확인하였습니다</Text>
+            </View>
           </View>
         )}
       </View>
@@ -117,11 +136,11 @@ const SuiteRoompay = () => {
         <PayCheckModal
           visible={visible}
           onClose={outModal}
-          text={'보증금 납부가 완료되었습니다! \n 마이페이지에서 확인해보세요!'}
+          text={'스터디 참가가 완료되었습니다! \n 마이페이지에서 확인해보세요!'}
         />
       </ImageModalPopup>
     </View>
   );
 };
 
-export default SuiteRoompay;
+export default SuiteRoomUserAttendPay;

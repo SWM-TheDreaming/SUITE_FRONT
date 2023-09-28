@@ -19,6 +19,7 @@ import ContractTabNavigation from './ContractTabNavigation';
 import SuiteRoomCreateComplete from '../screens/SutieRoomCreate/SuiteRoomCreateComplete';
 import Alarm from '../screens/Alarm';
 import SuiteRoomEdit from '../screens/SuiteRoom/SuiteRoomEdit';
+import SuiteRoomUserAttendPay from '../screens/SuiteRoom/SuiteRoomUserAttendPay';
 const App = createStackNavigator<RootStackParamList>();
 
 export function AppStack() {
@@ -135,6 +136,14 @@ export function AppStack() {
       <App.Screen
         name="SuiteRoomCreateComplete"
         component={SuiteRoomCreateComplete}
+        options={{
+          headerShown: false,
+          ...TransitionPresets.RevealFromBottomAndroid,
+        }}
+      />
+      <App.Screen
+        name="SuiteRoomUserAttendPay"
+        component={SuiteRoomUserAttendPay}
         options={{
           headerShown: false,
           ...TransitionPresets.RevealFromBottomAndroid,

@@ -23,6 +23,8 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { useIsFocused } from '@react-navigation/native';
 import { SuiteRoomDeleteApi } from '../../api/SuiteRoom/SutieRoomDeleteApi';
 import CheckCancelModal from '../../hook/checkCancelModal';
+import ImageModalPopup from '../../hook/ImageModal';
+import PayCheckModal from '../../components/presents/PayCheckModalPresent';
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 type SuiteRoomDetailRouteProp = RouteProp<RootStackParamList, 'SuiteRoomDetail'>;
@@ -57,6 +59,8 @@ const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route 
   const [subject, setSubject] = useState('');
   const [title, setTitle] = useState('');
   const [dday, setDday] = useState('');
+  const [checkInVisible, setcheckInVisible] = useState(false);
+
   const fetchData = async () => {
     try {
       const datalist = await SuiteRoomDetailView(storedToken, SuiteRoomid);
@@ -103,6 +107,10 @@ const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route 
     const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
     return daysDiff < 0 ? `D+${daysDiff.toString().slice(1, daysDiff.toString().length)}` : `D-${daysDiff}`;
   };
+  const GoAttendancePay = () => {
+    setcheckInVisible(false);
+    navigation.navigate('SuiteRoomUserAttendPay');
+  };
   useEffect(() => {
     fetchData();
   }, []);
@@ -127,6 +135,7 @@ const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route 
               dDay={dday}
               category={convertStudyValueFromEngish(subject)}
               depositAmount={`${depositAmount.toString().slice(0, 2)}K`}
+              isPublic={isPublic}
             />
             {host === true ? (
               <TouchableOpacity
@@ -258,7 +267,10 @@ const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route 
               <TouchableOpacity style={SuiteRoomStyleSheet.SuiteRoomDetailScrabButton}>
                 <FontAwesome name="star-o" size={20} color={'#888888'} />
               </TouchableOpacity>
-              <TouchableOpacity style={SuiteRoomStyleSheet.SutieRoomDetailCheckinButton}>
+              <TouchableOpacity
+                style={SuiteRoomStyleSheet.SutieRoomDetailCheckinButton}
+                onPress={() => setcheckInVisible(true)}
+              >
                 <Text style={mainPageStyleSheet.categortFilterApplyText}>체크인하기</Text>
               </TouchableOpacity>
             </View>
@@ -277,6 +289,14 @@ const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route 
             visible={cancelVisible}
             onClose={() => cancelCheckButtonHandler()}
             text={'취소가 완료되었습니다!'}
+          />
+        </ModalPopup>
+        <ModalPopup visible={checkInVisible}>
+          <CheckCancelModal
+            visible={checkInVisible}
+            onClose={() => setcheckInVisible(false)}
+            text={'보증금을 납부하러 가시겠습니까?'}
+            onConfirm={GoAttendancePay}
           />
         </ModalPopup>
       </View>

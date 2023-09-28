@@ -797,6 +797,13 @@ const mainPageStyleSheet = StyleSheet.create({
     height: heightPercentage(130),
     backgroundColor: '#FFF4F4',
   },
+  depositOKInformationContainer: {
+    marginTop: heightPercentage(20),
+    marginBottom: heightPercentage(20),
+    width: widthPercentage(310),
+    height: heightPercentage(130),
+    backgroundColor: '#FFF4F4',
+  },
   depositInformationTextContainer: {
     flexDirection: 'row',
     marginBottom: heightPercentage(5),
