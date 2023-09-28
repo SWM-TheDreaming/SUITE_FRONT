@@ -65,6 +65,9 @@ const Mypage = () => {
   useEffect(() => {
     getUserInfo(token);
   }, []);
+  useEffect(() => {
+    console.log(profileImage);
+  }, [profileImage]);
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={AnpServiceStyleSheet.MypageContainer}>
       <View style={AnpServiceStyleSheet.MyPageHeader}>
@@ -87,7 +90,7 @@ const Mypage = () => {
 
       <View>
         <View style={{ flexDirection: 'row' }}>
-          {profileImage ? (
+          {profileImage.length > 5 ? (
             <Image source={{ uri: profileImage }} style={AnpServiceStyleSheet.choiceProfileImage} />
           ) : (
             <Image source={defaultImage} style={AnpServiceStyleSheet.choiceProfileImage} />

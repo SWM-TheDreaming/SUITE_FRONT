@@ -17,14 +17,12 @@ import Clipboard from '@react-native-clipboard/clipboard';
 import ModalPopup from '../../hook/modal';
 import SignModalPopup from '../../components/presents/SignmodalPopup';
 import { SuiteRoomDetailView } from '../../api/SuiteRoom/SuiteroomDetail';
-import { useRecoilValue } from 'recoil';
-import { tokenState } from '../../../recoil/atoms';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { tokenState, depositAmountState, suiteRoomIdState } from '../../../recoil/atoms';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useIsFocused } from '@react-navigation/native';
 import { SuiteRoomDeleteApi } from '../../api/SuiteRoom/SutieRoomDeleteApi';
 import CheckCancelModal from '../../hook/checkCancelModal';
-import ImageModalPopup from '../../hook/ImageModal';
-import PayCheckModal from '../../components/presents/PayCheckModalPresent';
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 type SuiteRoomDetailRouteProp = RouteProp<RootStackParamList, 'SuiteRoomDetail'>;
@@ -60,7 +58,8 @@ const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route 
   const [title, setTitle] = useState('');
   const [dday, setDday] = useState('');
   const [checkInVisible, setcheckInVisible] = useState(false);
-
+  const setMoney = useSetRecoilState(depositAmountState);
+  const setRoomId = useSetRecoilState(suiteRoomIdState);
   const fetchData = async () => {
     try {
       const datalist = await SuiteRoomDetailView(storedToken, SuiteRoomid);
@@ -109,6 +108,8 @@ const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route 
   };
   const GoAttendancePay = () => {
     setcheckInVisible(false);
+    setRoomId(SuiteRoomid.toString());
+    setMoney(parseInt(depositAmount));
     navigation.navigate('SuiteRoomUserAttendPay');
   };
   useEffect(() => {
