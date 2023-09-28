@@ -1,4 +1,5 @@
 import { API_URL } from '../../../react-native.config';
+import axios from 'axios';
 
 export const signUpAPI = async ({
   email,
@@ -24,29 +25,23 @@ export const signUpAPI = async ({
   fcmToken: string;
 }): Promise<void> => {
   try {
-    const response = await fetch(`${API_URL}/member/signup`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-        role: 'USER',
-        name: name,
-        nickName: nickname,
-        phone: phone,
-        securityNum: securityNum,
-        preferStudy: preferStudy,
-        studyMethod: studyMethod,
-        isOauth: isOauth,
-        fcmToken: '123',
-      }),
+    const response = await axios.post(`${API_URL}/member/signup`, {
+      email: email,
+      password: password,
+      role: 'USER',
+      name: name,
+      nickName: nickname,
+      phone: phone,
+      securityNum: securityNum,
+      preferStudy: preferStudy,
+      studyMethod: studyMethod,
+      isOauth: isOauth,
+      fcmToken: '123',
     });
     console.log(response);
-    if (response.ok) {
-      const data = await response.json();
-      return data.data.memberId;
+    if (response.status === 200) {
+      const data = response.data.data;
+      return data.memberId;
     } else {
       console.log('Error occurred:', response);
     }
