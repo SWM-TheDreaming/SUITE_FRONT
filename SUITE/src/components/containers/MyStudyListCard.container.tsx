@@ -1,85 +1,57 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
 import mainPageStyleSheet from '../../style/style';
 import MyStudyListCardUI from '../presents/MyStudyListCard.present';
+import { mySuiteRoomReadApi } from '../../api/SuiteRoom/mySuiteRoomReadApi';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
+import { useRecoilValue } from 'recoil';
+import { tokenState } from '../../../recoil/atoms';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../types';
+import { ScrollView } from 'react-native-gesture-handler';
+export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
-const mockdata = [
-  {
-    id: '123',
-    title: '임용 시험 합격 준비반 스터디 모집',
-    studyDeadLine: new Date('2023-06-13'),
-    recruitmentDeadLine: new Date('2023-06-13'),
-    category: '공무원',
-    depositAmount: 10000,
-    recruitmentLimit: 5,
-    presentRecruitment: 2,
-    writeDate: new Date('2023-06-13'),
-    scrab: 5,
-    userId : 'one8775'
-  },
-  {
-    id: '234',
-    title: 'TOEIC 스터디 모집',
-    studyDeadLine: new Date('2023-07-13'),
-    recruitmentDeadLine: new Date('2023-07-13'),
-    category: '영어',
-    depositAmount: 15000,
-    recruitmentLimit: 5,
-    presentRecruitment: 4,
-    writeDate: new Date('2023-06-13'),
-    scrab: 2,
-    userId : 'you'
-  },
-  {
-    id: '345',
-    title: '코테 스터디 모집',
-    studyDeadLine: new Date('2023-08-13'),
-    recruitmentDeadLine: new Date('2023-08-13'),
-    category: '컴퓨터',
-    depositAmount: 12000,
-    recruitmentLimit: 7,
-    presentRecruitment: 4,
-    writeDate: new Date('2023-06-13'),
-    scrab: 6,
-    userId : 'hyeop'
-  },
-];
-const userId = 'one8775'
 const MyStudyListCard = () => {
+  const [studyList, setStudyList] = useState([]);
+  const navigation = useNavigation<RootStackNavigationProp>();
+  const storedToken = useRecoilValue(tokenState);
+  const isFocused = useIsFocused();
+
+  const fetchData = async () => {
+    try {
+      const datalist = await mySuiteRoomReadApi(storedToken);
+      setStudyList(datalist);
+      // 받은 데이터 활용하기
+    } catch (error) {
+      console.log('Error occurred:', error);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, [isFocused]);
   return (
     <>
-      {mockdata.map((item) => (
-        userId === item.userId ?
-        <MyStudyListCardUI
-          key={item.id}
-          id={item.id}
-          title={item.title}
-          studyDeadLine={item.studyDeadLine}
-          recruitmentDeadLine={item.recruitmentDeadLine}
-          category={item.category}
-          depositAmount={item.depositAmount}
-          recruitmentLimit={item.recruitmentLimit}
-          presentRecruitment={item.presentRecruitment}
-          writeDate={item.writeDate}
-          scrab={item.scrab}
-          IsLeader = {true}
-        />
-        :
-        <MyStudyListCardUI
-          key={item.id}
-          id={item.id}
-          title={item.title}
-          studyDeadLine={item.studyDeadLine}
-          recruitmentDeadLine={item.recruitmentDeadLine}
-          category={item.category}
-          depositAmount={item.depositAmount}
-          recruitmentLimit={item.recruitmentLimit}
-          presentRecruitment={item.presentRecruitment}
-          writeDate={item.writeDate}
-          scrab={item.scrab}
-          IsLeader = {false}
-        />
-      ))}
+      <ScrollView style={{ marginBottom: 60 }} showsVerticalScrollIndicator={false}>
+        {studyList.map((item) => (
+          <MyStudyListCardUI
+            key={item.suiteRoomId}
+            suiteRoomId={item.suiteRoomId}
+            title={item.title}
+            subject={item.subject}
+            recruitmentDeadline={item.recruitmentDeadline}
+            suiteStatus={item.suiteStatus}
+            createdDate={item.createdDate}
+            recruitmentLimit={item.recruitmentLimit}
+            depositAmount={item.depositAmount}
+            isPublic={item.isPublic}
+            isOpen={item.isOpen}
+            participantCount={item.participantCount}
+            hostNickName={item.hostNickName}
+            markCount={item.markCount}
+            host={item.host}
+          />
+        ))}
+      </ScrollView>
     </>
   );
 };

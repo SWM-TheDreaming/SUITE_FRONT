@@ -107,7 +107,7 @@ const StudyInfoCard: React.FunctionComponent<{ filterCategory?: Category }> = ({
         </ScrollView>
       </View>
 
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView style={{ marginBottom: 60 }} showsVerticalScrollIndicator={false}>
         {studyList &&
           studyList.map((item) => (
             <StudyInfoCardUI

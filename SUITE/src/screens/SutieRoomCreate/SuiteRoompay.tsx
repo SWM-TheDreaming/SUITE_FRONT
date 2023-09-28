@@ -10,6 +10,10 @@ import suiteRoomForm from '../../hook/suiteRoomForm';
 import { useRecoilValue } from 'recoil';
 import { depositAmountState, suiteRoomIdState, tokenState } from '../../../recoil/atoms';
 import { SuiteRoomPay } from '../../api/SuiteRoom/SuiteRoomPay';
+import CheckBox from '@react-native-community/checkbox';
+import ModalPopup from '../../hook/modal';
+import SignModalPopup from '../../components/presents/SignmodalPopup';
+
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 const SuiteRoompay = () => {
@@ -20,12 +24,19 @@ const SuiteRoompay = () => {
   const token = useRecoilValue(tokenState);
   const [point, setPoint] = useState(30000);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [checked, setChecked] = useState(false);
+  const [visible, setVisible] = useState(false);
+
   const handleButtonPress = () => {
     payCheck();
-    navigation.navigate('SuiteRoomCreateComplete');
+    setVisible(true);
   };
   const payCheck = () => {
     SuiteRoomPay(token, parseInt(suiteRoomNum));
+  };
+  const outModal = () => {
+    setVisible(false);
+    navigation.navigate('Mystudy');
   };
   useEffect(() => {
     if (point < depositAmount) {
@@ -34,7 +45,7 @@ const SuiteRoompay = () => {
   }, []);
   return (
     <View style={mainPageStyleSheet.categoryPageContainer}>
-      <Header title="Suite Room 체크인" backScreen="SuiteRoomurl" />
+      <Header title="Suite Room 체크인" />
       <View style={mainPageStyleSheet.emailAuthenticationContainer}>
         <Text style={mainPageStyleSheet.idpwtext}>현재 포인트</Text>
         <View style={mainPageStyleSheet.depositCheckBox}>
@@ -67,12 +78,25 @@ const SuiteRoompay = () => {
               • 포인트 충전 후 스위트룸 생성을 완료해주세요!
             </Text>
           </View>
-        ) : null}
+        ) : (
+          <View style={mainPageStyleSheet.PaycheckboxContainer}>
+            <TouchableOpacity>
+              <CheckBox
+                value={checked}
+                onValueChange={setChecked}
+                tintColors={{ true: '#005BA5', false: '#686868' }}
+                style={{ width: 25, height: 20 }}
+              />
+            </TouchableOpacity>
+            <Text style={mainPageStyleSheet.AllcheckboxText}>차감 포인트를 확인하였습니다</Text>
+          </View>
+        )}
       </View>
       <View style={mainPageStyleSheet.SignUpNextBtnContainer}>
         {isButtonDisabled === false ? (
           <TouchableOpacity
-            style={mainPageStyleSheet.SignUpNextBtnBtn}
+            style={[mainPageStyleSheet.SignUpNextBtnBtn, !checked && mainPageStyleSheet.disabledSignUpNextBtnBtn]}
+            disabled={!checked}
             onPress={() => {
               handleButtonPress();
             }}
@@ -90,6 +114,13 @@ const SuiteRoompay = () => {
           </TouchableOpacity>
         )}
       </View>
+      <ModalPopup visible={visible}>
+        <SignModalPopup
+          visible={visible}
+          onClose={() => outModal()}
+          text={'보증금 납부를 완료하였습니다! 마이페이지에서 확인해보세요!'}
+        />
+      </ModalPopup>
     </View>
   );
 };

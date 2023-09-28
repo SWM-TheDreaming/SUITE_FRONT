@@ -25,23 +25,25 @@ const RequestData: DataRow[] = [
   { id: '5', missionName: '3장 예습', missionDate: '2023-07-20', nickname: 'Ki' },
 ];
 
-
 const SuiteRoomLeaderCanbanBoard = () => {
-    const navigation = useNavigation<RootStackNavigationProp>();
+  const navigation = useNavigation<RootStackNavigationProp>();
 
   return (
     <View>
       <ScrollView>
         <View style={SuiteRoomStyleSheet.LeaderMissionStatusContainer}>
-            <View style={{flexDirection : 'row'}}>
-                <Text style={SuiteRoomStyleSheet.MissionStatusText}>{'미션완료 요청'}</Text>
-                <Text style={SuiteRoomStyleSheet.MissionLengthText}>{RequestData.length}</Text>
-            </View>
-            <View>
-                <TouchableOpacity style={SuiteRoomStyleSheet.CreateMissionButton} onPress={() => navigation.navigate('CreateMission')}>
-                    <Text style={SuiteRoomStyleSheet.CreateMissionText}>미션 생성</Text>
-                </TouchableOpacity>
-            </View>   
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={SuiteRoomStyleSheet.MissionStatusText}>{'미션완료 요청'}</Text>
+            <Text style={SuiteRoomStyleSheet.MissionLengthText}>{RequestData.length}</Text>
+          </View>
+          <View>
+            <TouchableOpacity
+              style={SuiteRoomStyleSheet.CreateMissionButton}
+              onPress={() => navigation.navigate('CreateMission')}
+            >
+              <Text style={SuiteRoomStyleSheet.CreateMissionText}>미션 생성</Text>
+            </TouchableOpacity>
+          </View>
         </View>
         <View style={SuiteRoomStyleSheet.MissionContainer}>
           {RequestData.map((item) => (
@@ -49,7 +51,6 @@ const SuiteRoomLeaderCanbanBoard = () => {
           ))}
         </View>
       </ScrollView>
-      
     </View>
   );
 };

@@ -31,7 +31,7 @@ const StudyInfoCardUI = (props: StudyInfoCardProps) => {
     const recruitmentDeadline = new Date(props.recruitmentDeadline);
     const timeDiff = recruitmentDeadline.getTime() - today.getTime();
     const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-    return `D-${daysDiff}`;
+    return daysDiff < 0 ? `D+${daysDiff.toString().slice(1, daysDiff.toString().length)}` : `D-${daysDiff}`;
   };
 
   return (
@@ -47,6 +47,7 @@ const StudyInfoCardUI = (props: StudyInfoCardProps) => {
           dDay={calculateDDay()}
           category={convertStudyValueFromEngish(props.subject)}
           depositAmount={`${props.depositAmount.toString().slice(0, 2)}K`}
+          isPublic={props.isPublic}
         />
         <Text style={mainPageStyleSheet.titletext}>{props.title}</Text>
         <Text style={mainPageStyleSheet.detailtext}>

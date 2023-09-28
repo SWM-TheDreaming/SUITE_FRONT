@@ -456,6 +456,12 @@ const mainPageStyleSheet = StyleSheet.create({
     fontWeight: 'bold',
     fontFamily: 'PretendardVariable',
   },
+  PaycheckboxContainer: {
+    marginTop: heightPercentage(10),
+    flexDirection: 'row',
+    marginLeft: 6,
+    justifyContent: 'center',
+  },
   IndividualCheckBoxContainer: {
     justifyContent: 'center',
     alignItems: 'center',

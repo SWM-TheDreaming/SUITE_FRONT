@@ -19,16 +19,16 @@ const SuiteRoomLeaderDashboard = () => {
   const SuiteRoomId = useRecoilValue(suiteRoomIdState);
   const [visible, setVisible] = useState(false);
   const [number, setNumber] = useState<number>(0);
-    const navigation = useNavigation<RootStackNavigationProp>();
+  const navigation = useNavigation<RootStackNavigationProp>();
 
   const attendanceStart = () => {
-    setNumber(Math.random())
-  }
-  useEffect(()=>{
-    if(number!=0){
-        setVisible(true)
+    setNumber(Math.random());
+  };
+  useEffect(() => {
+    if (number != 0) {
+      setVisible(true);
     }
-  },[number])
+  }, [number]);
   return (
     <ScrollView style={{ backgroundColor: 'white' }}>
       <View style={SuiteRoomStyleSheet.MyStudyRoomContainer}>
@@ -79,23 +79,26 @@ const SuiteRoomLeaderDashboard = () => {
               </View>
             </View>
           </View>
-          <View style={{flexDirection : 'row'}}>
-          <TouchableOpacity style={SuiteRoomStyleSheet.AttendanceCheckStart} onPress = {attendanceStart}>
-            <Text style={mainPageStyleSheet.categortFilterApplyText}>출석 시작</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={SuiteRoomStyleSheet.ContractButtonConatiner}  onPress = {()=>navigation.navigate('ContractTabNavigation')}>
-            <FontAwesome5 name="file-contract" size={20} color={'#050953'} />
-            <Text style={SuiteRoomStyleSheet.ContractButtonText}>계약서 이력</Text>
-          </TouchableOpacity>
+          <View style={{ flexDirection: 'row' }}>
+            <TouchableOpacity style={SuiteRoomStyleSheet.AttendanceCheckStart} onPress={attendanceStart}>
+              <Text style={mainPageStyleSheet.categortFilterApplyText}>출석 시작</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={SuiteRoomStyleSheet.ContractButtonConatiner}
+              onPress={() => navigation.navigate('ContractTabNavigation')}
+            >
+              <FontAwesome5 name="file-contract" size={20} color={'#050953'} />
+              <Text style={SuiteRoomStyleSheet.ContractButtonText}>계약서 이력</Text>
+            </TouchableOpacity>
           </View>
           <ImageModalPopup visible={visible}>
             <LeaderAttendanceModal
-                visible={visible}
-                onClose={() => setVisible(false)}
-                text={'출석 번호는 10분 뒤 만료되니 \n 팀원들에게 빠르게 안내해주세요!'}
-                number = {number}
+              visible={visible}
+              onClose={() => setVisible(false)}
+              text={'출석 번호는 10분 뒤 만료되니 \n 팀원들에게 빠르게 안내해주세요!'}
+              number={number}
             />
-        </ImageModalPopup>
+          </ImageModalPopup>
           <View style={SuiteRoomStyleSheet.StudyDashboardContainer}>
             <View style={SuiteRoomStyleSheet.StudyInfoContainer}>
               <Text style={SuiteRoomStyleSheet.StudyInfoText}>팀 스터디 현황</Text>

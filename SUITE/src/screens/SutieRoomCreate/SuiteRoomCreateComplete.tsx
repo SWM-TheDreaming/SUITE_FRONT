@@ -14,7 +14,7 @@ const SuiteRoomCreateComplete = () => {
 
   return (
     <View style={mainPageStyleSheet.loginContainer}>
-      <Header title="Suite Room 체크인" backScreen="SuiteRoompay" />
+      <Header title="Suite Room 체크인" />
       <View style={mainPageStyleSheet.signUpcompleteContainer}>
         <Image source={Logo} style={mainPageStyleSheet.logoStyle} />
 

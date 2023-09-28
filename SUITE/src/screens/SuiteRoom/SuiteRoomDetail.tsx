@@ -56,7 +56,7 @@ const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route 
   const [studyMethod, setStudyMethod] = useState('');
   const [subject, setSubject] = useState('');
   const [title, setTitle] = useState('');
-  const [dday, setDday] = useState(0);
+  const [dday, setDday] = useState('');
   const fetchData = async () => {
     try {
       const datalist = await SuiteRoomDetailView(storedToken, SuiteRoomid);
@@ -96,12 +96,22 @@ const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route 
     setCancelVisible(false);
     navigation.navigate('Studylist');
   };
+  const calculateDDay = () => {
+    const today = new Date();
+    const recruitmentDeadline = new Date(recruitmentDeadLine);
+    const timeDiff = recruitmentDeadline.getTime() - today.getTime();
+    const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+    return daysDiff < 0 ? `D+${daysDiff.toString().slice(1, daysDiff.toString().length)}` : `D-${daysDiff}`;
+  };
   useEffect(() => {
     fetchData();
   }, []);
   useEffect(() => {
-    const oneDay = 24 * 60 * 60 * 1000;
-    setDday(Math.ceil((new Date(recruitmentDeadLine).getTime() - today.getTime()) / oneDay));
+    const today = new Date();
+    const recruitmentDeadline = new Date(recruitmentDeadLine);
+    const timeDiff = recruitmentDeadline.getTime() - today.getTime();
+    const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+    setDday(daysDiff < 0 ? `D+${daysDiff.toString().slice(1, daysDiff.toString().length)}` : `D-${daysDiff}`);
   }, [recruitmentDeadLine]);
   useEffect(() => {
     //페이지 새로고침시 다시 리렌더링 가능
@@ -114,7 +124,7 @@ const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route 
         <View style={SuiteRoomStyleSheet.SuiteRoomDetailupperBox}>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
             <TagComponent
-              dDay={`D-${dday}`}
+              dDay={dday}
               category={convertStudyValueFromEngish(subject)}
               depositAmount={`${depositAmount.toString().slice(0, 2)}K`}
             />
