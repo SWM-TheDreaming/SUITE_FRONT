@@ -6,10 +6,11 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import TagComponent from './TagComponent';
 import { useSetRecoilState } from 'recoil';
-import { depositAmountState, suiteRoomIdState } from '../../../recoil/atoms';
+import { depositAmountState, suiteRoomIdState, suiteRoomStatusState, hostState } from '../../../recoil/atoms';
 import convertStudyValueFromEngish from '../../data/ChangeCategoryFromEnglish';
 import ModalPopup from '../../hook/modal';
 import CheckCancelModal from '../../hook/checkCancelModal';
+
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 export interface StudyInfoCardProps {
@@ -32,7 +33,8 @@ const MyStudyInfoCardUI = (props: StudyInfoCardProps) => {
   const navigation = useNavigation<RootStackNavigationProp>();
   const suiteRoomId = useSetRecoilState(suiteRoomIdState);
   const suiteDepositAmount = useSetRecoilState(depositAmountState);
-
+  const suiteRoomStatus = useSetRecoilState(suiteRoomStatusState);
+  const suiteHostStatus = useSetRecoilState(hostState);
   const [visible, setVisible] = useState(false);
 
   const calculateDDay = () => {
@@ -52,6 +54,8 @@ const MyStudyInfoCardUI = (props: StudyInfoCardProps) => {
       onPress={() => {
         suiteRoomId(props.suiteRoomId);
         suiteDepositAmount(props.depositAmount);
+        suiteRoomStatus(props.suiteStatus);
+        suiteHostStatus(props.host);
         props.suiteStatus == 'PLAIN' ? setVisible(true) : navigation.navigate('LeaderTabBarNavigation');
       }}
     >

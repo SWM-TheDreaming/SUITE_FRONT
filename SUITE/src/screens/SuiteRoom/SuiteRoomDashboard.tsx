@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { useRecoilValue } from 'recoil';
-import { suiteRoomIdState } from '../../../recoil/atoms';
+import { suiteRoomIdState, suiteRoomStatusState, tokenState } from '../../../recoil/atoms';
 import SuiteRoomStyleSheet from '../../style/SuiteRoom';
 import ProgressCircle from 'react-native-progress-circle';
 import StudyStatusTable from '../../hook/studyStatusTable';
@@ -12,24 +12,31 @@ import AttendanceCheckModal from '../../hook/AttendanceCheckModal';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../types';
+import { SuiteRoomOutApi } from '../../api/SuiteRoom/SuiteRoomOutApi';
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 const SuiteRoomDashboard = () => {
   const SuiteRoomId = useRecoilValue(suiteRoomIdState);
+  const suiteRoomStatus = useRecoilValue(suiteRoomStatusState);
+  const tokenId = useRecoilValue(tokenState);
   const [attendanceCheckVisible, setAttendanceCheckVisible] = useState(false);
   const [number, setNumber] = useState<number>(0);
   const navigation = useNavigation<RootStackNavigationProp>();
+  const suiteRoomOutButtonHandler = () => {
+    SuiteRoomOutApi(tokenId, parseInt(SuiteRoomId));
+    Alert.alert('스터디 탈퇴가 완료되었습니다');
+    navigation.navigate('Mystudy');
+  };
   const attendanceStart = () => {
     //출석 API 불러오기
-    setNumber(Math.floor(Math.random() * 100))  //출석 진행중이라면 number 세팅
+    setNumber(Math.floor(Math.random() * 100)); //출석 진행중이라면 number 세팅
     //출석 진행중 아니라면 출석 진행중이 아니라는 modal visible 세팅
-
-  }
-  useEffect(()=>{
-    if(number!=0){
-      setAttendanceCheckVisible(true)
+  };
+  useEffect(() => {
+    if (number != 0) {
+      setAttendanceCheckVisible(true);
     }
-  },[number])
+  }, [number]);
   return (
     <ScrollView style={{ backgroundColor: 'white' }}>
       <View style={SuiteRoomStyleSheet.MyStudyRoomContainer}>
@@ -80,23 +87,32 @@ const SuiteRoomDashboard = () => {
               </View>
             </View>
           </View>
-          <View style={{flexDirection : 'row'}}>
-          <TouchableOpacity style={SuiteRoomStyleSheet.AttendanceCheckStart} onPress = {attendanceStart}>
-            <Text style={mainPageStyleSheet.categortFilterApplyText}>출석 하기</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={SuiteRoomStyleSheet.ContractButtonConatiner} onPress = {()=>navigation.navigate('ContractTabNavigation')}>
-            <FontAwesome5 name="file-contract" size={20} color={'#050953'} />
-            <Text style={SuiteRoomStyleSheet.ContractButtonText}>계약서 이력</Text>
-          </TouchableOpacity>
+          <View style={{ flexDirection: 'row' }}>
+            {suiteRoomStatus == 'START' ? (
+              <TouchableOpacity style={SuiteRoomStyleSheet.AttendanceCheckStart} onPress={attendanceStart}>
+                <Text style={mainPageStyleSheet.categortFilterApplyText}>출석 하기</Text>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity style={SuiteRoomStyleSheet.AttendanceCheckStart} onPress={suiteRoomOutButtonHandler}>
+                <Text style={mainPageStyleSheet.categortFilterApplyText}>스터디 탈퇴</Text>
+              </TouchableOpacity>
+            )}
+            <TouchableOpacity
+              style={SuiteRoomStyleSheet.ContractButtonConatiner}
+              onPress={() => navigation.navigate('ContractTabNavigation')}
+            >
+              <FontAwesome5 name="file-contract" size={20} color={'#050953'} />
+              <Text style={SuiteRoomStyleSheet.ContractButtonText}>계약서 이력</Text>
+            </TouchableOpacity>
           </View>
           <ImageModalPopup visible={attendanceCheckVisible}>
             <AttendanceCheckModal
-                visible={attendanceCheckVisible}
-                onClose={() => setAttendanceCheckVisible(false)}
-                text={'출석 번호는 10분 뒤 만료되니 \n 팀원들에게 빠르게 안내해주세요!'}
-                number = {number}
+              visible={attendanceCheckVisible}
+              onClose={() => setAttendanceCheckVisible(false)}
+              text={'출석 번호는 10분 뒤 만료되니 \n 팀원들에게 빠르게 안내해주세요!'}
+              number={number}
             />
-        </ImageModalPopup>
+          </ImageModalPopup>
           <View style={SuiteRoomStyleSheet.StudyDashboardContainer}>
             <View style={SuiteRoomStyleSheet.StudyInfoContainer}>
               <Text style={SuiteRoomStyleSheet.StudyInfoText}>팀 스터디 현황</Text>

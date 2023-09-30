@@ -106,3 +106,11 @@ export const suiteRoomIdState = atom({
   key: 'suiteRoomIdState',
   default: '',
 });
+export const suiteRoomStatusState = atom({
+  key: 'suiteRoomStatusState',
+  default: '',
+});
+export const hostState = atom({
+  key: 'hostState',
+  default: true,
+});
