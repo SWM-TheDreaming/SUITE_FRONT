@@ -128,7 +128,7 @@ const SuiteRoomStyleSheet = StyleSheet.create({
     width: widthPercentage(310),
     height: heightPercentage(170),
     backgroundColor: '#FFF4F4',
-    marginBottom : heightPercentage(40)
+    marginBottom: heightPercentage(40),
   },
   SuiteRoomDetailInformationText: {
     marginTop: heightPercentage(10),
@@ -178,6 +178,16 @@ const SuiteRoomStyleSheet = StyleSheet.create({
     width: widthPercentage(260),
     height: heightPercentage(60),
     backgroundColor: '#050953',
+    borderColor: 'black',
+    borderWidth: 1,
+    borderRadius: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  SutieRoomDetailDeleteButton: {
+    width: widthPercentage(260),
+    height: heightPercentage(60),
+    backgroundColor: '#B92E5A',
     borderColor: 'black',
     borderWidth: 1,
     borderRadius: 24,
@@ -311,7 +321,7 @@ const SuiteRoomStyleSheet = StyleSheet.create({
   MissionStatusContainer: {
     marginTop: 24,
     marginLeft: 20,
-    marginRight : 20,
+    marginRight: 20,
     marginBottom: 8,
     flexDirection: 'row',
     alignItems: 'center',
@@ -319,11 +329,11 @@ const SuiteRoomStyleSheet = StyleSheet.create({
   LeaderMissionStatusContainer: {
     marginTop: 24,
     marginLeft: 20,
-    marginRight : 20,
+    marginRight: 20,
     marginBottom: 8,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent : 'space-between'
+    justifyContent: 'space-between',
   },
   MissionStatusText: {
     color: 'black',
@@ -382,32 +392,32 @@ const SuiteRoomStyleSheet = StyleSheet.create({
   MissionScrollView: {
     height: Height,
   },
-  CreateMissionButton : {
-    width : widthPercentage(100),
-    height : heightPercentage (40),
-    backgroundColor : '#050953',
-    borderRadius : 24,
-    justifyContent : 'center',
-    alignItems : 'center'
+  CreateMissionButton: {
+    width: widthPercentage(100),
+    height: heightPercentage(40),
+    backgroundColor: '#050953',
+    borderRadius: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  CreateMissionText : {
+  CreateMissionText: {
     color: 'white',
     fontWeight: 'bold',
     fontSize: 16,
-    fontFamily: 'PretendardVariable',  
+    fontFamily: 'PretendardVariable',
   },
   AttendanceCheckStart: {
     width: widthPercentage(160),
     height: heightPercentage(40),
-    marginTop : 20,
+    marginTop: 20,
     backgroundColor: '#050953',
     borderColor: 'black',
     borderWidth: 1,
     borderRadius: 15,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight : 7,
-    flexDirection : 'row',
+    marginRight: 7,
+    flexDirection: 'row',
     ...Platform.select({
       ios: {
         shadowColor: '#000000',
@@ -440,12 +450,12 @@ const SuiteRoomStyleSheet = StyleSheet.create({
   ContractButtonConatiner: {
     width: widthPercentage(160),
     height: heightPercentage(40),
-    marginTop : 20,
+    marginTop: 20,
     backgroundColor: '#FEDE35',
     borderRadius: 15,
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection : 'row',
+    flexDirection: 'row',
     ...Platform.select({
       ios: {
         shadowColor: '#000000',
@@ -466,18 +476,18 @@ const SuiteRoomStyleSheet = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'PretendardVariable',
     fontWeight: 'bold',
-    marginLeft : 5
+    marginLeft: 5,
   },
-  AttendanceInputContainer : {
-    width : widthPercentage(240),
-    height : heightPercentage(50),
-    marginTop : heightPercentage(12),
-    borderRadius : 5,
-    borderColor : '#D8D8D8',
-    borderWidth : 1,
-    justifyContent : 'center'
+  AttendanceInputContainer: {
+    width: widthPercentage(240),
+    height: heightPercentage(50),
+    marginTop: heightPercentage(12),
+    borderRadius: 5,
+    borderColor: '#D8D8D8',
+    borderWidth: 1,
+    justifyContent: 'center',
   },
-  IncorrectAttendanceText : {
+  IncorrectAttendanceText: {
     color: 'red',
     fontSize: 10,
     marginTop: 4,
@@ -486,13 +496,13 @@ const SuiteRoomStyleSheet = StyleSheet.create({
   ContractBox: {
     //컴포넌트 박스 설정
     marginTop: 16,
-    marginBottom : 4,
+    marginBottom: 4,
     backgroundColor: 'white',
     // opacity:0.77,
     width: widthPercentage(328),
     height: heightPercentage(140),
     borderRadius: 10,
-    borderColor : '#050953',
+    borderColor: '#050953',
     ...Platform.select({
       ios: {
         shadowColor: '#686868',
@@ -533,18 +543,17 @@ const SuiteRoomStyleSheet = StyleSheet.create({
     width: 40,
     height: 40,
   },
-  ContractModalDetailText : {
-    fontSize : 14,
+  ContractModalDetailText: {
+    fontSize: 14,
     fontFamily: 'PretendardVariable',
-    marginTop : 5,
-    width: widthPercentage(200)
+    marginTop: 5,
+    width: widthPercentage(200),
   },
-  ContractModalCopyIcon : {
-    alignItems : 'center',
-    justifyContent : 'center',
-    marginTop : 2
-  }
-}
-);
+  ContractModalCopyIcon: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 2,
+  },
+});
 
 export default SuiteRoomStyleSheet;

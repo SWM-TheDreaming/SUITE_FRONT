@@ -9,9 +9,10 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import ProgressCircle from 'react-native-progress-circle';
 import mainPageStyleSheet from '../../style/style';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import Clipboard from '@react-native-clipboard/clipboard';
+import { hostState, suiteRoomIdState, suiteRoomStatusState, tokenState } from '../../../recoil/atoms';
+import { useRecoilValue } from 'recoil';
 
 const mockdata = {
   id: '123',
@@ -30,6 +31,13 @@ const mockdata = {
   minMissionCompleteRate: 90,
 };
 const SuiteRoomDetailStart = () => {
+  const SuiteRoomId = useRecoilValue(suiteRoomIdState);
+  const suiteRoomStatus = useRecoilValue(suiteRoomStatusState);
+  const tokenId = useRecoilValue(tokenState);
+  const hostStatus = useRecoilValue(hostState);
+  const SuiteRoomDeleteButtonHandler = () => {
+    //
+  };
   const handleCopyToClipboard = () => {
     Clipboard.setString(mockdata.link);
   };
@@ -147,6 +155,15 @@ const SuiteRoomDetailStart = () => {
               환급되지 못한 금액은 다른 스터디원들에게 나누어 집니다.
             </Text>
           </View>
+          {suiteRoomStatus != 'START' && hostStatus == true ? (
+            <View style={{ justifyContent: 'center', alignItems: 'center', marginBottom: 20 }}>
+              <TouchableOpacity style={SuiteRoomStyleSheet.SutieRoomDetailDeleteButton}>
+                <Text style={mainPageStyleSheet.categortFilterApplyText}>스터디 삭제</Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <></>
+          )}
         </View>
       </View>
     </ScrollView>

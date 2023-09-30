@@ -97,6 +97,7 @@ const SuiteRoomDashboard = () => {
                 <Text style={mainPageStyleSheet.categortFilterApplyText}>스터디 탈퇴</Text>
               </TouchableOpacity>
             )}
+
             <TouchableOpacity
               style={SuiteRoomStyleSheet.ContractButtonConatiner}
               onPress={() => navigation.navigate('ContractTabNavigation')}
