@@ -7,15 +7,15 @@ import CheckCancelModal from '../hook/checkCancelModal';
 type DataRow = {
   id: string;
   missionName: string;
-  missionDate: string;
-  status: string;
+  missionDeadLine: Date;
+  missionStatus: string;
 };
 
 type DataListProps = {
   data: DataRow[];
 };
 
-const MissionItem: React.FC<DataRow> = ({ id, missionName, missionDate, status }) => {
+const MissionItem: React.FC<DataRow> = ({ id, missionName, missionDeadLine, missionStatus }) => {
   const [visible, setVisible] = useState(false);
   const [modalText, setModalText] = useState('');
   const [actionType, setActionType] = useState(null);
@@ -43,15 +43,15 @@ const MissionItem: React.FC<DataRow> = ({ id, missionName, missionDate, status }
     <View style={styles.container}>
       <View style={{ flexDirection: 'column' }}>
         <Text style={styles.missionName}>{missionName}</Text>
-        <Text style={styles.missionDate}>{missionDate}</Text>
+        <Text style={styles.missionDate}>{missionDeadLine.toString().slice(0, 10)}</Text>
       </View>
-      {status == 'progress' ? (
+      {missionStatus == 'PROGRESS' ? (
         <TouchableOpacity onPress={handleVPress} style={styles.buttonStyle}>
-          {status === 'progress' && <AntDesign name="checkcircle" size={28} color="#005BA5" />}
+          {missionStatus === 'PROGRESS' && <AntDesign name="checkcircle" size={28} color="#005BA5" />}
         </TouchableOpacity>
       ) : (
         <TouchableOpacity onPress={handleXPress} style={styles.buttonStyle}>
-          {status === 'request' && <AntDesign name="closecircle" size={28} color="#B8B8B8" />}
+          {missionStatus === 'CHECKING' && <AntDesign name="closecircle" size={28} color="#B8B8B8" />}
         </TouchableOpacity>
       )}
       <ModalPopup visible={visible}>

@@ -1,22 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-type DataRow = {
-  nickname: string;
-  attendance: string;
-  missionCompletion: string;
-};
-
-const data: DataRow[] = [
-  { nickname: '', attendance: '', missionCompletion: '' },
-  { nickname: 'one8775', attendance: '85%', missionCompletion: '70%' },
-  { nickname: 'dareren', attendance: '90%', missionCompletion: '80%' },
-  { nickname: 'Songpe', attendance: '85%', missionCompletion: '70%' },
-  { nickname: 'Son', attendance: '90%', missionCompletion: '80%' },
-  { nickname: 'KangInLee', attendance: '85%', missionCompletion: '70%' },
-];
-
-const StudyStatusTable: React.FC = () => {
+const StudyStatusTable: React.FC<{ data: any[] }> = ({ data }) => {
   return (
     <View style={styles.container}>
       {data.map((item, index) => (
@@ -24,9 +9,9 @@ const StudyStatusTable: React.FC = () => {
           key={index}
           style={[styles.row, index % 2 === 0 ? styles.evenRow : styles.oddRow, index === 0 ? styles.headerRow : null]}
         >
-          <Text style={styles.firstColumn}>{index === 0 ? '스터디 팀원' : item.nickname}</Text>
-          <Text style={styles.secondColumn}>{index === 0 ? '출석률' : item.attendance}</Text>
-          <Text style={styles.thirdColumn}>{index === 0 ? '미션달성률' : item.missionCompletion}</Text>
+          <Text style={styles.firstColumn}>{index === 0 ? '스터디 팀원' : item.nickName}</Text>
+          <Text style={styles.secondColumn}>{index === 0 ? '출석률' : item.attendanceRate}</Text>
+          <Text style={styles.thirdColumn}>{index === 0 ? '미션달성률' : item.missionRate}</Text>
         </View>
       ))}
     </View>

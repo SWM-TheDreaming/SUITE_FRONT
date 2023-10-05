@@ -13,15 +13,44 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../types';
 import { SuiteRoomOutApi } from '../../api/SuiteRoom/SuiteRoomOutApi';
+import { DashBoardApi } from '../../api/StudyRoom/DashBoardApi';
+
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 const SuiteRoomDashboard = () => {
   const SuiteRoomId = useRecoilValue(suiteRoomIdState);
   const suiteRoomStatus = useRecoilValue(suiteRoomStatusState);
   const tokenId = useRecoilValue(tokenState);
+  const [dashboard, setDashboard] = useState();
   const [attendanceCheckVisible, setAttendanceCheckVisible] = useState(false);
   const [number, setNumber] = useState<number>(0);
+  const [depositAmount, setDepositAmount] = useState();
+  const [myMissionRate, setMyMissionRate] = useState();
+  const [myAttendanceRate, setMyAttendanceRate] = useState();
+  const [dday, setDday] = useState<number>(0);
+  const [member, setMember] = useState([]);
   const navigation = useNavigation<RootStackNavigationProp>();
+  const readDashBoard = async () => {
+    try {
+      const datalist = await DashBoardApi(tokenId, parseInt(SuiteRoomId));
+      const studyDeadline = new Date(datalist.studyDeadline);
+      const currentDate = new Date();
+      const timeDiff = studyDeadline.getTime() - currentDate.getTime();
+      const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+      setDday(daysDiff);
+      setDepositAmount(datalist.depositAmount.toLocaleString());
+      setMember(datalist.otherDashBoardDto);
+      for (const obj of datalist.otherDashBoardDto) {
+        if (obj.memberId === datalist.myMemberId) {
+          setMyAttendanceRate(obj.attendanceRate);
+          setMyMissionRate(obj.missionRate);
+        }
+      }
+      // 받은 데이터 활용하기
+    } catch (error) {
+      console.log('Error occurred:', error);
+    }
+  };
   const suiteRoomOutButtonHandler = () => {
     SuiteRoomOutApi(tokenId, parseInt(SuiteRoomId));
     Alert.alert('스터디 탈퇴가 완료되었습니다');
@@ -37,6 +66,15 @@ const SuiteRoomDashboard = () => {
       setAttendanceCheckVisible(true);
     }
   }, [number]);
+  useEffect(() => {
+    console.log('change');
+    console.log(dashboard);
+  }, [dashboard]);
+  useEffect(() => {
+    if (suiteRoomStatus === 'START') {
+      readDashBoard();
+    }
+  }, [suiteRoomStatus]);
   return (
     <ScrollView style={{ backgroundColor: 'white' }}>
       <View style={SuiteRoomStyleSheet.MyStudyRoomContainer}>
@@ -44,11 +82,11 @@ const SuiteRoomDashboard = () => {
           <View style={SuiteRoomStyleSheet.DepositDayContainer}>
             <View style={SuiteRoomStyleSheet.DepositBox}>
               <Text style={SuiteRoomStyleSheet.DepositDayInfoText}>내 환급액</Text>
-              <Text style={SuiteRoomStyleSheet.DepositDayText}>100,000원</Text>
+              <Text style={SuiteRoomStyleSheet.DepositDayText}>{depositAmount}원</Text>
             </View>
             <View style={SuiteRoomStyleSheet.DayBox}>
               <Text style={SuiteRoomStyleSheet.DepositDayInfoText}>체크아웃</Text>
-              <Text style={SuiteRoomStyleSheet.DepositDayText}>D-12</Text>
+              <Text style={SuiteRoomStyleSheet.DepositDayText}>D-{dday}</Text>
             </View>
           </View>
           <View style={SuiteRoomStyleSheet.CircleProgressContainer}>
@@ -65,7 +103,7 @@ const SuiteRoomDashboard = () => {
                   shadowColor="#E2FFFE"
                   bgColor="white"
                 >
-                  <Text style={SuiteRoomStyleSheet.SuiteRoomDetailCircularBarText}>80%</Text>
+                  <Text style={SuiteRoomStyleSheet.SuiteRoomDetailCircularBarText}>{myAttendanceRate}%</Text>
                 </ProgressCircle>
               </View>
             </View>
@@ -82,7 +120,7 @@ const SuiteRoomDashboard = () => {
                   shadowColor="#F0EBFF"
                   bgColor="white"
                 >
-                  <Text style={SuiteRoomStyleSheet.SuiteRoomDetailCircularBarText}>90%</Text>
+                  <Text style={SuiteRoomStyleSheet.SuiteRoomDetailCircularBarText}>{myMissionRate}%</Text>
                 </ProgressCircle>
               </View>
             </View>
@@ -123,7 +161,7 @@ const SuiteRoomDashboard = () => {
         </View>
       </View>
       <View style={SuiteRoomStyleSheet.StudyStatusContainer}>
-        <StudyStatusTable />
+        <StudyStatusTable data={[{}, ...member]} />
       </View>
     </ScrollView>
   );

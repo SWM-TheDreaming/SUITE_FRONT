@@ -16,11 +16,11 @@ type DataListProps = {
 };
 
 const MissionRequestList: React.FC<DataRow> = ({ id, missionName, missionDate, nickname }) => {
-    const [visible, setVisible] = useState(false);
-    const [modalText, setModalText] = useState('');
-    const [actionType, setActionType] = useState(null);
+  const [visible, setVisible] = useState(false);
+  const [modalText, setModalText] = useState('');
+  const [actionType, setActionType] = useState(null);
 
-    const handleVPress = () => {
+  const handleVPress = () => {
     setModalText('PR을 승인하시겠습니까?');
     setVisible(true);
     setActionType('send');
@@ -32,12 +32,12 @@ const MissionRequestList: React.FC<DataRow> = ({ id, missionName, missionDate, n
     setActionType('cancel');
   };
   const acceptPr = () => {
-    console.log(id)
+    console.log(id);
     console.log('PR 승인하기');
     setVisible(false);
   };
   const rejectPr = () => {
-    console.log(id)
+    console.log(id);
     console.log('PR 거부하기');
     setVisible(false);
   };
@@ -45,20 +45,20 @@ const MissionRequestList: React.FC<DataRow> = ({ id, missionName, missionDate, n
     <View style={styles.container}>
       <View style={{ flexDirection: 'column' }}>
         <Text style={styles.missionName}>{missionName}</Text>
-        <View style = {{flexDirection : 'row'}}>
-            <Text style={styles.nickname}>{nickname}</Text>
-            <Text style={styles.middlebar}> | </Text>
-            <Text style={styles.missionDate}>{missionDate}</Text>
+        <View style={{ flexDirection: 'row' }}>
+          <Text style={styles.nickname}>{nickname}</Text>
+          <Text style={styles.middlebar}> | </Text>
+          <Text style={styles.missionDate}>{missionDate}</Text>
         </View>
       </View>
-        <View style={{flexDirection:'row'}}> 
-            <TouchableOpacity onPress={handleXPress} style={styles.buttonStyle}>
-                <AntDesign name="closecircle" size={28} color="#B8B8B8" />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleVPress} style={styles.buttonStyle}>
-            <AntDesign name="checkcircle" size={28} color="#005BA5" />
+      <View style={{ flexDirection: 'row' }}>
+        <TouchableOpacity onPress={handleXPress} style={styles.buttonStyle}>
+          <AntDesign name="closecircle" size={28} color="#B8B8B8" />
         </TouchableOpacity>
-        </View>
+        <TouchableOpacity onPress={handleVPress} style={styles.buttonStyle}>
+          <AntDesign name="checkcircle" size={28} color="#005BA5" />
+        </TouchableOpacity>
+      </View>
       <ModalPopup visible={visible}>
         <CheckCancelModal
           visible={visible}
@@ -83,19 +83,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     ...Platform.select({
-        ios: {
-          shadowColor: '#000000',
-          shadowOffset: {
-            width: 1,
-            height: 1,
-          },
-          shadowOpacity: 0.2,
-          shadowRadius: 1,
+      ios: {
+        shadowColor: '#000000',
+        shadowOffset: {
+          width: 1,
+          height: 1,
         },
-        android: {
-          elevation: 4,
-        },
-      }),
+        shadowOpacity: 0.2,
+        shadowRadius: 1,
+      },
+      android: {
+        elevation: 4,
+      },
+    }),
   },
   missionName: {
     paddingLeft: 20,
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
   },
   nickname: {
     paddingLeft: 20,
-    paddingRight : 5,
+    paddingRight: 5,
     marginTop: 5,
     fontSize: 14,
     color: '#888888',
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     fontFamily: 'PretendardVariable',
   },
   missionDate: {
-    paddingLeft : 5,
+    paddingLeft: 5,
     marginTop: 5,
     fontSize: 14,
     color: '#888888',
