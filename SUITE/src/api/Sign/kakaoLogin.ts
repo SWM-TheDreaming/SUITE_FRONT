@@ -1,14 +1,10 @@
-import * as KakaoLogin from '@react-native-seoul/kakao-login';
+import { API_URL } from '../../../react-native.config';
 
-export const externalkakaologin = async (): Promise<any> => {
+export const googleloginApi = async (accessToken: string): Promise<any> => {
   try {
-    const result = await KakaoLogin.login();
-    const data = JSON.stringify(result);
-    const parsedData = JSON.parse(data);
-    const accessToken = parsedData.accessToken;
     console.log(accessToken);
     try {
-      const response = await fetch('http://semtle.catholic.ac.kr:8085/member/auth/signin', {
+      const response = await fetch(`${API_URL}/member/auth/signin`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

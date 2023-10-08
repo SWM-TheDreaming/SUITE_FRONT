@@ -1,5 +1,5 @@
-import { API_URL } from "../../../react-native.config";
-export const FindPWApi = async (email: string | null, newPassword : string | null) => {
+import { API_URL } from '../../../react-native.config';
+export const FindPWApi = async (email: string | null, newPassword: string | null) => {
   try {
     const response = await fetch(`${API_URL}/member/id`, {
       method: 'POST',
@@ -8,7 +8,7 @@ export const FindPWApi = async (email: string | null, newPassword : string | nul
       },
       body: JSON.stringify({
         email: email,
-        newPassword : newPassword
+        newPassword: newPassword,
       }),
     });
 
@@ -17,7 +17,7 @@ export const FindPWApi = async (email: string | null, newPassword : string | nul
       return data;
     } else {
       const data = await response.json();
-      return data
+      return data;
     }
   } catch (error) {
     throw error;

@@ -3,8 +3,8 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import RootNavigator from './src/navigation/RootNavigator';
 import { StyleSheet } from 'react-native';
 import { RecoilRoot } from 'recoil';
-// import messaging from '@react-native-firebase/messaging';
-
+import { GoogleSignin } from '@react-native-google-signin/google-signin'; // import messaging from '@react-native-firebase/messaging';
+import config from './config';
 // messaging().setBackgroundMessageHandler(async (remoteMessage) => {
 //   console.log('[Background Remote Message]', remoteMessage);
 // });
@@ -21,7 +21,15 @@ function App(): JSX.Element {
   //   });
   //   return unsubscribe;
   // }, []);
+  const googleConfigureSignIn = () => {
+    GoogleSignin.configure({
+      webClientId: config.GOOGLE_WEB_CLIENT_ID,
+    });
+  };
 
+  useEffect(() => {
+    googleConfigureSignIn();
+  }, []);
   return (
     <RecoilRoot>
       <SafeAreaProvider>

@@ -13,7 +13,7 @@ const PhoneAuthentication = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
   const signUp = useForm();
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const [phonAuthenticationButtonDisabled, setPhonAuthenticationButtonDisabled] = useState(true)
+  const [phonAuthenticationButtonDisabled, setPhonAuthenticationButtonDisabled] = useState(true);
   const [phone, setPhone] = useRecoilState(phoneState);
   const [authenticationCode, setauthenticationCode] = useState('aa');
   const [verifyCode, setverifyCode] = useState('aa');
@@ -22,7 +22,7 @@ const PhoneAuthentication = () => {
   const getPhoneAuthenticationCode = async () => {
     try {
       const code = await PhoneAuthenticationCodeApi(signUp.getTextInputProps('phone').value);
-      console.log(code)
+      console.log(code);
       setverifyCode(code);
     } catch (error) {
       console.log('Error occurred:', error);
@@ -32,10 +32,10 @@ const PhoneAuthentication = () => {
   const handleAuthencticationCodeChange = (text: string) => {
     setauthenticationCode(text);
   };
-  const handleSendButtonPress = () =>{
-    getPhoneAuthenticationCode()
-    setIsViewDisabled(false)
-  }
+  const handleSendButtonPress = () => {
+    getPhoneAuthenticationCode();
+    setIsViewDisabled(false);
+  };
 
   const handleButtonPress = () => {
     const phoneValue = signUp.getTextInputProps('phone').value;
@@ -48,24 +48,19 @@ const PhoneAuthentication = () => {
   };
 
   useEffect(() => {
-    if (
-      signUp.errors.phone == '' 
-    ) {
-        setPhonAuthenticationButtonDisabled(false);
+    if (signUp.errors.phone == '') {
+      setPhonAuthenticationButtonDisabled(false);
     } else {
-        setPhonAuthenticationButtonDisabled(true);
+      setPhonAuthenticationButtonDisabled(true);
     }
-  }, [
-    signUp.errors.phone,
-  ]);
-    useEffect(()=>{
-        if (authenticationCode === verifyCode){
-            setIsButtonDisabled(false)
-        }
-        else{
-            setIsButtonDisabled(true)
-        }
-    },[authenticationCode])
+  }, [signUp.errors.phone]);
+  useEffect(() => {
+    if (authenticationCode === verifyCode) {
+      setIsButtonDisabled(false);
+    } else {
+      setIsButtonDisabled(true);
+    }
+  }, [authenticationCode]);
 
   return (
     <View style={mainPageStyleSheet.categoryPageContainer}>
@@ -73,7 +68,7 @@ const PhoneAuthentication = () => {
         <TouchableOpacity
           style={mainPageStyleSheet.pageBackIcon}
           onPress={() => {
-            navigation.navigate('TermOfUse');
+            navigation.goBack();
           }}
         >
           <Icon name="chevron-back" size={24} color={'#000000'} />
@@ -82,37 +77,41 @@ const PhoneAuthentication = () => {
       </View>
       <View style={mainPageStyleSheet.emailAuthenticationContainer}>
         <Text style={mainPageStyleSheet.idpwtext}>전화번호</Text>
-        <View style={{flexDirection : 'row'}}>
-            <InputField
-                style={mainPageStyleSheet.phoneNumInputBox}
-                placeholder=" 전화번호 입력해주세요"
-                {...signUp.getTextInputProps('phone')}
-                touched={signUp.touched.phone}
-            />
-            <View style={mainPageStyleSheet.phoneAuthenticateCodeContainer}>
-                <TouchableOpacity 
-                    style={[mainPageStyleSheet.phoneAuthenticateCodeButtonNotDisabled, phonAuthenticationButtonDisabled && mainPageStyleSheet.phoneAuthenticateCodeButton]} 
-                    disabled={phonAuthenticationButtonDisabled}
-                    onPress = {() =>{handleSendButtonPress()}}
-                >
-                    <Text style={mainPageStyleSheet.phonAuthenticateCodeText}>인증번호 발송</Text>
-                </TouchableOpacity>
-            </View>
+        <View style={{ flexDirection: 'row' }}>
+          <InputField
+            style={mainPageStyleSheet.phoneNumInputBox}
+            placeholder=" 전화번호 입력해주세요"
+            {...signUp.getTextInputProps('phone')}
+            touched={signUp.touched.phone}
+          />
+          <View style={mainPageStyleSheet.phoneAuthenticateCodeContainer}>
+            <TouchableOpacity
+              style={[
+                mainPageStyleSheet.phoneAuthenticateCodeButtonNotDisabled,
+                phonAuthenticationButtonDisabled && mainPageStyleSheet.phoneAuthenticateCodeButton,
+              ]}
+              disabled={phonAuthenticationButtonDisabled}
+              onPress={() => {
+                handleSendButtonPress();
+              }}
+            >
+              <Text style={mainPageStyleSheet.phonAuthenticateCodeText}>인증번호 발송</Text>
+            </TouchableOpacity>
+          </View>
         </View>
         <Text>{<Text style={mainPageStyleSheet.idPwInputErrorText}>{signUp.errors.phone}</Text>}</Text>
-        { isViewDisabled == false ?
-        <View>
-        <Text style={mainPageStyleSheet.idpwtext}>인증코드</Text>
+        {isViewDisabled == false ? (
+          <View>
+            <Text style={mainPageStyleSheet.idpwtext}>인증코드</Text>
             <InputField
-            autoFocus
-            placeholder="인증코드를 입력해주세요"
-            onChangeText={handleAuthencticationCodeChange}
+              autoFocus
+              placeholder="인증코드를 입력해주세요"
+              onChangeText={handleAuthencticationCodeChange}
             />
             {!validateCode() && <Text style={mainPageStyleSheet.idPwInputErrorText}>코드가 일치하지 않습니다.</Text>}
-        </View>
-        :null
-        }
-        </View>
+          </View>
+        ) : null}
+      </View>
       <View style={mainPageStyleSheet.SignUpNextBtnContainer}>
         <TouchableOpacity
           style={[mainPageStyleSheet.SignUpNextBtnBtn, isButtonDisabled && mainPageStyleSheet.disabledSignUpNextBtnBtn]}

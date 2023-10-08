@@ -16,8 +16,9 @@ import { setStorage } from '../../hook/asyncStorage';
 import { SignInApi } from '../../api/Sign/signin';
 import ModalPopup from '../../hook/modal';
 import SignModalPopup from '../../components/presents/SignmodalPopup';
-import { externalkakaologin } from '../../api/Sign/kakaoLogin';
+import { googleloginApi } from '../../api/Sign/kakaoLogin';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { GoogleSignin, GoogleSigninButton } from '@react-native-google-signin/google-signin';
 
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
@@ -31,13 +32,17 @@ const Login = () => {
   const [loginFailText, setLoginFailText] = useState('');
   const [email, setEmail] = useRecoilState(emailState);
   const [password, setpPassword] = useRecoilState(passwordState);
-  const kakaoLoginHandle = async () => {
+
+  const onPressGoogleBtn = async () => {
+    await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+    const { idToken } = await GoogleSignin.signIn();
+    console.log('idToekn : ', idToken);
     try {
-      const kakaoResult = await externalkakaologin();
+      const kakaoResult = await googleloginApi(idToken);
       if (kakaoResult.statusCode == 201) {
         setEmail(kakaoResult.data.email);
         setpPassword(kakaoResult.data.password);
-        navigation.navigate('OauthTermOfUse');
+        navigation.navigate('PhoneAuthentication');
       } else if (kakaoResult.statusCode == 200) {
         setStorage('token', JSON.stringify(kakaoResult.data.accessToken));
         setToken(kakaoResult.data.accessToken);
@@ -53,6 +58,7 @@ const Login = () => {
       console.log('Error occurred:', error);
     }
   };
+
   const SingIn = async () => {
     try {
       const email = login.getTextInputProps('username').value;
@@ -177,11 +183,7 @@ const Login = () => {
           </TouchableOpacity>
         </View>
         <View style={mainPageStyleSheet.snsLoginButtonContainer}>
-          <TouchableOpacity style={mainPageStyleSheet.kakaoLoginButton} onPress={() => kakaoLoginHandle()}>
-            <Kakaosvg />
-            <Text style={mainPageStyleSheet.snsLoginButtonText}>카카오 아이디로 로그인하기</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={mainPageStyleSheet.googleLoginButton}>
+          <TouchableOpacity style={mainPageStyleSheet.googleLoginButton} onPress={() => onPressGoogleBtn()}>
             <Googlesvg />
             <Text style={mainPageStyleSheet.snsLoginButtonText}>구글 아이디로 로그인하기</Text>
           </TouchableOpacity>

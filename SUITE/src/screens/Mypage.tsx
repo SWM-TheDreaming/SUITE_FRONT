@@ -126,16 +126,14 @@ const Mypage = () => {
           </View>
           <View style={SuiteRoomStyleSheet.AttendanceMissionBox}>
             <ProgressCircle
-              percent={Math.floor(attendanceAvgRate * 100)}
+              percent={attendanceAvgRate * 100}
               radius={65}
               borderWidth={45}
               color="#4CADA8"
               shadowColor="#E2FFFE"
               bgColor="white"
             >
-              <Text style={SuiteRoomStyleSheet.SuiteRoomDetailCircularBarText}>
-                {Math.floor(attendanceAvgRate * 100)}%
-              </Text>
+              <Text style={SuiteRoomStyleSheet.SuiteRoomDetailCircularBarText}>{attendanceAvgRate * 100}%</Text>
             </ProgressCircle>
           </View>
         </View>
@@ -145,16 +143,14 @@ const Mypage = () => {
           </View>
           <View style={SuiteRoomStyleSheet.AttendanceMissionBox}>
             <ProgressCircle
-              percent={Math.floor(missionAvgRate * 100)}
+              percent={missionAvgRate * 100}
               radius={65}
               borderWidth={45}
               color="#A38AE7"
               shadowColor="#F0EBFF"
               bgColor="white"
             >
-              <Text style={SuiteRoomStyleSheet.SuiteRoomDetailCircularBarText}>
-                {Math.floor(missionAvgRate * 100)}%
-              </Text>
+              <Text style={SuiteRoomStyleSheet.SuiteRoomDetailCircularBarText}>{missionAvgRate * 100}%</Text>
             </ProgressCircle>
           </View>
         </View>
