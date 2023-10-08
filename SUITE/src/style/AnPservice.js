@@ -80,7 +80,7 @@ const AnpServiceStyleSheet = StyleSheet.create({
     color: '#686868',
   },
   profileSecondText: {
-    marginTop: 12,
+    marginTop: 6,
     fontSize: 14,
     fontFamily: 'PretendardVariable',
     color: 'black',
@@ -88,7 +88,7 @@ const AnpServiceStyleSheet = StyleSheet.create({
   IsAuthenticateContainer: {
     width: widthPercentage(100),
     height: heightPercentage(25),
-    marginTop: 12,
+    marginTop: 6,
     borderRadius: 4,
     borderWidth: 2,
     borderColor: '#005BA5',
@@ -104,7 +104,7 @@ const AnpServiceStyleSheet = StyleSheet.create({
   IsNotAuthenticateContainer: {
     width: widthPercentage(100),
     height: heightPercentage(25),
-    marginTop: 12,
+    marginTop: 6,
     borderRadius: 4,
     borderWidth: 2,
     borderColor: '#B92E5A',

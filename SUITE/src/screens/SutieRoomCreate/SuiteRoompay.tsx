@@ -13,6 +13,7 @@ import { SuiteRoomPay } from '../../api/SuiteRoom/SuiteRoomPay';
 import CheckBox from '@react-native-community/checkbox';
 import ImageModalPopup from '../../hook/ImageModal';
 import PayCheckModal from '../../components/presents/PayCheckModalPresent';
+import { MyPointApi } from '../../api/SuiteRoom/MyPointApi';
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 const SuiteRoompay = () => {
@@ -37,7 +38,12 @@ const SuiteRoompay = () => {
     setVisible(false);
     navigation.navigate('Mystudy');
   };
+  const readPoint = async () => {
+    const point = await MyPointApi(token);
+    setPoint(point);
+  };
   useEffect(() => {
+    readPoint();
     if (point < depositAmount) {
       setIsButtonDisabled(true);
     }

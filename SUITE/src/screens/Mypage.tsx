@@ -27,6 +27,7 @@ import {
 import { useRecoilValue } from 'recoil';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getUserInformation } from '../api/Sign/getUserInformation';
+import { MyPointApi } from '../api/SuiteRoom/MyPointApi';
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 const Mypage = () => {
@@ -39,6 +40,7 @@ const Mypage = () => {
   const [memberId, setMemebrId] = useRecoilState(memberIdState);
   const [name, setName] = useRecoilState(nameState);
   const [nickname, setNickname] = useRecoilState(nicknameState);
+  const [point, setPoint] = useState(0);
   const [isAuth, setIsAuth] = useRecoilState(isAuthState);
   const [phone, setPhone] = useRecoilState(phoneState);
   const [preferStudy, setPreferStudy] = useRecoilState(preferStudyState);
@@ -51,6 +53,10 @@ const Mypage = () => {
   const SignOut = async () => {
     await AsyncStorage.removeItem('token');
     setToken(null);
+  };
+  const readPoint = async () => {
+    const point = await MyPointApi(token);
+    setPoint(point);
   };
   const getUserInfo = async (token: string) => {
     try {
@@ -72,6 +78,7 @@ const Mypage = () => {
     }
   };
   useEffect(() => {
+    readPoint();
     getUserInfo(token);
   }, []);
   return (
@@ -107,6 +114,7 @@ const Mypage = () => {
               <Text style={AnpServiceStyleSheet.profileNameText}>{name}</Text>
             </View>
             <Text style={AnpServiceStyleSheet.profileSecondText}>{email}</Text>
+            <Text style={AnpServiceStyleSheet.profileSecondText}>남은 포인트 : {point.toLocaleString()} P</Text>
             {Authenticate === true ? (
               <View style={AnpServiceStyleSheet.IsAuthenticateContainer}>
                 <Text style={AnpServiceStyleSheet.IsAuthenticateText}>계좌 인증 완료</Text>
