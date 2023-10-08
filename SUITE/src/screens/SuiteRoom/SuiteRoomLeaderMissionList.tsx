@@ -7,6 +7,7 @@ import MissionItem from '../../hook/missionList';
 import { MissionListApi } from '../../api/StudyRoom/MissionListApi';
 import { useRecoilValue } from 'recoil';
 import { suiteRoomIdState, tokenState, suiteRoomStatusState } from '../../../recoil/atoms';
+import { useIsFocused } from '@react-navigation/native';
 
 type DataRow = {
   id: string;
@@ -38,6 +39,8 @@ const SuiteRoomLeaderMissionList = () => {
   const buttons: string[] = ['PROGRESS', 'COMPLETE'];
   const SuiteRoomId = useRecoilValue(suiteRoomIdState);
   const tokenId = useRecoilValue(tokenState);
+  const isFocused = useIsFocused();
+
   const readMissionList = async () => {
     try {
       const datalist = await MissionListApi(tokenId, parseInt(SuiteRoomId), selectedButton);
@@ -64,10 +67,13 @@ const SuiteRoomLeaderMissionList = () => {
   useEffect(() => {
     readMissionList();
   }, [selectedButton]);
+  useEffect(() => {
+    readMissionList();
+  }, [isFocused]);
   return (
     <View>
       <View style={SuiteRoomStyleSheet.ChoiceMissionContainer}>
-        <View style={SuiteRoomStyleSheet.ChoiceMissionBox}>
+        <View style={SuiteRoomStyleSheet.LeaderChoiceMissionBox}>
           {buttons.map((button) => (
             <TouchableOpacity
               key={button}
@@ -89,7 +95,7 @@ const SuiteRoomLeaderMissionList = () => {
           ))}
         </View>
       </View>
-      <ScrollView style={{ marginBottom: 60 }}>
+      <ScrollView style={{ marginBottom: 60 }} bounces={false}>
         <View style={SuiteRoomStyleSheet.MissionStatusContainer}>
           <Text style={SuiteRoomStyleSheet.MissionStatusText}>{content}</Text>
           <Text style={SuiteRoomStyleSheet.MissionLengthText}>{mission.length}</Text>
@@ -102,6 +108,7 @@ const SuiteRoomLeaderMissionList = () => {
               missionName={item.missionName}
               missionDeadLine={item.missionDeadLine}
               missionStatus={selectedButton}
+              afterPR={() => readMissionList()}
             />
           ))}
         </View>

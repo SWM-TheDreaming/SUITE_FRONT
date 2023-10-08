@@ -10,7 +10,7 @@ import mainPageStyleSheet from '../../style/style';
 import ImageModalPopup from '../../hook/ImageModal';
 import LeaderAttendanceModal from '../../components/presents/LeaderAttendanceModal';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../types';
 import { SuiteRoomStart } from '../../api/SuiteRoom/SuiteRoomStartAPi';
@@ -31,6 +31,8 @@ const SuiteRoomLeaderDashboard = () => {
   const [myAttendanceRate, setMyAttendanceRate] = useState(0);
   const [dday, setDday] = useState<number>(0);
   const [member, setMember] = useState([]);
+  const isFocused = useIsFocused();
+
   const suiteRoomStatus = useRecoilValue(suiteRoomStatusState);
   const navigation = useNavigation<RootStackNavigationProp>();
   const readDashBoard = async () => {
@@ -73,8 +75,11 @@ const SuiteRoomLeaderDashboard = () => {
       readDashBoard();
     }
   }, [suiteRoomStatus]);
+  useEffect(() => {
+    readDashBoard();
+  }, [isFocused]);
   return (
-    <ScrollView style={{ backgroundColor: 'white' }}>
+    <ScrollView style={{ backgroundColor: 'white' }} bounces={false}>
       <ModalPopup visible={startVisible}>
         <CheckCancelModal
           visible={startVisible}

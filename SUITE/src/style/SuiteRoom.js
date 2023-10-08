@@ -363,6 +363,16 @@ const SuiteRoomStyleSheet = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 24,
   },
+  LeaderChoiceMissionBox: {
+    width: widthPercentage(220),
+    height: heightPercentage(50),
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 16,
+    backgroundColor: 'white',
+    borderRadius: 24,
+  },
   SelectedMissionButton: {
     width: widthPercentage(100),
     height: heightPercentage(35),

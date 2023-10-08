@@ -8,18 +8,20 @@ import { suiteRoomIdState, tokenState, hostState } from '../../recoil/atoms';
 import { MissionPullRequestApi } from '../api/StudyRoom/MissionPullReqeustApi';
 import { DeleteMissionApi } from '../api/StudyRoom/DeleteMissionApi';
 import { useIsFocused } from '@react-navigation/native';
+import { ScrollView } from 'react-native-gesture-handler';
 type DataRow = {
   missionId: string;
   missionName: string;
   missionDeadLine: Date;
   missionStatus: string;
+  afterPR: () => void;
 };
 
 type DataListProps = {
   data: DataRow[];
 };
 
-const MissionItem: React.FC<DataRow> = ({ missionId, missionName, missionDeadLine, missionStatus }) => {
+const MissionItem: React.FC<DataRow> = ({ missionId, missionName, missionDeadLine, missionStatus, afterPR }) => {
   const SuiteRoomId = useRecoilValue(suiteRoomIdState);
   const tokenId = useRecoilValue(tokenState);
   const Ishost = useRecoilValue(hostState);
@@ -52,8 +54,9 @@ const MissionItem: React.FC<DataRow> = ({ missionId, missionName, missionDeadLin
     setActionType('Delete');
     setVisible(true);
   };
-  const SendPr = () => {
-    MissionPullRequestApi(tokenId, parseInt(SuiteRoomId), missionName);
+  const SendPr = async () => {
+    await MissionPullRequestApi(tokenId, parseInt(SuiteRoomId), missionName);
+    afterPR();
     setVisible(false);
   };
   const cancelPr = () => {
@@ -64,38 +67,40 @@ const MissionItem: React.FC<DataRow> = ({ missionId, missionName, missionDeadLin
     setVisible(false);
   };
   return (
-    <View style={styles.container}>
-      <View style={{ flexDirection: 'column' }}>
-        <Text style={styles.missionName}>{missionName}</Text>
-        <Text style={styles.missionDate}>{missionDeadLine.toString().slice(0, 10)}</Text>
-      </View>
-      {Ishost == true ? (
-        <View style={{ flexDirection: 'row' }}>
-          <TouchableOpacity onPress={LeaderXPress} style={styles.buttonStyle}>
-            <AntDesign name="closecircle" size={28} color="#B8B8B8" />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handleVPress} style={styles.buttonStyle}>
-            <AntDesign name="checkcircle" size={28} color="#005BA5" />
-          </TouchableOpacity>
+    <ScrollView bounces={false}>
+      <View style={styles.container}>
+        <View style={{ flexDirection: 'column' }}>
+          <Text style={styles.missionName}>{missionName}</Text>
+          <Text style={styles.missionDate}>{missionDeadLine.toString().slice(0, 10)}</Text>
         </View>
-      ) : missionStatus == 'PROGRESS' ? (
-        <TouchableOpacity onPress={handleVPress} style={styles.buttonStyle}>
-          {missionStatus === 'PROGRESS' && <AntDesign name="checkcircle" size={28} color="#005BA5" />}
-        </TouchableOpacity>
-      ) : (
-        <TouchableOpacity onPress={handleXPress} style={styles.buttonStyle}>
-          {missionStatus === 'CHECKING' && <AntDesign name="closecircle" size={28} color="#B8B8B8" />}
-        </TouchableOpacity>
-      )}
-      <ModalPopup visible={visible}>
-        <CheckCancelModal
-          visible={visible}
-          onClose={() => setVisible(false)}
-          text={modalText}
-          onConfirm={() => (actionType === 'send' ? SendPr() : cancelPr())}
-        />
-      </ModalPopup>
-    </View>
+        {Ishost == true ? (
+          <View style={{ flexDirection: 'row' }}>
+            <TouchableOpacity onPress={LeaderXPress} style={styles.buttonStyle}>
+              <AntDesign name="closecircle" size={28} color="#B8B8B8" />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handleVPress} style={styles.buttonStyle}>
+              <AntDesign name="checkcircle" size={28} color="#005BA5" />
+            </TouchableOpacity>
+          </View>
+        ) : missionStatus == 'PROGRESS' ? (
+          <TouchableOpacity onPress={handleVPress} style={styles.buttonStyle}>
+            {missionStatus === 'PROGRESS' && <AntDesign name="checkcircle" size={28} color="#005BA5" />}
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity onPress={handleXPress} style={styles.buttonStyle}>
+            {missionStatus === 'CHECKING' && <AntDesign name="closecircle" size={28} color="#B8B8B8" />}
+          </TouchableOpacity>
+        )}
+        <ModalPopup visible={visible}>
+          <CheckCancelModal
+            visible={visible}
+            onClose={() => setVisible(false)}
+            text={modalText}
+            onConfirm={() => (actionType === 'send' ? SendPr() : cancelPr())}
+          />
+        </ModalPopup>
+      </View>
+    </ScrollView>
   );
 };
 export default MissionItem;

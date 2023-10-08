@@ -7,6 +7,7 @@ import MissionItem from '../../hook/missionList';
 import { MissionListApi } from '../../api/StudyRoom/MissionListApi';
 import { useRecoilValue } from 'recoil';
 import { suiteRoomIdState, tokenState, suiteRoomStatusState } from '../../../recoil/atoms';
+import { useIsFocused } from '@react-navigation/native';
 
 type DataRow = {
   id: string;
@@ -38,6 +39,8 @@ const SuiteRoomCanbanBoard = () => {
   const buttons: string[] = ['PROGRESS', 'CHECKING', 'COMPLETE'];
   const SuiteRoomId = useRecoilValue(suiteRoomIdState);
   const tokenId = useRecoilValue(tokenState);
+  const isFocused = useIsFocused();
+
   const readMissionList = async () => {
     try {
       const datalist = await MissionListApi(tokenId, parseInt(SuiteRoomId), selectedButton);
@@ -69,6 +72,9 @@ const SuiteRoomCanbanBoard = () => {
   useEffect(() => {
     readMissionList();
   }, [selectedButton]);
+  useEffect(() => {
+    readMissionList();
+  }, [isFocused]);
   return (
     <View>
       <View style={SuiteRoomStyleSheet.ChoiceMissionContainer}>
@@ -107,6 +113,7 @@ const SuiteRoomCanbanBoard = () => {
               missionName={item.missionName}
               missionDeadLine={item.missionDeadLine}
               missionStatus={selectedButton}
+              afterPR={() => readMissionList()}
             />
           ))}
         </View>

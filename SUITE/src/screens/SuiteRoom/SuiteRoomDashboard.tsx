@@ -9,7 +9,7 @@ import mainPageStyleSheet from '../../style/style';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import ImageModalPopup from '../../hook/ImageModal';
 import AttendanceCheckModal from '../../hook/AttendanceCheckModal';
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../types';
 import { SuiteRoomOutApi } from '../../api/SuiteRoom/SuiteRoomOutApi';
@@ -29,6 +29,7 @@ const SuiteRoomDashboard = () => {
   const [myAttendanceRate, setMyAttendanceRate] = useState();
   const [dday, setDday] = useState<number>(0);
   const [member, setMember] = useState([]);
+  const isFocused = useIsFocused();
   const navigation = useNavigation<RootStackNavigationProp>();
   const readDashBoard = async () => {
     try {
@@ -67,14 +68,13 @@ const SuiteRoomDashboard = () => {
     }
   }, [number]);
   useEffect(() => {
-    console.log('change');
-    console.log(dashboard);
-  }, [dashboard]);
-  useEffect(() => {
     if (suiteRoomStatus === 'START') {
       readDashBoard();
     }
   }, [suiteRoomStatus]);
+  useEffect(() => {
+    readDashBoard();
+  }, [isFocused]);
   return (
     <ScrollView style={{ backgroundColor: 'white' }}>
       <View style={SuiteRoomStyleSheet.MyStudyRoomContainer}>
@@ -96,7 +96,7 @@ const SuiteRoomDashboard = () => {
               </View>
               <View style={SuiteRoomStyleSheet.AttendanceMissionBox}>
                 <ProgressCircle
-                  percent={80}
+                  percent={parseInt(myAttendanceRate) * 100}
                   radius={65}
                   borderWidth={45}
                   color="#4CADA8"
@@ -115,7 +115,7 @@ const SuiteRoomDashboard = () => {
               </View>
               <View style={SuiteRoomStyleSheet.AttendanceMissionBox}>
                 <ProgressCircle
-                  percent={90}
+                  percent={parseInt(myAttendanceRate) * 100}
                   radius={65}
                   borderWidth={45}
                   color="#A38AE7"

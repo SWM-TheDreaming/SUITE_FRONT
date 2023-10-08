@@ -4,7 +4,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import SuiteRoomStyleSheet from '../../style/SuiteRoom';
 import MissionRequestList from '../../hook/missionRequestList';
 import mainPageStyleSheet from '../../style/style';
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../types';
 import { MissionPullRequestListApi } from '../../api/StudyRoom/MissionPullRequestListApi';
@@ -24,6 +24,8 @@ const SuiteRoomLeaderCanbanBoard = () => {
   const SuiteRoomId = useRecoilValue(suiteRoomIdState);
   const tokenId = useRecoilValue(tokenState);
   const [PRList, setPRList] = useState([]);
+  const isFocused = useIsFocused();
+
   const readMissionRequest = async () => {
     try {
       const datalist = await MissionPullRequestListApi(tokenId, parseInt(SuiteRoomId));
@@ -36,9 +38,12 @@ const SuiteRoomLeaderCanbanBoard = () => {
   useEffect(() => {
     readMissionRequest();
   }, []);
+  useEffect(() => {
+    readMissionRequest();
+  }, [isFocused]);
   return (
     <View>
-      <ScrollView>
+      <ScrollView bounces={false}>
         <View style={SuiteRoomStyleSheet.LeaderMissionStatusContainer}>
           <View style={{ flexDirection: 'row' }}>
             <Text style={SuiteRoomStyleSheet.MissionStatusText}>{'미션완료 요청'}</Text>

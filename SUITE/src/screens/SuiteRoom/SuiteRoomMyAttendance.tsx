@@ -6,6 +6,7 @@ import { suiteRoomIdState, tokenState } from '../../../recoil/atoms';
 import MyAttendanceTable from '../../hook/myAttendanceTable';
 import * as Progress from 'react-native-progress';
 import { AttendanceListApi } from '../../api/StudyRoom/AttendanceListApi';
+import { useIsFocused } from '@react-navigation/native';
 
 const SuiteRoomMyAttendance = () => {
   const SuiteRoomId = useRecoilValue(suiteRoomIdState);
@@ -13,6 +14,8 @@ const SuiteRoomMyAttendance = () => {
   const [myAttendanceRate, setMyAttendanceRate] = useState(0);
   const [deposit, setDeposit] = useState(0);
   const [attendanceList, setAttendanceList] = useState([]);
+  const isFocused = useIsFocused();
+
   const readAttendanceList = async () => {
     try {
       const datalist = await AttendanceListApi(tokenId, parseInt(SuiteRoomId));
@@ -27,6 +30,9 @@ const SuiteRoomMyAttendance = () => {
   useEffect(() => {
     readAttendanceList();
   }, []);
+  useEffect(() => {
+    readAttendanceList();
+  }, [isFocused]);
   return (
     <ScrollView style={{ backgroundColor: 'white' }}>
       <View style={SuiteRoomStyleSheet.MyStudyRoomContainer}>
