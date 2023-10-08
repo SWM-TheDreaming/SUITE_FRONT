@@ -30,12 +30,12 @@ const CompleteData: DataRow[] = [
   { id: '4', missionName: '2장 연습문제 풀이', missionDate: '2023-07-19', status: 'complete' },
 ];
 
-const SuiteRoomCanbanBoard = () => {
+const SuiteRoomLeaderMissionList = () => {
   const [content, setContent] = useState('진행 중');
   const [data, setData] = useState(ProgressData);
   const [mission, setMission] = useState([]);
   const [selectedButton, setSelectedButton] = useState<string | null>('PROGRESS');
-  const buttons: string[] = ['PROGRESS', 'CHECKING', 'COMPLETE'];
+  const buttons: string[] = ['PROGRESS', 'COMPLETE'];
   const SuiteRoomId = useRecoilValue(suiteRoomIdState);
   const tokenId = useRecoilValue(tokenState);
   const readMissionList = async () => {
@@ -53,11 +53,6 @@ const SuiteRoomCanbanBoard = () => {
         setSelectedButton('PROGRESS');
         setContent('진행 중');
         setData(ProgressData);
-        break;
-      case 'CHECKING':
-        setSelectedButton('CHECKING');
-        setContent('승인 대기중');
-        setData(RequestData);
         break;
       case 'COMPLETE':
         setSelectedButton('COMPLETE');
@@ -88,7 +83,7 @@ const SuiteRoomCanbanBoard = () => {
                   selectedButton === button && SuiteRoomStyleSheet.SelectedMissionText,
                 ]}
               >
-                {button === 'PROGRESS' ? '진행중' : button === 'CHECKING' ? '승인 대기 중' : '완료'}
+                {button === 'PROGRESS' ? '진행중' : '완료'}
               </Text>
             </TouchableOpacity>
           ))}
@@ -115,4 +110,4 @@ const SuiteRoomCanbanBoard = () => {
   );
 };
 
-export default SuiteRoomCanbanBoard;
+export default SuiteRoomLeaderMissionList;

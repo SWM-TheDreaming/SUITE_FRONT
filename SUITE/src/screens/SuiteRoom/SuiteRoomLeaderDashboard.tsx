@@ -27,8 +27,8 @@ const SuiteRoomLeaderDashboard = () => {
   const [startVisible, setStartVisible] = useState(false);
   const [number, setNumber] = useState<number>(0);
   const [depositAmount, setDepositAmount] = useState();
-  const [myMissionRate, setMyMissionRate] = useState();
-  const [myAttendanceRate, setMyAttendanceRate] = useState();
+  const [myMissionRate, setMyMissionRate] = useState(0);
+  const [myAttendanceRate, setMyAttendanceRate] = useState(0);
   const [dday, setDday] = useState<number>(0);
   const [member, setMember] = useState([]);
   const suiteRoomStatus = useRecoilValue(suiteRoomStatusState);
@@ -55,7 +55,7 @@ const SuiteRoomLeaderDashboard = () => {
     }
   };
   const attendanceStart = () => {
-    setNumber(Math.random());
+    navigation.navigate('CreateAttendance');
   };
   const studyStartButtonHandler = () => {
     SuiteRoomStart(tokenId, parseInt(SuiteRoomId));
@@ -102,14 +102,14 @@ const SuiteRoomLeaderDashboard = () => {
               </View>
               <View style={SuiteRoomStyleSheet.AttendanceMissionBox}>
                 <ProgressCircle
-                  percent={myAttendanceRate}
+                  percent={myAttendanceRate * 100}
                   radius={65}
                   borderWidth={45}
                   color="#4CADA8"
                   shadowColor="#E2FFFE"
                   bgColor="white"
                 >
-                  <Text style={SuiteRoomStyleSheet.SuiteRoomDetailCircularBarText}>{myAttendanceRate}%</Text>
+                  <Text style={SuiteRoomStyleSheet.SuiteRoomDetailCircularBarText}>{myAttendanceRate * 100}%</Text>
                 </ProgressCircle>
               </View>
             </View>
@@ -119,14 +119,14 @@ const SuiteRoomLeaderDashboard = () => {
               </View>
               <View style={SuiteRoomStyleSheet.AttendanceMissionBox}>
                 <ProgressCircle
-                  percent={myMissionRate}
+                  percent={myMissionRate * 100}
                   radius={65}
                   borderWidth={45}
                   color="#A38AE7"
                   shadowColor="#F0EBFF"
                   bgColor="white"
                 >
-                  <Text style={SuiteRoomStyleSheet.SuiteRoomDetailCircularBarText}>{myMissionRate}%</Text>
+                  <Text style={SuiteRoomStyleSheet.SuiteRoomDetailCircularBarText}>{myMissionRate * 100}%</Text>
                 </ProgressCircle>
               </View>
             </View>
@@ -149,14 +149,6 @@ const SuiteRoomLeaderDashboard = () => {
               <Text style={SuiteRoomStyleSheet.ContractButtonText}>계약서 이력</Text>
             </TouchableOpacity>
           </View>
-          <ImageModalPopup visible={visible}>
-            <LeaderAttendanceModal
-              visible={visible}
-              onClose={() => setVisible(false)}
-              text={'출석 번호는 10분 뒤 만료되니 \n 팀원들에게 빠르게 안내해주세요!'}
-              number={number}
-            />
-          </ImageModalPopup>
           <View style={SuiteRoomStyleSheet.StudyDashboardContainer}>
             <View style={SuiteRoomStyleSheet.StudyInfoContainer}>
               <Text style={SuiteRoomStyleSheet.StudyInfoText}>팀 스터디 현황</Text>

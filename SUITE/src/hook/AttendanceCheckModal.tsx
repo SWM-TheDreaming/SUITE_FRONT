@@ -6,7 +6,9 @@ import SuiteRoomStyleSheet from '../style/SuiteRoom';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import ModalPopup from './modal';
 import AttendanceCheckOkModaPopup from '../components/presents/AttendanceCheckOkModal';
-
+import { AttendanceApi } from '../api/StudyRoom/AttendacneApi';
+import { suiteRoomIdState, tokenState } from '../../recoil/atoms';
+import { useRecoilValue } from 'recoil';
 interface ModalPopupProps {
   visible: boolean;
   onClose: () => void;
@@ -18,15 +20,29 @@ const AttendanceCheckModal: React.FC<ModalPopupProps> = ({ visible, onClose, tex
   const [attendanceNumber, setattendanceNumber] = useState('');
   const [incorrect, setIncorrect] = useState(false);
   const [okVisible, setOkVisible] = useState(false);
-  console.log(number);
-  const checkAttendanceNumber = () => {
-    if (number == parseInt(attendanceNumber)) {
-      console.log('correct');
-      setIncorrect(false);
-      //출석체크 완료 API 세팅
-      setOkVisible(true);
-    } else {
-      setIncorrect(true);
+  const [errortext, setErrorText] = useState('');
+  const SuiteRoomId = useRecoilValue(suiteRoomIdState);
+  const tokenId = useRecoilValue(tokenState);
+  const AttendanceHandler = async () => {
+    try {
+      const datalist = await AttendanceApi(tokenId, parseInt(SuiteRoomId), parseInt(attendanceNumber));
+      console.log(datalist);
+      if (datalist == 200) {
+        setOkVisible(true);
+      } else if (datalist == 401) {
+        setIncorrect(true);
+        setErrorText('출석 번호가 틀립니다!');
+      } else if (datalist == 403) {
+        setIncorrect(true);
+        setErrorText('출석 권한이 없습니다!');
+      } else if (datalist == 408) {
+        setIncorrect(true);
+        setErrorText('출석 시간이 아닙니다!');
+      }
+
+      // 받은 데이터 활용하기
+    } catch (error) {
+      console.log('Error occurred:', error);
     }
   };
   if (!visible) {
@@ -50,10 +66,8 @@ const AttendanceCheckModal: React.FC<ModalPopupProps> = ({ visible, onClose, tex
             keyboardType="numeric"
             textAlign="center"
           />
-          {incorrect == true ? (
-            <Text style={SuiteRoomStyleSheet.IncorrectAttendanceText}>출석번호가 일치하지 않습니다!</Text>
-          ) : null}
-          <TouchableOpacity style={mainPageStyleSheet.imagemodalButton} onPress={checkAttendanceNumber}>
+          {incorrect == true ? <Text style={SuiteRoomStyleSheet.IncorrectAttendanceText}>{errortext}</Text> : null}
+          <TouchableOpacity style={mainPageStyleSheet.imagemodalButton} onPress={AttendanceHandler}>
             <Text style={mainPageStyleSheet.SignmodalButtonText}>출석 하기</Text>
           </TouchableOpacity>
         </View>

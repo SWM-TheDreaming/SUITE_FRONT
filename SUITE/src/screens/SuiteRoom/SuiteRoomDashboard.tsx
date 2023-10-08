@@ -14,7 +14,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../types';
 import { SuiteRoomOutApi } from '../../api/SuiteRoom/SuiteRoomOutApi';
 import { DashBoardApi } from '../../api/StudyRoom/DashBoardApi';
-
+import { AttendanceApi } from '../../api/StudyRoom/AttendacneApi';
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 const SuiteRoomDashboard = () => {
@@ -103,7 +103,9 @@ const SuiteRoomDashboard = () => {
                   shadowColor="#E2FFFE"
                   bgColor="white"
                 >
-                  <Text style={SuiteRoomStyleSheet.SuiteRoomDetailCircularBarText}>{myAttendanceRate}%</Text>
+                  <Text style={SuiteRoomStyleSheet.SuiteRoomDetailCircularBarText}>
+                    {parseInt(myAttendanceRate) * 100}%
+                  </Text>
                 </ProgressCircle>
               </View>
             </View>
@@ -120,7 +122,9 @@ const SuiteRoomDashboard = () => {
                   shadowColor="#F0EBFF"
                   bgColor="white"
                 >
-                  <Text style={SuiteRoomStyleSheet.SuiteRoomDetailCircularBarText}>{myMissionRate}%</Text>
+                  <Text style={SuiteRoomStyleSheet.SuiteRoomDetailCircularBarText}>
+                    {parseInt(myMissionRate) * 100}%
+                  </Text>
                 </ProgressCircle>
               </View>
             </View>

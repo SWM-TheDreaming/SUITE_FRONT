@@ -5,6 +5,7 @@ import SuiteRoomDetailStart from '../screens/SuiteRoom/SuiteRoomDetailStart';
 import SuiteRoomLeaderCanbanBoard from '../screens/SuiteRoom/SuiteRoomLeaderCanban';
 import SuiteRoomMyAttendance from '../screens/SuiteRoom/SuiteRoomMyAttendance';
 import SuiteRoomDashboard from '../screens/SuiteRoom/SuiteRoomDashboard';
+import SuiteRoomLeaderMissionList from '../screens/SuiteRoom/SuiteRoomLeaderMissionList';
 import { suiteRoomStatusState, hostState } from '../../recoil/atoms';
 import { useRecoilValue } from 'recoil';
 import { Header } from '../hook/header';
@@ -29,7 +30,11 @@ export default function LeaderTopBarNavigation() {
           hostStatus === true ? ( //방장일때의 Top Tab Bar
             <>
               <Tab.Screen name="대시보드" component={SuiteRoomLeaderDashboard} options={{ tabBarLabel: '대시보드' }} />
-              <Tab.Screen name="칸반보드" component={SuiteRoomCanbanBoard} options={{ tabBarLabel: '칸반보드' }} />
+              <Tab.Screen
+                name="칸반보드"
+                component={SuiteRoomLeaderMissionList}
+                options={{ tabBarLabel: '칸반보드' }}
+              />
               <Tab.Screen
                 name="칸반관리"
                 component={SuiteRoomLeaderCanbanBoard}

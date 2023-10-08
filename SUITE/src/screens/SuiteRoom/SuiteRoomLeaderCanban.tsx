@@ -7,34 +7,42 @@ import mainPageStyleSheet from '../../style/style';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../types';
+import { MissionPullRequestListApi } from '../../api/StudyRoom/MissionPullRequestListApi';
+import { useRecoilValue } from 'recoil';
+import { suiteRoomIdState, tokenState } from '../../../recoil/atoms';
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 type DataRow = {
-  id: string;
+  missionId: string;
   missionName: string;
-  missionDate: string;
+  missionDeadLine: string;
   nickname: string;
 };
 
-const RequestData: DataRow[] = [
-  { id: '0', missionName: '영어 독해', missionDate: '2023-07-15', nickname: 'son' },
-  { id: '1', missionName: '영어 독해', missionDate: '2023-07-15', nickname: 'kim' },
-  { id: '2', missionName: '영어 독해', missionDate: '2023-07-15', nickname: 'Lee' },
-  { id: '3', missionName: '2장 외워오기', missionDate: '2023-07-18', nickname: 'You' },
-  { id: '4', missionName: '2장 연습문제 풀이', missionDate: '2023-07-19', nickname: 'Hwang' },
-  { id: '5', missionName: '3장 예습', missionDate: '2023-07-20', nickname: 'Ki' },
-];
-
 const SuiteRoomLeaderCanbanBoard = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
-
+  const SuiteRoomId = useRecoilValue(suiteRoomIdState);
+  const tokenId = useRecoilValue(tokenState);
+  const [PRList, setPRList] = useState([]);
+  const readMissionRequest = async () => {
+    try {
+      const datalist = await MissionPullRequestListApi(tokenId, parseInt(SuiteRoomId));
+      setPRList(datalist);
+      // 받은 데이터 활용하기
+    } catch (error) {
+      console.log('Error occurred:', error);
+    }
+  };
+  useEffect(() => {
+    readMissionRequest();
+  }, []);
   return (
     <View>
       <ScrollView>
         <View style={SuiteRoomStyleSheet.LeaderMissionStatusContainer}>
           <View style={{ flexDirection: 'row' }}>
             <Text style={SuiteRoomStyleSheet.MissionStatusText}>{'미션완료 요청'}</Text>
-            <Text style={SuiteRoomStyleSheet.MissionLengthText}>{RequestData.length}</Text>
+            <Text style={SuiteRoomStyleSheet.MissionLengthText}>{PRList.length}</Text>
           </View>
           <View>
             <TouchableOpacity
@@ -46,8 +54,14 @@ const SuiteRoomLeaderCanbanBoard = () => {
           </View>
         </View>
         <View style={SuiteRoomStyleSheet.MissionContainer}>
-          {RequestData.map((item) => (
-            <MissionRequestList key={item.id} {...item} />
+          {PRList.map((item) => (
+            <MissionRequestList
+              key={item.missionId}
+              missionId={item.missionId}
+              missionName={item.missionName}
+              missionDeadLine={item.missionDeadLine}
+              nickname={'Son'}
+            />
           ))}
         </View>
       </ScrollView>

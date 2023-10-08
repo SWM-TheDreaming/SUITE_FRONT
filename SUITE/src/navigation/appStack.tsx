@@ -15,6 +15,7 @@ import SuiteRoomDetail from '../screens/SuiteRoom/SuiteRoomDetail';
 import TabBarNavigation from './TopBarNavigation';
 import LeaderTopBarNavigation from './LeaderTopBarNavigation';
 import CreateMission from '../screens/SuiteRoom/CreateMission';
+import CreateAttendance from '../screens/SuiteRoom/CreateAttendance';
 import ContractTabNavigation from './ContractTabNavigation';
 import SuiteRoomCreateComplete from '../screens/SutieRoomCreate/SuiteRoomCreateComplete';
 import Alarm from '../screens/Alarm';
@@ -120,6 +121,14 @@ export function AppStack() {
       <App.Screen
         name="CreateMission"
         component={CreateMission}
+        options={{
+          headerShown: false,
+          ...TransitionPresets.RevealFromBottomAndroid,
+        }}
+      />
+      <App.Screen
+        name="CreateAttendance"
+        component={CreateAttendance}
         options={{
           headerShown: false,
           ...TransitionPresets.RevealFromBottomAndroid,

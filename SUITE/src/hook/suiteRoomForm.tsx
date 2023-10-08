@@ -14,7 +14,8 @@ export interface FormValues {
   channelLink: string;
   studyMethod: string;
   name: string;
-  missionName : string;
+  missionName: string;
+  attendanceCode: string;
 }
 
 const suiteRoomForm = () => {
@@ -32,7 +33,8 @@ const suiteRoomForm = () => {
     channelLink: '',
     studyMethod: '',
     name: '',
-    missionName:''
+    missionName: '',
+    attendanceCode: '',
   });
   const [touched, setTouched] = useState<{ [key: string]: boolean }>({});
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -194,6 +196,18 @@ const suiteRoomForm = () => {
         setErrors({
           ...errors,
           [name]: '내용을 입력해주세요',
+        });
+      } else {
+        setErrors({
+          ...errors,
+          [name]: '',
+        });
+      }
+    } else if (name === 'attendanceCode') {
+      if (!text) {
+        setErrors({
+          ...errors,
+          [name]: '숫자를 입력해주세요',
         });
       } else {
         setErrors({

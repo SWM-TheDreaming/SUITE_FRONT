@@ -5,9 +5,9 @@ import ModalPopup from '../hook/modal';
 import CheckCancelModal from '../hook/checkCancelModal';
 
 type DataRow = {
-  id: string;
+  missionId: string;
   missionName: string;
-  missionDate: string;
+  missionDeadLine: string;
   nickname: string;
 };
 
@@ -15,7 +15,7 @@ type DataListProps = {
   data: DataRow[];
 };
 
-const MissionRequestList: React.FC<DataRow> = ({ id, missionName, missionDate, nickname }) => {
+const MissionRequestList: React.FC<DataRow> = ({ missionId, missionName, missionDeadLine, nickname }) => {
   const [visible, setVisible] = useState(false);
   const [modalText, setModalText] = useState('');
   const [actionType, setActionType] = useState(null);
@@ -32,12 +32,10 @@ const MissionRequestList: React.FC<DataRow> = ({ id, missionName, missionDate, n
     setActionType('cancel');
   };
   const acceptPr = () => {
-    console.log(id);
     console.log('PR 승인하기');
     setVisible(false);
   };
   const rejectPr = () => {
-    console.log(id);
     console.log('PR 거부하기');
     setVisible(false);
   };
@@ -48,7 +46,7 @@ const MissionRequestList: React.FC<DataRow> = ({ id, missionName, missionDate, n
         <View style={{ flexDirection: 'row' }}>
           <Text style={styles.nickname}>{nickname}</Text>
           <Text style={styles.middlebar}> | </Text>
-          <Text style={styles.missionDate}>{missionDate}</Text>
+          <Text style={styles.missionDate}>{missionDeadLine.toString().slice(0, 10)}</Text>
         </View>
       </View>
       <View style={{ flexDirection: 'row' }}>
