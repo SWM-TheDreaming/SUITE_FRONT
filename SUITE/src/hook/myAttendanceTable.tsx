@@ -1,22 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-type DataRow = {
-  nickname: string;
-  attendance: string;
-  missionCompletion: string;
-};
-
-const data: DataRow[] = [
-  { nickname: '', attendance: '', missionCompletion: '' },
-  { nickname: '1', attendance: '2023-07-15', missionCompletion: 'O' },
-  { nickname: '2', attendance: '2023-07-16', missionCompletion: 'X' },
-  { nickname: '3', attendance: '2023-07-17', missionCompletion: 'O' },
-  { nickname: '4', attendance: '2023-07-18', missionCompletion: 'O' },
-  { nickname: '5', attendance: '2023-07-19', missionCompletion: 'O' },
-];
-
-const MyAttendanceTable: React.FC = () => {
+const MyAttendanceTable: React.FC<{ data: any[] }> = ({ data }) => {
   return (
     <View style={styles.container}>
       {data.map((item, index) => (
@@ -24,9 +9,11 @@ const MyAttendanceTable: React.FC = () => {
           key={index}
           style={[styles.row, index % 2 === 0 ? styles.evenRow : styles.oddRow, index === 0 ? styles.headerRow : null]}
         >
-          <Text style={styles.firstColumn}>{index === 0 ? '회차' : item.nickname}</Text>
-          <Text style={styles.secondColumn}>{index === 0 ? '출석일자' : item.attendance}</Text>
-          <Text style={styles.thirdColumn}>{index === 0 ? '출석여부' : item.missionCompletion}</Text>
+          <Text style={styles.firstColumn}>{index === 0 ? '회차' : item.round}</Text>
+          <Text style={styles.secondColumn}>
+            {index === 0 ? '출석일자' : item.attendanceTime.toString().slice(0, 10)}
+          </Text>
+          <Text style={styles.thirdColumn}>{index === 0 ? '출석여부' : item.status == true ? 'O' : 'X'}</Text>
         </View>
       ))}
     </View>
