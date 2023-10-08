@@ -9,6 +9,10 @@ interface UserData {
   phone: string;
   preferStudy: string;
   profileURL: string;
+  missionAvgRate: number;
+  missionCompleteCount: number;
+  attendanceAvgRate: number;
+  attendanceCompleteCount: number;
   // 다른 속성들도 정의할 수 있음
 }
 export const getUserInformation = async (accessToken: string): Promise<UserData> => {
