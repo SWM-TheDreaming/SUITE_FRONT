@@ -3,22 +3,27 @@ import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import ModalPopup from '../hook/modal';
 import CheckCancelModal from '../hook/checkCancelModal';
-
+import { MissionApprove } from '../api/StudyRoom/MissionApprove';
+import { useRecoilValue } from 'recoil';
+import { suiteRoomIdState, tokenState } from '../../recoil/atoms';
 type DataRow = {
   missionId: string;
   missionName: string;
   missionDeadLine: string;
   nickname: string;
+  afterApprove: () => void;
 };
 
 type DataListProps = {
   data: DataRow[];
 };
 
-const MissionRequestList: React.FC<DataRow> = ({ missionId, missionName, missionDeadLine, nickname }) => {
+const MissionRequestList: React.FC<DataRow> = ({ missionId, missionName, missionDeadLine, nickname, afterApprove }) => {
   const [visible, setVisible] = useState(false);
   const [modalText, setModalText] = useState('');
   const [actionType, setActionType] = useState(null);
+  const tokenId = useRecoilValue(tokenState);
+  const SuiteRoomId = useRecoilValue(suiteRoomIdState);
 
   const handleVPress = () => {
     setModalText('PR을 승인하시겠습니까?');
@@ -31,8 +36,9 @@ const MissionRequestList: React.FC<DataRow> = ({ missionId, missionName, mission
     setVisible(true);
     setActionType('cancel');
   };
-  const acceptPr = () => {
-    console.log('PR 승인하기');
+  const acceptPr = async () => {
+    await MissionApprove(tokenId, parseInt(SuiteRoomId), parseInt(missionId));
+    afterApprove();
     setVisible(false);
   };
   const rejectPr = () => {

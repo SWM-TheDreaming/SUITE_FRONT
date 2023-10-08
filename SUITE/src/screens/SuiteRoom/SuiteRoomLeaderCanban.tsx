@@ -65,7 +65,8 @@ const SuiteRoomLeaderCanbanBoard = () => {
               missionId={item.missionId}
               missionName={item.missionName}
               missionDeadLine={item.missionDeadLine}
-              nickname={'Son'}
+              nickname={item.nickname}
+              afterApprove={() => readMissionRequest()}
             />
           ))}
         </View>
