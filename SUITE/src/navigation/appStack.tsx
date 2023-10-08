@@ -20,6 +20,7 @@ import SuiteRoomCreateComplete from '../screens/SutieRoomCreate/SuiteRoomCreateC
 import Alarm from '../screens/Alarm';
 import SuiteRoomEdit from '../screens/SuiteRoom/SuiteRoomEdit';
 import SuiteRoomUserAttendPay from '../screens/SuiteRoom/SuiteRoomUserAttendPay';
+import ScrabList from '../screens/Mypage/ScarbList';
 const App = createStackNavigator<RootStackParamList>();
 
 export function AppStack() {
@@ -144,6 +145,14 @@ export function AppStack() {
       <App.Screen
         name="SuiteRoomUserAttendPay"
         component={SuiteRoomUserAttendPay}
+        options={{
+          headerShown: false,
+          ...TransitionPresets.RevealFromBottomAndroid,
+        }}
+      />
+      <App.Screen
+        name="ScrabList"
+        component={ScrabList}
         options={{
           headerShown: false,
           ...TransitionPresets.RevealFromBottomAndroid,

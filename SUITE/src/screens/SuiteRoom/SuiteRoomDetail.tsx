@@ -23,6 +23,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { useIsFocused } from '@react-navigation/native';
 import { SuiteRoomDeleteApi } from '../../api/SuiteRoom/SutieRoomDeleteApi';
 import CheckCancelModal from '../../hook/checkCancelModal';
+import { ScrabSuiteRoomApi } from '../../api/SuiteRoom/ScrabSuiteRoomApi';
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 type SuiteRoomDetailRouteProp = RouteProp<RootStackParamList, 'SuiteRoomDetail'>;
@@ -57,7 +58,10 @@ const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route 
   const [subject, setSubject] = useState('');
   const [title, setTitle] = useState('');
   const [dday, setDday] = useState('');
+  const [mark, setMark] = useState(false);
+  const [markChange, setMarkChange] = useState(false);
   const [checkInVisible, setcheckInVisible] = useState(false);
+
   const setMoney = useSetRecoilState(depositAmountState);
   const setRoomId = useSetRecoilState(suiteRoomIdState);
   const fetchData = async () => {
@@ -81,6 +85,7 @@ const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route 
       setStudyMethod(datalist.studyMethod);
       setSubject(datalist.subject);
       setTitle(datalist.title);
+      setMark(datalist.mark);
       // 받은 데이터 활용하기
     } catch (error) {
       console.log('Error occurred:', error);
@@ -99,22 +104,24 @@ const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route 
     setCancelVisible(false);
     navigation.navigate('Studylist');
   };
-  const calculateDDay = () => {
-    const today = new Date();
-    const recruitmentDeadline = new Date(recruitmentDeadLine);
-    const timeDiff = recruitmentDeadline.getTime() - today.getTime();
-    const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-    return daysDiff < 0 ? `D+${daysDiff.toString().slice(1, daysDiff.toString().length)}` : `D-${daysDiff}`;
-  };
   const GoAttendancePay = () => {
     setcheckInVisible(false);
     setRoomId(SuiteRoomid.toString());
     setMoney(parseInt(depositAmount));
     navigation.navigate('SuiteRoomUserAttendPay');
   };
+  const scrabButtonHandle = () => {
+    setMarkChange(true);
+    setMark(!mark);
+  };
   useEffect(() => {
     fetchData();
   }, []);
+  useEffect(() => {
+    if (markChange == true) {
+      ScrabSuiteRoomApi(storedToken, SuiteRoomid);
+    }
+  }, [mark]);
   useEffect(() => {
     const today = new Date();
     const recruitmentDeadline = new Date(recruitmentDeadLine);
@@ -127,9 +134,9 @@ const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route 
     fetchData();
   }, [isFocused]);
   return (
-    <ScrollView>
+    <ScrollView bounces={false}>
       <View style={SuiteRoomStyleSheet.SuiteRoomDetailContainer}>
-        <Header title={''} backScreen="Studylist" />
+        <Header title={''} />
         <View style={SuiteRoomStyleSheet.SuiteRoomDetailupperBox}>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
             <TagComponent
@@ -265,8 +272,11 @@ const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route 
             </View>
           ) : (
             <View style={{ flexDirection: 'row' }}>
-              <TouchableOpacity style={SuiteRoomStyleSheet.SuiteRoomDetailScrabButton}>
-                <FontAwesome name="star-o" size={20} color={'#888888'} />
+              <TouchableOpacity
+                style={SuiteRoomStyleSheet.SuiteRoomDetailScrabButton}
+                onPress={() => scrabButtonHandle()}
+              >
+                <FontAwesome name="star-o" size={20} color={mark == true ? '#FEDE35' : '#888888'} />
               </TouchableOpacity>
               <TouchableOpacity
                 style={SuiteRoomStyleSheet.SutieRoomDetailCheckinButton}

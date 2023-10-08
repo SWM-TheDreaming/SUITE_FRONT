@@ -190,7 +190,12 @@ const Mypage = () => {
             <MaterialIcons name="navigate-next" size={24} color={'black'} />
           </View>
         </TouchableOpacity>
-        <TouchableOpacity style={AnpServiceStyleSheet.ChoiceContainer}>
+        <TouchableOpacity
+          style={AnpServiceStyleSheet.ChoiceContainer}
+          onPress={() => {
+            navigation.navigate('ScrabList');
+          }}
+        >
           <Text style={AnpServiceStyleSheet.ChoiceText}>스크랩한 스터디</Text>
           <MaterialIcons name="navigate-next" size={24} color={'black'} />
         </TouchableOpacity>

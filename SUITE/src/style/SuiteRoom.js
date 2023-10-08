@@ -176,7 +176,7 @@ const SuiteRoomStyleSheet = StyleSheet.create({
   },
   SutieRoomDetailCheckinButton: {
     width: widthPercentage(260),
-    height: heightPercentage(60),
+    height: heightPercentage(50),
     backgroundColor: '#050953',
     borderColor: 'black',
     borderWidth: 1,
