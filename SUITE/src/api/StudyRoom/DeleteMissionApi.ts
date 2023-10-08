@@ -17,7 +17,7 @@ export const DeleteMissionApi = async (accessToken: string, roomNum: number, mis
       },
     );
     if (response.status === 200) {
-      const data = response.data.data;
+      const data = response.status;
       return data;
     } else if (response.status === 400) {
       const errorData = response.data; // 에러 응답 데이터

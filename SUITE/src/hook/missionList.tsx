@@ -9,6 +9,7 @@ import { MissionPullRequestApi } from '../api/StudyRoom/MissionPullReqeustApi';
 import { DeleteMissionApi } from '../api/StudyRoom/DeleteMissionApi';
 import { useIsFocused } from '@react-navigation/native';
 import { ScrollView } from 'react-native-gesture-handler';
+import { MissionPRCancel } from '../api/StudyRoom/MissionPRCancel';
 type DataRow = {
   missionId: string;
   missionName: string;
@@ -32,7 +33,12 @@ const MissionItem: React.FC<DataRow> = ({ missionId, missionName, missionDeadLin
   const DeleteMission = async () => {
     try {
       const data = await DeleteMissionApi(tokenId, parseInt(SuiteRoomId), missionName);
-      Alert.alert(data);
+      if (data == 200) {
+        Alert.alert('미션 삭제가 완료 되었습니다!');
+      } else {
+        Alert.alert(data);
+      }
+      afterPR();
       // 받은 데이터 활용하기
     } catch (error) {
       console.log('Error occurred:', error);
@@ -59,10 +65,12 @@ const MissionItem: React.FC<DataRow> = ({ missionId, missionName, missionDeadLin
     afterPR();
     setVisible(false);
   };
-  const cancelPr = () => {
+  const cancelPr = async () => {
     if (actionType === 'Delete') {
       DeleteMission();
     } else {
+      await MissionPRCancel(tokenId, parseInt(missionId));
+      afterPR();
     }
     setVisible(false);
   };
@@ -74,14 +82,16 @@ const MissionItem: React.FC<DataRow> = ({ missionId, missionName, missionDeadLin
           <Text style={styles.missionDate}>{missionDeadLine.toString().slice(0, 10)}</Text>
         </View>
         {Ishost == true ? (
-          <View style={{ flexDirection: 'row' }}>
-            <TouchableOpacity onPress={LeaderXPress} style={styles.buttonStyle}>
-              <AntDesign name="closecircle" size={28} color="#B8B8B8" />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleVPress} style={styles.buttonStyle}>
-              <AntDesign name="checkcircle" size={28} color="#005BA5" />
-            </TouchableOpacity>
-          </View>
+          missionStatus == 'PROGRESS' ? (
+            <View style={{ flexDirection: 'row' }}>
+              <TouchableOpacity onPress={LeaderXPress} style={styles.buttonStyle}>
+                <AntDesign name="closecircle" size={28} color="#B8B8B8" />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={handleVPress} style={styles.buttonStyle}>
+                <AntDesign name="checkcircle" size={28} color="#005BA5" />
+              </TouchableOpacity>
+            </View>
+          ) : null
         ) : missionStatus == 'PROGRESS' ? (
           <TouchableOpacity onPress={handleVPress} style={styles.buttonStyle}>
             {missionStatus === 'PROGRESS' && <AntDesign name="checkcircle" size={28} color="#005BA5" />}

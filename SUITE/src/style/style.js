@@ -640,6 +640,7 @@ const mainPageStyleSheet = StyleSheet.create({
     fontSize: 17,
     fontWeight: 'bold',
     marginTop: heightPercentage(30),
+    color: 'black',
   },
   showNumberText: {
     fontSize: 40,
@@ -654,7 +655,7 @@ const mainPageStyleSheet = StyleSheet.create({
   },
   SignModalContainer: {
     width: widthPercentage(280),
-    height: heightPercentage(170),
+    height: heightPercentage(150),
     backgroundColor: 'white',
     borderRadius: 10,
     padding: 20,

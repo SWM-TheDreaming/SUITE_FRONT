@@ -6,6 +6,7 @@ import CheckCancelModal from '../hook/checkCancelModal';
 import { MissionApprove } from '../api/StudyRoom/MissionApprove';
 import { useRecoilValue } from 'recoil';
 import { suiteRoomIdState, tokenState } from '../../recoil/atoms';
+import { MissionPRCancel } from '../api/StudyRoom/MissionPRCancel';
 type DataRow = {
   missionId: string;
   missionName: string;
@@ -41,8 +42,9 @@ const MissionRequestList: React.FC<DataRow> = ({ missionId, missionName, mission
     afterApprove();
     setVisible(false);
   };
-  const rejectPr = () => {
-    console.log('PR 거부하기');
+  const rejectPr = async () => {
+    await MissionPRCancel(tokenId, parseInt(missionId));
+    afterApprove();
     setVisible(false);
   };
   return (
