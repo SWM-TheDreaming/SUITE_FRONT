@@ -17,6 +17,7 @@ import ModalPopup from '../../hook/modal';
 import CheckCancelModal from '../../hook/checkCancelModal';
 import { DashBoardApi } from '../../api/StudyRoom/DashBoardApi';
 import AttendanceCreateModal from '../../hook/AttendanceCreateModal';
+import { BeforeStartSuiteRoomInformationApi } from '../../api/SuiteRoom/BeforeStartSuiteRoomInformationApi';
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 const SuiteRoomLeaderDashboard = () => {
@@ -25,7 +26,7 @@ const SuiteRoomLeaderDashboard = () => {
   const [visible, setVisible] = useState(false);
   const [startVisible, setStartVisible] = useState(false);
   const [number, setNumber] = useState<number>(0);
-  const [depositAmount, setDepositAmount] = useState();
+  const [depositAmount, setDepositAmount] = useState(0);
   const [myMissionRate, setMyMissionRate] = useState(0);
   const [myAttendanceRate, setMyAttendanceRate] = useState(0);
   const [dday, setDday] = useState<number>(0);
@@ -56,6 +57,23 @@ const SuiteRoomLeaderDashboard = () => {
       console.log('Error occurred:', error);
     }
   };
+  const BeforeStartReadDashBoard = async () => {
+    try {
+      const datalist = await BeforeStartSuiteRoomInformationApi(tokenId, parseInt(SuiteRoomId));
+      const studyDeadline = new Date(datalist.studyDeadline);
+      const currentDate = new Date();
+      const timeDiff = studyDeadline.getTime() - currentDate.getTime();
+      const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+      setDday(daysDiff);
+      setDepositAmount(datalist.depositAmount.toLocaleString());
+      setMember(datalist.participantDtoList);
+      setMyAttendanceRate(0);
+      setMyMissionRate(0);
+      // 받은 데이터 활용하기
+    } catch (error) {
+      console.log('Error occurred:', error);
+    }
+  };
   const studyStartButtonHandler = () => {
     SuiteRoomStart(tokenId, parseInt(SuiteRoomId));
     setStartVisible(false);
@@ -70,6 +88,8 @@ const SuiteRoomLeaderDashboard = () => {
   useEffect(() => {
     if (suiteRoomStatus === 'START') {
       readDashBoard();
+    } else {
+      BeforeStartReadDashBoard();
     }
   }, [suiteRoomStatus]);
   useEffect(() => {

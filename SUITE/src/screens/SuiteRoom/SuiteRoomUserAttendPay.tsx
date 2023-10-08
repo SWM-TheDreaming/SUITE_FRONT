@@ -40,13 +40,13 @@ const SuiteRoomUserAttendPay = () => {
   };
   const readPoint = async () => {
     const point = await MyPointApi(token);
+    if (point < depositAmount) {
+      setIsButtonDisabled(true);
+    }
     setPoint(point);
   };
   useEffect(() => {
     readPoint();
-    if (point < depositAmount) {
-      setIsButtonDisabled(true);
-    }
   }, []);
 
   return (
@@ -55,15 +55,15 @@ const SuiteRoomUserAttendPay = () => {
       <View style={mainPageStyleSheet.emailAuthenticationContainer}>
         <Text style={mainPageStyleSheet.idpwtext}>현재 포인트</Text>
         <View style={mainPageStyleSheet.depositCheckBox}>
-          <Text>{point}원</Text>
+          <Text>{point.toLocaleString()}원</Text>
         </View>
         <Text style={mainPageStyleSheet.noValidateCheckText}>보증 금액</Text>
         <View style={mainPageStyleSheet.depositCheckBox}>
-          <Text>{depositAmount}원</Text>
+          <Text>{depositAmount.toLocaleString()}원</Text>
         </View>
         <Text style={mainPageStyleSheet.noValidateCheckText}>차감후 남은 포인트</Text>
         <View style={mainPageStyleSheet.depositCheckBox}>
-          <Text>{point - depositAmount}원</Text>
+          <Text>{(point - depositAmount).toLocaleString()}원</Text>
         </View>
         <Text style={mainPageStyleSheet.idPwInputErrorText}>{suiteRoomPay.errors.name}</Text>
         {isButtonDisabled === true ? (

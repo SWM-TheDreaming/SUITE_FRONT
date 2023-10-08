@@ -14,7 +14,8 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../types';
 import { SuiteRoomOutApi } from '../../api/SuiteRoom/SuiteRoomOutApi';
 import { DashBoardApi } from '../../api/StudyRoom/DashBoardApi';
-import { AttendanceApi } from '../../api/StudyRoom/AttendacneApi';
+import { BeforeStartSuiteRoomInformationApi } from '../../api/SuiteRoom/BeforeStartSuiteRoomInformationApi';
+
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 const SuiteRoomDashboard = () => {
@@ -24,8 +25,8 @@ const SuiteRoomDashboard = () => {
   const [dashboard, setDashboard] = useState();
   const [attendanceCheckVisible, setAttendanceCheckVisible] = useState(false);
   const [depositAmount, setDepositAmount] = useState();
-  const [myMissionRate, setMyMissionRate] = useState();
-  const [myAttendanceRate, setMyAttendanceRate] = useState();
+  const [myMissionRate, setMyMissionRate] = useState(0);
+  const [myAttendanceRate, setMyAttendanceRate] = useState(0);
   const [dday, setDday] = useState<number>(0);
   const [member, setMember] = useState([]);
   const isFocused = useIsFocused();
@@ -51,6 +52,24 @@ const SuiteRoomDashboard = () => {
       console.log('Error occurred:', error);
     }
   };
+  const BeforeStartReadDashBoard = async () => {
+    try {
+      const datalist = await BeforeStartSuiteRoomInformationApi(tokenId, parseInt(SuiteRoomId));
+      const studyDeadline = new Date(datalist.studyDeadline);
+      const currentDate = new Date();
+      const timeDiff = studyDeadline.getTime() - currentDate.getTime();
+      const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+      setDday(daysDiff);
+      setDepositAmount(datalist.depositAmount.toLocaleString());
+      setMember(datalist.participantDtoList);
+      setMyAttendanceRate(0);
+      setMyMissionRate(0);
+
+      // 받은 데이터 활용하기
+    } catch (error) {
+      console.log('Error occurred:', error);
+    }
+  };
   const suiteRoomOutButtonHandler = () => {
     SuiteRoomOutApi(tokenId, parseInt(SuiteRoomId));
     Alert.alert('스터디 탈퇴가 완료되었습니다');
@@ -64,6 +83,8 @@ const SuiteRoomDashboard = () => {
   useEffect(() => {
     if (suiteRoomStatus === 'START') {
       readDashBoard();
+    } else {
+      BeforeStartReadDashBoard();
     }
   }, [suiteRoomStatus]);
   useEffect(() => {
@@ -90,16 +111,14 @@ const SuiteRoomDashboard = () => {
               </View>
               <View style={SuiteRoomStyleSheet.AttendanceMissionBox}>
                 <ProgressCircle
-                  percent={parseInt(myAttendanceRate) * 100}
+                  percent={myAttendanceRate * 100}
                   radius={65}
                   borderWidth={45}
                   color="#4CADA8"
                   shadowColor="#E2FFFE"
                   bgColor="white"
                 >
-                  <Text style={SuiteRoomStyleSheet.SuiteRoomDetailCircularBarText}>
-                    {parseInt(myAttendanceRate) * 100}%
-                  </Text>
+                  <Text style={SuiteRoomStyleSheet.SuiteRoomDetailCircularBarText}>{myAttendanceRate * 100}%</Text>
                 </ProgressCircle>
               </View>
             </View>
@@ -109,16 +128,14 @@ const SuiteRoomDashboard = () => {
               </View>
               <View style={SuiteRoomStyleSheet.AttendanceMissionBox}>
                 <ProgressCircle
-                  percent={parseInt(myAttendanceRate) * 100}
+                  percent={myAttendanceRate * 100}
                   radius={65}
                   borderWidth={45}
                   color="#A38AE7"
                   shadowColor="#F0EBFF"
                   bgColor="white"
                 >
-                  <Text style={SuiteRoomStyleSheet.SuiteRoomDetailCircularBarText}>
-                    {parseInt(myMissionRate) * 100}%
-                  </Text>
+                  <Text style={SuiteRoomStyleSheet.SuiteRoomDetailCircularBarText}>{myMissionRate * 100}%</Text>
                 </ProgressCircle>
               </View>
             </View>
@@ -153,7 +170,7 @@ const SuiteRoomDashboard = () => {
           <View style={SuiteRoomStyleSheet.StudyDashboardContainer}>
             <View style={SuiteRoomStyleSheet.StudyInfoContainer}>
               <Text style={SuiteRoomStyleSheet.StudyInfoText}>팀 스터디 현황</Text>
-              <Text style={SuiteRoomStyleSheet.DepositText}>보증금 10,000원</Text>
+              <Text style={SuiteRoomStyleSheet.DepositText}>보증금 {depositAmount}원</Text>
             </View>
           </View>
         </View>

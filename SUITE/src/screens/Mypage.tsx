@@ -10,7 +10,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../types';
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import defaultImage from '../Icons/profile.png';
 import SuiteRoomStyleSheet from '../style/SuiteRoom';
 import ProgressCircle from 'react-native-progress-circle';
@@ -48,6 +48,7 @@ const Mypage = () => {
   const [attendanceCompleteCount, setAttendanceCompleteCount] = useState(0);
   const [missionAvgRate, setMissionAvgRate] = useState(0);
   const [missionCompleteCount, setMissionCompleteCount] = useState(0);
+  const isFocused = useIsFocused();
 
   const [profileImage, setProfileImage] = useRecoilState(profileImageState);
   const SignOut = async () => {
@@ -81,6 +82,11 @@ const Mypage = () => {
     readPoint();
     getUserInfo(token);
   }, []);
+  useEffect(() => {
+    //페이지 새로고침시 다시 리렌더링 가능
+    readPoint();
+    getUserInfo(token);
+  }, [isFocused]);
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={AnpServiceStyleSheet.MypageContainer}>
       <View style={AnpServiceStyleSheet.MyPageHeader}>
