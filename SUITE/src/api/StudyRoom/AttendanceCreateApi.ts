@@ -16,7 +16,7 @@ export const AttendanceCreateApi = async (
       },
       {
         validateStatus: function (status) {
-          return (status >= 200 && status < 300) || status === 400; // 성공(2xx) 또는 400 상태 코드를 성공으로 처리
+          return status >= 200 && status <= 403; // 성공(2xx) 또는 400 상태 코드를 성공으로 처리
         },
       },
     );
@@ -24,11 +24,9 @@ export const AttendanceCreateApi = async (
     if (response.status === 200) {
       const data = response.status;
       return data;
-    } else if (response.status === 400) {
+    } else {
       const errorData = response.status; // 에러 응답 데이터
       return errorData;
-    } else {
-      console.log('Error occurred:', response.status);
     }
   } catch (error) {
     console.log('Error', error);

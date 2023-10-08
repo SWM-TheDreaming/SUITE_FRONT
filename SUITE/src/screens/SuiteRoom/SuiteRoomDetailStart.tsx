@@ -99,20 +99,13 @@ const SuiteRoomDetailStart = () => {
   useEffect(() => {
     fetchData();
   }, []);
-  useEffect(() => {
-    const today = new Date();
-    const recruitmentDeadline = new Date(recruitmentDeadLine);
-    const timeDiff = recruitmentDeadline.getTime() - today.getTime();
-    const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-    setDday(daysDiff < 0 ? `D+${daysDiff.toString().slice(1, daysDiff.toString().length)}` : `D-${daysDiff}`);
-  }, [recruitmentDeadLine]);
   return (
     <ScrollView bounces={false}>
       <View style={SuiteRoomStyleSheet.SuiteRoomDetailContainer}>
         <View style={SuiteRoomStyleSheet.SuiteRoomDetailupperBox}>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
             <TagComponent
-              dDay={dday}
+              dDay={'진행중'}
               category={convertStudyValueFromEngish(subject)}
               depositAmount={`${depositAmount.toString().slice(0, 2)}K`}
               isPublic={isPublic}

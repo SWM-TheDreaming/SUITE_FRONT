@@ -6,9 +6,12 @@ import SuiteRoomStyleSheet from '../style/SuiteRoom';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import ModalPopup from './modal';
 import AttendanceCheckOkModaPopup from '../components/presents/AttendanceCheckOkModal';
-import { AttendanceApi } from '../api/StudyRoom/AttendacneApi';
+import AttendanceCheckNumberModaPopup from '../components/presents/AttendanceCheckNumberModal';
 import { suiteRoomIdState, tokenState } from '../../recoil/atoms';
 import { useRecoilValue } from 'recoil';
+import { AttendanceCreateApi } from '../api/StudyRoom/AttendanceCreateApi';
+import ImageModalPopup from './ImageModal';
+import AttendanceModalPopup from './AttendanceModal';
 interface ModalPopupProps {
   visible: boolean;
   onClose: () => void;
@@ -16,7 +19,7 @@ interface ModalPopupProps {
   number: number;
 }
 
-const AttendanceCheckModal: React.FC<ModalPopupProps> = ({ visible, onClose, text, number }) => {
+const AttendanceCreateModal: React.FC<ModalPopupProps> = ({ visible, onClose, text, number }) => {
   const [attendanceNumber, setattendanceNumber] = useState('');
   const [incorrect, setIncorrect] = useState(false);
   const [okVisible, setOkVisible] = useState(false);
@@ -25,22 +28,16 @@ const AttendanceCheckModal: React.FC<ModalPopupProps> = ({ visible, onClose, tex
   const tokenId = useRecoilValue(tokenState);
   const AttendanceHandler = async () => {
     try {
-      const datalist = await AttendanceApi(tokenId, parseInt(SuiteRoomId), parseInt(attendanceNumber));
+      const datalist = await AttendanceCreateApi(tokenId, parseInt(SuiteRoomId), parseInt(attendanceNumber));
       console.log(datalist);
       if (datalist == 200) {
         setOkVisible(true);
       } else if (datalist == 400) {
         setIncorrect(true);
-        setErrorText('이미 출석을 완료했습니다!');
-      } else if (datalist == 401) {
-        setIncorrect(true);
-        setErrorText('출석 번호가 틀립니다!');
+        setErrorText('출석 시작한 뒤 5분이 지나지 않았습니다!');
       } else if (datalist == 403) {
         setIncorrect(true);
         setErrorText('출석 권한이 없습니다!');
-      } else if (datalist == 408) {
-        setIncorrect(true);
-        setErrorText('출석 시간이 아닙니다!');
       }
 
       // 받은 데이터 활용하기
@@ -71,19 +68,20 @@ const AttendanceCheckModal: React.FC<ModalPopupProps> = ({ visible, onClose, tex
           />
           {incorrect == true ? <Text style={SuiteRoomStyleSheet.IncorrectAttendanceText}>{errortext}</Text> : null}
           <TouchableOpacity style={mainPageStyleSheet.imagemodalButton} onPress={AttendanceHandler}>
-            <Text style={mainPageStyleSheet.SignmodalButtonText}>출석 하기</Text>
+            <Text style={mainPageStyleSheet.SignmodalButtonText}>출석 시작</Text>
           </TouchableOpacity>
         </View>
-        <ModalPopup visible={okVisible}>
-          <AttendanceCheckOkModaPopup
+        <AttendanceModalPopup visible={okVisible}>
+          <AttendanceCheckNumberModaPopup
             visible={okVisible}
             onClose={() => setOkVisible(false)}
-            text="출석이 완료되었습니다!"
+            text={`출석 번호는 10분 뒤 만료되니 \n 팀원들에게 빠르게 안내해주세요!`}
             onConfirm={() => onClose()}
+            number={attendanceNumber}
           />
-        </ModalPopup>
+        </AttendanceModalPopup>
       </View>
     );
 };
 
-export default AttendanceCheckModal;
+export default AttendanceCreateModal;

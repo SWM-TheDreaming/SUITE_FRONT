@@ -10,8 +10,12 @@ const StudyStatusTable: React.FC<{ data: any[] }> = ({ data }) => {
           style={[styles.row, index % 2 === 0 ? styles.evenRow : styles.oddRow, index === 0 ? styles.headerRow : null]}
         >
           <Text style={styles.firstColumn}>{index === 0 ? '스터디 팀원' : item.nickName}</Text>
-          <Text style={styles.secondColumn}>{index === 0 ? '출석률' : `${item.attendanceRate * 100}%`}</Text>
-          <Text style={styles.thirdColumn}>{index === 0 ? '미션달성률' : `${item.missionRate * 100}%`}</Text>
+          <Text style={styles.secondColumn}>
+            {index === 0 ? '출석률' : `${Math.floor(item.attendanceRate * 100)}%`}
+          </Text>
+          <Text style={styles.thirdColumn}>
+            {index === 0 ? '미션달성률' : `${Math.floor(item.missionRate * 100)}%`}
+          </Text>
         </View>
       ))}
     </View>

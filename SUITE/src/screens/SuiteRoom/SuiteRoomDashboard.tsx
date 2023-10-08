@@ -23,7 +23,6 @@ const SuiteRoomDashboard = () => {
   const tokenId = useRecoilValue(tokenState);
   const [dashboard, setDashboard] = useState();
   const [attendanceCheckVisible, setAttendanceCheckVisible] = useState(false);
-  const [number, setNumber] = useState<number>(0);
   const [depositAmount, setDepositAmount] = useState();
   const [myMissionRate, setMyMissionRate] = useState();
   const [myAttendanceRate, setMyAttendanceRate] = useState();
@@ -59,14 +58,9 @@ const SuiteRoomDashboard = () => {
   };
   const attendanceStart = () => {
     //출석 API 불러오기
-    setNumber(Math.floor(Math.random() * 100)); //출석 진행중이라면 number 세팅
+    setAttendanceCheckVisible(true); //출석 진행중이라면 number 세팅
     //출석 진행중 아니라면 출석 진행중이 아니라는 modal visible 세팅
   };
-  useEffect(() => {
-    if (number != 0) {
-      setAttendanceCheckVisible(true);
-    }
-  }, [number]);
   useEffect(() => {
     if (suiteRoomStatus === 'START') {
       readDashBoard();
@@ -153,7 +147,7 @@ const SuiteRoomDashboard = () => {
               visible={attendanceCheckVisible}
               onClose={() => setAttendanceCheckVisible(false)}
               text={'출석 번호는 10분 뒤 만료되니 \n 팀원들에게 빠르게 안내해주세요!'}
-              number={number}
+              number={0}
             />
           </ImageModalPopup>
           <View style={SuiteRoomStyleSheet.StudyDashboardContainer}>

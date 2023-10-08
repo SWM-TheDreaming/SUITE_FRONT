@@ -5,11 +5,12 @@ import mainPageStyleSheet from '../../style/style';
 interface ModalPopupProps {
   visible: boolean;
   onClose: () => void;
+  number: string;
   text: string;
   onConfirm: () => void;
 }
 
-const AttendanceCheckOkModaPopup: React.FC<ModalPopupProps> = ({ visible, onClose, text, onConfirm }) => {
+const AttendanceCheckNumberModaPopup: React.FC<ModalPopupProps> = ({ visible, onClose, number, text, onConfirm }) => {
   const CloseModal = () => {
     onClose();
     onConfirm();
@@ -19,7 +20,8 @@ const AttendanceCheckOkModaPopup: React.FC<ModalPopupProps> = ({ visible, onClos
   } else
     return (
       <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-        <Text style={mainPageStyleSheet.emailChecktext}>{text}</Text>
+        <Text style={mainPageStyleSheet.showNumberText}>{number}</Text>
+        <Text style={mainPageStyleSheet.emailChecktextaligncenter}>{text}</Text>
         <TouchableOpacity style={mainPageStyleSheet.SignmodalButton} onPress={CloseModal}>
           <Text style={mainPageStyleSheet.SignmodalButtonText}>확인</Text>
         </TouchableOpacity>
@@ -27,4 +29,4 @@ const AttendanceCheckOkModaPopup: React.FC<ModalPopupProps> = ({ visible, onClos
     );
 };
 
-export default AttendanceCheckOkModaPopup;
+export default AttendanceCheckNumberModaPopup;

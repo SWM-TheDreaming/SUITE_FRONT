@@ -8,7 +8,6 @@ import StudyStatusTable from '../../hook/studyStatusTable';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import mainPageStyleSheet from '../../style/style';
 import ImageModalPopup from '../../hook/ImageModal';
-import LeaderAttendanceModal from '../../components/presents/LeaderAttendanceModal';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -16,8 +15,8 @@ import { RootStackParamList } from '../../types';
 import { SuiteRoomStart } from '../../api/SuiteRoom/SuiteRoomStartAPi';
 import ModalPopup from '../../hook/modal';
 import CheckCancelModal from '../../hook/checkCancelModal';
-import PayCheckModal from '../../components/presents/PayCheckModalPresent';
 import { DashBoardApi } from '../../api/StudyRoom/DashBoardApi';
+import AttendanceCreateModal from '../../hook/AttendanceCreateModal';
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 const SuiteRoomLeaderDashboard = () => {
@@ -31,6 +30,7 @@ const SuiteRoomLeaderDashboard = () => {
   const [myAttendanceRate, setMyAttendanceRate] = useState(0);
   const [dday, setDday] = useState<number>(0);
   const [member, setMember] = useState([]);
+  const [attendanceCheckVisible, setAttendanceCheckVisible] = useState(false);
   const isFocused = useIsFocused();
 
   const suiteRoomStatus = useRecoilValue(suiteRoomStatusState);
@@ -55,9 +55,6 @@ const SuiteRoomLeaderDashboard = () => {
     } catch (error) {
       console.log('Error occurred:', error);
     }
-  };
-  const attendanceStart = () => {
-    navigation.navigate('CreateAttendance');
   };
   const studyStartButtonHandler = () => {
     SuiteRoomStart(tokenId, parseInt(SuiteRoomId));
@@ -138,7 +135,10 @@ const SuiteRoomLeaderDashboard = () => {
           </View>
           <View style={{ flexDirection: 'row' }}>
             {suiteRoomStatus == 'START' ? (
-              <TouchableOpacity style={SuiteRoomStyleSheet.AttendanceCheckStart} onPress={attendanceStart}>
+              <TouchableOpacity
+                style={SuiteRoomStyleSheet.AttendanceCheckStart}
+                onPress={() => setAttendanceCheckVisible(true)}
+              >
                 <Text style={mainPageStyleSheet.categortFilterApplyText}>출석 시작</Text>
               </TouchableOpacity>
             ) : (
@@ -154,10 +154,18 @@ const SuiteRoomLeaderDashboard = () => {
               <Text style={SuiteRoomStyleSheet.ContractButtonText}>계약서 이력</Text>
             </TouchableOpacity>
           </View>
+          <ImageModalPopup visible={attendanceCheckVisible}>
+            <AttendanceCreateModal
+              visible={attendanceCheckVisible}
+              onClose={() => setAttendanceCheckVisible(false)}
+              text={'출석 번호는 10분 뒤 만료되니 \n 팀원들에게 빠르게 안내해주세요!'}
+              number={number}
+            />
+          </ImageModalPopup>
           <View style={SuiteRoomStyleSheet.StudyDashboardContainer}>
             <View style={SuiteRoomStyleSheet.StudyInfoContainer}>
               <Text style={SuiteRoomStyleSheet.StudyInfoText}>팀 스터디 현황</Text>
-              <Text style={SuiteRoomStyleSheet.DepositText}>보증금 10,000원</Text>
+              <Text style={SuiteRoomStyleSheet.DepositText}>보증금 {depositAmount}원</Text>
             </View>
           </View>
         </View>

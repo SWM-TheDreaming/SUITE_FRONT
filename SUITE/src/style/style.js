@@ -641,6 +641,17 @@ const mainPageStyleSheet = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: heightPercentage(30),
   },
+  showNumberText: {
+    fontSize: 40,
+    fontWeight: 'bold',
+    marginTop: heightPercentage(30),
+  },
+  emailChecktextaligncenter: {
+    fontSize: 17,
+    fontWeight: 'bold',
+    marginTop: heightPercentage(30),
+    textAlign: 'center',
+  },
   SignModalContainer: {
     width: widthPercentage(280),
     height: heightPercentage(170),
@@ -759,6 +770,15 @@ const mainPageStyleSheet = StyleSheet.create({
   imageModalContainer: {
     width: widthPercentage(280),
     height: heightPercentage(400),
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  attendanceModalContainer: {
+    width: widthPercentage(280),
+    height: heightPercentage(300),
     backgroundColor: 'white',
     borderRadius: 10,
     padding: 20,
