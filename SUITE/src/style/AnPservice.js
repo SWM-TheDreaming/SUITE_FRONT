@@ -15,6 +15,18 @@ const AnpServiceStyleSheet = StyleSheet.create({
     paddingTop: heightPercentage(20),
     justifyContent: 'center',
   },
+  AlarmPageContainer: {
+    width: Width,
+    height: heightPercentage(130),
+    borderTopColor: '#E8E8E8',
+    borderBottomColor: '#E8E8E8',
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    paddingTop: heightPercentage(20),
+    paddingLeft: 10,
+    paddingRight: 10,
+    justifyContent: 'center',
+  },
   AlarmTopText: {
     color: 'black',
     fontSize: 14,
