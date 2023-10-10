@@ -46,13 +46,16 @@ const StudyInfoCard: React.FunctionComponent<{ filterCategory?: Category }> = ({
       for (let i = 0; i < filter.length; i++) {
         convertfilter.push(convertStudyValue(filter[i]));
       }
-      const datalist = await SuiteRoomReadAllApi(storedToken, convertfilter);
+      const datalist = await SuiteRoomReadAllApi(storedToken, search, convertfilter);
       setStudyList(datalist);
       // 받은 데이터 활용하기
     } catch (error) {
       console.log('Error occurred:', error);
     }
   };
+  useEffect(() => {
+    fetchData();
+  }, [search]);
   useEffect(() => {
     fetchData();
   }, [filter]);

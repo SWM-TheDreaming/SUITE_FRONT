@@ -6,9 +6,9 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import TagComponent from './TagComponent';
 import convertStudyValueFromEngish from '../../data/ChangeCategoryFromEnglish';
-import { SecretRoomCheckApi } from '../../api/SuiteRoom/SecretRoomCheckApi';
-import ImageModalPopup from './ImageModalPopup';
 import AttendanceCheckModal from '../../hook/AttendanceCheckModal';
+import SuiteRoomPasswordModal from '../../hook/SuiteRoomPasswordModal';
+import ImageModalPopup from '../../hook/ImageModal';
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 export interface StudyInfoCardProps {
@@ -29,6 +29,8 @@ export interface StudyInfoCardProps {
 }
 const StudyInfoCardUI = (props: StudyInfoCardProps) => {
   const [visible, setVisible] = useState(false);
+  const [okVisible, setOkVisible] = useState(false);
+
   const navigation = useNavigation<RootStackNavigationProp>();
   const calculateDDay = () => {
     const today = new Date();
@@ -45,7 +47,7 @@ const StudyInfoCardUI = (props: StudyInfoCardProps) => {
         console.log(props.suiteRoomId);
         props.isPublic == true
           ? navigation.navigate('SuiteRoomDetail', { SuiteRoomid: props.suiteRoomId })
-          : setVisible(true);
+          : setOkVisible(true);
       }}
     >
       <View style={mainPageStyleSheet.innerbox}>
@@ -62,12 +64,12 @@ const StudyInfoCardUI = (props: StudyInfoCardProps) => {
         <Text style={mainPageStyleSheet.detailtext}>
           작성일 : {props.createdDate.slice(0, 10)} | 스크랩 : {props.markCount}
         </Text>
-        <ImageModalPopup visible={visible}>
-          <AttendanceCheckModal
-            visible={visible}
-            onClose={() => setVisible(false)}
-            text={'출석 번호는 10분 뒤 만료되니 \n 팀원들에게 빠르게 안내해주세요!'}
-            number={1}
+        <ImageModalPopup visible={okVisible}>
+          <SuiteRoomPasswordModal
+            visible={okVisible}
+            roomNum={props.suiteRoomId}
+            onClose={() => setOkVisible(false)}
+            correct={() => navigation.navigate('SuiteRoomDetail', { SuiteRoomid: props.suiteRoomId })}
           />
         </ImageModalPopup>
       </View>

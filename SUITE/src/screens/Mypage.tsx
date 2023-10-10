@@ -28,6 +28,9 @@ import { useRecoilValue } from 'recoil';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getUserInformation } from '../api/Sign/getUserInformation';
 import { MyPointApi } from '../api/SuiteRoom/MyPointApi';
+import { UserDeleteApi } from '../api/Sign/UserDeleteApi';
+import ModalPopup from '../hook/modal';
+import CheckCancelModal from '../hook/checkCancelModal';
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 const Mypage = () => {
@@ -49,9 +52,27 @@ const Mypage = () => {
   const [missionAvgRate, setMissionAvgRate] = useState(0);
   const [missionCompleteCount, setMissionCompleteCount] = useState(0);
   const isFocused = useIsFocused();
-
+  const [visible, setVisible] = useState(false);
+  const [modalText, setModalText] = useState('');
+  const [actionType, setActionType] = useState(null);
   const [profileImage, setProfileImage] = useRecoilState(profileImageState);
+  const handleSignOutPress = () => {
+    setModalText('로그아웃 하시겠습니까?');
+    setVisible(true);
+    setActionType('send');
+  };
+
+  const handleUserDeletePress = () => {
+    setModalText('회원 탈퇴 하시겠습니까?');
+    setVisible(true);
+    setActionType('cancel');
+  };
   const SignOut = async () => {
+    await AsyncStorage.removeItem('token');
+    setToken(null);
+  };
+  const UserDelete = async () => {
+    const datalist = await UserDeleteApi(token);
     await AsyncStorage.removeItem('token');
     setToken(null);
   };
@@ -212,11 +233,27 @@ const Mypage = () => {
         <TouchableOpacity
           style={AnpServiceStyleSheet.ChoiceContainer}
           onPress={() => {
-            SignOut();
+            handleSignOutPress();
           }}
         >
           <Text style={AnpServiceStyleSheet.ChoiceText}>로그아웃</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          style={AnpServiceStyleSheet.ChoiceContainer}
+          onPress={() => {
+            handleUserDeletePress();
+          }}
+        >
+          <Text style={AnpServiceStyleSheet.ChoiceText}>회원 탈퇴</Text>
+        </TouchableOpacity>
+        <ModalPopup visible={visible}>
+          <CheckCancelModal
+            visible={visible}
+            onClose={() => setVisible(false)}
+            text={modalText}
+            onConfirm={() => (actionType === 'send' ? SignOut() : UserDelete())}
+          />
+        </ModalPopup>
         <TouchableOpacity style={AnpServiceStyleSheet.ChoiceContainer}>
           <Text style={AnpServiceStyleSheet.ChoiceText}></Text>
         </TouchableOpacity>

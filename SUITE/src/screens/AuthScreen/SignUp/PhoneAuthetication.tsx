@@ -9,12 +9,15 @@ import InputField from '../../../components/presents/InputField';
 import { useRecoilState } from 'recoil';
 import { phoneState } from '../../../../recoil/atoms';
 import { PhoneAuthenticationCodeApi } from '../../../api/Sign/PhoneAuthenticationApi';
+import ModalPopup from '../../../hook/modal';
+import SignModalPopup from '../../../components/presents/SignmodalPopup';
 const PhoneAuthentication = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
   const signUp = useForm();
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [phonAuthenticationButtonDisabled, setPhonAuthenticationButtonDisabled] = useState(true);
   const [phone, setPhone] = useRecoilState(phoneState);
+  const [visible, setVisible] = useState(false);
   const [authenticationCode, setauthenticationCode] = useState('aa');
   const [verifyCode, setverifyCode] = useState('aa');
   const [isViewDisabled, setIsViewDisabled] = useState(true);
@@ -22,8 +25,12 @@ const PhoneAuthentication = () => {
   const getPhoneAuthenticationCode = async () => {
     try {
       const code = await PhoneAuthenticationCodeApi(signUp.getTextInputProps('phone').value);
-      console.log(code);
-      setverifyCode(code);
+      if (code == 400) {
+        setVisible(true);
+      } else {
+        setverifyCode(code);
+        setIsViewDisabled(false);
+      }
     } catch (error) {
       console.log('Error occurred:', error);
     }
@@ -34,7 +41,6 @@ const PhoneAuthentication = () => {
   };
   const handleSendButtonPress = () => {
     getPhoneAuthenticationCode();
-    setIsViewDisabled(false);
   };
 
   const handleButtonPress = () => {
@@ -112,6 +118,9 @@ const PhoneAuthentication = () => {
           </View>
         ) : null}
       </View>
+      <ModalPopup visible={visible}>
+        <SignModalPopup visible={visible} onClose={() => setVisible(false)} text={'이미 등록된 번호입니다'} />
+      </ModalPopup>
       <View style={mainPageStyleSheet.SignUpNextBtnContainer}>
         <TouchableOpacity
           style={[mainPageStyleSheet.SignUpNextBtnBtn, isButtonDisabled && mainPageStyleSheet.disabledSignUpNextBtnBtn]}

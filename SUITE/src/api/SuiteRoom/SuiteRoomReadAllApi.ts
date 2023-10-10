@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { API_URL_SUITEROOM } from '../../../react-native.config';
 
-export const SuiteRoomReadAllApi = async (accessToken: string, filter: string[]): Promise<any> => {
+export const SuiteRoomReadAllApi = async (accessToken: string, keyword: string, filter: string[]): Promise<any> => {
   try {
     console.log('readall+', accessToken, filter);
     axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
     const response = await axios.post(`${API_URL_SUITEROOM}/suite/suiteroom`, {
-      keyword: '',
+      keyword: keyword,
       subjects: filter,
     });
     console.log(response.data.data);

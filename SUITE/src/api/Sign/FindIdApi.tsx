@@ -1,6 +1,5 @@
-import { API_URL } from "../../../react-native.config";
+import { API_URL } from '../../../react-native.config';
 export const FindIdApi = async (phoneNumber: string | null) => {
-    console.log(phoneNumber)
   try {
     const response = await fetch(`${API_URL}/member/id`, {
       method: 'POST',
@@ -17,7 +16,7 @@ export const FindIdApi = async (phoneNumber: string | null) => {
       return data;
     } else {
       const data = await response.json();
-      return data
+      return data;
     }
   } catch (error) {
     throw error;

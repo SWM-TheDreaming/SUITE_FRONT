@@ -1,4 +1,4 @@
-import { API_URL } from "../../../react-native.config";
+import { API_URL } from '../../../react-native.config';
 export const PhoneAuthenticationCodeApi = async (phoneNumber: string | null) => {
   try {
     const response = await fetch(`${API_URL}/member/send-sms`, {
@@ -12,10 +12,10 @@ export const PhoneAuthenticationCodeApi = async (phoneNumber: string | null) => 
     });
     if (response.ok) {
       const data = await response.json();
-      return data.data;
+      return data.statusCode;
     } else {
       const data = await response.json();
-      throw new Error(data);
+      return data.statusCode;
     }
   } catch (error) {
     throw error;

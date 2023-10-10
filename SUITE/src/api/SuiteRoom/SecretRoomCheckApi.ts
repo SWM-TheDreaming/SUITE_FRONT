@@ -8,9 +8,8 @@ export const SecretRoomCheckApi = async (accessToken: string, roomNum: number, p
       suiteRoomId: roomNum,
       password: password,
     });
-    console.log(response);
     if (response.status === 200) {
-      const data = response.data.data;
+      const data = response.status;
       return data;
     } else {
       console.log('Error occurred:', response);
