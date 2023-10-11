@@ -932,6 +932,26 @@ const mainPageStyleSheet = StyleSheet.create({
     fontFamily: 'PretendardVariable',
     textAlign: 'center',
   },
+  hallOfFameContainer: {
+    marginTop: heightPercentage(20),
+    width: widthPercentage(310),
+    height: heightPercentage(130),
+    backgroundColor: '#00ACCF',
+    borderRadius: 10,
+  },
+  hallOfFameInformationText: {
+    paddingTop: 20,
+    color: 'white',
+    fontFamily: 'PretendardVariable',
+    fontWeight: 'bold',
+  },
+  hallOfFameDetailInformationText: {
+    marginTop: heightPercentage(5),
+    paddingLeft: 25,
+    fontFamily: 'PretendardVariable',
+    fontSize: 10,
+    color: 'white',
+  },
 });
 
 export default mainPageStyleSheet;

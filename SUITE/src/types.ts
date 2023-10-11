@@ -3,6 +3,7 @@ export type RootStackParamList = {
   TabBarNavigation: undefined;
   ContractTabNavigation: undefined;
   LeaderTabBarNavigation: undefined;
+  HallOfFameNavigation: undefined;
   PhoneAuthentication: undefined;
   CategoryFilter: undefined;
   Studylist: { selectedCategories: string[] };

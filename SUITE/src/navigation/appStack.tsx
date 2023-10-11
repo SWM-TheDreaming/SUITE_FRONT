@@ -21,6 +21,7 @@ import Alarm from '../screens/Alarm';
 import SuiteRoomEdit from '../screens/SuiteRoom/SuiteRoomEdit';
 import SuiteRoomUserAttendPay from '../screens/SuiteRoom/SuiteRoomUserAttendPay';
 import ScrabList from '../screens/Mypage/ScarbList';
+import HallOfFameNavigation from './HallOfFameNavigation';
 const App = createStackNavigator<RootStackParamList>();
 
 export function AppStack() {
@@ -43,6 +44,13 @@ export function AppStack() {
       <App.Screen
         name="LeaderTabBarNavigation"
         component={LeaderTopBarNavigation}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <App.Screen
+        name="HallOfFameNavigation"
+        component={HallOfFameNavigation}
         options={{
           headerShown: false,
         }}
