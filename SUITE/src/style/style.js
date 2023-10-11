@@ -102,6 +102,9 @@ const mainPageStyleSheet = StyleSheet.create({
     width: Width,
     flexDirection: 'row',
   },
+  searchBarWidth: {
+    width: widthPercentage(300),
+  },
   statuscontainer: {
     flex: 1,
     paddingTop: 60, // statusBar만큼 높이 설정
@@ -951,6 +954,28 @@ const mainPageStyleSheet = StyleSheet.create({
     fontFamily: 'PretendardVariable',
     fontSize: 10,
     color: 'white',
+  },
+  EndStudyConainer: {
+    marginTop: heightPercentage(20),
+    width: widthPercentage(310),
+    height: heightPercentage(50),
+    backgroundColor: '#00ACCF',
+    borderRadius: 10,
+    justifyContent: 'center',
+  },
+  EndStudyTextContainer: {
+    flexDirection: 'row',
+    marginBottom: heightPercentage(5),
+    alignItems: 'center',
+  },
+  EndStudyInformationText: {
+    color: 'white',
+    fontFamily: 'PretendardVariable',
+    fontWeight: 'bold',
+  },
+  EndStudyInformationIcon: {
+    paddingLeft: 20,
+    marginRight: 3,
   },
 });
 

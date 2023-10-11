@@ -8,6 +8,7 @@ import { MissionListApi } from '../../api/StudyRoom/MissionListApi';
 import { useRecoilValue } from 'recoil';
 import { suiteRoomIdState, tokenState, suiteRoomStatusState } from '../../../recoil/atoms';
 import { useIsFocused } from '@react-navigation/native';
+import { IsStudyEndApi } from '../../api/SuiteRoom/StudyEndApi';
 
 type DataRow = {
   id: string;
@@ -16,30 +17,15 @@ type DataRow = {
   status: string;
 };
 
-const ProgressData: DataRow[] = [
-  { id: '0', missionName: '영어 독해', missionDate: '2023-07-15', status: 'progress' },
-  { id: '1', missionName: '단어 외우기', missionDate: '2023-07-16', status: 'progress' },
-  { id: '2', missionName: '영작', missionDate: '2023-07-17', status: 'progress' },
-  { id: '3', missionName: '2장 외워오기', missionDate: '2023-07-18', status: 'progress' },
-  { id: '4', missionName: '2장 연습문제 풀이', missionDate: '2023-07-19', status: 'progress' },
-  { id: '5', missionName: '3장 예습', missionDate: '2023-07-20', status: 'progress' },
-];
-const RequestData: DataRow[] = [{ id: '1', missionName: '단어 외우기', missionDate: '2023-07-16', status: 'request' }];
-const CompleteData: DataRow[] = [
-  { id: '0', missionName: '영어 독해', missionDate: '2023-07-15', status: 'complete' },
-  { id: '2', missionName: '영작', missionDate: '2023-07-17', status: 'complete' },
-  { id: '4', missionName: '2장 연습문제 풀이', missionDate: '2023-07-19', status: 'complete' },
-];
-
 const SuiteRoomLeaderMissionList = () => {
-  const [content, setContent] = useState('진행 중');
-  const [data, setData] = useState(ProgressData);
+  const [content, setContent] = useState('완료');
   const [mission, setMission] = useState([]);
-  const [selectedButton, setSelectedButton] = useState<string | null>('PROGRESS');
+  const [selectedButton, setSelectedButton] = useState<string | null>('COMPLETE');
   const buttons: string[] = ['PROGRESS', 'COMPLETE'];
   const SuiteRoomId = useRecoilValue(suiteRoomIdState);
   const tokenId = useRecoilValue(tokenState);
   const isFocused = useIsFocused();
+  const [endVisible, setEndVisible] = useState(false);
 
   const readMissionList = async () => {
     try {
@@ -50,50 +36,60 @@ const SuiteRoomLeaderMissionList = () => {
       console.log('Error occurred:', error);
     }
   };
+  const IsStudyEnd = async () => {
+    const statusCode = await IsStudyEndApi(tokenId, parseInt(SuiteRoomId));
+    if (statusCode == true) {
+      setEndVisible(true);
+    }
+  };
   const handlePress = (type: string) => {
     switch (type) {
       case 'PROGRESS':
         setSelectedButton('PROGRESS');
         setContent('진행 중');
-        setData(ProgressData);
         break;
       case 'COMPLETE':
         setSelectedButton('COMPLETE');
         setContent('완료');
-        setData(CompleteData);
         break;
     }
   };
   useEffect(() => {
     readMissionList();
+    IsStudyEnd();
   }, [selectedButton]);
   useEffect(() => {
     readMissionList();
+    IsStudyEnd();
   }, [isFocused]);
   return (
     <View>
       <View style={SuiteRoomStyleSheet.ChoiceMissionContainer}>
-        <View style={SuiteRoomStyleSheet.LeaderChoiceMissionBox}>
-          {buttons.map((button) => (
-            <TouchableOpacity
-              key={button}
-              style={[
-                SuiteRoomStyleSheet.MissionButton,
-                selectedButton === button && SuiteRoomStyleSheet.SelectedMissionButton,
-              ]}
-              onPress={() => handlePress(button)}
-            >
-              <Text
+        {endVisible === false ? (
+          <View style={SuiteRoomStyleSheet.LeaderChoiceMissionBox}>
+            {buttons.map((button) => (
+              <TouchableOpacity
+                key={button}
                 style={[
-                  SuiteRoomStyleSheet.MissionText,
-                  selectedButton === button && SuiteRoomStyleSheet.SelectedMissionText,
+                  SuiteRoomStyleSheet.MissionButton,
+                  selectedButton === button && SuiteRoomStyleSheet.SelectedMissionButton,
                 ]}
+                onPress={() => handlePress(button)}
               >
-                {button === 'PROGRESS' ? '진행중' : '완료'}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </View>
+                <Text
+                  style={[
+                    SuiteRoomStyleSheet.MissionText,
+                    selectedButton === button && SuiteRoomStyleSheet.SelectedMissionText,
+                  ]}
+                >
+                  {button === 'PROGRESS' ? '진행중' : '완료'}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        ) : (
+          <></>
+        )}
       </View>
       <ScrollView style={{ marginBottom: 60 }} bounces={false}>
         <View style={SuiteRoomStyleSheet.MissionStatusContainer}>

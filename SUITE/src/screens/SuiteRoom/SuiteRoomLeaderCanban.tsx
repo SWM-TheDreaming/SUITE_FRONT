@@ -10,6 +10,7 @@ import { RootStackParamList } from '../../types';
 import { MissionPullRequestListApi } from '../../api/StudyRoom/MissionPullRequestListApi';
 import { useRecoilValue } from 'recoil';
 import { suiteRoomIdState, tokenState } from '../../../recoil/atoms';
+import { IsStudyEndApi } from '../../api/SuiteRoom/StudyEndApi';
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 type DataRow = {
@@ -24,6 +25,8 @@ const SuiteRoomLeaderCanbanBoard = () => {
   const SuiteRoomId = useRecoilValue(suiteRoomIdState);
   const tokenId = useRecoilValue(tokenState);
   const [PRList, setPRList] = useState([]);
+  const [endVisible, setEndVisible] = useState(false);
+
   const isFocused = useIsFocused();
 
   const readMissionRequest = async () => {
@@ -35,11 +38,19 @@ const SuiteRoomLeaderCanbanBoard = () => {
       console.log('Error occurred:', error);
     }
   };
+  const IsStudyEnd = async () => {
+    const statusCode = await IsStudyEndApi(tokenId, parseInt(SuiteRoomId));
+    if (statusCode == true) {
+      setEndVisible(true);
+    }
+  };
   useEffect(() => {
     readMissionRequest();
+    IsStudyEnd();
   }, []);
   useEffect(() => {
     readMissionRequest();
+    IsStudyEnd();
   }, [isFocused]);
   return (
     <View>
@@ -51,8 +62,12 @@ const SuiteRoomLeaderCanbanBoard = () => {
           </View>
           <View>
             <TouchableOpacity
-              style={SuiteRoomStyleSheet.CreateMissionButton}
+              style={[
+                SuiteRoomStyleSheet.CreateMissionButton,
+                endVisible && SuiteRoomStyleSheet.disabledCreateMissionButton, // endVisible 값에 따라 스타일 조건부 적용
+              ]}
               onPress={() => navigation.navigate('CreateMission')}
+              disabled={endVisible}
             >
               <Text style={SuiteRoomStyleSheet.CreateMissionText}>미션 생성</Text>
             </TouchableOpacity>

@@ -19,6 +19,7 @@ const SuiteRoomMyAttendance = () => {
   const readAttendanceList = async () => {
     try {
       const datalist = await AttendanceListApi(tokenId, parseInt(SuiteRoomId));
+      console.log(datalist);
       setMyAttendanceRate(datalist.data.myAttendanceRate * 100);
       setDeposit(datalist.data.depositAmount.toLocaleString());
       setAttendanceList(datalist.data.attendanceBoardDtoList);
@@ -42,16 +43,15 @@ const SuiteRoomMyAttendance = () => {
               <Text style={SuiteRoomStyleSheet.MyattendanceText}>내 출석률</Text>
               <Text style={SuiteRoomStyleSheet.MyAttendanceRate}>{myAttendanceRate}%</Text>
             </View>
-            <View style={SuiteRoomStyleSheet.MyattendanceProgressBarContainer}>
+            {/* <View style={SuiteRoomStyleSheet.MyattendanceProgressBarContainer}>
               <Progress.Bar
-                progress={myAttendanceRate / 100}
+                progress={myAttendanceRate === 0 ? 0 : myAttendanceRate / 100}
                 width={288}
                 height={30}
                 color={'#4CADA8'}
                 unfilledColor={'#E2FFFE'}
-                borderWidth={0}
               />
-            </View>
+            </View> */}
           </View>
 
           <View style={SuiteRoomStyleSheet.StudyDashboardContainer}>
@@ -62,9 +62,9 @@ const SuiteRoomMyAttendance = () => {
           </View>
         </View>
       </View>
-      <View style={SuiteRoomStyleSheet.StudyStatusContainer}>
+      {/* <View style={SuiteRoomStyleSheet.StudyStatusContainer}>
         <MyAttendanceTable data={[{}, ...attendanceList]} />
-      </View>
+      </View> */}
     </ScrollView>
   );
 };

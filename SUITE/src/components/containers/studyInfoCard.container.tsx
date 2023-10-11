@@ -65,7 +65,7 @@ const StudyInfoCard: React.FunctionComponent<{ filterCategory?: Category }> = ({
   return (
     <>
       <View style={mainPageStyleSheet.searchAndalarmbox}>
-        <View style={{ width: 300 }}>
+        <View style={mainPageStyleSheet.searchBarWidth}>
           <View style={mainPageStyleSheet.searchBorder}>
             <TextInput
               placeholder="스터디를 검색하세요"

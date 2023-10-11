@@ -18,8 +18,12 @@ import CheckCancelModal from '../../hook/checkCancelModal';
 import { DashBoardApi } from '../../api/StudyRoom/DashBoardApi';
 import AttendanceCreateModal from '../../hook/AttendanceCreateModal';
 import { BeforeStartSuiteRoomInformationApi } from '../../api/SuiteRoom/BeforeStartSuiteRoomInformationApi';
-import ImageModal from '../../hook/ImageModal';
 import StudyEndModal from '../../components/presents/StudyEndModal';
+import { heightPercentage } from '../../responsive/ResponsiveSize';
+import { EndStudyApi } from '../../api/StudyRoom/EndStudyApi';
+import { IsStudyEndApi } from '../../api/SuiteRoom/StudyEndApi';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 const SuiteRoomLeaderDashboard = () => {
@@ -28,6 +32,7 @@ const SuiteRoomLeaderDashboard = () => {
   const [visible, setVisible] = useState(false);
   const [startVisible, setStartVisible] = useState(false);
   const [endVisible, setEndVisible] = useState(false);
+  const [studyEndVisible, setStudyEndVisible] = useState(false);
   const [number, setNumber] = useState<number>(0);
   const [depositAmount, setDepositAmount] = useState(0);
   const [myMissionRate, setMyMissionRate] = useState(0);
@@ -77,11 +82,26 @@ const SuiteRoomLeaderDashboard = () => {
       console.log('Error occurred:', error);
     }
   };
-  const studyStartButtonHandler = () => {
-    SuiteRoomStart(tokenId, parseInt(SuiteRoomId));
+  const studyStartButtonHandler = async () => {
+    await SuiteRoomStart(tokenId, parseInt(SuiteRoomId));
     setStartVisible(false);
+    navigation.navigate('Mystudy');
     Alert.alert('스터디가 시작되었습니다!');
+
     //다시 API 불러오는 코드
+  };
+  const EndStudy = async () => {
+    await EndStudyApi(tokenId, parseInt(SuiteRoomId));
+    setStudyEndVisible(false);
+    navigation.navigate('Mystudy');
+    Alert.alert('스터디가 종료되었습니다!');
+  };
+  const IsStudyEnd = async () => {
+    const statusCode = await IsStudyEndApi(tokenId, parseInt(SuiteRoomId));
+    if (statusCode == true) {
+      console.log(statusCode);
+      setEndVisible(true);
+    }
   };
   useEffect(() => {
     if (number != 0) {
@@ -97,6 +117,7 @@ const SuiteRoomLeaderDashboard = () => {
   }, [suiteRoomStatus]);
   useEffect(() => {
     readDashBoard();
+    IsStudyEnd();
   }, [isFocused]);
   return (
     <ScrollView style={{ backgroundColor: 'white' }} bounces={false}>
@@ -109,6 +130,23 @@ const SuiteRoomLeaderDashboard = () => {
         />
       </ModalPopup>
       <View style={SuiteRoomStyleSheet.MyStudyRoomContainer}>
+        {endVisible === true ? (
+          <View style={{ alignItems: 'center' }}>
+            <View style={mainPageStyleSheet.EndStudyConainer}>
+              <View style={mainPageStyleSheet.EndStudyTextContainer}>
+                <Icon
+                  name="exclamation-circle"
+                  size={15}
+                  color={'white'}
+                  style={mainPageStyleSheet.EndStudyInformationIcon}
+                />
+                <Text style={mainPageStyleSheet.EndStudyInformationText}>체크 아웃이 진행 중이에요!</Text>
+              </View>
+            </View>
+          </View>
+        ) : (
+          <></>
+        )}
         <View style={SuiteRoomStyleSheet.dashBoardContainer}>
           <View style={SuiteRoomStyleSheet.DepositDayContainer}>
             <View style={SuiteRoomStyleSheet.DepositBox}>
@@ -128,8 +166,8 @@ const SuiteRoomLeaderDashboard = () => {
               <View style={SuiteRoomStyleSheet.AttendanceMissionBox}>
                 <ProgressCircle
                   percent={myAttendanceRate * 100}
-                  radius={65}
-                  borderWidth={45}
+                  radius={heightPercentage(75)}
+                  borderWidth={heightPercentage(45)}
                   color="#4CADA8"
                   shadowColor="#E2FFFE"
                   bgColor="white"
@@ -145,8 +183,8 @@ const SuiteRoomLeaderDashboard = () => {
               <View style={SuiteRoomStyleSheet.AttendanceMissionBox}>
                 <ProgressCircle
                   percent={myMissionRate * 100}
-                  radius={65}
-                  borderWidth={45}
+                  radius={heightPercentage(75)}
+                  borderWidth={heightPercentage(45)}
                   color="#A38AE7"
                   shadowColor="#F0EBFF"
                   bgColor="white"
@@ -159,8 +197,12 @@ const SuiteRoomLeaderDashboard = () => {
           <View style={{ flexDirection: 'row' }}>
             {suiteRoomStatus == 'START' ? (
               <TouchableOpacity
-                style={SuiteRoomStyleSheet.AttendanceCheckStart}
+                style={[
+                  SuiteRoomStyleSheet.AttendanceCheckStart,
+                  endVisible && SuiteRoomStyleSheet.AttendanceCheckStartDisabled, // endVisible 값에 따라 스타일 조건부 적용
+                ]}
                 onPress={() => setAttendanceCheckVisible(true)}
+                disabled={endVisible}
               >
                 <Text style={mainPageStyleSheet.categortFilterApplyText}>출석 시작</Text>
               </TouchableOpacity>
@@ -185,9 +227,9 @@ const SuiteRoomLeaderDashboard = () => {
               number={number}
             />
           </ImageModalPopup>
-          <ImageModalPopup visible={endVisible}>
-            <StudyEndModal visible={endVisible} onClose={() => setEndVisible(false)} />
-          </ImageModalPopup>
+          {/* <ImageModalPopup visible={endModalVisible}>
+            <StudyEndModal visible={endModalVisible} onClose={() => setEndModalVisible(false)} />
+          </ImageModalPopup> */}
           <View style={SuiteRoomStyleSheet.StudyDashboardContainer}>
             <View style={SuiteRoomStyleSheet.StudyInfoContainer}>
               <Text style={SuiteRoomStyleSheet.StudyInfoText}>팀 스터디 현황</Text>
@@ -199,6 +241,23 @@ const SuiteRoomLeaderDashboard = () => {
       <View style={SuiteRoomStyleSheet.StudyStatusContainer}>
         <StudyStatusTable data={[{}, ...member]} />
       </View>
+      <ModalPopup visible={studyEndVisible}>
+        <CheckCancelModal
+          visible={studyEndVisible}
+          onClose={() => setStudyEndVisible(false)}
+          text="스터디를 종료하시겠습니까?"
+          onConfirm={() => EndStudy()}
+        />
+      </ModalPopup>
+      {endVisible === false ? (
+        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <TouchableOpacity style={SuiteRoomStyleSheet.StudyEndButton} onPress={() => setStudyEndVisible(true)}>
+            <Text style={SuiteRoomStyleSheet.CreateMissionText}>스터디 종료</Text>
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <></>
+      )}
     </ScrollView>
   );
 };

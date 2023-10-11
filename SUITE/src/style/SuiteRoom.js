@@ -1,6 +1,7 @@
 import { StyleSheet, Platform } from 'react-native';
 import { heightPercentage, widthPercentage } from '../responsive/ResponsiveSize';
 import { Dimensions } from 'react-native';
+
 const Width = Dimensions.get('window').width; //스크린 너비 초기화
 const Height = Dimensions.get('window').height; //스크린 높이 초기화
 const SuiteRoomStyleSheet = StyleSheet.create({
@@ -22,7 +23,7 @@ const SuiteRoomStyleSheet = StyleSheet.create({
     marginTop: heightPercentage(14),
   },
   SuiteRoomDetailUpperBox: {
-    height: heightPercentage(100),
+    height: heightPercentage(90),
     width: widthPercentage(320),
     marginTop: heightPercentage(16),
     backgroundColor: '#F8F8F8',
@@ -126,7 +127,7 @@ const SuiteRoomStyleSheet = StyleSheet.create({
   SuiteRoomDetailInformationContainer: {
     marginTop: heightPercentage(40),
     width: widthPercentage(310),
-    height: heightPercentage(170),
+    height: Height * 0.2,
     backgroundColor: '#FFF4F4',
     marginBottom: heightPercentage(40),
   },
@@ -410,6 +411,14 @@ const SuiteRoomStyleSheet = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  disabledCreateMissionButton: {
+    width: widthPercentage(100),
+    height: heightPercentage(40),
+    backgroundColor: '#BBB7B7',
+    borderRadius: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   CreateMissionText: {
     color: 'white',
     fontWeight: 'bold',
@@ -575,6 +584,27 @@ const SuiteRoomStyleSheet = StyleSheet.create({
     textAlign: 'center',
     marginTop: 10,
     color: 'black',
+  },
+  StudyEndButton: {
+    width: widthPercentage(200),
+    height: heightPercentage(40),
+    backgroundColor: '#F14A4A',
+    borderRadius: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  AttendanceCheckStartDisabled: {
+    width: widthPercentage(160),
+    height: heightPercentage(40),
+    marginTop: 20,
+    backgroundColor: '#BBB7B7',
+    borderColor: '#BBB7B7',
+    borderRadius: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 7,
+    flexDirection: 'row',
   },
 });
 

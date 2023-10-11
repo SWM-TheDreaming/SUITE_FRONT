@@ -16,6 +16,9 @@ import { SuiteRoomOutApi } from '../../api/SuiteRoom/SuiteRoomOutApi';
 import { DashBoardApi } from '../../api/StudyRoom/DashBoardApi';
 import { BeforeStartSuiteRoomInformationApi } from '../../api/SuiteRoom/BeforeStartSuiteRoomInformationApi';
 import StudyEndModal from '../../components/presents/StudyEndModal';
+import { heightPercentage } from '../../responsive/ResponsiveSize';
+import { IsStudyEndApi } from '../../api/SuiteRoom/StudyEndApi';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
@@ -23,7 +26,6 @@ const SuiteRoomDashboard = () => {
   const SuiteRoomId = useRecoilValue(suiteRoomIdState);
   const suiteRoomStatus = useRecoilValue(suiteRoomStatusState);
   const tokenId = useRecoilValue(tokenState);
-  const [dashboard, setDashboard] = useState();
   const [attendanceCheckVisible, setAttendanceCheckVisible] = useState(false);
   const [depositAmount, setDepositAmount] = useState();
   const [myMissionRate, setMyMissionRate] = useState(0);
@@ -83,6 +85,12 @@ const SuiteRoomDashboard = () => {
     setAttendanceCheckVisible(true); //출석 진행중이라면 number 세팅
     //출석 진행중 아니라면 출석 진행중이 아니라는 modal visible 세팅
   };
+  const IsStudyEnd = async () => {
+    const statusCode = await IsStudyEndApi(tokenId, parseInt(SuiteRoomId));
+    if (statusCode == true) {
+      setEndVisible(true);
+    }
+  };
   useEffect(() => {
     if (suiteRoomStatus === 'START') {
       readDashBoard();
@@ -92,10 +100,28 @@ const SuiteRoomDashboard = () => {
   }, [suiteRoomStatus]);
   useEffect(() => {
     readDashBoard();
+    IsStudyEnd();
   }, [isFocused]);
   return (
     <ScrollView style={{ backgroundColor: 'white' }}>
       <View style={SuiteRoomStyleSheet.MyStudyRoomContainer}>
+        {endVisible === true ? (
+          <View style={{ alignItems: 'center' }}>
+            <View style={mainPageStyleSheet.EndStudyConainer}>
+              <View style={mainPageStyleSheet.EndStudyTextContainer}>
+                <Icon
+                  name="exclamation-circle"
+                  size={15}
+                  color={'white'}
+                  style={mainPageStyleSheet.EndStudyInformationIcon}
+                />
+                <Text style={mainPageStyleSheet.EndStudyInformationText}>체크 아웃이 진행 중이에요!</Text>
+              </View>
+            </View>
+          </View>
+        ) : (
+          <></>
+        )}
         <View style={SuiteRoomStyleSheet.dashBoardContainer}>
           <View style={SuiteRoomStyleSheet.DepositDayContainer}>
             <View style={SuiteRoomStyleSheet.DepositBox}>
@@ -115,8 +141,8 @@ const SuiteRoomDashboard = () => {
               <View style={SuiteRoomStyleSheet.AttendanceMissionBox}>
                 <ProgressCircle
                   percent={myAttendanceRate * 100}
-                  radius={65}
-                  borderWidth={45}
+                  radius={heightPercentage(75)}
+                  borderWidth={heightPercentage(45)}
                   color="#4CADA8"
                   shadowColor="#E2FFFE"
                   bgColor="white"
@@ -132,8 +158,8 @@ const SuiteRoomDashboard = () => {
               <View style={SuiteRoomStyleSheet.AttendanceMissionBox}>
                 <ProgressCircle
                   percent={myAttendanceRate * 100}
-                  radius={65}
-                  borderWidth={45}
+                  radius={heightPercentage(75)}
+                  borderWidth={heightPercentage(45)}
                   color="#A38AE7"
                   shadowColor="#F0EBFF"
                   bgColor="white"
@@ -145,7 +171,13 @@ const SuiteRoomDashboard = () => {
           </View>
           <View style={{ flexDirection: 'row' }}>
             {suiteRoomStatus == 'START' ? (
-              <TouchableOpacity style={SuiteRoomStyleSheet.AttendanceCheckStart} onPress={attendanceStart}>
+              <TouchableOpacity
+                style={[
+                  SuiteRoomStyleSheet.AttendanceCheckStart,
+                  endVisible && SuiteRoomStyleSheet.AttendanceCheckStartDisabled, // endVisible 값에 따라 스타일 조건부 적용
+                ]}
+                onPress={attendanceStart}
+              >
                 <Text style={mainPageStyleSheet.categortFilterApplyText}>출석 하기</Text>
               </TouchableOpacity>
             ) : (
@@ -171,9 +203,9 @@ const SuiteRoomDashboard = () => {
             />
           </ImageModalPopup>
 
-          <ImageModalPopup visible={endVisible}>
+          {/* <ImageModalPopup visible={endVisible}>
             <StudyEndModal visible={endVisible} onClose={() => setEndVisible(false)} />
-          </ImageModalPopup>
+          </ImageModalPopup> */}
           <View style={SuiteRoomStyleSheet.StudyDashboardContainer}>
             <View style={SuiteRoomStyleSheet.StudyInfoContainer}>
               <Text style={SuiteRoomStyleSheet.StudyInfoText}>팀 스터디 현황</Text>

@@ -43,7 +43,7 @@ export default function LeaderTopBarNavigation() {
               <Tab.Screen name="스위트룸" component={SuiteRoomDetailStart} options={{ tabBarLabel: '스위트룸' }} />
             </>
           ) : (
-            //시작하고, 일반 유저일때의 Top Tab Bar
+            // 시작하고, 일반 유저일때의 Top Tab Bar
             <>
               <Tab.Screen name="대시보드" component={SuiteRoomDashboard} options={{ tabBarLabel: '대시보드' }} />
               <Tab.Screen name="칸반보드" component={SuiteRoomCanbanBoard} options={{ tabBarLabel: '칸반보드' }} />
