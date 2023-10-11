@@ -564,6 +564,18 @@ const SuiteRoomStyleSheet = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 2,
   },
+  StudyEndModal: {
+    fontSize: 17,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: 'black',
+  },
+  StdudyEndDetailModal: {
+    fontSize: 13,
+    textAlign: 'center',
+    marginTop: 10,
+    color: 'black',
+  },
 });
 
 export default SuiteRoomStyleSheet;

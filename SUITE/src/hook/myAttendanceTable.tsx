@@ -1,6 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-
+import { View, Text, StyleSheet, Image } from 'react-native';
+import AttnedanceOk from '../Icons/AttendanceOk.png';
+import AttendanceNot from '../Icons/AtendanceNot.png';
+import SuiteRoomStyleSheet from '../style/SuiteRoom';
 const MyAttendanceTable: React.FC<{ data: any[] }> = ({ data }) => {
   return (
     <View style={styles.container}>
@@ -13,7 +15,21 @@ const MyAttendanceTable: React.FC<{ data: any[] }> = ({ data }) => {
           <Text style={styles.secondColumn}>
             {index === 0 ? '출석일자' : item.attendanceTime.toString().slice(0, 10)}
           </Text>
-          <Text style={styles.thirdColumn}>{index === 0 ? '출석여부' : item.status == true ? 'O' : 'X'}</Text>
+          <View style={styles.thirdColumn}>
+            <Text style={styles.thirdColumnText}>
+              {index === 0 ? (
+                '출석여부'
+              ) : item.status == true ? (
+                <View style={{ paddingTop: 4 }}>
+                  <Image source={AttnedanceOk} />
+                </View>
+              ) : (
+                <View style={{ paddingTop: 4 }}>
+                  <Image source={AttendanceNot} />
+                </View>
+              )}
+            </Text>
+          </View>
         </View>
       ))}
     </View>
@@ -24,6 +40,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 10,
+
     paddingTop: 20,
   },
   headerRow: {
@@ -41,9 +58,11 @@ const styles = StyleSheet.create({
   },
   oddRow: {
     backgroundColor: 'white',
+    alignItems: 'center',
   },
   evenRow: {
     backgroundColor: '#F8F8F8',
+    alignItems: 'center',
   },
   cell: {
     textAlign: 'center',
@@ -67,7 +86,9 @@ const styles = StyleSheet.create({
   },
   thirdColumn: {
     width: 80,
-    textAlign: 'center',
+    alignItems: 'center',
+  },
+  thirdColumnText: {
     color: 'black',
     fontWeight: 'bold',
     fontSize: 14,

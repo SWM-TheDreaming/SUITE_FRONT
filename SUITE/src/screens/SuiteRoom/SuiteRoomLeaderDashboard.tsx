@@ -18,6 +18,8 @@ import CheckCancelModal from '../../hook/checkCancelModal';
 import { DashBoardApi } from '../../api/StudyRoom/DashBoardApi';
 import AttendanceCreateModal from '../../hook/AttendanceCreateModal';
 import { BeforeStartSuiteRoomInformationApi } from '../../api/SuiteRoom/BeforeStartSuiteRoomInformationApi';
+import ImageModal from '../../hook/ImageModal';
+import StudyEndModal from '../../components/presents/StudyEndModal';
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 const SuiteRoomLeaderDashboard = () => {
@@ -25,6 +27,7 @@ const SuiteRoomLeaderDashboard = () => {
   const tokenId = useRecoilValue(tokenState);
   const [visible, setVisible] = useState(false);
   const [startVisible, setStartVisible] = useState(false);
+  const [endVisible, setEndVisible] = useState(false);
   const [number, setNumber] = useState<number>(0);
   const [depositAmount, setDepositAmount] = useState(0);
   const [myMissionRate, setMyMissionRate] = useState(0);
@@ -181,6 +184,9 @@ const SuiteRoomLeaderDashboard = () => {
               text={'출석 번호는 10분 뒤 만료되니 \n 팀원들에게 빠르게 안내해주세요!'}
               number={number}
             />
+          </ImageModalPopup>
+          <ImageModalPopup visible={endVisible}>
+            <StudyEndModal visible={endVisible} onClose={() => setEndVisible(false)} />
           </ImageModalPopup>
           <View style={SuiteRoomStyleSheet.StudyDashboardContainer}>
             <View style={SuiteRoomStyleSheet.StudyInfoContainer}>

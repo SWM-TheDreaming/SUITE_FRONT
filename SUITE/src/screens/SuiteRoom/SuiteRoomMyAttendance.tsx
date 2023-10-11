@@ -49,6 +49,7 @@ const SuiteRoomMyAttendance = () => {
                 height={30}
                 color={'#4CADA8'}
                 unfilledColor={'#E2FFFE'}
+                borderWidth={0}
               />
             </View>
           </View>

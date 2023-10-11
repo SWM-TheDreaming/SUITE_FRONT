@@ -15,6 +15,7 @@ import { RootStackParamList } from '../../types';
 import { SuiteRoomOutApi } from '../../api/SuiteRoom/SuiteRoomOutApi';
 import { DashBoardApi } from '../../api/StudyRoom/DashBoardApi';
 import { BeforeStartSuiteRoomInformationApi } from '../../api/SuiteRoom/BeforeStartSuiteRoomInformationApi';
+import StudyEndModal from '../../components/presents/StudyEndModal';
 
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
@@ -30,6 +31,8 @@ const SuiteRoomDashboard = () => {
   const [dday, setDday] = useState<number>(0);
   const [member, setMember] = useState([]);
   const isFocused = useIsFocused();
+  const [endVisible, setEndVisible] = useState(false);
+
   const navigation = useNavigation<RootStackNavigationProp>();
   const readDashBoard = async () => {
     try {
@@ -166,6 +169,10 @@ const SuiteRoomDashboard = () => {
               text={'출석 번호는 10분 뒤 만료되니 \n 팀원들에게 빠르게 안내해주세요!'}
               number={0}
             />
+          </ImageModalPopup>
+
+          <ImageModalPopup visible={endVisible}>
+            <StudyEndModal visible={endVisible} onClose={() => setEndVisible(false)} />
           </ImageModalPopup>
           <View style={SuiteRoomStyleSheet.StudyDashboardContainer}>
             <View style={SuiteRoomStyleSheet.StudyInfoContainer}>
