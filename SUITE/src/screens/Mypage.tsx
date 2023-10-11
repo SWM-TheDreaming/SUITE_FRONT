@@ -123,9 +123,6 @@ const Mypage = () => {
             <MaterialCommunityIcons name="bell-outline" size={24} color={'black'} />
           )}
         </TouchableOpacity>
-        <TouchableOpacity>
-          <AntDesign name="setting" size={24} color={'black'} />
-        </TouchableOpacity>
       </View>
 
       <View>
