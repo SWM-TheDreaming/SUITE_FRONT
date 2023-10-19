@@ -53,7 +53,7 @@ const Profile = () => {
         fcmToken: '1234',
       });
       console.log(code);
-      sendProfileImageApi(parseInt(String(code)), img);
+      await sendProfileImageApi(parseInt(String(code)), img);
       navigation.navigate('SignUp');
     } catch (error) {
       console.log('Error occurred:', error);
@@ -75,6 +75,7 @@ const Profile = () => {
         } else if (response.errorCode) {
           console.log('Image Error : ' + response.errorCode);
         }
+        console.log('response', response.assets[0].uri);
         setImageSource(response.assets[0].uri);
       },
     );
@@ -86,6 +87,9 @@ const Profile = () => {
       setIsButtonDisabled(true);
     }
   }, [profile.getTextInputProps('nickname').value]);
+  useEffect(() => {
+    console.log(img);
+  }, [img]);
   return (
     <View style={mainPageStyleSheet.categoryPageContainer}>
       <View style={mainPageStyleSheet.underStatusBar}>

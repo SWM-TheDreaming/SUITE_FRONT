@@ -80,7 +80,7 @@ const SuiteRoomLeaderCanbanBoard = () => {
               missionId={item.missionId}
               missionName={item.missionName}
               missionDeadLine={item.missionDeadLine}
-              nickname={item.nickname}
+              nickName={item.nickName}
               afterApprove={() => readMissionRequest()}
             />
           ))}

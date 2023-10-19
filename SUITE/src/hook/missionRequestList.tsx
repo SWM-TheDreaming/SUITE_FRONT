@@ -11,7 +11,7 @@ type DataRow = {
   missionId: string;
   missionName: string;
   missionDeadLine: string;
-  nickname: string;
+  nickName: string;
   afterApprove: () => void;
 };
 
@@ -19,7 +19,7 @@ type DataListProps = {
   data: DataRow[];
 };
 
-const MissionRequestList: React.FC<DataRow> = ({ missionId, missionName, missionDeadLine, nickname, afterApprove }) => {
+const MissionRequestList: React.FC<DataRow> = ({ missionId, missionName, missionDeadLine, nickName, afterApprove }) => {
   const [visible, setVisible] = useState(false);
   const [modalText, setModalText] = useState('');
   const [actionType, setActionType] = useState(null);
@@ -52,7 +52,7 @@ const MissionRequestList: React.FC<DataRow> = ({ missionId, missionName, mission
       <View style={{ flexDirection: 'column' }}>
         <Text style={styles.missionName}>{missionName}</Text>
         <View style={{ flexDirection: 'row' }}>
-          <Text style={styles.nickname}>{nickname}</Text>
+          <Text style={styles.nickname}>{nickName}</Text>
           <Text style={styles.middlebar}> | </Text>
           <Text style={styles.missionDate}>{missionDeadLine.toString().slice(0, 10)}</Text>
         </View>

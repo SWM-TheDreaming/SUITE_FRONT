@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { API_URL_STUDYROOM } from '../../../react-native.config';
-export const TransactionReadApi = async (accessToken: string, roomNum: number, title: string): Promise<any> => {
+export const ContractRequestAPi = async (accessToken: string, roomNum: number, title: string): Promise<any> => {
   try {
     axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
     const response = await axios.post(`${API_URL_STUDYROOM}/contract/user/get/group-contract`, {
       suite_room_id: roomNum,
-      tilte: title,
+      title: title,
     });
     if (response.status === 200) {
       const data = response.data.data;

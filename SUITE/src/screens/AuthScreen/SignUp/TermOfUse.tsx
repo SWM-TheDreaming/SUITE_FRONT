@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Linking } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import mainPageStyleSheet from '../../../style/style';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -28,6 +28,7 @@ const CheckboxItem: React.FC<CheckboxItemProps> = ({
     onCheckboxChange(!checked);
     onPress();
   };
+  const link = 'https://noisy-twill-01a.notion.site/Suite-57acd0e1ead74b2c8af45b1b1923671a?pvs=4';
 
   return (
     <View style={mainPageStyleSheet.IndividualCheck}>
@@ -50,7 +51,7 @@ const CheckboxItem: React.FC<CheckboxItemProps> = ({
         </Text>
       </View>
       <View style={mainPageStyleSheet.termOfUseDetailClick}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => Linking.openURL(link)}>
           <Icon name="chevron-forward" size={16} color={checked ? '#005BA5' : '#686868'} />
         </TouchableOpacity>
       </View>

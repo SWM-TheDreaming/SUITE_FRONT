@@ -14,7 +14,6 @@ export const LeaderMissionCreateApi = async (
       missionName: missionName,
       missionDeadLine: missionDeadLine,
     });
-    console.log(response.data);
     if (response.status === 200) {
       const data = response.data;
       return data;

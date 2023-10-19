@@ -11,10 +11,11 @@ const mainPageStyleSheet = StyleSheet.create({
   },
   box: {
     //컴포넌트 박스 설정
-    marginTop: 16,
+    marginTop: 5,
     backgroundColor: '#FFFFFF',
     width: widthPercentage(328),
-    height: 140,
+    height: heightPercentage(155),
+    marginBottom: 10,
     borderRadius: 10,
     ...Platform.select({
       ios: {
@@ -42,7 +43,7 @@ const mainPageStyleSheet = StyleSheet.create({
   },
   ddaybox: {
     //ddaybox
-    width: widthPercentage(37),
+    width: widthPercentage(40),
     height: heightPercentage(20),
     backgroundColor: '#4CADA8',
     borderRadius: 4,
@@ -57,7 +58,7 @@ const mainPageStyleSheet = StyleSheet.create({
   },
   categorybox: {
     //categorybox
-    width: widthPercentage(44),
+    width: widthPercentage(45),
     height: heightPercentage(20),
     backgroundColor: '#3380F9',
     borderRadius: 4,
@@ -433,6 +434,14 @@ const mainPageStyleSheet = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
   },
+  mainStatusBar: {
+    width: Width,
+    height: heightPercentage(48),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: 'white',
+  },
   pageBackIcon: {
     marginTop: 12,
     marginLeft: 12,
@@ -546,6 +555,27 @@ const mainPageStyleSheet = StyleSheet.create({
     fontSize: 16,
     color: '#000000',
     fontFamily: 'PretendardVariable',
+  },
+  MainpagePosition: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    textAlign: 'left',
+    marginLeft: 20,
+    fontSize: 16,
+    color: '#000000',
+    fontWeight: 'bold',
+    fontFamily: 'PretendardVariable',
+  },
+  MainTextPosition: {
+    marginLeft: 20,
+    fontSize: 16,
+    color: '#000000',
+    fontWeight: 'bold',
+    fontFamily: 'PretendardVariable',
+  },
+  AlarmPosition: {
+    marginRight: 20,
   },
   emailAuthenticationContainer: {
     marginTop: heightPercentage(40),
@@ -922,6 +952,14 @@ const mainPageStyleSheet = StyleSheet.create({
   findIdContainer: {
     width: widthPercentage(310),
     height: heightPercentage(50),
+    marginTop: heightPercentage(10),
+    paddingLeft: 13,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  pdfContainer: {
+    width: widthPercentage(310),
+    height: heightPercentage(200),
     marginTop: heightPercentage(10),
     paddingLeft: 13,
     justifyContent: 'center',

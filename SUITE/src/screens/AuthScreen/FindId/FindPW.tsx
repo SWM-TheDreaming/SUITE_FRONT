@@ -13,18 +13,18 @@ const FindPW = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
   const emailAuthentication = useForm();
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const [verifyCode, setVerifyCode] = useState('aa')
+  const [verifyCode, setVerifyCode] = useState('aa');
   const [visible, setVisible] = useState(false);
-  const [phonAuthenticationButtonDisabled, setPhonAuthenticationButtonDisabled] = useState(true)
+  const [phonAuthenticationButtonDisabled, setPhonAuthenticationButtonDisabled] = useState(true);
   const [authenticationCode, setauthenticationCode] = useState('');
   const [email, setEmail] = useRecoilState(emailState);
 
-  const handleSendButtonPress = async () =>{
-    setVisible(true)
+  const handleSendButtonPress = async () => {
+    setVisible(true);
     const code = await emailAuthenticationCodeApi(emailAuthentication.getTextInputProps('username').value);
-    console.log(code)
-    setVerifyCode(code)
-  }
+    console.log(code);
+    setVerifyCode(code);
+  };
   const handleAuthencticationCodeChange = (text: string) => {
     setauthenticationCode(text);
   };
@@ -32,15 +32,15 @@ const FindPW = () => {
     return verifyCode === authenticationCode;
   };
   const handleButtonPress = () => {
-    setEmail(emailAuthentication.getTextInputProps('username').value)
-    navigation.navigate('NewPW')
+    setEmail(emailAuthentication.getTextInputProps('username').value);
+    navigation.navigate('NewPW');
   };
 
   useEffect(() => {
     if (emailAuthentication.errors.username == '') {
-        setPhonAuthenticationButtonDisabled(false);
+      setPhonAuthenticationButtonDisabled(false);
     } else {
-        setPhonAuthenticationButtonDisabled(true);
+      setPhonAuthenticationButtonDisabled(true);
     }
   }, [emailAuthentication.errors.username]);
   useEffect(() => {
@@ -65,37 +65,37 @@ const FindPW = () => {
       </View>
       <View style={mainPageStyleSheet.emailAuthenticationContainer}>
         <Text style={mainPageStyleSheet.idpwtext}>이메일</Text>
-        <View style={{flexDirection : 'row'}}>
-        <InputField
-            style = {mainPageStyleSheet.phoneNumInputBox}
-          placeholder=" 이메일을 입력해주세요"
-          {...emailAuthentication.getTextInputProps('username')}
-          touched={emailAuthentication.touched.username}
-        />
-         <View style={mainPageStyleSheet.phoneAuthenticateCodeContainer}>
-                <TouchableOpacity 
-                    style={[mainPageStyleSheet.phoneAuthenticateCodeButtonNotDisabled, phonAuthenticationButtonDisabled && mainPageStyleSheet.phoneAuthenticateCodeButton]} 
-                    disabled={phonAuthenticationButtonDisabled}
-                    onPress = {() =>{handleSendButtonPress()}}
-                >
-                    <Text style={mainPageStyleSheet.phonAuthenticateCodeText}>인증번호 발송</Text>
-                </TouchableOpacity>
-            </View>
+        <View style={{ flexDirection: 'row' }}>
+          <InputField
+            style={mainPageStyleSheet.phoneNumInputBox}
+            placeholder=" 이메일을 입력해주세요"
+            {...emailAuthentication.getTextInputProps('username')}
+            touched={emailAuthentication.touched.username}
+          />
+          <View style={mainPageStyleSheet.phoneAuthenticateCodeContainer}>
+            <TouchableOpacity
+              style={[
+                mainPageStyleSheet.phoneAuthenticateCodeButtonNotDisabled,
+                phonAuthenticationButtonDisabled && mainPageStyleSheet.phoneAuthenticateCodeButton,
+              ]}
+              disabled={phonAuthenticationButtonDisabled}
+              onPress={() => {
+                handleSendButtonPress();
+              }}
+            >
+              <Text style={mainPageStyleSheet.phonAuthenticateCodeText}>인증번호 발송</Text>
+            </TouchableOpacity>
+          </View>
         </View>
         <Text style={mainPageStyleSheet.idPwInputErrorText}>{emailAuthentication.errors.username}</Text>
-        
       </View>
-      {visible === true ?
-      <View style={mainPageStyleSheet.FindPwemailAuthenticationContainer}>
-        <Text style={mainPageStyleSheet.idpwtext}>인증코드</Text>
-        <InputField
-          autoFocus
-          placeholder="인증코드를 입력해주세요"
-          onChangeText={handleAuthencticationCodeChange}
-        />
-        {!validateCode() && <Text style={mainPageStyleSheet.idPwInputErrorText}>코드가 일치하지 않습니다.</Text>}
-      </View>
-    : null}
+      {visible === true ? (
+        <View style={mainPageStyleSheet.FindPwemailAuthenticationContainer}>
+          <Text style={mainPageStyleSheet.idpwtext}>인증코드</Text>
+          <InputField autoFocus placeholder="인증코드를 입력해주세요" onChangeText={handleAuthencticationCodeChange} />
+          {!validateCode() && <Text style={mainPageStyleSheet.idPwInputErrorText}>코드가 일치하지 않습니다.</Text>}
+        </View>
+      ) : null}
       <View style={mainPageStyleSheet.SignUpNextBtnContainer}>
         <TouchableOpacity
           style={[mainPageStyleSheet.SignUpNextBtnBtn, isButtonDisabled && mainPageStyleSheet.disabledSignUpNextBtnBtn]}

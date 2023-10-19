@@ -44,10 +44,12 @@ const SuiteRoompay = () => {
   };
   useEffect(() => {
     readPoint();
+  }, []);
+  useEffect(() => {
     if (point < depositAmount) {
       setIsButtonDisabled(true);
     }
-  }, []);
+  }, [point]);
   return (
     <View style={mainPageStyleSheet.categoryPageContainer}>
       <Header title="Suite Room 체크인" />
@@ -112,7 +114,7 @@ const SuiteRoompay = () => {
           <TouchableOpacity
             style={mainPageStyleSheet.SignUpNextBtnBtn}
             onPress={() => {
-              handleButtonPress();
+              () => navigation.navigate('Mypage');
             }}
           >
             <Text style={mainPageStyleSheet.SignUpNextBtnText}>포인트 충전하기</Text>

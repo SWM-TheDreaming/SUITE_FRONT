@@ -59,8 +59,8 @@ const AnpServiceStyleSheet = StyleSheet.create({
     marginRight: 10,
   },
   choiceProfileImage: {
-    width: widthPercentage(100),
-    height: heightPercentage(120),
+    width: 120,
+    height: 120,
     borderRadius: heightPercentage(100),
   },
   profileTextContainer: {

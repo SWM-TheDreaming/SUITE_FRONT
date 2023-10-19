@@ -7,7 +7,6 @@ export const SuiteRoomStart = async (accessToken: string, roomNum: number): Prom
     const response = await axios.post(`${API_URL_SUITEROOM}/suite/suiteroom/beginning`, {
       suiteRoomId: roomNum,
     });
-    console.log(response);
     if (response.status === 200) {
       const data = response.data.data;
       return data;

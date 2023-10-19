@@ -61,7 +61,7 @@ const MissionItem: React.FC<DataRow> = ({ missionId, missionName, missionDeadLin
     setVisible(true);
   };
   const SendPr = async () => {
-    await MissionPullRequestApi(tokenId, parseInt(SuiteRoomId), missionName);
+    await MissionPullRequestApi(tokenId, parseInt(SuiteRoomId), parseInt(missionId));
     afterPR();
     setVisible(false);
   };

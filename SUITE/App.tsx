@@ -5,6 +5,8 @@ import { StyleSheet } from 'react-native';
 import { RecoilRoot } from 'recoil';
 import { GoogleSignin } from '@react-native-google-signin/google-signin'; // import messaging from '@react-native-firebase/messaging';
 import config from './config';
+import SplashScreen from 'react-native-splash-screen';
+
 // messaging().setBackgroundMessageHandler(async (remoteMessage) => {
 //   console.log('[Background Remote Message]', remoteMessage);
 // });
@@ -26,9 +28,12 @@ function App(): JSX.Element {
       webClientId: config.GOOGLE_WEB_CLIENT_ID,
     });
   };
-
+  const onNavigationReady = () => {
+    setTimeout(() => SplashScreen.hide(), 1000); // just hide the splash screen after navigation ready
+  };
   useEffect(() => {
     googleConfigureSignIn();
+    onNavigationReady();
   }, []);
   return (
     <RecoilRoot>

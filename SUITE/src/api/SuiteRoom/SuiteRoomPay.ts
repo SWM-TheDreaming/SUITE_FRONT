@@ -7,7 +7,6 @@ export const SuiteRoomPay = async (accessToken: string, roomNum: number): Promis
     const response = await axios.post(`${API_URL_SUITEROOM}/suite/payment/completion`, {
       suiteRoomId: roomNum,
     });
-    console.log(response);
     if (response.status === 200) {
       const data = response.data.data;
       return data;

@@ -7,7 +7,6 @@ export const BeforeStartSuiteRoomInformationApi = async (accessToken: string, ro
     const response = await axios.post(`${API_URL_SUITEROOM}/suite/suiteroom/before/dashboard`, {
       suiteRoomId: roomNum,
     });
-    console.log(response);
     if (response.status === 200) {
       const data = response.data.data;
       return data;

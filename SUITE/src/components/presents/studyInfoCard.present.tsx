@@ -44,7 +44,6 @@ const StudyInfoCardUI = (props: StudyInfoCardProps) => {
     <TouchableOpacity
       style={mainPageStyleSheet.box}
       onPress={() => {
-        console.log(props.suiteRoomId);
         props.isPublic == true
           ? navigation.navigate('SuiteRoomDetail', { SuiteRoomid: props.suiteRoomId })
           : setOkVisible(true);

@@ -28,6 +28,7 @@ import {
 import { Header } from '../../hook/header';
 import { SuiteRoomCreateApi } from '../../api/SuiteRoom/SuiteRoomCreateApi';
 import convertStudyValue from '../../data/ChangeCategory';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
@@ -94,52 +95,57 @@ const SuiteRoomurl = () => {
     }
   }, [suiteRoomUrl.getTextInputProps('content').value, suiteRoomUrl.getTextInputProps('channelLink').value]);
   return (
-    <View style={mainPageStyleSheet.categoryPageContainer}>
-      <Header title="Suite Room 개설" backScreen="SuiteRoomRule" />
-      <Progress.Bar
-        progress={1.0}
-        height={2}
-        width={Dimensions.get('window').width}
-        color={'#005BA5'}
-        borderRadius={0}
-        borderColor={'white'}
-        unfilledColor={'#E8E8E8'}
-      />
-
-      <View style={mainPageStyleSheet.emailAuthenticationContainer}>
-        <Text style={mainPageStyleSheet.idpwtext}>Suite Room 소개</Text>
-        <InputField
-          style={mainPageStyleSheet.roomInformationContainer}
-          autoFocus
-          placeholder=" Suite Room을 소개해주세요!"
-          {...suiteRoomUrl.getTextInputProps('content')}
-          touched={suiteRoomUrl.touched.content}
+    <KeyboardAwareScrollView>
+      <View style={mainPageStyleSheet.categoryPageContainer}>
+        <Header title="Suite Room 개설" backScreen="SuiteRoomRule" />
+        <Progress.Bar
+          progress={1.0}
+          height={2}
+          width={Dimensions.get('window').width}
+          color={'#005BA5'}
+          borderRadius={0}
+          borderColor={'white'}
+          unfilledColor={'#E8E8E8'}
         />
-        <Text style={mainPageStyleSheet.idPwInputErrorText}>{suiteRoomUrl.errors.content}</Text>
 
-        <Text style={mainPageStyleSheet.idpwtext}>소통 창구</Text>
-        <InputField
-          style={mainPageStyleSheet.idpwInputBox}
-          autoFocus
-          placeholder=" 디스코드, 오픈 채팅방 등 소통 창구를 입력해주세요!"
-          {...suiteRoomUrl.getTextInputProps('channelLink')}
-          touched={suiteRoomUrl.touched.channelLink}
-        />
-        <Text style={mainPageStyleSheet.idPwInputErrorText}>{suiteRoomUrl.errors.channelLink}</Text>
-      </View>
+        <View style={mainPageStyleSheet.emailAuthenticationContainer}>
+          <Text style={mainPageStyleSheet.idpwtext}>Suite Room 소개</Text>
+          <InputField
+            style={mainPageStyleSheet.roomInformationContainer}
+            autoFocus
+            placeholder=" Suite Room을 소개해주세요!"
+            {...suiteRoomUrl.getTextInputProps('content')}
+            touched={suiteRoomUrl.touched.content}
+          />
+          <Text style={mainPageStyleSheet.idPwInputErrorText}>{suiteRoomUrl.errors.content}</Text>
 
-      <View style={mainPageStyleSheet.SignUpNextBtnContainer}>
-        <TouchableOpacity
-          style={[mainPageStyleSheet.SignUpNextBtnBtn, isButtonDisabled && mainPageStyleSheet.disabledSignUpNextBtnBtn]}
-          disabled={isButtonDisabled}
-          onPress={() => {
-            handleButtonPress();
-          }}
-        >
-          <Text style={mainPageStyleSheet.SignUpNextBtnText}>Suite Room 개설하기</Text>
-        </TouchableOpacity>
+          <Text style={mainPageStyleSheet.idpwtext}>소통 창구</Text>
+          <InputField
+            style={mainPageStyleSheet.idpwInputBox}
+            autoFocus
+            placeholder=" 디스코드, 오픈 채팅방 등 소통 창구를 입력해주세요!"
+            {...suiteRoomUrl.getTextInputProps('channelLink')}
+            touched={suiteRoomUrl.touched.channelLink}
+          />
+          <Text style={mainPageStyleSheet.idPwInputErrorText}>{suiteRoomUrl.errors.channelLink}</Text>
+        </View>
+
+        <View style={mainPageStyleSheet.SignUpNextBtnContainer}>
+          <TouchableOpacity
+            style={[
+              mainPageStyleSheet.SignUpNextBtnBtn,
+              isButtonDisabled && mainPageStyleSheet.disabledSignUpNextBtnBtn,
+            ]}
+            disabled={isButtonDisabled}
+            onPress={() => {
+              handleButtonPress();
+            }}
+          >
+            <Text style={mainPageStyleSheet.SignUpNextBtnText}>Suite Room 개설하기</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </KeyboardAwareScrollView>
   );
 };
 

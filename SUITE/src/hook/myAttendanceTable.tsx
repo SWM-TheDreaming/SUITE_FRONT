@@ -16,17 +16,17 @@ const MyAttendanceTable: React.FC<{ data: any[] }> = ({ data }) => {
           </Text>
           <View style={styles.thirdColumn}>
             <Text style={styles.thirdColumnText}>
-              {index === 0
-                ? '출석여부'
-                : item.status == true
-                ? // <View style={{ paddingTop: 4 }}>
-                  //   <Image source={AttnedanceOk} />
-                  // </View>
-                  'o'
-                : // <View style={{ paddingTop: 4 }}>
-                  //   <Image source={AttendanceNot} />
-                  // </View>
-                  'x'}
+              {index === 0 ? (
+                '출석여부'
+              ) : item.status == true ? (
+                <View style={{ paddingTop: 4 }}>
+                  <Image source={AttnedanceOk} />
+                </View>
+              ) : (
+                <View style={{ paddingTop: 4 }}>
+                  <Image source={AttendanceNot} />
+                </View>
+              )}
             </Text>
           </View>
         </View>

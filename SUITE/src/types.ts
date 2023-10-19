@@ -8,6 +8,7 @@ export type RootStackParamList = {
   CategoryFilter: undefined;
   Studylist: { selectedCategories: string[] };
   Mystudy: undefined;
+  Mypage: undefined;
   Login: undefined;
   SignUp: undefined;
   EmailAuthentication: undefined;
@@ -36,6 +37,7 @@ export type RootStackParamList = {
   ScrabList: undefined;
   Alarm: undefined;
   SuiteRoomCreateComplete: undefined;
+  ContractFind: undefined;
 };
 
 export interface Category {

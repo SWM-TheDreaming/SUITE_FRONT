@@ -68,7 +68,7 @@ const MyStudyInfoCardUI = (props: StudyInfoCardProps) => {
         />
         <Text style={mainPageStyleSheet.titletext}>{props.title}</Text>
         <Text style={mainPageStyleSheet.detailtext}>
-          방장: {props.hostNickName} | 참여인원:{1}/{2}
+          방장: {props.hostNickName} | 참여인원:{props.participantCount}/{props.recruitmentLimit}
         </Text>
         <Text style={mainPageStyleSheet.detailtext}>
           작성일:{props.createdDate.toString().slice(0, 10)} | 보증금 납부여부 :{' '}

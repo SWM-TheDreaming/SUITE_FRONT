@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView, Alert } from 'react-native';
 import { useRecoilValue } from 'recoil';
-import { suiteRoomIdState, tokenState, suiteRoomStatusState } from '../../../recoil/atoms';
+import { suiteRoomIdState, tokenState, suiteRoomStatusState, suiteRoomState } from '../../../recoil/atoms';
 import SuiteRoomStyleSheet from '../../style/SuiteRoom';
 import ProgressCircle from 'react-native-progress-circle';
 import StudyStatusTable from '../../hook/studyStatusTable';
@@ -40,6 +40,7 @@ const SuiteRoomLeaderDashboard = () => {
   const [dday, setDday] = useState<number>(0);
   const [member, setMember] = useState([]);
   const [attendanceCheckVisible, setAttendanceCheckVisible] = useState(false);
+  const suiteRoomTitle = useRecoilValue(suiteRoomState);
   const isFocused = useIsFocused();
 
   const suiteRoomStatus = useRecoilValue(suiteRoomStatusState);
@@ -116,8 +117,10 @@ const SuiteRoomLeaderDashboard = () => {
     }
   }, [suiteRoomStatus]);
   useEffect(() => {
-    readDashBoard();
-    IsStudyEnd();
+    if (suiteRoomStatus === 'START') {
+      readDashBoard();
+      IsStudyEnd();
+    }
   }, [isFocused]);
   return (
     <ScrollView style={{ backgroundColor: 'white' }} bounces={false}>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { useRecoilValue } from 'recoil';
-import { suiteRoomIdState, suiteRoomStatusState, tokenState } from '../../../recoil/atoms';
+import { suiteRoomIdState, suiteRoomStatusState, tokenState, suiteRoomState } from '../../../recoil/atoms';
 import SuiteRoomStyleSheet from '../../style/SuiteRoom';
 import ProgressCircle from 'react-native-progress-circle';
 import StudyStatusTable from '../../hook/studyStatusTable';
@@ -26,6 +26,7 @@ const SuiteRoomDashboard = () => {
   const SuiteRoomId = useRecoilValue(suiteRoomIdState);
   const suiteRoomStatus = useRecoilValue(suiteRoomStatusState);
   const tokenId = useRecoilValue(tokenState);
+  const SuiteRoomTitle = useRecoilValue(suiteRoomState);
   const [attendanceCheckVisible, setAttendanceCheckVisible] = useState(false);
   const [depositAmount, setDepositAmount] = useState();
   const [myMissionRate, setMyMissionRate] = useState(0);
@@ -92,6 +93,7 @@ const SuiteRoomDashboard = () => {
     }
   };
   useEffect(() => {
+    console.log(SuiteRoomTitle);
     if (suiteRoomStatus === 'START') {
       readDashBoard();
     } else {
@@ -102,6 +104,7 @@ const SuiteRoomDashboard = () => {
     readDashBoard();
     IsStudyEnd();
   }, [isFocused]);
+
   return (
     <ScrollView style={{ backgroundColor: 'white' }}>
       <View style={SuiteRoomStyleSheet.MyStudyRoomContainer}>

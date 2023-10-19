@@ -31,6 +31,10 @@ import { MyPointApi } from '../api/SuiteRoom/MyPointApi';
 import { UserDeleteApi } from '../api/Sign/UserDeleteApi';
 import ModalPopup from '../hook/modal';
 import CheckCancelModal from '../hook/checkCancelModal';
+import SignModalPopup from '../components/presents/SignmodalPopup';
+import { launchImageLibrary } from 'react-native-image-picker';
+import { sendProfileImageApi } from '../api/Sign/sendProfileImageApi';
+
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 const Mypage = () => {
@@ -53,9 +57,11 @@ const Mypage = () => {
   const [missionCompleteCount, setMissionCompleteCount] = useState(0);
   const isFocused = useIsFocused();
   const [visible, setVisible] = useState(false);
+  const [betaVisible, setBetaVisible] = useState(false);
   const [modalText, setModalText] = useState('');
   const [actionType, setActionType] = useState(null);
   const [profileImage, setProfileImage] = useRecoilState(profileImageState);
+
   const handleSignOutPress = () => {
     setModalText('로그아웃 하시겠습니까?');
     setVisible(true);
@@ -95,10 +101,35 @@ const Mypage = () => {
       setAttendanceCompleteCount(code.attendanceCompleteCount);
       setMissionAvgRate(code.missionAvgRate);
       setMissionCompleteCount(code.missionCompleteCount);
+      console.log(code);
     } catch (error) {
       console.log('Error occurred:', error);
     }
   };
+  function pickImg() {
+    launchImageLibrary(
+      {
+        mediaType: 'photo',
+        maxWidth: 188,
+        maxHeight: 188,
+      },
+      (response) => {
+        if (response.didCancel) {
+          return;
+        } else if (response.errorCode) {
+          console.log('Image Error : ' + response.errorCode);
+        }
+        console.log('response', response.assets[0].uri);
+        setImageSource(response.assets[0].uri);
+      },
+    );
+  }
+  useEffect(() => {
+    if (img.length > 10) {
+      sendProfileImageApi(parseInt(memberId), img);
+      getUserInfo(token);
+    }
+  }, [img]);
   useEffect(() => {
     readPoint();
     getUserInfo(token);
@@ -127,11 +158,13 @@ const Mypage = () => {
 
       <View>
         <View style={{ flexDirection: 'row' }}>
-          {profileImage != null ? (
-            <Image source={{ uri: profileImage }} style={AnpServiceStyleSheet.choiceProfileImage} />
-          ) : (
-            <Image source={defaultImage} style={AnpServiceStyleSheet.choiceProfileImage} />
-          )}
+          <TouchableOpacity onPress={() => pickImg()}>
+            {profileImage.length > 5 ? (
+              <Image source={{ uri: profileImage }} style={AnpServiceStyleSheet.choiceProfileImage} />
+            ) : (
+              <Image source={defaultImage} style={AnpServiceStyleSheet.choiceProfileImage} />
+            )}
+          </TouchableOpacity>
           <View style={AnpServiceStyleSheet.profileTextContainer}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Text style={AnpServiceStyleSheet.profileFirstText}>{nickname}</Text>
@@ -144,9 +177,12 @@ const Mypage = () => {
                 <Text style={AnpServiceStyleSheet.IsAuthenticateText}>계좌 인증 완료</Text>
               </View>
             ) : (
-              <View style={AnpServiceStyleSheet.IsNotAuthenticateContainer}>
+              <TouchableOpacity
+                style={AnpServiceStyleSheet.IsNotAuthenticateContainer}
+                onPress={() => setBetaVisible(true)}
+              >
                 <Text style={AnpServiceStyleSheet.IsNotAuthenticateText}>계좌 인증 필요</Text>
-              </View>
+              </TouchableOpacity>
             )}
           </View>
         </View>
@@ -198,17 +234,12 @@ const Mypage = () => {
         </View>
       </View>
       <View style={AnpServiceStyleSheet.MyPageUserChoice}>
-        <TouchableOpacity style={AnpServiceStyleSheet.ChoiceContainer}>
+        <TouchableOpacity
+          style={AnpServiceStyleSheet.ChoiceContainer}
+          onPress={() => navigation.navigate('ContractFind')}
+        >
           <View style={{ flexDirection: 'row' }}>
-            <Text style={AnpServiceStyleSheet.ChoiceText}>진행중인 계약서</Text>
-          </View>
-          <View>
-            <MaterialIcons name="navigate-next" size={24} color={'black'} />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity style={AnpServiceStyleSheet.ChoiceContainer}>
-          <View style={{ flexDirection: 'row' }}>
-            <Text style={AnpServiceStyleSheet.ChoiceText}>완료된 계약서</Text>
+            <Text style={AnpServiceStyleSheet.ChoiceText}>계약서 확인하기</Text>
           </View>
           <View>
             <MaterialIcons name="navigate-next" size={24} color={'black'} />
@@ -223,7 +254,7 @@ const Mypage = () => {
           <Text style={AnpServiceStyleSheet.ChoiceText}>스크랩한 스터디</Text>
           <MaterialIcons name="navigate-next" size={24} color={'black'} />
         </TouchableOpacity>
-        <TouchableOpacity style={AnpServiceStyleSheet.ChoiceContainer}>
+        <TouchableOpacity style={AnpServiceStyleSheet.ChoiceContainer} onPress={() => setBetaVisible(true)}>
           <Text style={AnpServiceStyleSheet.ChoiceText}>계좌 인증하러가기</Text>
           <MaterialIcons name="navigate-next" size={24} color={'black'} />
         </TouchableOpacity>
@@ -250,6 +281,9 @@ const Mypage = () => {
             text={modalText}
             onConfirm={() => (actionType === 'send' ? SignOut() : UserDelete())}
           />
+        </ModalPopup>
+        <ModalPopup visible={betaVisible}>
+          <SignModalPopup visible={betaVisible} onClose={() => setBetaVisible(false)} text={'정식버전에 오픈됩니다!'} />
         </ModalPopup>
         <TouchableOpacity style={AnpServiceStyleSheet.ChoiceContainer}>
           <Text style={AnpServiceStyleSheet.ChoiceText}></Text>

@@ -1,4 +1,4 @@
-import { API_URL } from "../../../react-native.config";
+import { API_URL } from '../../../react-native.config';
 export const emailAuthenticationCodeApi = async (email: string | null) => {
   try {
     const response = await fetch(`${API_URL}/member/auth/mail`, {

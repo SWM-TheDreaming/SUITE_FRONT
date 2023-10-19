@@ -16,6 +16,7 @@ import {
   hostState,
   suiteRoomIdState,
   suiteRoomStatusState,
+  suiteRoomState,
   tokenState,
 } from '../../../recoil/atoms';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
@@ -44,6 +45,7 @@ const SuiteRoomDetailStart = () => {
   const [visible, setVisible] = useState(false);
   const [cancelVisible, setCancelVisible] = useState(false);
   const storedToken = useRecoilValue(tokenState);
+  const setSuiteRoomTitleState = useSetRecoilState(suiteRoomState);
   const [channelLink, setChannelLink] = useState('');
   const [content, setContent] = useState('');
   const [contractAddress, setContractAddress] = useState('');
@@ -87,6 +89,7 @@ const SuiteRoomDetailStart = () => {
       setStudyMethod(datalist.studyMethod);
       setSubject(datalist.subject);
       setTitle(datalist.title);
+      setSuiteRoomTitleState(datalist.title);
       // 받은 데이터 활용하기
     } catch (error) {
       console.log('Error occurred:', error);
@@ -99,6 +102,9 @@ const SuiteRoomDetailStart = () => {
   useEffect(() => {
     fetchData();
   }, []);
+  useEffect(() => {
+    console.log(title);
+  }, [title]);
   return (
     <ScrollView bounces={false}>
       <View style={SuiteRoomStyleSheet.SuiteRoomDetailContainer}>

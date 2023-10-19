@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Linking } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import mainPageStyleSheet from '../../../style/style';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -67,7 +67,6 @@ const OauthTermOfUse = () => {
   const [sensitiveInfoChecked, setSensitiveInfoChecked] = useState(false);
   const [emailChecked, setEmailChecked] = useState(false);
   const [CheckedBtn, setCheckedBtn] = useState(true);
-
   const handleAllCheck = () => {
     setAllChecked(!allChecked);
     setAgeChecked(!allChecked);

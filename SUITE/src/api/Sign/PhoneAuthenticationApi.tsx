@@ -12,7 +12,7 @@ export const PhoneAuthenticationCodeApi = async (phoneNumber: string | null) => 
     });
     if (response.ok) {
       const data = await response.json();
-      return data.statusCode;
+      return data.data;
     } else {
       const data = await response.json();
       return data.statusCode;

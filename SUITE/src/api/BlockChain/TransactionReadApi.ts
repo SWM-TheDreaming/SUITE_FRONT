@@ -5,10 +5,10 @@ export const TransactionReadApi = async (accessToken: string, roomNum: number, t
     axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
     const response = await axios.post(`${API_URL_STUDYROOM}/contract/user/get/group-transaction-read`, {
       suite_room_id: roomNum,
-      tilte: title,
+      title: title,
     });
     if (response.status === 200) {
-      const data = response.data.data;
+      const data = response.data.txResults;
       return data;
     } else {
       const errorData = response.status; // 에러 응답 데이터

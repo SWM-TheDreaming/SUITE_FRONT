@@ -9,7 +9,6 @@ export const SuiteRoomReadAllApi = async (accessToken: string, keyword: string, 
       keyword: keyword,
       subjects: filter,
     });
-    console.log(response.data.data);
     if (response.status === 200) {
       const data = response.data.data;
       return data;

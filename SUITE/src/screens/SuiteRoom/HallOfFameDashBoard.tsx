@@ -84,7 +84,7 @@ const HallOfFameDashboard = () => {
     readDashBoard();
   }, []);
   return (
-    <ScrollView bounces={false}>
+    <ScrollView bounces={false} style={{ backgroundColor: 'white' }}>
       <View style={SuiteRoomStyleSheet.SuiteRoomDetailContainer}>
         <View style={SuiteRoomStyleSheet.SuiteRoomDetailupperBox}>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>

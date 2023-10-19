@@ -22,6 +22,7 @@ import SuiteRoomEdit from '../screens/SuiteRoom/SuiteRoomEdit';
 import SuiteRoomUserAttendPay from '../screens/SuiteRoom/SuiteRoomUserAttendPay';
 import ScrabList from '../screens/Mypage/ScarbList';
 import HallOfFameNavigation from './HallOfFameNavigation';
+import ContractFind from '../screens/SuiteRoom/ContractFind';
 const App = createStackNavigator<RootStackParamList>();
 
 export function AppStack() {
@@ -161,6 +162,14 @@ export function AppStack() {
       <App.Screen
         name="ScrabList"
         component={ScrabList}
+        options={{
+          headerShown: false,
+          ...TransitionPresets.RevealFromBottomAndroid,
+        }}
+      />
+      <App.Screen
+        name="ContractFind"
+        component={ContractFind}
         options={{
           headerShown: false,
           ...TransitionPresets.RevealFromBottomAndroid,

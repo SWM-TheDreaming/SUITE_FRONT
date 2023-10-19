@@ -67,7 +67,9 @@ const PhoneAuthentication = () => {
       setIsButtonDisabled(true);
     }
   }, [authenticationCode]);
-
+  useEffect(() => {
+    console.log(verifyCode);
+  }, [verifyCode]);
   return (
     <View style={mainPageStyleSheet.categoryPageContainer}>
       <View style={mainPageStyleSheet.underStatusBar}>

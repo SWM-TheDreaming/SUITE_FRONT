@@ -20,7 +20,6 @@ export const AttendanceCreateApi = async (
         },
       },
     );
-    console.log(response);
     if (response.status === 200) {
       const data = response.status;
       return data;
