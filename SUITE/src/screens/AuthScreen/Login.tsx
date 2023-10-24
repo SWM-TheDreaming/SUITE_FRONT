@@ -21,6 +21,7 @@ import { googleloginApi } from '../../api/Sign/kakaoLogin';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { GoogleSignin, GoogleSigninButton } from '@react-native-google-signin/google-signin';
 import appleAuth from '@invertase/react-native-apple-authentication';
+import AttendanceCheckOkModaPopup from '../../components/presents/AttendanceCheckOkModal';
 
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
@@ -34,7 +35,7 @@ const Login = () => {
   const [loginFailText, setLoginFailText] = useState('');
   const [email, setEmail] = useRecoilState(emailState);
   const [password, setpPassword] = useRecoilState(passwordState);
-
+  const [okVisible, setOkVisible] = useState(false);
   const onPressGoogleBtn = async () => {
     await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
     const { idToken } = await GoogleSignin.signIn();
@@ -44,7 +45,8 @@ const Login = () => {
       if (kakaoResult.statusCode == 201) {
         setEmail(kakaoResult.data.email);
         setpPassword(kakaoResult.data.password);
-        navigation.navigate('PhoneAuthentication');
+        setOkVisible(true);
+        // navigation.navigate('PhoneAuthentication');
       } else if (kakaoResult.statusCode == 200) {
         setStorage('token', JSON.stringify(kakaoResult.data.accessToken));
         setToken(kakaoResult.data.accessToken);
@@ -174,7 +176,14 @@ const Login = () => {
         <ModalPopup visible={visible}>
           <SignModalPopup visible={visible} onClose={() => setVisible(false)} text={loginFailText} />
         </ModalPopup>
-
+        <ModalPopup visible={okVisible}>
+          <AttendanceCheckOkModaPopup
+            visible={okVisible}
+            onClose={() => setOkVisible(false)}
+            text={`정보 확인이 완료 되었습니다! \n 나머지 정보를 입력해 주세요!`}
+            onConfirm={() => navigation.navigate('PhoneAuthentication')}
+          />
+        </ModalPopup>
         <View style={mainPageStyleSheet.authInfoContainer}>
           <TouchableOpacity>
             <Text
