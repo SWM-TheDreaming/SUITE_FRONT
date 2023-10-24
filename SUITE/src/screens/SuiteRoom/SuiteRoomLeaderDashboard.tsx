@@ -32,6 +32,7 @@ const SuiteRoomLeaderDashboard = () => {
   const [visible, setVisible] = useState(false);
   const [startVisible, setStartVisible] = useState(false);
   const [endVisible, setEndVisible] = useState(false);
+  const [endPossible, setEndPossible] = useState(false);
   const [studyEndVisible, setStudyEndVisible] = useState(false);
   const [number, setNumber] = useState<number>(0);
   const [depositAmount, setDepositAmount] = useState(0);
@@ -52,6 +53,9 @@ const SuiteRoomLeaderDashboard = () => {
       const currentDate = new Date();
       const timeDiff = studyDeadline.getTime() - currentDate.getTime();
       const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+      if (daysDiff <= 0) {
+        setEndPossible(true);
+      }
       setDday(daysDiff);
       setDepositAmount(datalist.depositAmount.toLocaleString());
       setMember(datalist.otherDashBoardDto);
@@ -252,7 +256,7 @@ const SuiteRoomLeaderDashboard = () => {
           onConfirm={() => EndStudy()}
         />
       </ModalPopup>
-      {endVisible === false ? (
+      {endPossible === true ? (
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
           <TouchableOpacity style={SuiteRoomStyleSheet.StudyEndButton} onPress={() => setStudyEndVisible(true)}>
             <Text style={SuiteRoomStyleSheet.CreateMissionText}>스터디 종료</Text>

@@ -426,6 +426,7 @@ const mainPageStyleSheet = StyleSheet.create({
     color: 'black',
     paddingLeft: 5,
     fontFamily: 'PretendardVariable',
+    fontWeight: 'bold',
   },
   underStatusBar: {
     width: Width,

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Image, Alert, Platform } from 'react-native';
 import useForm from '../../hook/useForm';
 import mainPageStyleSheet from '../../style/style';
 import InputField from '../../components/presents/InputField';
 import Kakaosvg from '../../Icons/kakao.svg';
 import Googlesvg from '../../Icons/google.svg';
+import Applesvg from '../../Icons/apple.svg';
 import Logo from '../../Icons/Logo.png';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -19,6 +20,7 @@ import SignModalPopup from '../../components/presents/SignmodalPopup';
 import { googleloginApi } from '../../api/Sign/kakaoLogin';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { GoogleSignin, GoogleSigninButton } from '@react-native-google-signin/google-signin';
+import appleAuth from '@invertase/react-native-apple-authentication';
 
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
@@ -58,7 +60,26 @@ const Login = () => {
       console.log('Error occurred:', error);
     }
   };
+  const onPressAppleBtn = async () => {
+    try {
+      // performs login request
+      const appleAuthRequestResponse = await appleAuth.performRequest({
+        requestedOperation: appleAuth.Operation.LOGIN,
+        requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
+      });
 
+      // get current authentication state for user
+      const credentialState = await appleAuth.getCredentialStateForUser(appleAuthRequestResponse.user);
+
+      // use credentialState response to ensure the user is authenticated
+      if (credentialState === appleAuth.State.AUTHORIZED) {
+        // user is authenticated
+        console.log(appleAuthRequestResponse);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const SingIn = async () => {
     try {
       const email = login.getTextInputProps('username').value;
@@ -187,6 +208,12 @@ const Login = () => {
             <Googlesvg />
             <Text style={mainPageStyleSheet.snsLoginButtonText}>구글 아이디로 로그인하기</Text>
           </TouchableOpacity>
+          {Platform.OS == 'ios' ? (
+            <TouchableOpacity style={mainPageStyleSheet.googleLoginButton} onPress={() => onPressAppleBtn()}>
+              <Applesvg />
+              <Text style={mainPageStyleSheet.snsLoginButtonText}>애플 아이디로 로그인하기</Text>
+            </TouchableOpacity>
+          ) : null}
         </View>
       </View>
     </ScrollView>

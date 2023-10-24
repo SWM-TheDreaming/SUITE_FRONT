@@ -1305,6 +1305,11 @@
   resolved "https://registry.npmjs.org/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
+"@invertase/react-native-apple-authentication@^2.2.2":
+  version "2.2.2"
+  resolved "https://registry.npmjs.org/@invertase/react-native-apple-authentication/-/react-native-apple-authentication-2.2.2.tgz"
+  integrity sha512-uNZcUn9WbAQP5zSOFXI1+kEUokLwZG9imUulFdt5t22CU2ozGq6zyPm+BAVVg8D5eUUXduX/dJFhbuOpJxiEhQ==
+
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
   resolved "https://registry.npmjs.org/@istanbuljs/load-nyc-config/-/load-nyc-config-1.1.0.tgz"
@@ -6478,11 +6483,6 @@ react-native-hyperlink@^0.0.22:
     linkify-it "^4.0.1"
     mdurl "^1.0.1"
 
-react-native-image-crop-picker@^0.40.0:
-  version "0.40.0"
-  resolved "https://registry.npmjs.org/react-native-image-crop-picker/-/react-native-image-crop-picker-0.40.0.tgz"
-  integrity sha512-FpqiCS4CiPQp8qIorlELWKbpi1d9lyhJki9spZr4LShv9hk65GWo6tYJupfTV19o5XcRwJn8d4MHIUoyWMJRTQ==
-
 react-native-image-picker@^5.6.0:
   version "5.6.0"
   resolved "https://registry.npmjs.org/react-native-image-picker/-/react-native-image-picker-5.6.0.tgz"
@@ -6601,7 +6601,7 @@ react-native-viewport-units@^0.0.5:
   resolved "https://registry.npmjs.org/react-native-viewport-units/-/react-native-viewport-units-0.0.5.tgz"
   integrity sha512-0Z4vvZsGciXusmyMQImfm1fK6je49lwfGIze5UoG/TRWGXXCEwRAZAXvDecHTFKfhzF9YXfalawNsLfN3FsgYg==
 
-react-native@*, "react-native@^0.0.0-0 || 0.60 - 0.72 || 1000.0.0", "react-native@>= 0.4.4 < 1.0", "react-native@>= 0.62", "react-native@>= 0.64.3", react-native@>=0.40.0, react-native@>=0.42.0, react-native@>=0.44.1, react-native@>=0.48.0, react-native@>=0.48.4, react-native@>=0.57.0, react-native@>=0.59.0, react-native@0.72.3:
+react-native@*, "react-native@^0.0.0-0 || 0.60 - 0.72 || 1000.0.0", "react-native@>= 0.4.4 < 1.0", "react-native@>= 0.62", "react-native@>= 0.64.3", react-native@>=0.42.0, react-native@>=0.44.1, react-native@>=0.48.0, react-native@>=0.48.4, react-native@>=0.57.0, react-native@>=0.59.0, react-native@0.72.3:
   version "0.72.3"
   resolved "https://registry.npmjs.org/react-native/-/react-native-0.72.3.tgz"
   integrity sha512-QqISi+JVmCssNP2FlQ4MWhlc4O/I00MRE1/GClvyZ8h/6kdsyk/sOirkYdZqX3+DrJfI3q+OnyMnsyaXIQ/5tQ==
