@@ -19,18 +19,21 @@ const ContractFind = () => {
   const [visible, setVisible] = useState(false);
   const [isViewDisabled, setIsViewDisabled] = useState(true);
   const [pdf, setPdf] = useState('');
+  const [message, setMessage] = useState('');
   const tokenId = useRecoilValue(tokenState);
   const signUp = useForm();
   const [phonAuthenticationButtonDisabled, setPhonAuthenticationButtonDisabled] = useState(true);
 
   const getPhoneAuthenticationCode = async () => {
     try {
-      console.log(tokenId);
-      console.log(signUp.getTextInputProps('phone').value);
-      const code = await ContractLinkApi(tokenId, '0x7dbd3021ff');
-      setIsViewDisabled(false);
-      console.log(code);
-      setPdf(code);
+      const code = await ContractLinkApi(tokenId, pdf);
+      if (code == 200) {
+        setIsViewDisabled(false);
+        setPdf(code);
+        setMessage('');
+      } else {
+        setMessage('계약서 번호를 확인해주세요!');
+      }
     } catch (error) {
       console.log('Error occurred:', error);
     }
@@ -87,7 +90,11 @@ const ContractFind = () => {
               <FontAwesome name="file-pdf-o" size={50} color={'#050953'} />
             </TouchableOpacity>
           </View>
-        ) : null}
+        ) : (
+          <View>
+            <Text style={mainPageStyleSheet.idPwInputErrorText}>{message}</Text>
+          </View>
+        )}
       </View>
       <ModalPopup visible={visible}>
         <SignModalPopup visible={visible} onClose={() => setVisible(false)} text={'이미 등록된 번호입니다'} />

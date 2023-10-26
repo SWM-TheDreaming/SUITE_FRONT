@@ -53,10 +53,10 @@ const AnpServiceStyleSheet = StyleSheet.create({
     height: heightPercentage(70),
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
   },
   MypageHeaderIcon: {
-    marginRight: 10,
+    // marginRight: 10,
   },
   choiceProfileImage: {
     width: 120,
@@ -73,6 +73,7 @@ const AnpServiceStyleSheet = StyleSheet.create({
     fontWeight: 'bold',
     fontFamily: 'PretendardVariable',
     color: 'black',
+    marginRight: 4,
   },
   profileNameText: {
     fontSize: 14,
@@ -134,6 +135,7 @@ const AnpServiceStyleSheet = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'PretendardVariable',
     color: 'black',
+    fontWeight: 'bold',
   },
   ChoiceNumber: {
     fontSize: 16,

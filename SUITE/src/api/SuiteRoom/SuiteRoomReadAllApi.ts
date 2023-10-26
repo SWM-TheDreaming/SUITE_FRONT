@@ -5,10 +5,12 @@ export const SuiteRoomReadAllApi = async (accessToken: string, keyword: string, 
   try {
     console.log('readall+', accessToken, filter);
     axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+    console.log(axios.defaults.headers.common);
     const response = await axios.post(`${API_URL_SUITEROOM}/suite/suiteroom`, {
       keyword: keyword,
       subjects: filter,
     });
+    console.log('readResponse', response);
     if (response.status === 200) {
       const data = response.data.data;
       return data;

@@ -8,7 +8,7 @@ const convertStudyValue = (studyvalue: string): string => {
       return 'OPIC';
     case '공무원':
       return 'OFFICE';
-    case '법학능력시험':
+    case '법학':
       return 'LEET';
     case '경찰고시':
       return 'POLICE';

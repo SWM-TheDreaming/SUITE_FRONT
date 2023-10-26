@@ -53,7 +53,7 @@ const StudyInfoCardUI = (props: StudyInfoCardProps) => {
         <TagComponent
           dDay={calculateDDay()}
           category={convertStudyValueFromEngish(props.subject)}
-          depositAmount={`${props.depositAmount.toString().slice(0, 2)}K`}
+          depositAmount={`${props.depositAmount.toString().slice(0, props.depositAmount.length - 3)}K`}
           isPublic={props.isPublic}
         />
         <Text style={mainPageStyleSheet.titletext}>{props.title}</Text>

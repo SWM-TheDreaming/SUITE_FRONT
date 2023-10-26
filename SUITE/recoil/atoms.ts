@@ -34,7 +34,7 @@ export const studyMethodState = atom({
 });
 export const isAuthState = atom({
   key: 'isAuthState',
-  default: true,
+  default: false,
 });
 export const memberIdState = atom({
   key: 'memberIdState',

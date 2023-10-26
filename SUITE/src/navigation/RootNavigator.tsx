@@ -33,8 +33,9 @@ const RootNavigator: React.FC = () => {
       try {
         const storedToken = await AsyncStorage.getItem('token');
         if (storedToken && storedToken.length >= 10) {
-          setToken(storedToken);
-          getEmailCode(storedToken); // getEmailCode 함수 호출
+          const Token = storedToken.replace(/"/g, '');
+          setToken(Token);
+          getEmailCode(Token); // getEmailCode 함수 호출
         }
       } catch (error) {
         console.log('Error retrieving token from AsyncStorage:', error);

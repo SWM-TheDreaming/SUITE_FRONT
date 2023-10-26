@@ -114,6 +114,7 @@ const SuiteRoomurl = () => {
             style={mainPageStyleSheet.roomInformationContainer}
             autoFocus
             placeholder=" Suite Room을 소개해주세요!"
+            multiline={true}
             {...suiteRoomUrl.getTextInputProps('content')}
             touched={suiteRoomUrl.touched.content}
           />

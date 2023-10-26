@@ -12,15 +12,16 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../types';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useRecoilState } from 'recoil';
-import { emailState, passwordState, tokenState } from '../../../recoil/atoms';
+import { emailState, passwordState, tokenState, isAuthState } from '../../../recoil/atoms';
 import { setStorage } from '../../hook/asyncStorage';
 import { SignInApi } from '../../api/Sign/signin';
 import ModalPopup from '../../hook/modal';
 import SignModalPopup from '../../components/presents/SignmodalPopup';
 import { googleloginApi } from '../../api/Sign/kakaoLogin';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { GoogleSignin, GoogleSigninButton } from '@react-native-google-signin/google-signin';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import appleAuth from '@invertase/react-native-apple-authentication';
+import { AppleloginApi } from '../../api/Sign/AppleLogin';
 import AttendanceCheckOkModaPopup from '../../components/presents/AttendanceCheckOkModal';
 
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
@@ -35,6 +36,7 @@ const Login = () => {
   const [loginFailText, setLoginFailText] = useState('');
   const [email, setEmail] = useRecoilState(emailState);
   const [password, setpPassword] = useRecoilState(passwordState);
+  const [isOauth, setIsOauth] = useRecoilState(isAuthState);
   const [okVisible, setOkVisible] = useState(false);
   const onPressGoogleBtn = async () => {
     await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
@@ -45,6 +47,7 @@ const Login = () => {
       if (kakaoResult.statusCode == 201) {
         setEmail(kakaoResult.data.email);
         setpPassword(kakaoResult.data.password);
+        setIsOauth(true);
         setOkVisible(true);
         // navigation.navigate('PhoneAuthentication');
       } else if (kakaoResult.statusCode == 200) {
@@ -77,6 +80,30 @@ const Login = () => {
       if (credentialState === appleAuth.State.AUTHORIZED) {
         // user is authenticated
         console.log(appleAuthRequestResponse);
+        try {
+          const appleResult = await AppleloginApi(appleAuthRequestResponse.identityToken);
+          if (appleResult.statusCode == 201) {
+            setEmail(appleResult.data.email);
+            setpPassword(appleResult.data.password);
+            setIsOauth(true);
+            setOkVisible(true);
+            // navigation.navigate('PhoneAuthentication');
+          } else if (appleResult.statusCode == 200) {
+            console.log(appleResult);
+            setStorage('token', JSON.stringify(appleResult.data.accessToken));
+            setToken(appleResult.data.accessToken);
+            setIsOauth(true);
+          } else if (appleResult.statusCode == 400) {
+            setVisible(true);
+            setLoginFailText('가입된 이메일이 있습니다.');
+          } else if (appleResult.statusCode == 403) {
+            setVisible(true);
+            setLoginFailText('삭제된 계정입니다. 3개월 뒤에 가입가능합니다.');
+          }
+          console.log('result =', appleResult);
+        } catch (error) {
+          console.log('Error occurred:', error);
+        }
       }
     } catch (error) {
       console.log(error);
@@ -180,7 +207,7 @@ const Login = () => {
           <AttendanceCheckOkModaPopup
             visible={okVisible}
             onClose={() => setOkVisible(false)}
-            text={`정보 확인이 완료 되었습니다! \n 나머지 정보를 입력해 주세요!`}
+            text={`나머지 정보를 입력해 주세요!`}
             onConfirm={() => navigation.navigate('PhoneAuthentication')}
           />
         </ModalPopup>

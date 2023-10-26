@@ -2,6 +2,7 @@ import { API_URL } from '../../../react-native.config';
 
 export const SignInApi = async (email: string, password: string): Promise<string> => {
   try {
+    console.log(API_URL);
     const response = await fetch(`${API_URL}/member/signin`, {
       method: 'POST',
       headers: {

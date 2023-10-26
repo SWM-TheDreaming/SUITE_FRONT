@@ -113,7 +113,7 @@ const SuiteRoomDetailStart = () => {
             <TagComponent
               dDay={'진행중'}
               category={convertStudyValueFromEngish(subject)}
-              depositAmount={`${depositAmount.toString().slice(0, 2)}K`}
+              depositAmount={`${depositAmount.toString().slice(0, depositAmount.length - 3)}K`}
               isPublic={isPublic}
             />
           </View>

@@ -67,6 +67,7 @@ const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route 
   const fetchData = async () => {
     try {
       const datalist = await SuiteRoomDetailView(storedToken, SuiteRoomid);
+      console.log(datalist);
       setChannelLink(datalist.channelLink);
       setContent(datalist.content);
       setContractAddress(datalist.contractAddress);
@@ -136,13 +137,13 @@ const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route 
   return (
     <ScrollView bounces={false}>
       <View style={SuiteRoomStyleSheet.SuiteRoomDetailContainer}>
-        <Header title={''} />
+        <Header title={'스터디 상세'} />
         <View style={SuiteRoomStyleSheet.SuiteRoomDetailupperBox}>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
             <TagComponent
               dDay={dday}
               category={convertStudyValueFromEngish(subject)}
-              depositAmount={`${depositAmount.toString().slice(0, 2)}K`}
+              depositAmount={`${depositAmount.toString().slice(0, depositAmount.toString().length - 3)}K`}
               isPublic={isPublic}
             />
             {host === true ? (

@@ -9,7 +9,7 @@ const convertStudyValueFromEngish = (studyvalue: string): string => {
     case 'OFFICE':
       return '공무원';
     case 'LEET':
-      return '법학능력시험';
+      return '법학';
     case 'POLICE':
       return '경찰고시';
     case 'TEACHING':

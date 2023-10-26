@@ -60,6 +60,7 @@ const StudyInfoCard: React.FunctionComponent<{ filterCategory?: Category }> = ({
     fetchData();
   }, [filter]);
   useEffect(() => {
+    console.log('studylist', storedToken);
     fetchData();
   }, [isFocused]);
   return (

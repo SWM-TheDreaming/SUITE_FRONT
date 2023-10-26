@@ -35,7 +35,7 @@ const HallofFameList = () => {
   return (
     <>
       <ScrollView style={{ marginBottom: 60 }} showsVerticalScrollIndicator={false}>
-        <View style={{ alignItems: 'center' }}>
+        <View style={{ alignItems: 'center', marginBottom: 10 }}>
           <View style={mainPageStyleSheet.hallOfFameContainer}>
             <View style={mainPageStyleSheet.depositInformationTextContainer}>
               <Icon

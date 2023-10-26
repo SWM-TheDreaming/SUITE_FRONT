@@ -51,7 +51,7 @@ const HallofFameCardUI = (props: StudyInfoCardProps) => {
         <View style={mainPageStyleSheet.innerbox}>
           <HallofFameTagComponent
             category={convertStudyValueFromEngish(props.subject)}
-            depositAmount={`${props.depositAmount.toString().slice(0, 2)}K`}
+            depositAmount={`${props.depositAmount.toString().slice(0, props.depositAmount.toString().length - 3)}K`}
             isPublic={props.isPublic}
           />
           <Text style={mainPageStyleSheet.titletext}>{props.title}</Text>

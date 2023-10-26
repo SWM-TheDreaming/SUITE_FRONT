@@ -5,28 +5,12 @@ import { Header } from '../hook/header';
 import AnpServiceStyleSheet from '../style/AnPservice';
 const data = [
   {
-    text: 'SUITE 출시 기념 친구초대 이벤트가 진행 중입니다.',
-    date: '2023-07-21',
+    text: 'SUITE 베타버전에 오신것을 환영합니다!',
+    date: '2023-10-23',
   },
   {
-    text: '회원님의 스위트룸이 명예의 전당에 올라갔습니다. 지금 확인해보세요!',
-    date: '2023-07-20',
-  },
-  {
-    text: 'SUITE 출시 기념 친구초대 이벤트가 진행 중입니다.',
-    date: '2023-07-19',
-  },
-  {
-    text: '회원님의 스위트룸이 명예의 전당에 올라갔습니다. 지금 확인해보세요!',
-    date: '2023-07-18',
-  },
-  {
-    text: 'SUITE 출시 기념 친구초대 이벤트가 진행 중입니다.',
-    date: '2023-07-17',
-  },
-  {
-    text: 'SUITE 출시 기념 친구초대 이벤트가 진행 중입니다.',
-    date: '2023-07-16',
+    text: '베타 버전의 스터디 보증금은 5,000원이 최대입니다!',
+    date: '2023-10-24',
   },
 ];
 const Alarm = () => {

@@ -56,15 +56,15 @@ const SuiteRoompay = () => {
       <View style={mainPageStyleSheet.emailAuthenticationContainer}>
         <Text style={mainPageStyleSheet.idpwtext}>현재 포인트</Text>
         <View style={mainPageStyleSheet.depositCheckBox}>
-          <Text>{point}원</Text>
+          <Text style={{ color: 'black' }}>{point}원</Text>
         </View>
         <Text style={mainPageStyleSheet.noValidateCheckText}>보증 금액</Text>
         <View style={mainPageStyleSheet.depositCheckBox}>
-          <Text>{depositAmount}원</Text>
+          <Text style={{ color: 'black' }}>{depositAmount}원</Text>
         </View>
         <Text style={mainPageStyleSheet.noValidateCheckText}>차감후 남은 포인트</Text>
         <View style={mainPageStyleSheet.depositCheckBox}>
-          <Text>{point - depositAmount}원</Text>
+          <Text style={{ color: 'black' }}>{point - depositAmount}원</Text>
         </View>
         <Text style={mainPageStyleSheet.idPwInputErrorText}>{suiteRoomPay.errors.name}</Text>
         {isButtonDisabled === true ? (
@@ -125,7 +125,7 @@ const SuiteRoompay = () => {
         <PayCheckModal
           visible={visible}
           onClose={outModal}
-          text={'보증금 납부가 완료되었습니다! \n 마이페이지에서 확인해보세요!'}
+          text={'보증금 납부가 완료되었습니다! \n 나의 스터디에서 확인해보세요!'}
         />
       </ImageModalPopup>
     </View>

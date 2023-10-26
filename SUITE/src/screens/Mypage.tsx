@@ -34,6 +34,8 @@ import CheckCancelModal from '../hook/checkCancelModal';
 import SignModalPopup from '../components/presents/SignmodalPopup';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { sendProfileImageApi } from '../api/Sign/sendProfileImageApi';
+import Logo22Size from '../Icons/Logo22Size.png';
+import mainPageStyleSheet from '../style/style';
 
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
@@ -142,6 +144,12 @@ const Mypage = () => {
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={AnpServiceStyleSheet.MypageContainer}>
       <View style={AnpServiceStyleSheet.MyPageHeader}>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View>
+            <Image source={Logo22Size} />
+          </View>
+          <Text style={mainPageStyleSheet.MainTextPosition}>{'마이 페이지'}</Text>
+        </View>
         <TouchableOpacity
           style={AnpServiceStyleSheet.MypageHeaderIcon}
           onPress={() => {

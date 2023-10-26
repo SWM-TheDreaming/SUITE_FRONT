@@ -225,6 +225,7 @@ const SuiteRoomStyleSheet = StyleSheet.create({
     color: 'black',
     paddingLeft: 20,
     paddingTop: 10,
+    fontWeight: 'bold',
   },
   DepositDayText: {
     fontSize: 18,
@@ -247,14 +248,14 @@ const SuiteRoomStyleSheet = StyleSheet.create({
   AttendanceCircleBox: {
     width: widthPercentage(160),
     height: heightPercentage(210),
-    backgroundColor: '#F8F8F8',
+    backgroundColor: 'white',
     borderRadius: 5,
     marginRight: 7,
   },
   MissionCircleBox: {
     width: widthPercentage(160),
     height: heightPercentage(210),
-    backgroundColor: '#F8F8F8',
+    backgroundColor: 'white',
     borderRadius: 10,
   },
   AttendanceMissionBox: {

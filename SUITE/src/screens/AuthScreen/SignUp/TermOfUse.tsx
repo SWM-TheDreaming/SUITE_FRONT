@@ -79,7 +79,7 @@ const TermOfUse = () => {
   };
 
   const handleNextPage = () => {
-    if (!ageChecked || !termsChecked || !privacyChecked) {
+    if (!ageChecked || !termsChecked || !privacyChecked || !sensitiveInfoChecked || !emailChecked) {
       setCheckedBtn(false);
     } else {
       navigation.navigate('EmailAuthentication');
@@ -141,14 +141,16 @@ const TermOfUse = () => {
           <CheckboxItem
             checked={sensitiveInfoChecked}
             onPress={() => setSensitiveInfoChecked(!sensitiveInfoChecked)}
-            label="[선택] 민감 정보 수집 및 이용 동의"
+            label="[필수] 민감 정보 수집 및 이용 동의"
+            required
             onCheckboxChange={setSensitiveInfoChecked}
             checkedBtn={CheckedBtn}
           />
           <CheckboxItem
             checked={emailChecked}
             onPress={() => setEmailChecked(!emailChecked)}
-            label="[선택] 이메일 수신 동의"
+            label="[필수] 이메일 수신 동의"
+            required
             onCheckboxChange={setEmailChecked}
             checkedBtn={CheckedBtn}
           />

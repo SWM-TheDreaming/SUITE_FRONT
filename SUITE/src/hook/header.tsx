@@ -27,7 +27,7 @@ export const Header: React.FC<HeaderProps> = ({ title, backScreen }) => {
 
   return (
     <View style={mainPageStyleSheet.underStatusBar}>
-      <TouchableOpacity style={mainPageStyleSheet.pageBackIcon} onPress={handleBackPress} hitSlop={200}>
+      <TouchableOpacity style={mainPageStyleSheet.pageBackIcon} onPress={handleBackPress} hitSlop={32}>
         <Icon name="chevron-back" size={24} color={'#000000'} />
       </TouchableOpacity>
       <Text style={mainPageStyleSheet.SignUpText}>{title}</Text>

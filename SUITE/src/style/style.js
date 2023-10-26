@@ -12,6 +12,8 @@ const mainPageStyleSheet = StyleSheet.create({
   box: {
     //컴포넌트 박스 설정
     marginTop: 5,
+    marginRight: 5,
+    marginLeft: 5,
     backgroundColor: '#FFFFFF',
     width: widthPercentage(328),
     height: heightPercentage(155),
@@ -55,6 +57,7 @@ const mainPageStyleSheet = StyleSheet.create({
     //dday, category text 스타일
     fontSize: 12,
     color: 'white',
+    fontWeight: 'bold',
   },
   categorybox: {
     //categorybox
@@ -430,18 +433,19 @@ const mainPageStyleSheet = StyleSheet.create({
   },
   underStatusBar: {
     width: Width,
-    height: heightPercentage(48),
+    height: heightPercentage(70),
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'white',
   },
   mainStatusBar: {
     width: Width,
-    height: heightPercentage(48),
+    height: heightPercentage(70),
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: 'white',
+    marginBottom: 10,
   },
   pageBackIcon: {
     marginTop: 12,
@@ -556,6 +560,7 @@ const mainPageStyleSheet = StyleSheet.create({
     fontSize: 16,
     color: '#000000',
     fontFamily: 'PretendardVariable',
+    fontWeight: 'bold',
   },
   MainpagePosition: {
     position: 'absolute',
@@ -569,7 +574,7 @@ const mainPageStyleSheet = StyleSheet.create({
     fontFamily: 'PretendardVariable',
   },
   MainTextPosition: {
-    marginLeft: 20,
+    marginLeft: 10,
     fontSize: 16,
     color: '#000000',
     fontWeight: 'bold',
@@ -975,7 +980,7 @@ const mainPageStyleSheet = StyleSheet.create({
     textAlign: 'center',
   },
   hallOfFameContainer: {
-    marginTop: heightPercentage(20),
+    marginTop: heightPercentage(10),
     width: widthPercentage(310),
     height: heightPercentage(130),
     backgroundColor: '#00ACCF',

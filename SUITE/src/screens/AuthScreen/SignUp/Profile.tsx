@@ -22,7 +22,7 @@ import useForm from '../../../hook/useForm';
 import defaultImage from '../../../Icons/profile.png';
 import { signUpAPI } from '../../../api/Sign/signup';
 import { useRecoilValue } from 'recoil';
-
+import { OauthsignUpAPI } from '../../../api/Sign/Oauthsignup';
 const Profile = () => {
   const email = useRecoilValue(emailState);
   const password = useRecoilValue(passwordState);
@@ -59,8 +59,33 @@ const Profile = () => {
       console.log('Error occurred:', error);
     }
   };
+  const OauthApi = async () => {
+    try {
+      const code = await OauthsignUpAPI({
+        email: email,
+        password: password,
+        name: name,
+        nickname: profile.getTextInputProps('nickname').value,
+        phone: phone,
+        securityNum: securityNum,
+        preferStudy: preferStudy,
+        studyMethod: studyMethod,
+        isOauth: isOauth,
+        fcmToken: '1234',
+      });
+      console.log(code);
+      await sendProfileImageApi(parseInt(String(code)), img);
+      navigation.navigate('SignUp');
+    } catch (error) {
+      console.log('Error occurred:', error);
+    }
+  };
   const handleButtonPress = () => {
-    getEmailCode();
+    if (isOauth == true) {
+      OauthApi();
+    } else {
+      getEmailCode();
+    }
   };
   function pickImg() {
     launchImageLibrary(
@@ -89,6 +114,7 @@ const Profile = () => {
   }, [profile.getTextInputProps('nickname').value]);
   useEffect(() => {
     console.log(img);
+    console.log(isOauth);
   }, [img]);
   return (
     <View style={mainPageStyleSheet.categoryPageContainer}>
