@@ -231,17 +231,33 @@ const Mypage = () => {
           </View>
         </View>
       </View>
-      <View style={AnpServiceStyleSheet.TotalInfoContainer}>
-        <View style={SuiteRoomStyleSheet.DepositBox}>
+      {/* <View style={AnpServiceStyleSheet.TotalInfoContainer}>
+        <View style={SuiteRoomStyleSheet.MyPageAttendanceBox}>
           <Text style={SuiteRoomStyleSheet.DepositDayInfoText}>전체 출석 횟수</Text>
           <Text style={SuiteRoomStyleSheet.DepositDayText}>{attendanceCompleteCount}회</Text>
         </View>
-        <View style={SuiteRoomStyleSheet.DayBox}>
+        <View style={SuiteRoomStyleSheet.MyPageMissionBox}>
           <Text style={SuiteRoomStyleSheet.DepositDayInfoText}>전체 달성 미션</Text>
           <Text style={SuiteRoomStyleSheet.DepositDayText}>{missionCompleteCount}개</Text>
         </View>
-      </View>
+      </View> */}
       <View style={AnpServiceStyleSheet.MyPageUserChoice}>
+        <TouchableOpacity style={AnpServiceStyleSheet.ChoiceContainer}>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={AnpServiceStyleSheet.ChoiceText}>전체 출석 횟수</Text>
+          </View>
+          <View>
+            <Text style={SuiteRoomStyleSheet.DepositDayText}>{attendanceCompleteCount}회</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity style={AnpServiceStyleSheet.ChoiceContainer}>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={AnpServiceStyleSheet.ChoiceText}>전체 달성 미션</Text>
+          </View>
+          <View>
+            <Text style={SuiteRoomStyleSheet.DepositDayText}>{missionCompleteCount}개</Text>
+          </View>
+        </TouchableOpacity>
         <TouchableOpacity
           style={AnpServiceStyleSheet.ChoiceContainer}
           onPress={() => navigation.navigate('ContractFind')}

@@ -9,7 +9,7 @@ import InputField from '../../../components/presents/InputField';
 import { SelectList } from 'react-native-dropdown-select-list';
 import { Category } from '../../../data/Categoty';
 import { useRecoilState } from 'recoil';
-import { nameState, preferStudyState, securityNumState, studyMethodState } from '../../../../recoil/atoms';
+import { nameState, preferStudyState, securityNumState, studyMethodState, isIosState } from '../../../../recoil/atoms';
 import convertStudyValue from '../../../data/ChangeCategory';
 import convertStudyMethod from '../../../data/ChangeStudyMethod';
 const UserInformation = () => {
@@ -18,6 +18,7 @@ const UserInformation = () => {
   const [selectedCategory, setselectedCategory] = useState('');
   const [selectedItem, setSelectedItem] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [isIos, setIsIos] = useRecoilState(isIosState);
   const [name, setName] = useRecoilState(nameState);
   const [securityNum, setsecurityNum] = useRecoilState(securityNumState);
   const [preferStudy, setpreferStudy] = useRecoilState(preferStudyState);
@@ -27,32 +28,36 @@ const UserInformation = () => {
     setSelectedItem(item);
   };
   const handleButtonPress = () => {
-    const nameValue = signUp.getTextInputProps('name').value;
-    const securityNumValue = signUp.getTextInputProps('birthday').value + '-' + signUp.getTextInputProps('sex').value;
+    if (isIos == false) {
+      const nameValue = signUp.getTextInputProps('name').value;
+      setName(nameValue);
+    }
+    // const securityNumValue = signUp.getTextInputProps('birthday').value + '-' + signUp.getTextInputProps('sex').value;
     const preferStudyValue = convertStudyValue(selectedCategory);
     const studyMethodValue = convertStudyMethod(selectedItem);
-    setName(nameValue);
-    setsecurityNum(securityNumValue);
+    setsecurityNum('990304-1');
     setpreferStudy(preferStudyValue);
     setstudyMethod(studyMethodValue);
     navigation.navigate('Profile');
   };
   useEffect(() => {
+    console.log(isIos);
     if (
-      signUp.errors.name == '' &&
+      // signUp.errors.name == '' &&
       selectedItem != '' &&
-      selectedCategory != '' &&
-      signUp.getTextInputProps('birthday').value != '' &&
-      signUp.getTextInputProps('sex').value != ''
+      selectedCategory != ''
+      // &&
+      // signUp.getTextInputProps('birthday').value != '' &&
+      // signUp.getTextInputProps('sex').value != ''
     ) {
       setIsButtonDisabled(false);
     } else {
       setIsButtonDisabled(true);
     }
   }, [
-    signUp.errors.name,
-    signUp.getTextInputProps('birthday').value,
-    signUp.getTextInputProps('sex').value,
+    // signUp.errors.name,
+    // signUp.getTextInputProps('birthday').value,
+    // signUp.getTextInputProps('sex').value,
     selectedCategory,
     selectedItem,
   ]);
@@ -69,17 +74,22 @@ const UserInformation = () => {
         </TouchableOpacity>
         <Text style={mainPageStyleSheet.SignUpText}>회원가입</Text>
       </View>
+
       <View style={mainPageStyleSheet.emailAuthenticationContainer}>
-        <Text style={mainPageStyleSheet.idpwtext}>이름</Text>
-        <InputField
-          style={mainPageStyleSheet.idpwInputBox}
-          autoFocus
-          placeholder=" 본명을 입력해주세요"
-          {...signUp.getTextInputProps('name')}
-          touched={signUp.touched.name}
-        />
-        <Text>{<Text style={mainPageStyleSheet.idPwInputErrorText}>{signUp.errors.name}</Text>}</Text>
-        <Text style={mainPageStyleSheet.idpwtext}>주민번호</Text>
+        {isIos == false ? (
+          <View>
+            <Text style={mainPageStyleSheet.idpwtext}>이름</Text>
+            <InputField
+              style={mainPageStyleSheet.idpwInputBox}
+              autoFocus
+              placeholder=" 본명을 입력해주세요"
+              {...signUp.getTextInputProps('name')}
+              touched={signUp.touched.name}
+            />
+            <Text>{<Text style={mainPageStyleSheet.idPwInputErrorText}>{signUp.errors.name}</Text>}</Text>
+          </View>
+        ) : null}
+        {/* <Text style={mainPageStyleSheet.idpwtext}>주민번호</Text>
         <View style={{ flexDirection: 'row' }}>
           <View style={{ flexDirection: 'column' }}>
             <InputField
@@ -99,7 +109,7 @@ const UserInformation = () => {
               maxLength={1}
             />
           </View>
-        </View>
+        </View> */}
         <Text style={mainPageStyleSheet.noValidateCheckText}>관심 스터디</Text>
         <SelectList
           boxStyles={mainPageStyleSheet.categoySelectBox}

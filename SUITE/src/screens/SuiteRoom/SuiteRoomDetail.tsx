@@ -55,6 +55,7 @@ const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route 
   const [recruitmentLimit, setRecruitmentLimit] = useState(0);
   const [studyDeadLine, setStudyDeadline] = useState<string>('');
   const [studyMethod, setStudyMethod] = useState('');
+  const [participantState, setParticipantState] = useState(false);
   const [subject, setSubject] = useState('');
   const [title, setTitle] = useState('');
   const [dday, setDday] = useState('');
@@ -87,6 +88,7 @@ const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route 
       setSubject(datalist.subject);
       setTitle(datalist.title);
       setMark(datalist.mark);
+      setParticipantState(datalist.participant);
       // 받은 데이터 활용하기
     } catch (error) {
       console.log('Error occurred:', error);
@@ -271,7 +273,7 @@ const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route 
                 <Text style={mainPageStyleSheet.categortFilterApplyText}>스터디 시작</Text>
               </TouchableOpacity>
             </View>
-          ) : (
+          ) : participantState === false ? (
             <View style={{ flexDirection: 'row' }}>
               <TouchableOpacity
                 style={SuiteRoomStyleSheet.SuiteRoomDetailScrabButton}
@@ -286,7 +288,7 @@ const SuiteRoomDetail: React.FunctionComponent<SuiteRoomDetailProps> = ({ route 
                 <Text style={mainPageStyleSheet.categortFilterApplyText}>체크인하기</Text>
               </TouchableOpacity>
             </View>
-          )}
+          ) : null}
         </View>
         <ModalPopup visible={visible}>
           <CheckCancelModal

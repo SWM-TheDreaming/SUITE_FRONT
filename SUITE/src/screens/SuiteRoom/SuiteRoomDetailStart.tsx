@@ -24,22 +24,6 @@ import { SuiteRoomDetailView } from '../../api/SuiteRoom/SuiteroomDetail';
 import convertStudyValueFromEngish from '../../data/ChangeCategoryFromEnglish';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-const mockdata = {
-  id: '123',
-  title: '임용 시험 합격 준비반 스터디 모집',
-  content: `안녕하세요 임용 시험 합격 준비반 스터디 모집 합니다. 인원은 6명 정도 구할 예정이고요, 매주 월요일 대면으로 진행할 생각입니다.${'\n'} 모두 열심히 해서 보증금도 돌려받고, 임용시험도 합격해요!`,
-  link: 'open.kakao.talk/yujeonghyeop/testsafewafefdsvvdsvasvdfa',
-  studyDeadLine: '2023-06-13',
-  recruitmentDeadLine: '2023-06-13',
-  category: '공무원',
-  depositAmount: 10000,
-  recruitmentLimit: 5,
-  presentRecruitment: 2,
-  writeDate: new Date('2023-06-13'),
-  scrab: 5,
-  minAttendanceRate: 80,
-  minMissionCompleteRate: 90,
-};
 const SuiteRoomDetailStart = () => {
   const SuiteRoomId = useRecoilValue(suiteRoomIdState);
   const [visible, setVisible] = useState(false);
@@ -113,7 +97,7 @@ const SuiteRoomDetailStart = () => {
             <TagComponent
               dDay={'진행중'}
               category={convertStudyValueFromEngish(subject)}
-              depositAmount={`${depositAmount.toString().slice(0, depositAmount.length - 3)}K`}
+              depositAmount={`${depositAmount.toString().slice(0, depositAmount.toString().length - 3)}K`}
               isPublic={isPublic}
             />
           </View>

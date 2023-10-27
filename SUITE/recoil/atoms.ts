@@ -114,3 +114,7 @@ export const hostState = atom({
   key: 'hostState',
   default: true,
 });
+export const isIosState = atom({
+  key: 'isIosState',
+  default: false,
+});

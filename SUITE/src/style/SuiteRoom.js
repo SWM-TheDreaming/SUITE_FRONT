@@ -219,6 +219,20 @@ const SuiteRoomStyleSheet = StyleSheet.create({
     borderRadius: 5,
     marginRight: 7,
   },
+  MyPageAttendanceBox: {
+    width: widthPercentage(160),
+    height: heightPercentage(80),
+    backgroundColor: '#E2FFFE',
+    borderRadius: 5,
+    marginRight: 7,
+  },
+  MyPageMissionBox: {
+    width: widthPercentage(160),
+    height: heightPercentage(80),
+    backgroundColor: '#F0EBFF',
+    borderRadius: 5,
+    marginRight: 7,
+  },
   DepositDayInfoText: {
     fontSize: 14,
     fontFamily: 'PretendardVariable',

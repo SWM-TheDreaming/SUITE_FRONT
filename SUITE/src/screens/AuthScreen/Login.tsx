@@ -12,7 +12,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../types';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useRecoilState } from 'recoil';
-import { emailState, passwordState, tokenState, isAuthState } from '../../../recoil/atoms';
+import { emailState, passwordState, tokenState, isAuthState, isIosState, nameState } from '../../../recoil/atoms';
 import { setStorage } from '../../hook/asyncStorage';
 import { SignInApi } from '../../api/Sign/signin';
 import ModalPopup from '../../hook/modal';
@@ -37,6 +37,8 @@ const Login = () => {
   const [email, setEmail] = useRecoilState(emailState);
   const [password, setpPassword] = useRecoilState(passwordState);
   const [isOauth, setIsOauth] = useRecoilState(isAuthState);
+  const [isIos, setIsIos] = useRecoilState(isIosState);
+  const [name, setName] = useRecoilState(nameState);
   const [okVisible, setOkVisible] = useState(false);
   const onPressGoogleBtn = async () => {
     await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
@@ -80,6 +82,7 @@ const Login = () => {
       if (credentialState === appleAuth.State.AUTHORIZED) {
         // user is authenticated
         console.log(appleAuthRequestResponse);
+        setName(appleAuthRequestResponse.fullName.familyName + appleAuthRequestResponse.fullName.givenName);
         try {
           const appleResult = await AppleloginApi(appleAuthRequestResponse.identityToken);
           if (appleResult.statusCode == 201) {
@@ -87,9 +90,11 @@ const Login = () => {
             setpPassword(appleResult.data.password);
             setIsOauth(true);
             setOkVisible(true);
+            setIsIos(true);
             // navigation.navigate('PhoneAuthentication');
           } else if (appleResult.statusCode == 200) {
             console.log(appleResult);
+            setIsIos(true);
             setStorage('token', JSON.stringify(appleResult.data.accessToken));
             setToken(appleResult.data.accessToken);
             setIsOauth(true);
@@ -245,9 +250,9 @@ const Login = () => {
             <Text style={mainPageStyleSheet.snsLoginButtonText}>구글 아이디로 로그인하기</Text>
           </TouchableOpacity>
           {Platform.OS == 'ios' ? (
-            <TouchableOpacity style={mainPageStyleSheet.googleLoginButton} onPress={() => onPressAppleBtn()}>
+            <TouchableOpacity style={mainPageStyleSheet.appleLoginButton} onPress={() => onPressAppleBtn()}>
               <Applesvg />
-              <Text style={mainPageStyleSheet.snsLoginButtonText}>애플 아이디로 로그인하기</Text>
+              <Text style={mainPageStyleSheet.appleLoginButtonText}>Sign In With Apple</Text>
             </TouchableOpacity>
           ) : null}
         </View>

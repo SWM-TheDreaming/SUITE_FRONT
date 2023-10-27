@@ -26,7 +26,7 @@ import { OauthsignUpAPI } from '../../../api/Sign/Oauthsignup';
 const Profile = () => {
   const email = useRecoilValue(emailState);
   const password = useRecoilValue(passwordState);
-  const name = useRecoilValue(nameState);
+  let name = useRecoilValue(nameState);
   const phone = useRecoilValue(phoneState);
   const securityNum = useRecoilValue(securityNumState);
   const preferStudy = useRecoilValue(preferStudyState);
@@ -39,6 +39,9 @@ const Profile = () => {
   const [memberId, setMemberId] = useState('');
 
   const getEmailCode = async () => {
+    if (name == null) {
+      name = '익명';
+    }
     try {
       const code = await signUpAPI({
         email: email,
