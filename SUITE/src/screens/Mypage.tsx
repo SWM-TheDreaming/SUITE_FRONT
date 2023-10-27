@@ -167,7 +167,7 @@ const Mypage = () => {
       <View>
         <View style={{ flexDirection: 'row' }}>
           <TouchableOpacity onPress={() => pickImg()}>
-            {profileImage.length > 5 ? (
+            {profileImage != null ? (
               <Image source={{ uri: profileImage }} style={AnpServiceStyleSheet.choiceProfileImage} />
             ) : (
               <Image source={defaultImage} style={AnpServiceStyleSheet.choiceProfileImage} />
